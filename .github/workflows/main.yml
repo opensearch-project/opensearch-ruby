@@ -2,10 +2,14 @@ name: 7.x
 on:
   push:
     branches:
-      - 7.x
+      - main
+    paths-ignore:
+      - 'README.md'
   pull_request:
     branches:
-      - 7.x
+      - main
+    paths-ignore:
+      - 'README.md'
 jobs:
   test-ruby:
     env:
@@ -14,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [ 2.5, 2.6, 2.7, 3.0, jruby-9.2 ]
+        ruby: [ 2.5, 2.6, 2.7, 3.0, jruby-9.3 ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -24,9 +28,9 @@ jobs:
         sudo sysctl -w vm.swappiness=1
         sudo sysctl -w fs.file-max=262144
         sudo sysctl -w vm.max_map_count=262144
-    - uses: elastic/elastic-github-actions/elasticsearch@master
+    - uses: ./.github/actions/elasticsearch
       with:
-        stack-version: 7.x-SNAPSHOT
+        stack-version: 7.10.2
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}

@@ -20,10 +20,12 @@ require 'elasticsearch/transport'
 require 'elasticsearch/api'
 
 module Elasticsearch
-  SECURITY_PRIVILEGES_VALIDATION_WARNING = 'The client is unable to verify that the server is Elasticsearch due to security privileges on the server side. Some functionality may not be compatible if the server is running an unsupported product.'.freeze
-  NOT_ELASTICSEARCH_WARNING = 'The client noticed that the server is not Elasticsearch and we do not support this unknown product.'.freeze
-  NOT_SUPPORTED_ELASTICSEARCH_WARNING = 'The client noticed that the server is not a supported distribution of Elasticsearch.'.freeze
-  YOU_KNOW_FOR_SEARCH = 'You Know, for Search'.freeze
+  SECURITY_PRIVILEGES_VALIDATION_WARNING = 'The client is unable to verify that the server is OpenSearch due to
+security privileges on the server side. Some functionality may not be compatible if the server is running an unsupported product.'.freeze
+  NOT_OPEN_SEARCH_WARNING = 'The client noticed that the server is not OpenSearch and we do not support this unknown
+product.'.freeze
+  NOT_SUPPORTED_OPEN_SEARCH_WARNING = 'The client noticed that the server is not a supported distribution of
+OpenSearch.'.freeze
 
   class Client
     include Elasticsearch::API
@@ -37,7 +39,7 @@ module Elasticsearch
 
     def method_missing(name, *args, &block)
       if name == :perform_request
-        verify_elasticsearch unless @verified
+        verify_open_search unless @verified
         @transport.perform_request(*args, &block)
       else
         super
@@ -46,9 +48,9 @@ module Elasticsearch
 
     private
 
-    def verify_elasticsearch
+    def verify_open_search
       begin
-        response = elasticsearch_validation_request
+        response = opensearch_validation_request
       rescue Elasticsearch::Transport::Transport::Errors::Unauthorized,
              Elasticsearch::Transport::Transport::Errors::Forbidden
         @verified = true
@@ -63,38 +65,25 @@ module Elasticsearch
                response.body
              end
       version = body.dig('version', 'number')
-      verify_with_version_or_header(body, version, response.headers)
+      distribution = body.dig('version', 'distribution')
+      verify_with_version_or_header(version, distribution)
     end
 
-    def verify_with_version_or_header(body, version, headers)
-      raise Elasticsearch::UnsupportedProductError if version.nil? || version < '6.0.0'
-
-      if version == '7.x-SNAPSHOT' || Gem::Version.new(version) >= Gem::Version.new('7.14-SNAPSHOT')
-        raise Elasticsearch::UnsupportedProductError unless headers['x-elastic-product'] == 'Elasticsearch'
-
+    def verify_with_version_or_header(version, distribution)
+      if distribution == 'opensearch' && version != nil
         @verified = true
-      elsif Gem::Version.new(version) > Gem::Version.new('6.0.0') &&
-            Gem::Version.new(version) < Gem::Version.new('7.0.0')
-        raise Elasticsearch::UnsupportedProductError unless
-          body['tagline'] == YOU_KNOW_FOR_SEARCH
-
-        @verified = true
-      elsif Gem::Version.new(version) >= Gem::Version.new('7.0.0') &&
-            Gem::Version.new(version) < Gem::Version.new('7.14-SNAPSHOT')
-        raise Elasticsearch::UnsupportedProductError unless body['tagline'] == YOU_KNOW_FOR_SEARCH
-        raise Elasticsearch::UnsupportedProductError.new(NOT_SUPPORTED_ELASTICSEARCH_WARNING) unless body.dig('version', 'build_flavor') == 'default'
-
-        @verified = true
+      else
+        raise Elasticsearch::UnsupportedProductError
       end
     end
 
-    def elasticsearch_validation_request
+    def opensearch_validation_request
       @transport.perform_request('GET', '/')
     end
   end
 
   class UnsupportedProductError < StandardError
-    def initialize(message = NOT_ELASTICSEARCH_WARNING)
+    def initialize(message = NOT_OPEN_SEARCH_WARNING)
       super(message)
     end
   end

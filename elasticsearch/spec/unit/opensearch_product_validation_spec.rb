@@ -18,7 +18,7 @@
 require 'spec_helper'
 require 'webmock/rspec'
 
-describe 'Elasticsearch: Validation' do
+describe 'OpenSearch: Validation' do
   let(:host) { 'http://localhost:9200' }
   let(:verify_request_stub) do
     stub_request(:get, host)
@@ -35,7 +35,7 @@ describe 'Elasticsearch: Validation' do
     { 'content-type' => 'json' }
   end
 
-  def error_requests_and_expectations(message = Elasticsearch::NOT_OPEN_SEARCH_WARNING)
+  def error_requests_and_expectations(message = Elasticsearch::NOT_SUPPORTED_WARNING)
     expect { client.count }.to raise_error Elasticsearch::UnsupportedProductError, message
     assert_requested :get, host
     assert_not_requested :post, "#{host}/_count"
@@ -122,6 +122,36 @@ describe 'Elasticsearch: Validation' do
         assert_not_requested :get, host
 
         error_requests_and_expectations
+      end
+    end
+  end
+
+
+  context 'When the Elasticsearch version is >= 7.14' do
+    context 'With a valid Elasticsearch response' do
+      let(:body) { { 'version' => { 'number' => '7.14.0' } }.to_json }
+      let(:headers) do
+        {
+          'X-Elastic-Product' => 'Elasticsearch',
+          'content-type' => 'json'
+        }
+      end
+
+      it 'Makes requests and passes validation' do
+        verify_request_stub
+        count_request_stub
+
+        valid_requests_and_expectations
+      end
+    end
+
+    context 'When the header is not present' do
+      let(:body) { { 'version' => { 'number' => '7.14.0' } }.to_json }
+      it 'Makes requests and passes validation' do
+        verify_request_stub
+        count_request_stub
+
+        valid_requests_and_expectations
       end
     end
   end

@@ -20,12 +20,8 @@ require 'elasticsearch/transport'
 require 'elasticsearch/api'
 
 module Elasticsearch
-  SECURITY_PRIVILEGES_VALIDATION_WARNING = 'The client is unable to verify that the server is OpenSearch due to
-security privileges on the server side. Some functionality may not be compatible if the server is running an unsupported product.'.freeze
-  NOT_OPEN_SEARCH_WARNING = 'The client noticed that the server is not OpenSearch and we do not support this unknown
-product.'.freeze
-  NOT_SUPPORTED_OPEN_SEARCH_WARNING = 'The client noticed that the server is not a supported distribution of
-OpenSearch.'.freeze
+  SECURITY_PRIVILEGES_VALIDATION_WARNING = 'The client is unable to verify distribution due to security privileges on the server side. Some functionality may not be compatible if the server is running an unsupported product.'.freeze
+  NOT_SUPPORTED_WARNING = 'The client is not supported for the provided version and distribution combination.'.freeze
 
   class Client
     include Elasticsearch::API
@@ -50,7 +46,7 @@ OpenSearch.'.freeze
 
     def verify_open_search
       begin
-        response = opensearch_validation_request
+        response = open_search_validation_request
       rescue Elasticsearch::Transport::Transport::Errors::Unauthorized,
              Elasticsearch::Transport::Transport::Errors::Forbidden
         @verified = true
@@ -66,24 +62,29 @@ OpenSearch.'.freeze
              end
       version = body.dig('version', 'number')
       distribution = body.dig('version', 'distribution')
-      verify_with_version_or_header(version, distribution)
+      verify_version_and_distribution(version, distribution)
     end
 
-    def verify_with_version_or_header(version, distribution)
-      if distribution == 'opensearch' && version != nil
+    def verify_version_and_distribution(version, distribution)
+      raise Elasticsearch::UnsupportedProductError if version.nil?
+
+      # The client supports all the versions of OpenSearch
+      if distribution == 'opensearch'
+        @verified = true
+      elsif Gem::Version.new(version) >= Gem::Version.new('6.0.0')
         @verified = true
       else
         raise Elasticsearch::UnsupportedProductError
       end
     end
 
-    def opensearch_validation_request
+    def open_search_validation_request
       @transport.perform_request('GET', '/')
     end
   end
 
   class UnsupportedProductError < StandardError
-    def initialize(message = NOT_OPEN_SEARCH_WARNING)
+    def initialize(message = NOT_SUPPORTED_WARNING)
       super(message)
     end
   end

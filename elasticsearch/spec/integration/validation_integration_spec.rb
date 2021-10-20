@@ -17,8 +17,8 @@
 require 'spec_helper'
 require 'logger'
 
-describe 'Elasticsearch validation integration' do
-  it 'Validates for Elasticsearch > 7.14' do
+describe 'OpenSearch validation integration' do
+  it 'Validates for OpenSearch 1.0.0-SNAPSHOT' do
     client = Elasticsearch::Client.new(
       host: ELASTICSEARCH_URL,
       logger: Logger.new($stderr)

@@ -18,7 +18,7 @@
 require 'spec_helper'
 require 'webmock/rspec'
 
-describe 'Elasticsearch: Validation' do
+describe 'OpenSearch: Validation' do
   let(:host) { 'http://localhost:9200' }
   let(:verify_request_stub) do
     stub_request(:get, host)
@@ -35,7 +35,7 @@ describe 'Elasticsearch: Validation' do
     { 'content-type' => 'json' }
   end
 
-  def error_requests_and_expectations(message = Elasticsearch::NOT_ELASTICSEARCH_WARNING)
+  def error_requests_and_expectations(message = Elasticsearch::NOT_SUPPORTED_WARNING)
     expect { client.count }.to raise_error Elasticsearch::UnsupportedProductError, message
     assert_requested :get, host
     assert_not_requested :post, "#{host}/_count"
@@ -54,7 +54,7 @@ describe 'Elasticsearch: Validation' do
     assert_requested :post, "#{host}/_count"
   end
 
-  context 'When Elasticsearch replies with status 401' do
+  context 'When OpenSearch replies with status 401' do
     let(:status) { 401 }
     let(:body) { {}.to_json }
 
@@ -96,6 +96,37 @@ describe 'Elasticsearch: Validation' do
     end
   end
 
+  context 'When the OpenSearch version is 1.0.0-SNAPSHOT' do
+    context 'With a valid OpenSearch response' do
+      let(:body) { { 'version' => { 'number' => '1.0.0-SNAPSHOT', 'distribution' => 'opensearch' } }.to_json }
+      let(:headers) do
+        {
+          'content-type' => 'json'
+        }
+      end
+
+      it 'Makes requests and passes validation' do
+        verify_request_stub
+        count_request_stub
+
+        valid_requests_and_expectations
+      end
+    end
+
+    context 'When the distribution is not present' do
+      let(:body) { { 'version' => { 'number' => '1.0.0-SNAPSHOT' } }.to_json }
+      it 'Fails validation' do
+        verify_request_stub
+
+        expect(client.instance_variable_get('@verified')).to be false
+        assert_not_requested :get, host
+
+        error_requests_and_expectations
+      end
+    end
+  end
+
+
   context 'When the Elasticsearch version is >= 7.14' do
     context 'With a valid Elasticsearch response' do
       let(:body) { { 'version' => { 'number' => '7.14.0' } }.to_json }
@@ -115,20 +146,19 @@ describe 'Elasticsearch: Validation' do
     end
 
     context 'When the header is not present' do
-      it 'Fails validation' do
+      let(:body) { { 'version' => { 'number' => '7.14.0' } }.to_json }
+      it 'Makes requests and passes validation' do
         verify_request_stub
+        count_request_stub
 
-        expect(client.instance_variable_get('@verified')).to be false
-        assert_not_requested :get, host
-
-        error_requests_and_expectations
+        valid_requests_and_expectations
       end
     end
   end
 
-  context 'When the Elasticsearch version is >= 7.14-SNAPSHOT' do
+  context 'When the Elasticsearch version is >= 8.0.0' do
     context 'With a valid Elasticsearch response' do
-      let(:body) { { 'version' => { 'number' => '7.14-SNAPSHOT' } }.to_json }
+      let(:body) { { 'version' => { 'number' => '8.0.0' } }.to_json }
       let(:headers) do
         {
           'X-Elastic-Product' => 'Elasticsearch',
@@ -136,159 +166,12 @@ describe 'Elasticsearch: Validation' do
         }
       end
 
-      it 'Makes requests and passes validation' do
-        verify_request_stub
-        count_request_stub
-
-        valid_requests_and_expectations
-      end
-    end
-
-    context 'When the header is not present' do
-      it 'Fails validation' do
-        verify_request_stub
-
-        expect(client.instance_variable_get('@verified')).to be false
-        assert_not_requested :get, host
-
-        error_requests_and_expectations
-      end
-    end
-  end
-
-  context 'When the Elasticsearch version is >= 7.15-SNAPSHOT' do
-    context 'With a valid Elasticsearch response' do
-      let(:body) { { 'version' => { 'number' => '7.15-SNAPSHOT' } }.to_json }
-      let(:headers) do
-        {
-          'X-Elastic-Product' => 'Elasticsearch',
-          'content-type' => 'json'
-        }
-      end
-      it 'Makes requests and passes validation' do
-        verify_request_stub
-        count_request_stub
-
-        valid_requests_and_expectations
-      end
-    end
-
-    context 'When the header is not present' do
-      it 'Fails validation' do
-        verify_request_stub
-
-        expect(client.instance_variable_get('@verified')).to be false
-        assert_not_requested :get, host
-
-        error_requests_and_expectations
-      end
-    end
-  end
-
-  context 'When the version is 7.x-SNAPSHOT' do
-    let(:body) { { 'version' => { 'number' => '7.x-SNAPSHOT' } }.to_json }
-
-    context 'When the header is not present' do
       it 'Fails validation' do
         verify_request_stub
         count_request_stub
 
         error_requests_and_expectations
       end
-    end
-
-    context 'With a valid Elasticsearch response' do
-      let(:headers) do
-        {
-          'X-Elastic-Product' => 'Elasticsearch',
-          'content-type' => 'json'
-        }
-      end
-
-      it 'Makes requests and passes validation' do
-        verify_request_stub
-        count_request_stub
-
-        valid_requests_and_expectations
-      end
-    end
-  end
-
-  context 'When Elasticsearch version is 7.4.0' do
-    context 'When tagline is not present' do
-      let(:body) { { 'version' => { 'number' => '7.4.0', 'build_flavor' => 'default' } }.to_json }
-
-      it 'Fails validation' do
-        verify_request_stub
-        count_request_stub
-
-        error_requests_and_expectations
-      end
-    end
-
-    context 'When build flavor is not present' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '7.4.0'
-          },
-          'tagline' => Elasticsearch::YOU_KNOW_FOR_SEARCH
-        }.to_json
-      end
-
-      it 'Fails validation' do
-        verify_request_stub
-        count_request_stub
-
-        error_requests_and_expectations(Elasticsearch::NOT_SUPPORTED_ELASTICSEARCH_WARNING)
-      end
-    end
-
-    context 'When the tagline is different' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '7.4.0',
-            'build_flavor' => 'default'
-          },
-          'tagline' => 'You Know, for other stuff'
-        }.to_json
-      end
-
-      it 'Fails validation' do
-        verify_request_stub
-        count_request_stub
-
-        error_requests_and_expectations
-      end
-    end
-
-    context 'With a valid Elasticsearch response' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '7.4.0',
-            'build_flavor' => 'default'
-          },
-          'tagline' => 'You Know, for Search'
-        }.to_json
-      end
-
-      it 'Makes requests and passes validation' do
-        verify_request_stub
-        count_request_stub
-
-        valid_requests_and_expectations
-      end
-    end
-  end
-
-  context 'When Elasticsearch version is < 6.0.0' do
-    let(:body) { { 'version' => { 'number' => '5.0.0' } }.to_json }
-
-    it 'Raises an exception and client doesnae work' do
-      verify_request_stub
-      error_requests_and_expectations
     end
   end
 
@@ -300,141 +183,13 @@ describe 'Elasticsearch: Validation' do
     end
   end
 
-  context 'When Elasticsearch version is between 6.0.0 and 7.0.0' do
-    context 'With an Elasticsearch valid response' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '6.8.10'
-          },
-          'tagline' => 'You Know, for Search'
-        }.to_json
-      end
-
-      it 'Makes requests and passes validation' do
-        verify_request_stub
-        count_request_stub
-
-        valid_requests_and_expectations
-      end
-    end
-
-    context 'With no tagline' do
-      let(:body) do
-        { 'version' => { 'number' => '6.8.10' } }.to_json
-      end
-
-      it 'Fails validation' do
-        verify_request_stub
-        count_request_stub
-
-        error_requests_and_expectations
-      end
-    end
-
-    context 'When the tagline is different' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '6.8.10',
-            'build_flavor' => 'default'
-          },
-          'tagline' => 'You Know, for Stuff'
-        }.to_json
-      end
-
-      it 'Fails validation' do
-        verify_request_stub
-        count_request_stub
-
-        error_requests_and_expectations
-      end
-    end
-  end
-
-  context 'When Elasticsearch version is between 7.0.0 and 7.14.0' do
-    context 'With a valid Elasticsearch response' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '7.10.0',
-            'build_flavor' => 'default'
-          },
-          'tagline' => 'You Know, for Search'
-        }.to_json
-      end
-
-      it 'Makes requests and passes validation' do
-        verify_request_stub
-        count_request_stub
-
-        valid_requests_and_expectations
-      end
-    end
-
-    context 'When the tagline is not present' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '7.10.0',
-            'build_flavor' => 'default'
-          }
-        }.to_json
-      end
-
-      it 'Fails validation' do
-        verify_request_stub
-        count_request_stub
-
-        error_requests_and_expectations
-      end
-    end
-
-    context 'When the tagline is different' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '7.10.0',
-            'build_flavor' => 'default'
-          },
-          'tagline' => 'You Know, for other stuff'
-        }.to_json
-      end
-
-      it 'Fails validation' do
-        verify_request_stub
-        count_request_stub
-
-        error_requests_and_expectations
-      end
-    end
-
-    context 'When the build_flavor is not present' do
-      let(:body) do
-        {
-          'version' => {
-            'number' => '7.10.0'
-          },
-          'tagline' => 'You Know, for Search'
-        }.to_json
-      end
-
-      it 'Fails validation' do
-        verify_request_stub
-        count_request_stub
-
-        error_requests_and_expectations(Elasticsearch::NOT_SUPPORTED_ELASTICSEARCH_WARNING)
-      end
-    end
-  end
-
   context 'When doing a yaml content-type request' do
     let(:client) do
       Elasticsearch::Client.new(transport_options: {headers: { accept: 'application/yaml', content_type: 'application/yaml' }})
     end
 
-    let(:headers) { { 'content-type' => 'application/yaml', 'X-Elastic-Product' => 'Elasticsearch' } }
-    let(:body) { "---\nversion:\n  number: \"7.14.0-SNAPSHOT\"\n" }
+    let(:headers) { { 'content-type' => 'application/yaml'} }
+    let(:body) { "---\nversion:\n  number: \"1.0.0-SNAPSHOT\"\n  distribution: \"opensearch\"\n" }
 
     it 'validates' do
       verify_request_stub

@@ -1,6 +1,6 @@
 ---
 STACK_VERSION:
-  - 7.x-SNAPSHOT
+  - 7.10.2
 
 RUBY_TEST_VERSION:
 - 3.0
@@ -10,6 +10,5 @@ RUBY_TEST_VERSION:
 
 TEST_SUITE:
 - free
-- platinum
 
 exclude: ~

@@ -1,10 +1,10 @@
-name: 'Run Opensearch Cluster'
+name: 'Run Opendistro Cluster'
 description: 'This action spins up a Cluster instance that can be accessed and used in your subsequent steps.'
 author: 'opensearch-dev'
 
 inputs:
   stack-version:
-    description: 'The version of the Opensearch Stack you want to run'
+    description: 'The version of the Opendistro Stack you want to run'
     required: true
   nodes:
     description: 'Number of nodes in the cluster'

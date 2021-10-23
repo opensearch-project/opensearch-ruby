@@ -14,7 +14,7 @@ docker network create cluster
 for (( node=1; node<=${NODES-1}; node++ ))
 do
   port_com=$((9300 + $node - 1))
-  UNICAST_HOSTS+="es$node:${port_com},"
+  UNICAST_HOSTS+="os$node:${port_com},"
 done
 
 for (( node=1; node<=${NODES-1}; node++ ))

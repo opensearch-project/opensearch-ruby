@@ -11,7 +11,7 @@ on:
     paths-ignore:
       - 'README.md'
 jobs:
-  test-ruby:
+  test-elasticsearch:
     env:
       TEST_ES_SERVER: http://localhost:9250
       PORT: 9250
@@ -19,7 +19,6 @@ jobs:
       fail-fast: false
       matrix:
         ruby: [ 2.5, 2.6, 2.7, 3.0, jruby-9.3 ]
-        cluster: ["elasticsearch", "opensearch"]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -29,9 +28,9 @@ jobs:
         sudo sysctl -w vm.swappiness=1
         sudo sysctl -w fs.file-max=262144
         sudo sysctl -w vm.max_map_count=262144
-    - uses: ./.github/actions/opensearch
+    - uses: ./.github/actions/elasticsearch
       with:
-        stack-version: latest
+        stack-version: 7.10.2
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
@@ -52,3 +51,44 @@ jobs:
       run: cd elasticsearch-xpack && bundle exec rake test:unit test:spec
     - name: elasticsearch-dsl
       run: cd elasticsearch-dsl && bundle exec rake test:all
+
+  test-opensearch:
+    env:
+      TEST_ES_SERVER: http://localhost:9250
+      PORT: 9250
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [ 2.5, 2.6, 2.7, 3.0, jruby-9.3 ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Increase system limits
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+      - uses: ./.github/actions/opensearch
+        with:
+          stack-version: latest
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: Build and test with Rake
+        run: |
+          sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev
+          ruby -v
+          rake bundle:clean
+          rake bundle:install
+      - name: elasticsearch
+        run: cd elasticsearch && bundle exec rake test:all
+      - name: elasticsearch-transport
+        run: cd elasticsearch-transport && bundle exec rake test:all
+      - name: elasticsearch-api
+        run: cd elasticsearch-api && bundle exec rake test:spec
+      - name: elasticsearch-xpack
+        run: cd elasticsearch-xpack && bundle exec rake test:unit test:spec
+      - name: elasticsearch-dsl
+        run: cd elasticsearch-dsl && bundle exec rake test:all

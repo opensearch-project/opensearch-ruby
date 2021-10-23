@@ -49,3 +49,44 @@ jobs:
         run: cd opensearch-api && bundle exec rake test:spec
       - name: opensearch-dsl
         run: cd opensearch-dsl && bundle exec rake test:all
+
+  test-opendistro:
+    name: Tests Opendistro
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cluster: [ "opendistro"]
+        ruby: [ 2.5, 2.6, 2.7, 3.0, jruby-9.3 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Increase system limits
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+      - name: Launch ${{ matrix.cluster }} cluster
+        run: |
+          make cluster.clean cluster.${{ matrix.cluster }}.build cluster.${{ matrix.cluster }}.start
+        with:
+          stack-version: 1.13.2
+        - uses: ruby/setup-ruby@v1
+          with:
+            ruby-version: ${{ matrix.ruby }}
+        - name: Build and test with Rake
+          run: |
+            sudo apt-get update
+            sudo apt-get install libcurl4-openssl-dev
+            ruby -v
+            rake bundle:clean
+            rake bundle:install
+        - name: elasticsearch
+          run: cd elasticsearch && bundle exec rake test:all
+        - name: elasticsearch-transport
+          run: cd elasticsearch-transport && bundle exec rake test:all
+        - name: elasticsearch-api
+          run: cd elasticsearch-api && bundle exec rake test:spec
+        - name: elasticsearch-xpack
+          run: cd elasticsearch-xpack && bundle exec rake test:unit test:spec
+        - name: elasticsearch-dsl
+          run: cd elasticsearch-dsl && bundle exec rake test:all

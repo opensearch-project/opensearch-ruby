@@ -52,7 +52,7 @@ docker run \
   --retry-connrefused \
   --show-error \
   --silent \
-  https://os1:$PORT -u admin:admin --insecure
+  http://os1:$PORT
 
 sleep 10
 

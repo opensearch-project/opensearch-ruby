@@ -20,7 +20,6 @@ UNIT_TESTED_PROJECTS = [
   'elasticsearch-transport',
   'elasticsearch-dsl',
   'elasticsearch-api',
-  'elasticsearch-xpack',
   'elasticsearch-extensions'
 ].freeze
 
@@ -55,13 +54,6 @@ namespace :test do
   task rest_api: ['elasticsearch:wait_for_green'] do
     puts '-' * 80
     sh "cd #{CURRENT_PATH.join('elasticsearch-api')} && unset BUNDLE_GEMFILE && bundle exec rake test:rest_api"
-    puts "\n"
-  end
-
-  desc 'Run security (Platinum) rest api yaml tests'
-  task security: 'elasticsearch:wait_for_green' do
-    puts '-' * 80
-    sh "cd #{CURRENT_PATH.join('elasticsearch-xpack')} && unset BUNDLE_GEMFILE && bundle exec rake test:rest_api"
     puts "\n"
   end
 

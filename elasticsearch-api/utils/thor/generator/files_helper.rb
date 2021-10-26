@@ -23,8 +23,7 @@ module Elasticsearch
     module FilesHelper
       PROJECT_PATH = File.join(File.dirname(__FILE__), '..')
       SRC_PATH   = File.join(PROJECT_PATH, '..', '..', '..', 'tmp/rest-api-spec/api/')
-      OSS_OUTPUT_DIR = '../../elasticsearch-api/lib/elasticsearch/api/actions'.freeze
-      XPACK_OUTPUT_DIR = '../../elasticsearch-xpack/lib/elasticsearch/xpack/api/actions'.freeze
+      OSS_OUTPUT_DIR = '../../elasticsearch-api/lib/elasticsearch/api/actions'
 
       TESTS_DIRECTORIES = {
         oss: "#{PROJECT_PATH}/../../../tmp/rest-api-spec/test/free",
@@ -44,29 +43,9 @@ module Elasticsearch
         end.map { |file| "#{SRC_PATH}#{file}" }
       end
 
-      XPACK_ENDPOINTS = [
-        'autoscaling', 'cross_cluster_replication', 'ccr', 'data_frame_transform_deprecated',
-        'enrich', 'eql', 'fleet', 'ilm', 'logstash', 'migration', 'watcher', 'slm'
-      ]
-      XPACK_ENDPOINTS_REGEXP = /data_stream|ml_|reload_search_analyzers|transform|freeze|unfreeze/
-
-      def self.xpack_files
-        xpack_tests = Dir.entries(TESTS_DIRECTORIES[:xpack])
-        Dir.entries(SRC_PATH).map do |entry|
-          filename = entry.split('.').first
-          next if filename == 'snapshot'
-
-          if xpack_tests.include?(filename) ||
-                                  XPACK_ENDPOINTS.include?(filename) ||
-                                  entry.match?(XPACK_ENDPOINTS_REGEXP)
-            entry
-          end
-        end.compact
-      end
-
       # Path to directory to copy generated files
       def self.output_dir(api)
-        api == :xpack ? Pathname(XPACK_OUTPUT_DIR) : Pathname(OSS_OUTPUT_DIR)
+        Pathname(OSS_OUTPUT_DIR)
       end
 
       def self.gem_version

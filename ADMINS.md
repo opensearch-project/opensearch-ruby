@@ -4,10 +4,14 @@ This document explains who the admins are (see below), what they do in this repo
 
 ## Current Admins
 
-| Admin           | GitHub ID                               | Affiliation |
-| --------------- | --------------------------------------- | ----------- |
-| Henri Yandell   | [hyandell](https://github.com/hyandell) | Amazon      |
-| Vijayan Balasubramanian | [VijayanB](https://github.com/VijayanB) | Amazon |
+| Admin                    | GitHub ID                                           | Affiliation |
+| -------------------------| ----------------------------------------------------| ----------- |
+| Charlotte                | [CEHENKLE](https://github.com/CEHENKLE)             | Amazon      |
+| Henri Yandell            | [hyandell](https://github.com/hyandell)             | Amazon      |
+| Jayesh Hathila           | [jayeshathila](https://github.com/jayeshathila)     | Amazon      |
+| Vamshi Vijay Nakkirtha   | [vamshin](https://github.com/vamshin)               | Amazon      |
+| Yuvraj Jaiswal           | [yuvi17](https://github.com/yuvi17)                 | Amazon      |
+
 
 ## Admin Responsibilities
 

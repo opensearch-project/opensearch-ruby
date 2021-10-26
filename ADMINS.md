@@ -6,7 +6,7 @@ This document explains who the admins are (see below), what they do in this repo
 
 | Admin                    | GitHub ID                                           | Affiliation |
 | -------------------------| ----------------------------------------------------| ----------- |
-| Charlotte                | [CEHENKLE](https://github.com/CEHENKLE)             | Amazon      |
+| Charlotte                | [cehenkle](https://github.com/CEHENKLE)             | Amazon      |
 | Henri Yandell            | [hyandell](https://github.com/hyandell)             | Amazon      |
 | Jayesh Hathila           | [jayeshathila](https://github.com/jayeshathila)     | Amazon      |
 | Vamshi Vijay Nakkirtha   | [vamshin](https://github.com/vamshin)               | Amazon      |

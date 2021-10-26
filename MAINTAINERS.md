@@ -17,9 +17,12 @@ This document explains who the maintainers are (see below), what they do in this
 
 ## Current Maintainers
 
-| Maintainer      | GitHub ID                               | Affiliation |
-| --------------- | --------------------------------------- | ----------- |
-| Rob Sears       | [robsears](https://github.com/robsears) | Bonsai      |
+| Maintainer               | GitHub ID                                       | Affiliation |
+| ------------------------ | ---------------------------------------         | ----------- |
+| Jayesh Hathila           | [jayeshathila](https://github.com/jayeshathila) |   Amazon    |
+| Rob Sears                | [robsears](https://github.com/robsears)         |   Bonsai    |
+| Vamshi Vijay Nakkirtha   | [vamshin](https://github.com/vamshin)           |   Amazon    |
+| Yuvraj Jaiswal           | [yuvi17](https://github.com/yuvi17)             |   Amazon    |
 
 ## Maintainer Responsibilities
 

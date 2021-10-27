@@ -79,7 +79,7 @@ This file is where the action is executed, where we call the client with the met
 
 ## Enable Logging
 
-To enable logging, set the environment `QUIET` to false before running the tests. In CI, this is located in the [Dockerfile](https://github.com/elastic/opensearch-ruby/blob/master/.ci/Dockerfile). The environment variable is evaluated in the Rest YAML tests Helper file.
+To enable logging, set the environment `QUIET` to false before running the tests. In CI, this is located in the [Dockerfile](https://github.com/opensearch-project/opensearch-ruby/blob/main/.ci/Dockerfile). The environment variable is evaluated in the Rest YAML tests Helper file.
 
 # Features
 

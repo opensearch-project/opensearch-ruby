@@ -17,14 +17,7 @@
 
 require 'test_helper'
 
-class Opensearch::Transport::ClientIntegrationTest < Opensearch::Test::IntegrationTestCase
-  startup do
-    Opensearch::Extensions::Test::Cluster.start(number_of_nodes: 2) if ENV['SERVER'] and not Opensearch::Extensions::Test::Cluster.running?(number_of_nodes: 2)
-  end
-
-  shutdown do
-    Opensearch::Extensions::Test::Cluster.stop(number_of_nodes: 2) if ENV['SERVER'] and Opensearch::Extensions::Test::Cluster.running?(number_of_nodes: 2)
-  end
+class Opensearch::Transport::ClientIntegrationTest
 
   context "Transport" do
     setup do

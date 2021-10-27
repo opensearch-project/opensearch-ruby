@@ -17,7 +17,7 @@ To use an unreleased version, either add it to your `Gemfile` for [Bundler](http
 
 or install it from a source code checkout:
 
-    git clone https://github.com/opensearch/opensearch-ruby.git
+    git clone https://github.com/opensearch-project/opensearch-ruby.git
     cd opensearch-ruby/opensearch-dsl
     bundle install
     rake install
@@ -243,7 +243,7 @@ NOTE: You have to enable dynamic scripting to be able to execute the `function_s
 To work on the code, clone the repository and install the dependencies:
 
 ```
-git clone https://github.com/opensearch/opensearch-ruby.git
+git clone https://github.com/opensearch-project/opensearch-ruby.git
 cd opensearch-ruby/opensearch-dsl/
 bundle install
 ```

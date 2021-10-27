@@ -37,7 +37,7 @@ To use an unreleased version, either add it to your `Gemfile` for [Bundler](http
 
 or install it from a source code checkout:
 
-    git clone https://github.com/opensearch/opensearch-ruby.git
+    git clone https://github.com/opensearch-project/opensearch-ruby.git
     cd opensearch-ruby/opensearch-api
     bundle install
     rake install

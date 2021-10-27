@@ -21,7 +21,7 @@ def admin_client
                       transport_options = {}
                       test_suite = ENV['TEST_SUITE'].freeze
 
-                      if (hosts = ENV['TEST_OS_SERVER'] || ENV['OPENSEARCH_HOSTS'])
+                      if (hosts = ENV['TEST_OPENSEARCH_SERVER'] || ENV['OPENSEARCH_HOSTS'])
                         split_hosts = hosts.split(',').map do |host|
                           /(http\:\/\/)?\S+/.match(host)
                         end

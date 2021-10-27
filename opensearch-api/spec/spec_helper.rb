@@ -37,7 +37,7 @@ tracer.formatter = lambda { |s, d, p, m| "#{m.gsub(/^.*$/) { |n| '   ' + n }.ans
 
 unless defined?(OPENSEARCH_URL)
   OPENSEARCH_URL = ENV['OPENSEARCH_URL'] ||
-                        ENV['TEST_OS_SERVER'] ||
+                        ENV['TEST_OPENSEARCH_SERVER'] ||
                         "http://localhost:#{(ENV['TEST_CLUSTER_PORT'] || 9200)}"
 end
 

@@ -9,24 +9,24 @@ The file that traverses the yaml files and loads a **TestFile** object per each 
 
 You can use the SINGLE_TEST env variable to run just one test or one test directory. E.g.:
 ```
-$ cd opensearch-api && SINGLE_TEST=indices.resolve_index/10_basic_resolve_index.yml TEST_OS_SERVER='http://localhost:9200' be rake test:rest_api
+$ cd opensearch-api && SINGLE_TEST=indices.resolve_index/10_basic_resolve_index.yml TEST_OPENSEARCH_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 And:
 ```
-$ cd opensearch-api && SINGLE_TEST=indices.resolve_index TEST_OS_SERVER='http://localhost:9200' be rake test:rest_api
+$ cd opensearch-api && SINGLE_TEST=indices.resolve_index TEST_OPENSEARCH_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 
 ## Skipped tests
 
 We sometimes skip tests, generally due to limitations on how we run the CI server or for stuff that hasn't been completely implemented on the client yet. Skipped tests are located in `opensearch-(api|xpack)/spec/skipped_tests.yml`. You can run just the tests which are currently being skipped by running:
 ```
-$ cd opensearch-api && RUN_SKIPPED_TESTS=true TEST_OS_SERVER='http://localhost:9200' be rake test:rest_api
+$ cd opensearch-api && RUN_SKIPPED_TESTS=true TEST_OPENSEARCH_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 
 Or
 
 ```
-$ cd opensearch-xpack && RUN_SKIPPED_TESTS=true ELASTIC_PASSWORD=changeme TEST_SUITE=platinum TEST_OS_SERVER='http://localhost:9200' be rake test:rest_api
+$ cd opensearch-xpack && RUN_SKIPPED_TESTS=true ELASTIC_PASSWORD=changeme TEST_SUITE=platinum TEST_OPENSEARCH_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 
 ## TestFile

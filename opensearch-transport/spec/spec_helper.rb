@@ -35,7 +35,7 @@ end
 # The hosts to use for creating a opensearch client.
 #
 # @since 7.0.0
-OPENSEARCH_HOSTS = if (hosts = ENV['TEST_OS_SERVER'] || ENV['OPENSEARCH_HOSTS'])
+OPENSEARCH_HOSTS = if (hosts = ENV['TEST_OPENSEARCH_SERVER'] || ENV['OPENSEARCH_HOSTS'])
                         hosts.split(',').map do |host|
                           /(http\:\/\/)?(\S+)/.match(host)[2]
                         end

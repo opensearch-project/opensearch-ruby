@@ -1,10 +1,10 @@
 #!/bin/bash
 
-TEST_OS_SERVER=${TEST_OS_SERVER:-"http://localhost:9200"}
-echo $TEST_OS_SERVER
+TEST_OPENSEARCH_SERVER=${TEST_OPENSEARCH_SERVER:-"http://localhost:9200"}
+echo $TEST_OPENSEARCH_SERVER
 attempt_counter=0
 max_attempts=5
-url="${TEST_OS_SERVER}/_cluster/health?wait_for_status=green&timeout=50s"
+url="${TEST_OPENSEARCH_SERVER}/_cluster/health?wait_for_status=green&timeout=50s"
 
 echo "Waiting for Elasticsearch..."
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' --max-time 55 "$url")" != "200" ]]; do

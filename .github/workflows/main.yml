@@ -13,7 +13,7 @@ on:
 jobs:
   test-opensearch:
     env:
-      TEST_OS_SERVER: http://localhost:9250
+      TEST_OPENSEARCH_SERVER: http://localhost:9250
       PORT: 9250
     strategy:
       fail-fast: false

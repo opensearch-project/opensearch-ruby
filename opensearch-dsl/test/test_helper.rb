@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-OPENSEARCH_HOSTS = if hosts = ENV['TEST_OS_SERVER'] || ENV['OPENSEARCH_HOSTS']
+OPENSEARCH_HOSTS = if hosts = ENV['TEST_OPENSEARCH_SERVER'] || ENV['OPENSEARCH_HOSTS']
                         hosts.split(',').map do |host|
                           /(http\:\/\/)?(\S+)/.match(host)[2]
                         end

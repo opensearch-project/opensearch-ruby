@@ -44,7 +44,7 @@ namespace :test do
     require 'opensearch'
     # Check if a test cluster is running
     begin
-      url = ENV['TEST_CLUSTER_URL'] || ENV['TEST_OS_SERVER']
+      url = ENV['TEST_CLUSTER_URL'] || ENV['TEST_OPENSEARCH_SERVER']
       url = "http://localhost:#{ENV['TEST_CLUSTER_PORT'] || 9200}" unless url
       client = OpenSearch::Client.new :url => url
       es_version_info = client.info['version']

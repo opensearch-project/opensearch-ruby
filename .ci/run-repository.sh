@@ -42,7 +42,7 @@ repo=`pwd`
 if [[ $TEST_SUITE != "platinum" ]]; then
     docker run \
            --network="${network_name}" \
-           --env "TEST_OS_SERVER=${opensearch_url}" \
+           --env "TEST_OPENSEARCH_SERVER=${opensearch_url}" \
            --env "TEST_SUITE=${TEST_SUITE}" \
            --volume $repo:/usr/src/app \
            --volume=/tmp:/tmp \
@@ -53,7 +53,7 @@ if [[ $TEST_SUITE != "platinum" ]]; then
 else
     docker run \
            --network="${network_name}" \
-           --env "TEST_OS_SERVER=${opensearch_url}" \
+           --env "TEST_OPENSEARCH_SERVER=${opensearch_url}" \
            --env "ELASTIC_PASSWORD=${elastic_password}" \
            --env "TEST_SUITE=${TEST_SUITE}" \
            --env "ELASTIC_USER=elastic" \

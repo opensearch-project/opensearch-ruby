@@ -8,7 +8,7 @@
 # Export the NUMBER_OF_NODES variable to start more than 1 node
 
 # Version 1.3.0
-# - Initial version of the run-elasticsearch.sh script
+# - Initial version of the run-opensearch.sh script
 # - Deleting the volume should not dependent on the container still running
 # - Fixed `ES_JAVA_OPTS` config
 # - Moved to STACK_VERSION and TEST_VERSION
@@ -46,7 +46,7 @@ END
 
 cert_validation_flags=""
 if [[ "$TEST_SUITE" == "platinum" ]]; then
-  cert_validation_flags="--insecure --cacert /usr/share/elasticsearch/config/certs/ca.crt --resolve ${es_node_name}:443:127.0.0.1"
+  cert_validation_flags="--insecure --cacert /usr/share/opensearch/config/certs/ca.crt --resolve ${es_node_name}:443:127.0.0.1"
 fi
 
 # Pull the container, retry on failures up to 5 times with
@@ -54,7 +54,7 @@ fi
 docker_pull_attempts=0
 until [ "$docker_pull_attempts" -ge 5 ]
 do
-   docker pull docker.elastic.co/elasticsearch/"$elasticsearch_container" && break
+   docker pull docker.elastic.co/opensearch/"$opensearch_container" && break
    docker_pull_attempts=$((docker_pull_attempts+1))
    echo "Failed to pull image, retrying in 10 seconds (retry $docker_pull_attempts/5)..."
    sleep 10
@@ -64,7 +64,7 @@ NUMBER_OF_NODES=${NUMBER_OF_NODES-1}
 http_port=9200
 for (( i=0; i<$NUMBER_OF_NODES; i++, http_port++ )); do
   node_name=${es_node_name}$i
-  node_url=${external_elasticsearch_url/9200/${http_port}}$i
+  node_url=${external_opensearch_url/9200/${http_port}}$i
   if [[ "$i" == "0" ]]; then node_name=$es_node_name; fi
   environment+=($(cat <<-END
     --env node.name=$node_name
@@ -73,7 +73,7 @@ END
   echo "$i: $http_port $node_url "
   volume_name=${node_name}-${suffix}-data
   volumes+=($(cat <<-END
-    --volume $volume_name:/usr/share/elasticsearch/data${i}
+    --volume $volume_name:/usr/share/opensearch/data${i}
 END
 ))
 
@@ -92,12 +92,12 @@ END
     --ulimit nofile=65536:65536 \
     --ulimit memlock=-1:-1 \
     --detach="$local_detach" \
-    --health-cmd="curl $cert_validation_flags --fail $elasticsearch_url/_cluster/health || exit 1" \
+    --health-cmd="curl $cert_validation_flags --fail $opensearch_url/_cluster/health || exit 1" \
     --health-interval=2s \
     --health-retries=20 \
     --health-timeout=2s \
     --rm \
-    docker.elastic.co/elasticsearch/"$elasticsearch_container";
+    docker.elastic.co/opensearch/"$opensearch_container";
 
   set +x
   if wait_for_container "$es_node_name" "$network_name"; then

@@ -16,19 +16,19 @@
 # under the License.
 
 require 'fileutils'
-require_relative '../elasticsearch/lib/elasticsearch/version'
+require_relative '../opensearch/lib/opensearch/version'
 
 namespace :unified_release do
   desc 'Build gem releases and snapshots'
   task :assemble, [:version, :output_dir] do |_, args|
-    @zip_filename = "elasticsearch-ruby-#{args[:version]}"
+    @zip_filename = "opensearch-ruby-#{args[:version]}"
     @version = if args[:version].match? '-SNAPSHOT'
                  args[:version].gsub('-SNAPSHOT', ".#{Time.now.strftime('%Y%m%d%H%M%S')}-SNAPSHOT")
                else
                  args[:version]
                end
 
-    Rake::Task['update_version'].invoke(Elasticsearch::VERSION, @version) unless @version == Elasticsearch::VERSION
+    Rake::Task['update_version'].invoke(OpenSearch::VERSION, @version) unless @version == OpenSearch::VERSION
 
     build_gems(args[:output_dir])
     create_zip_file(args[:output_dir])
@@ -66,13 +66,13 @@ namespace :unified_release do
   task :bump, :version do |_, args|
     abort('[!] Required argument [version] missing') unless args[:version]
 
-    files = ['elasticsearch/elasticsearch.gemspec']
+    files = ['opensearch/opensearch.gemspec']
     RELEASE_TOGETHER.each do |gem|
       files << Dir["./#{gem}/**/**/version.rb"]
     end
 
     version_regexp = Regexp.new(/VERSION = ("|'([0-9.]+(-SNAPSHOT)?)'|")/)
-    gemspec_regexp = Regexp.new(/('elasticsearch-transport'|'elasticsearch-api'),\s+'([0-9.]+)'/)
+    gemspec_regexp = Regexp.new(/('opensearch-transport'|'opensearch-api'),\s+'([0-9.]+)'/)
 
     files.flatten.each do |file|
       content = File.read(file)

@@ -8,7 +8,7 @@ source $script_path/functions/imports.sh
 set -euo pipefail
 
 echo -e "\033[1m>>>>> Start [$STACK_VERSION container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
-DETACH=true bash .ci/run-elasticsearch.sh
+DETACH=true bash .ci/run-opensearch.sh
 
 if [[ -n "$RUNSCRIPTS" ]]; then
     for RUNSCRIPT in ${RUNSCRIPTS//,/ } ; do

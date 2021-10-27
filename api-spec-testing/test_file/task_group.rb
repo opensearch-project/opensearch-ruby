@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-module Elasticsearch
+module OpenSearch
   module RestAPIYAMLTests
     class TestFile
       class Test
@@ -70,7 +70,7 @@ module Elasticsearch
           # @example Run the actions
           #   task_group.run(client)
           #
-          # @param [ Elasticsearch::Client ] client The client to use to run the actions.
+          # @param [ OpenSearch::Client ] client The client to use to run the actions.
           #
           # @return [ self ]
           #

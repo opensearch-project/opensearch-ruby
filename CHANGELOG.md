@@ -11,19 +11,19 @@
 ### Client
 
 - Support for Elasticsearch version 7.13.1
-- Fixes thread safety issue in `get_connection` - [Pull Request](https://github.com/elastic/elasticsearch-ruby/pull/1325).
+- Fixes thread safety issue in `get_connection` - [Pull Request](https://github.com/elastic/opensearch-ruby/pull/1325).
 
 ## 7.13.0
 
 ### Client
 
 - Support for Elasticsearch version 7.13.0
-- Adds support for compatibility header for Elasticsearch. If the environment variable 'ELASTIC_CLIENT_APIVERSIONING' is set to `true` or `1`, the client will send the headers `Accept` and `Content-Type` with the following value: `application/vnd.elasticsearch+json;compatible-with=7`.
+- Adds support for compatibility header for Elasticsearch. If the environment variable 'ELASTIC_CLIENT_APIVERSIONING' is set to `true` or `1`, the client will send the headers `Accept` and `Content-Type` with the following value: `application/vnd.opensearch+json;compatible-with=7`.
 - Better detection of Elasticsearch and Enterprise Search clients in the meta header used by cloud.
 
 ### API
 
-- The REST API tests now use an artifact downloaded from the Elastic servers instead of depending of cloning `elasticsearch` locally. Check the README for more information.
+- The REST API tests now use an artifact downloaded from the Elastic servers instead of depending of cloning `opensearch` locally. Check the README for more information.
 - New parameter `include_unloaded_segments` in `cat.nodes`, `nodes.stats`: If set to true segment stats will include stats for segments that are not currently loaded into memory
 - New parameter `summary` in `ingest.get_pipeline`: Return pipelines without their definitions (default: false)
 - New parameter `index_details` in `snapshot.get`: Whether to include details of each index in the snapshot, if those details are available. Defaults to false.
@@ -45,7 +45,7 @@
 
 - Support for Elasticsearch version 7.12.0
 - Ruby 3 is now tested, it was added to the entire test suite.
-- New official documentation pages for configuration: [Basic Configuration](https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/basic-config.html) and [Advanced Configuration](https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/advanced-config.html).
+- New official documentation pages for configuration: [Basic Configuration](https://www.elastic.co/guide/en/opensearch/client/ruby-api/current/basic-config.html) and [Advanced Configuration](https://www.elastic.co/guide/en/opensearch/client/ruby-api/current/advanced-config.html).
 - Integration tests runner refactored to keep skipped tests in a yaml file.
 
 ### API
@@ -68,20 +68,20 @@
 
 ### Client
 
-* Bug fix in meta header, fixes fail when http adapter library hasn't been loaded yet: [Issue](https://github.com/elastic/elasticsearch-ruby/issues/1224).
+* Bug fix in meta header, fixes fail when http adapter library hasn't been loaded yet: [Issue](https://github.com/elastic/opensearch-ruby/issues/1224).
 
 
 ## 7.11.1
 
 ### Client
 
-* Bug fix in meta header, adds support for unknown Faraday adapters. [Pull Request](https://github.com/elastic/elasticsearch-ruby/pull/1204).
+* Bug fix in meta header, adds support for unknown Faraday adapters. [Pull Request](https://github.com/elastic/opensearch-ruby/pull/1204).
 
 ## 7.11.0
 
 ### Client
 
-- Fixes a bug with headers in our default Faraday class. [Commit](https://github.com/elastic/elasticsearch-ruby/commit/9c4afc452467cc6344359b54b98bbe5af1469219).
+- Fixes a bug with headers in our default Faraday class. [Commit](https://github.com/elastic/opensearch-ruby/commit/9c4afc452467cc6344359b54b98bbe5af1469219).
 - Adds the `X-Elastic-Client-Meta` HTTP header which is used by Elastic Cloud and can be disabled with the `enable_meta_header` parameter set to `false`.
 
 ### API
@@ -111,7 +111,7 @@
 
 - Support for Elasticsearch version `7.10.0`.
 - Fixes a bug when building the complete endpoint URL could end with duplicate slashes `//`.
-- Fixes a bug when building the complete endpoint URL with cloud id could end with duplicate ports [#1081](https://github.com/elastic/elasticsearch-ruby/issues/1081).
+- Fixes a bug when building the complete endpoint URL with cloud id could end with duplicate ports [#1081](https://github.com/elastic/opensearch-ruby/issues/1081).
 
 
 ### API
@@ -152,7 +152,7 @@ Deprecation notice: `searchable_snapshots.repository_stats` is deprecated and is
 ### Client
 
 - Support for Elasticsearch version `7.9.0`.
-- Transport/Connection: Considers attributes values for equality - [Commit](https://github.com/elastic/elasticsearch-ruby/commit/06ffd03bf51f5f33a0d87e9914e66b39357d40af).
+- Transport/Connection: Considers attributes values for equality - [Commit](https://github.com/elastic/opensearch-ruby/commit/06ffd03bf51f5f33a0d87e9914e66b39357d40af).
 - When an API endpoint accepts both `GET` and `POST`, the client will always use `POST` when a request body is present.
 
 ### API
@@ -287,7 +287,7 @@ This version drops support for Ruby 2.4 since it's reached it's end of life.
 
 #### Custom Headers
 
-You can set custom HTTP headers on the client's initializer or pass them as a parameter to any API endpoint. [More info and code examples](https://github.com/elastic/elasticsearch-ruby/tree/7.x/elasticsearch-transport#custom-http-headers).
+You can set custom HTTP headers on the client's initializer or pass them as a parameter to any API endpoint. [More info and code examples](https://github.com/elastic/opensearch-ruby/tree/7.x/opensearch-transport#custom-http-headers).
 
 ### API
 
@@ -346,23 +346,23 @@ You can set custom HTTP headers on the client's initializer or pass them as a pa
 - Last release supporting Ruby 2.4. Ruby 2.4 has reached it's end of life and no more security updates will be provided, users are suggested to update to a newer version of Ruby.
 
 #### API Key Support
-The client now supports API Key Authentication, check "Authentication" on the [transport README](https://github.com/elastic/elasticsearch-ruby/tree/7.x/elasticsearch-transport#authentication) for information on how to use it.
+The client now supports API Key Authentication, check "Authentication" on the [transport README](https://github.com/elastic/opensearch-ruby/tree/7.x/opensearch-transport#authentication) for information on how to use it.
 
 #### X-Opaque-Id Support
 
-The client now supports identifying running tasks with X-Opaque-Id. Check [transport README](https://github.com/elastic/elasticsearch-ruby/tree/7.x/elasticsearch-transport#identifying-running-tasks-with-x-opaque-id) for information on how to use X-Opaque-Id.
+The client now supports identifying running tasks with X-Opaque-Id. Check [transport README](https://github.com/elastic/opensearch-ruby/tree/7.x/opensearch-transport#identifying-running-tasks-with-x-opaque-id) for information on how to use X-Opaque-Id.
 
 #### Faraday migrated to 1.0
 
 We're now using version 1.0 of Faraday:
-- The client initializer was modified but this should not disrupt final users at all, check [this commit](https://github.com/elastic/elasticsearch-ruby/commit/0fdc6533f4621a549a4cb99e778bbd827461a2d0) for more information.
+- The client initializer was modified but this should not disrupt final users at all, check [this commit](https://github.com/elastic/opensearch-ruby/commit/0fdc6533f4621a549a4cb99e778bbd827461a2d0) for more information.
 - Migrated error checking to remove the deprecated `Faraday::Error` namespace.
 - **This change is not compatible with [Typhoeus](https://github.com/typhoeus/typhoeus)**. The latest release is 1.3.1, but it's [still using the deprecated `Faraday::Error` namespace](https://github.com/typhoeus/typhoeus/blob/v1.3.1/lib/typhoeus/adapters/faraday.rb#L100). This has been fixed on master, but the last release was November 6, 2018. Version 1.4.0 should be ok once it's released.
 - Note: Faraday 1.0 drops official support for JRuby. It installs fine on the tests we run with JRuby in this repo, but it's something we should pay attention to.
 
 Reference: [Upgrading - Faraday 1.0](https://github.com/lostisland/faraday/blob/master/UPGRADING.md)
 
-[Pull Request](https://github.com/elastic/elasticsearch-ruby/pull/808)
+[Pull Request](https://github.com/elastic/opensearch-ruby/pull/808)
 
 ### API
 
@@ -558,31 +558,31 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 
 ### Client
 
-* Update elasticsearch-transport README
+* Update opensearch-transport README
 * Use default port when host and protocol are specified but no port
 * Verify that we have a response object before checking its status
 * Make code more succinct for supporting host with path and no port
 * Support options specified with String keys
-* Update elasticsearch-transport/lib/elasticsearch/transport/client.rb
+* Update opensearch-transport/lib/opensearch/transport/client.rb
 * Add tests showing IPv6 host specified when creating client
 
 ### API
 
-* Update links in elasticsearch-api README
+* Update links in opensearch-api README
 
 ### DSL
 
-* Update links in elasticsearch-dsl README
+* Update links in opensearch-dsl README
 * Allow Bool query and Bool filter methods to take objects as arguments
 * Edit tests on bool query / filter to match context
 
 ### EXT:7.1.0
 
-* Update elasticsearch-ext README
+* Update opensearch-ext README
 
 ### XPACK
 
-* Update elasticsearch-xpack README
+* Update opensearch-xpack README
 * Minor formatting fix
 * Remove puts line
 
@@ -600,7 +600,7 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 * Allow passing request headers in `perform_request`
 * Added integration test for passing request headers in `perform_request`
 * Added, that request headers are printed in trace output, if set
-* Fix typos in elasticsearch-transport/README.md
+* Fix typos in opensearch-transport/README.md
 * Assert that connection count is at least previous count when reloaded
 * Adjust test for change in default number of shards on ES 7
 * Abstract logging functionality into a Loggable Module (#556)
@@ -642,8 +642,8 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 * Added, that trace logs are printed when the `TRACE` environment variable is set
 * Removed the "turn" dependency from generated test_helper.rb
 * Update the "Delete By Query" API to support :slices
-* Speed up `Elasticsearch::API::Utils.__listify`
-* Speed up `Elasticsearch::API::Utils.__pathify`
+* Speed up `OpenSearch::API::Utils.__listify`
+* Speed up `OpenSearch::API::Utils.__pathify`
 * Use "String#strip" and "String.empty?" in `Utils.__pathify`
 * Updated the inline documentation for using scripts in the "Update" API
 * Updated the "Scroll" API inline example with passing the scroll ID in the body
@@ -724,7 +724,7 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 * Convert aggregations tests to rspec (#566)
 * Convert filters tests to rspec (#567)
 * Fix bug in applying no_match_filter to indices filter
-* Update test for current elasticsearch version
+* Update test for current opensearch version
 * Fix integration tests for join field syntax
 * Update agg scripted metric test for deprecation in ES issue #29328
 * Fix script in update for #29328
@@ -739,7 +739,7 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 
 ### XPACK
 
-* Embedded the source code for the `elasticsearch-xpack` Rubygem
+* Embedded the source code for the `opensearch-xpack` Rubygem
 * Fixed the `setup` for YAML integration tests
 * Added missing X-Pack APIs
 * Improved the YAML integration test runner
@@ -747,7 +747,7 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 * Added, that password for Elasticsearch is generated
 * Fixed the Watcher example
 * Updated the README
-* Added gitignore for the `elasticsearch-xpack` Rubygem
+* Added gitignore for the `opensearch-xpack` Rubygem
 * Add ruby-prof as a development dependency
 * Handle multiple roles passed to get_role_mapping
 * Minor updates to xpack api methods (#586)
@@ -766,13 +766,13 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 * Fix issue with replacing argument value with an Integer value
 * Support transform_and_set in yaml tests
 * Skip two more tests
-* Run security tests against elasticsearch 7.0.0-rc2
+* Run security tests against opensearch 7.0.0-rc2
 * Account for error when forecast_id is not provided and legacy path is used
 * Blacklist specific tests, not the whole file
 * Fix version check for skipping test
 
 _Note: Up-to-date changelogs for each version can be found in their respective branches
-(e.g. [1.x/CHANGELOG.md](https://github.com/elastic/elasticsearch-ruby/blob/1.x/CHANGELOG.md))_
+(e.g. [1.x/CHANGELOG.md](https://github.com/elastic/opensearch-ruby/blob/1.x/CHANGELOG.md))_
 
 ## 6.0.0
 
@@ -902,14 +902,14 @@ Elasticsearch 6.0 compatibility.
 
 ## DSL:0.1.5
 
-* Added support for the ["Exists" Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)
-* Added missing `like` and `unlike` options to the ["More Like This" Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)
-* Added missing `time_zone` option to the ["Query String" Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)
-* Added missing `inner_hits` option to the [Nested Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html)
-* Allow calling the `filter` method for the [Bool Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html) multiple times
-* Added missing `minimum_should_match`, `prefix_length`, `max_expansions`, `fuzzy_rewrite`, `analyzer`, `lenient`, `zero_terms_query` and `cutoff_frequency` options to the [Match Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
-* Added missing `minimum_should_match` and `boost` options to the [Bool Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
-* Refactored the [Aggregations](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html) collection into its own `AggregationsCollection` class
+* Added support for the ["Exists" Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-exists-query.html)
+* Added missing `like` and `unlike` options to the ["More Like This" Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-query-string-query.html)
+* Added missing `time_zone` option to the ["Query String" Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-query-string-query.html)
+* Added missing `inner_hits` option to the [Nested Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-nested-query.html)
+* Allow calling the `filter` method for the [Bool Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-bool-query.html) multiple times
+* Added missing `minimum_should_match`, `prefix_length`, `max_expansions`, `fuzzy_rewrite`, `analyzer`, `lenient`, `zero_terms_query` and `cutoff_frequency` options to the [Match Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-match-query.html)
+* Added missing `minimum_should_match` and `boost` options to the [Bool Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-bool-query.html)
+* Refactored the [Aggregations](https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations.html) collection into its own `AggregationsCollection` class
 
 ## EXT:0.0.23
 
@@ -1003,7 +1003,7 @@ Elasticsearch 6.0 compatibility.
 * Improved the documentation for the "Backup" extension and added it to the main README
 * Added the information about the "Reindex" extension to the README
 * Added a reindex extension
-* Improved the `Elasticsearch::Extensions::Test::Cluster` extension
+* Improved the `OpenSearch::Extensions::Test::Cluster` extension
 
 ## 1.0.17
 
@@ -1015,7 +1015,7 @@ Elasticsearch 6.0 compatibility.
 
 * Added notes about ES 2.x compatibility
 * Fixes and updates to the Travis CI configuration
-* Updated the `elasticsearch:build` Rake task
+* Updated the `opensearch:build` Rake task
 
 ### API
 
@@ -1069,7 +1069,7 @@ Elasticsearch 6.0 compatibility.
 ## 1.0.14
 
 * Clarified version support of Elasticsearch
-* Improved the `elasticsearch:build` Rake task to work with branch names
+* Improved the `opensearch:build` Rake task to work with branch names
 
 ### API
 
@@ -1149,8 +1149,8 @@ Elasticsearch 6.0 compatibility.
 
 ## 1.0.9
 
-* Improved the `elasticsearch::build` task in the main Rakefile
-* Merged the 'elasticsearch-dsl' gem into the main repository
+* Improved the `opensearch::build` task in the main Rakefile
+* Merged the 'opensearch-dsl' gem into the main repository
 
 ### Client
 
@@ -1176,11 +1176,11 @@ Elasticsearch 6.0 compatibility.
 
 ### DSL
 
-* Added the `elasticsearch-dsl` gem
+* Added the `opensearch-dsl` gem
 
 ## 1.0.8
 
-* Fixed incorrect dependency specification in the "elasticsearch" wrapper gem
+* Fixed incorrect dependency specification in the "opensearch" wrapper gem
 
 ## EXT:0.0.18
 
@@ -1196,7 +1196,7 @@ Elasticsearch 6.0 compatibility.
 * Fixed, that the Curb transport passes the `selector_class` option
 * Added handling the `::Curl::Err::TimeoutError` exception for Curb transport
 * Reworded information about authentication and added example for using SSL certificates
-* Added information about the `ELASTICSEARCH_URL` environment variable to the README
+* Added information about the `OPENSEARCH_URL` environment variable to the README
 * Allow passing multiple URLs separated by a comma to the client
 * Fixed an error where passing `host: { ... }` resulted in error in Client#__extract_hosts
 
@@ -1211,8 +1211,8 @@ Elasticsearch 6.0 compatibility.
 * Added the "Cat Segments" API
 * Updated the code and documentation for the "Cluster State" API
 * Fixed incorrect examples for the "Percolate" API
-* Added a `Elasticsearch::API.settings` method for accessing module settings
-* Added a `Elasticsearch::API.settings[:skip_parameter_validation]` setting support into `__validate_and_extract_params`
+* Added a `OpenSearch::API.settings` method for accessing module settings
+* Added a `OpenSearch::API.settings[:skip_parameter_validation]` setting support into `__validate_and_extract_params`
 * Added `master_timeout` parameters to the "Template Exists" and "Get Template" APIs
 * Fixed incorrect encoding of Array parameters
 * Added support for the `metric` parameter in the "Nodes Info" API
@@ -1223,11 +1223,11 @@ Elasticsearch 6.0 compatibility.
 
 ### Various
 
-* Changed the way elasticsearch/elasticsearch repository is embedded
+* Changed the way opensearch/opensearch repository is embedded
 * Added the `setup` Rake task
 * Added chapter about development to the READMEs
 * Added the "test-unit" gem for Ruby 2.2
-* Fixed the `elasticsearch:build` Rake task
+* Fixed the `opensearch:build` Rake task
 
 ## EXT:0.0.17
 
@@ -1277,7 +1277,7 @@ Elasticsearch 6.0 compatibility.
 
 ### Client
 
-* Added support for automatically connecting to cluster set in the ELASTICSEARCH_URL environment variable
+* Added support for automatically connecting to cluster set in the OPENSEARCH_URL environment variable
 * Improved documentation
 
 ### API
@@ -1304,7 +1304,7 @@ Elasticsearch 6.0 compatibility.
 
 ## 1.0.2
 
-* Improved the `elasticsearch:build` Rake task
+* Improved the `opensearch:build` Rake task
 
 ### API
 
@@ -1344,4 +1344,4 @@ Elasticsearch 6.0 compatibility.
 
 ### Extensions
 
-* Improved the documentation for `Elasticsearch::Extensions::Test::Cluster`
+* Improved the documentation for `OpenSearch::Extensions::Test::Cluster`

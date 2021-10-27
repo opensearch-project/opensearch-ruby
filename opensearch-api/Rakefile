@@ -1,0 +1,122 @@
+# Licensed to Elasticsearch B.V. under one or more contributor
+# license agreements. See the NOTICE file distributed with
+# this work for additional information regarding copyright
+# ownership. Elasticsearch B.V. licenses this file to you under
+# the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+require 'bundler/gem_tasks'
+require 'json'
+
+task(:default) { system 'rake --tasks' }
+task test: 'test:unit'
+
+# ----- Test tasks ------------------------------------------------------------
+
+require 'rake/testtask'
+require 'rspec/core/rake_task'
+
+namespace :test do
+  desc 'Wait for Elasticsearch to be in a green state'
+  task :wait_for_green do
+    sh '../scripts/wait-cluster.sh'
+  end
+
+  # Unit tests - rake test:unit
+  #
+  task unit: :spec
+  RSpec::Core::RakeTask.new(:spec) do |t|
+    t.exclude_pattern = 'spec/**{,/*/**}/rest_api_yaml_spec.rb'
+  end
+
+  desc "Run Rest API Spec tests"
+  RSpec::Core::RakeTask.new(:rest_api) do |t|
+    require 'opensearch'
+    # Check if a test cluster is running
+    begin
+      url = ENV['TEST_CLUSTER_URL'] || ENV['TEST_OS_SERVER']
+      url = "http://localhost:#{ENV['TEST_CLUSTER_PORT'] || 9200}" unless url
+      client = OpenSearch::Client.new :url => url
+      es_version_info = client.info['version']
+      version_number = es_version_info['number']
+      build_hash      = es_version_info['build_hash']
+    rescue Faraday::ConnectionFailed
+      STDERR.puts "[!] Test cluster not running?"
+      exit 1
+    end
+
+    t.pattern = 'spec/**{,/*/**}/rest_api_yaml_spec.rb'
+  end
+
+  desc "Run integration tests"
+  task :integration do
+    Rake::Task['test:rest_api'].invoke
+  end
+
+  desc 'Run unit and integration tests'
+  task :all do
+    Rake::Task['test:unit'].invoke
+    Rake::Task['test:integration'].invoke
+  end
+
+  def refresh_artifacts(build_hash, version_number)
+    unless build_hash
+      STDERR.puts "[!] Cannot determine checkout build hash -- server not running"
+      exit(1)
+    end
+
+    puts 'Downloading artifacts file...'
+    filename = 'tmp/artifacts.json'
+    `curl -s https://artifacts-api.elastic.co/v1/versions/#{version_number} -o #{filename}`
+
+    unless File.exists?("./#{filename}")
+      STDERR.puts '[!] Couldn\'t download artifacts file'
+      exit 1
+    end
+
+    artifacts = JSON.parse(File.read('./tmp/artifacts.json'))
+
+    build_hash_artifact = artifacts['version']['builds'].select do |a|
+      a.dig('projects', 'opensearch', 'commit_hash') == build_hash
+    end.first
+    # Dig into the opensearch packages, search for the rest-resources-zip package and catch the URL:
+    zip_url = build_hash_artifact.dig('projects', 'opensearch', 'packages').select { |k,v| k =~ /rest-resources-zip/ }.map { | _, v| v['url'] }.first
+
+    filename = zip_url.split('/').last
+    puts 'Downloading zip file:'
+    `curl -s #{zip_url} -o tmp/#{filename}`
+
+    unless File.exists?("./tmp/#{filename}")
+      STDERR.puts '[!] Couldn\'t download artifact'
+      exit 1
+    end
+
+    puts "Unzipping file #{filename}"
+    `unzip -o tmp/#{filename} -d tmp/`
+  end
+end
+
+# ----- Documentation tasks ---------------------------------------------------
+
+require 'yard'
+YARD::Rake::YardocTask.new(:doc) do |t|
+  t.options = %w| --embed-mixins --markup=markdown |
+end
+
+# ----- Code analysis tasks ---------------------------------------------------
+
+require 'cane/rake_task'
+Cane::RakeTask.new(:quality) do |cane|
+  cane.abc_max = 15
+  cane.no_style = true
+end

@@ -1,32 +1,32 @@
 # Rest API YAML Test Runner
 
-The specs in `elasticsearch-api` and `elasticsearch-xpack` automatically run the tests from [Elasticsearch's REST API Spec tests](https://github.com/elastic/elasticsearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#test-suite). The test runner is defined in each of these project's `spec` folder, starting with the `rest_api_yaml_spec.rb` file.
+The specs in `opensearch-api` and `opensearch-xpack` automatically run the tests from [Elasticsearch's REST API Spec tests](https://github.com/elastic/opensearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#test-suite). The test runner is defined in each of these project's `spec` folder, starting with the `rest_api_yaml_spec.rb` file.
 
 ## REST API YAML Spec
 
 The file that traverses the yaml files and loads a **TestFile** object per each of them:
-`elasticsearch-(api|xpack)/spec/elasticsearch/api/rest_api_yaml_spec.rb`
+`opensearch-(api|xpack)/spec/opensearch/api/rest_api_yaml_spec.rb`
 
 You can use the SINGLE_TEST env variable to run just one test or one test directory. E.g.:
 ```
-$ cd elasticsearch-api && SINGLE_TEST=indices.resolve_index/10_basic_resolve_index.yml TEST_ES_SERVER='http://localhost:9200' be rake test:rest_api
+$ cd opensearch-api && SINGLE_TEST=indices.resolve_index/10_basic_resolve_index.yml TEST_OS_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 And:
 ```
-$ cd elasticsearch-api && SINGLE_TEST=indices.resolve_index TEST_ES_SERVER='http://localhost:9200' be rake test:rest_api
+$ cd opensearch-api && SINGLE_TEST=indices.resolve_index TEST_OS_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 
 ## Skipped tests
 
-We sometimes skip tests, generally due to limitations on how we run the CI server or for stuff that hasn't been completely implemented on the client yet. Skipped tests are located in `elasticsearch-(api|xpack)/spec/skipped_tests.yml`. You can run just the tests which are currently being skipped by running:
+We sometimes skip tests, generally due to limitations on how we run the CI server or for stuff that hasn't been completely implemented on the client yet. Skipped tests are located in `opensearch-(api|xpack)/spec/skipped_tests.yml`. You can run just the tests which are currently being skipped by running:
 ```
-$ cd elasticsearch-api && RUN_SKIPPED_TESTS=true TEST_ES_SERVER='http://localhost:9200' be rake test:rest_api
+$ cd opensearch-api && RUN_SKIPPED_TESTS=true TEST_OS_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 
 Or
 
 ```
-$ cd elasticsearch-xpack && RUN_SKIPPED_TESTS=true ELASTIC_PASSWORD=changeme TEST_SUITE=platinum TEST_ES_SERVER='http://localhost:9200' be rake test:rest_api
+$ cd opensearch-xpack && RUN_SKIPPED_TESTS=true ELASTIC_PASSWORD=changeme TEST_SUITE=platinum TEST_OS_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 
 ## TestFile
@@ -67,7 +67,7 @@ This file is where the action is executed, where we call the client with the met
 
 ## Rest YAML tests Helper
 
-`elasticsearch-(api|xpack)/spec/rest_yaml_tests_helper.rb`
+`opensearch-(api|xpack)/spec/rest_yaml_tests_helper.rb`
 
 - `ADMIN_CLIENT` is defined here.
 - `SINGLE_TEST` is defined here.
@@ -79,7 +79,7 @@ This file is where the action is executed, where we call the client with the met
 
 ## Enable Logging
 
-To enable logging, set the environment `QUIET` to false before running the tests. In CI, this is located in the [Dockerfile](https://github.com/elastic/elasticsearch-ruby/blob/master/.ci/Dockerfile). The environment variable is evaluated in the Rest YAML tests Helper file.
+To enable logging, set the environment `QUIET` to false before running the tests. In CI, this is located in the [Dockerfile](https://github.com/elastic/opensearch-ruby/blob/master/.ci/Dockerfile). The environment variable is evaluated in the Rest YAML tests Helper file.
 
 # Features
 
@@ -87,7 +87,7 @@ To enable logging, set the environment `QUIET` to false before running the tests
 
 The tests use custom [RSpec Matchers](https://www.rubydoc.info/gems/rspec-expectations/RSpec/Matchers) defined in `api-spec-testing/rspec_matchers.rb`.
 
-From the [Rest API test docs](https://github.com/elastic/elasticsearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#do):
+From the [Rest API test docs](https://github.com/elastic/opensearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#do):
 
 ## `catch`
 

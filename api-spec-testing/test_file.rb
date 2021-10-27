@@ -20,7 +20,7 @@ require_relative 'test_file/test'
 require_relative 'test_file/task_group'
 require 'logger'
 
-module Elasticsearch
+module OpenSearch
   module RestAPIYAMLTests
     # Custom exception to raise when a test file needs to be skipped. This is
     # captured as soon as possible so the test runners can move on to the next test.
@@ -110,7 +110,7 @@ module Elasticsearch
       # @example Run the setup tasks.
       #   test_file.setup
       #
-      # @param [ Elasticsearch::Client ] client The client to use to perform the setup tasks.
+      # @param [ OpenSearch::Client ] client The client to use to perform the setup tasks.
       #
       # @return [ self ]
       #
@@ -125,7 +125,7 @@ module Elasticsearch
             begin
               action.execute(client)
               true
-            rescue Elasticsearch::Transport::Transport::Errors::ServiceUnavailable => e
+            rescue OpenSearch::Transport::Transport::Errors::ServiceUnavailable => e
               # The action sometimes gets the cluster in a recovering state, so we
               # retry a few times and then raise an exception if it's still
               # happening
@@ -146,7 +146,7 @@ module Elasticsearch
       # @example Run the teardown tasks.
       #   test_file.teardown
       #
-      # @param [ Elasticsearch::Client ] client The client to use to perform the teardown tasks.
+      # @param [ OpenSearch::Client ] client The client to use to perform the teardown tasks.
       #
       # @return [ self ]
       #
@@ -178,7 +178,7 @@ module Elasticsearch
         ].freeze
 
         # Wipe Cluster, based on PHP's implementation of ESRestTestCase.java:wipeCluster()
-        # https://github.com/elastic/elasticsearch-php/blob/7.10/tests/Elasticsearch/Tests/Utility.php#L97
+        # https://github.com/elastic/opensearch-php/blob/7.10/tests/Elasticsearch/Tests/Utility.php#L97
         def wipe_cluster(client)
           if xpack?
             clear_rollup_jobs(client)
@@ -288,7 +288,7 @@ module Elasticsearch
 
             begin
               client.indices.delete_template(name: template)
-            rescue Elasticsearch::Transport::Transport::Errors::NotFound => e
+            rescue OpenSearch::Transport::Transport::Errors::NotFound => e
               if e.message.include?("index_template [#{template}] missing")
                 client.indices.delete_index_template(name: template, ignore: 404)
               end
@@ -394,7 +394,7 @@ module Elasticsearch
             begin
               response = client.perform_request('DELETE', "_snapshot/#{repository}", ignore: [500, 404])
               client.snapshot.delete_repository(repository: repository, ignore: 404)
-            rescue Elasticsearch::Transport::Transport::Errors::InternalServerError => e
+            rescue OpenSearch::Transport::Transport::Errors::InternalServerError => e
               regexp = /indices that use the repository: \[docs\/([a-zA-Z0-9]+)/
               raise e unless response.body['error']['root_cause'].first['reason'].match(regexp)
 

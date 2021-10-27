@@ -1,8 +1,8 @@
 ---
 - job:
-    name: elastic+elasticsearch-ruby+pull-request
-    display-name: 'elastic / elasticsearch-ruby # pull-request'
-    description: Testing of elasticsearch-ruby pull requests.
+    name: elastic+opensearch-ruby+pull-request
+    display-name: 'elastic / opensearch-ruby # pull-request'
+    description: Testing of opensearch-ruby pull requests.
     scm:
     - git:
         branches:

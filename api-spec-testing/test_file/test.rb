@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-module Elasticsearch
+module OpenSearch
   module RestAPIYAMLTests
     class TestFile
       # Represents a single test in a test file. A single test can have many operations and validations.
@@ -202,7 +202,7 @@ module Elasticsearch
         # @example
         #   test.run(client)
         #
-        # @param [ Elasticsearch::Client ] client The client to use when executing operations.
+        # @param [ OpenSearch::Client ] client The client to use when executing operations.
         #
         # @return [ self ]
         #

@@ -36,7 +36,7 @@ VERSION=$2
 STACK_VERSION=$VERSION
 set -euo pipefail
 
-product="elastic/elasticsearch-ruby"
+product="elastic/opensearch-ruby"
 output_folder=".ci/output"
 codegen_folder=".ci/output"
 OUTPUT_DIR="$repo/${output_folder}"
@@ -115,7 +115,7 @@ esac
 echo -e "\033[34;1mINFO:\033[0m OUTPUT_DIR ${OUTPUT_DIR}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m RUBY_TEST_VERSION ${RUBY_TEST_VERSION}\033[0m"
 
-echo -e "\033[1m>>>>> Build [elastic/elasticsearch-ruby container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
+echo -e "\033[1m>>>>> Build [elastic/opensearch-ruby container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
 # ------------------------------------------------------- #
 # Build Container

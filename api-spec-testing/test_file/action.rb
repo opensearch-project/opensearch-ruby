@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-module Elasticsearch
+module OpenSearch
   module RestAPIYAMLTests
     # Class representing a single action. An action is one of the following:
     #
@@ -45,10 +45,10 @@ module Elasticsearch
       # @example Execute the action.
       #   action.execute(client, test)
       #
-      # @param [ Elasticsearch::Client ] client The client to use to execute the action.
+      # @param [ OpenSearch::Client ] client The client to use to execute the action.
       # @param [ Test ] test The test containing this action. Necessary for caching variables.
       #
-      # @return [ Elasticsearch::Client ] The client. It will be a new one, not the one passed in,
+      # @return [ OpenSearch::Client ] The client. It will be a new one, not the one passed in,
       #   if the action is to set headers.
       #
       # @since 6.2.0
@@ -74,13 +74,13 @@ module Elasticsearch
               headers.delete(:Authorization)
             end
             if ENV['QUIET'] == 'true'
-              # todo: create a method on Elasticsearch::Client that can clone the client with new options
-              Elasticsearch::Client.new(
+              # todo: create a method on OpenSearch::Client that can clone the client with new options
+              OpenSearch::Client.new(
                 host: URL,
                 transport_options: TRANSPORT_OPTIONS.merge(headers: headers)
               )
             else
-              Elasticsearch::Client.new(
+              OpenSearch::Client.new(
                 host: URL,
                 tracer: Logger.new($stdout),
                 transport_options: TRANSPORT_OPTIONS.merge(headers: headers)

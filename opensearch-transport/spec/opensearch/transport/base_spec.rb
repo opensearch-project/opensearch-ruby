@@ -168,7 +168,7 @@ describe Opensearch::Transport::Transport::Base do
 
       let(:arguments) do
         {
-          hosts: ELASTICSEARCH_HOSTS,
+          hosts: OPENSEARCH_HOSTS,
           retry_on_status: ['404']
         }
       end

@@ -69,7 +69,7 @@ module Opensearch
 
       # Create a client connected to an Elasticsearch cluster.
       #
-      # Specify the URL via arguments or set the `ELASTICSEARCH_URL` environment variable.
+      # Specify the URL via arguments or set the `OPENSEARCH_URL` environment variable.
       #
       # @option arguments [String,Array] :hosts Single host passed as a String or Hash, or multiple hosts
       #                                         passed as an Array; `host` or `url` keys are also valid
@@ -151,7 +151,7 @@ module Opensearch
                                    @arguments[:host] ||
                                    @arguments[:url] ||
                                    @arguments[:urls] ||
-                                   ENV['ELASTICSEARCH_URL'] ||
+                                   ENV['OPENSEARCH_URL'] ||
                                    DEFAULT_HOST)
 
         @send_get_body_as = @arguments[:send_get_body_as] || 'GET'

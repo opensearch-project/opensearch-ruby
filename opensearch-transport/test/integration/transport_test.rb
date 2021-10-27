@@ -28,7 +28,7 @@ class Opensearch::Transport::ClientIntegrationTest < Opensearch::Test::Integrati
 
   context "Transport" do
     setup do
-      @host, @port = ELASTICSEARCH_HOSTS.first.split(':')
+      @host, @port = OPENSEARCH_HOSTS.first.split(':')
       begin; Object.send(:remove_const, :Patron);   rescue NameError; end
     end
 

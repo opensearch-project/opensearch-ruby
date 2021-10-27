@@ -35,7 +35,7 @@ end
 # The hosts to use for creating a opensearch client.
 #
 # @since 7.0.0
-ELASTICSEARCH_HOSTS = if (hosts = ENV['TEST_ES_SERVER'] || ENV['ELASTICSEARCH_HOSTS'])
+OPENSEARCH_HOSTS = if (hosts = ENV['TEST_ES_SERVER'] || ENV['OPENSEARCH_HOSTS'])
                         hosts.split(',').map do |host|
                           /(http\:\/\/)?(\S+)/.match(host)[2]
                         end
@@ -43,7 +43,7 @@ ELASTICSEARCH_HOSTS = if (hosts = ENV['TEST_ES_SERVER'] || ENV['ELASTICSEARCH_HO
                         ['localhost:9200']
                       end.freeze
 
-TEST_HOST, TEST_PORT = ELASTICSEARCH_HOSTS.first.split(':') if ELASTICSEARCH_HOSTS
+TEST_HOST, TEST_PORT = OPENSEARCH_HOSTS.first.split(':') if OPENSEARCH_HOSTS
 
 # Are we testing on JRuby?
 #
@@ -72,7 +72,7 @@ end
 #
 # @since 7.0.0
 def default_client
-  $client ||= Opensearch::Client.new(hosts: ELASTICSEARCH_HOSTS)
+  $client ||= Opensearch::Client.new(hosts: OPENSEARCH_HOSTS)
 end
 
 module Config
@@ -80,7 +80,7 @@ module Config
     # Get the hosts to use to connect an opensearch client.
     #
     # @since 7.0.0
-    context.let(:hosts) { ELASTICSEARCH_HOSTS }
+    context.let(:hosts) { OPENSEARCH_HOSTS }
   end
 end
 

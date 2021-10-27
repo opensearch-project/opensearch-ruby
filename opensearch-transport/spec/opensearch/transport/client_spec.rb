@@ -1148,15 +1148,15 @@ describe Opensearch::Transport::Client do
     it_behaves_like 'a client that extracts hosts'
   end
 
-  context 'when the URL is set in the ELASTICSEARCH_URL environment variable' do
+  context 'when the URL is set in the OPENSEARCH_URL environment variable' do
 
     context 'when there is only one host specified' do
 
       around do |example|
-        before_url = ENV['ELASTICSEARCH_URL']
-        ENV['ELASTICSEARCH_URL'] = 'example.com'
+        before_url = ENV['OPENSEARCH_URL']
+        ENV['OPENSEARCH_URL'] = 'example.com'
         example.run
-        ENV['ELASTICSEARCH_URL'] = before_url
+        ENV['OPENSEARCH_URL'] = before_url
       end
 
       it 'sets the host' do
@@ -1168,10 +1168,10 @@ describe Opensearch::Transport::Client do
     context 'when mutliple hosts are specified as a comma-separated String list' do
 
       around do |example|
-        before_url = ENV['ELASTICSEARCH_URL']
-        ENV['ELASTICSEARCH_URL'] = 'example.com, other.com'
+        before_url = ENV['OPENSEARCH_URL']
+        ENV['OPENSEARCH_URL'] = 'example.com, other.com'
         example.run
-        ENV['ELASTICSEARCH_URL'] = before_url
+        ENV['OPENSEARCH_URL'] = before_url
       end
 
       it 'sets the hosts' do
@@ -1465,12 +1465,12 @@ describe Opensearch::Transport::Client do
       end
     end
 
-    context 'when Opensearch response includes a warning header' do
+    context 'when Elasticsearch response includes a warning header' do
       let(:client) do
         Opensearch::Transport::Client.new(hosts: hosts)
       end
 
-      let(:warning) { 'Opensearch warning: "deprecation warning"' }
+      let(:warning) { 'Elasticsearch warning: "deprecation warning"' }
 
       it 'prints a warning' do
         allow_any_instance_of(Opensearch::Transport::Transport::Response).to receive(:headers) do
@@ -1525,7 +1525,7 @@ describe Opensearch::Transport::Client do
     end
   end
 
-  context 'when the client connects to Opensearch' do
+  context 'when the client connects to Elasticsearch' do
     let(:logger) do
       Logger.new(STDERR).tap do |logger|
         logger.formatter = proc do |severity, datetime, progname, msg|
@@ -1584,7 +1584,7 @@ describe Opensearch::Transport::Client do
 
       context 'when a block is provided' do
         let(:client) do
-          described_class.new(host: ELASTICSEARCH_HOSTS.first, logger: logger) do |client|
+          described_class.new(host: OPENSEARCH_HOSTS.first, logger: logger) do |client|
             client.headers['Accept'] = 'application/yaml'
           end
         end
@@ -1600,7 +1600,7 @@ describe Opensearch::Transport::Client do
 
         context 'when the Faraday adapter is set in the block' do
           let(:client) do
-            described_class.new(host: ELASTICSEARCH_HOSTS.first, logger: logger) do |client|
+            described_class.new(host: OPENSEARCH_HOSTS.first, logger: logger) do |client|
               client.adapter(:net_http_persistent)
             end
           end
@@ -1631,7 +1631,7 @@ describe Opensearch::Transport::Client do
         context 'when a node is unreachable' do
 
           let(:hosts) do
-            [ELASTICSEARCH_HOSTS.first, "foobar1", "foobar2"]
+            [OPENSEARCH_HOSTS.first, "foobar1", "foobar2"]
           end
 
           let(:options) do
@@ -1653,7 +1653,7 @@ describe Opensearch::Transport::Client do
       context 'when retry_on_failure is an integer' do
 
         let(:hosts) do
-          [ELASTICSEARCH_HOSTS.first, 'foobar1', 'foobar2', 'foobar3']
+          [OPENSEARCH_HOSTS.first, 'foobar1', 'foobar2', 'foobar3']
         end
 
         let(:options) do
@@ -1671,7 +1671,7 @@ describe Opensearch::Transport::Client do
       context 'when reload_on_failure is true' do
 
         let(:hosts) do
-          [ELASTICSEARCH_HOSTS.first, 'foobar1', 'foobar2']
+          [OPENSEARCH_HOSTS.first, 'foobar1', 'foobar2']
         end
 
         let(:options) do
@@ -1719,7 +1719,7 @@ describe Opensearch::Transport::Client do
           context 'when using the Net::HTTP adapter' do
 
             let(:client) do
-              described_class.new(hosts: ELASTICSEARCH_HOSTS, compression: true, adapter: :net_http)
+              described_class.new(hosts: OPENSEARCH_HOSTS, compression: true, adapter: :net_http)
             end
 
             it 'compresses the request and decompresses the response' do
@@ -1738,7 +1738,7 @@ describe Opensearch::Transport::Client do
           context 'when using the HTTPClient adapter' do
 
             let(:client) do
-              described_class.new(hosts: ELASTICSEARCH_HOSTS, compression: true, adapter: :httpclient, enable_meta_header: false)
+              described_class.new(hosts: OPENSEARCH_HOSTS, compression: true, adapter: :httpclient, enable_meta_header: false)
             end
 
             it 'compresses the request and decompresses the response' do
@@ -1757,7 +1757,7 @@ describe Opensearch::Transport::Client do
           context 'when using the Patron adapter', unless: jruby? do
 
             let(:client) do
-              described_class.new(hosts: ELASTICSEARCH_HOSTS, compression: true, adapter: :patron)
+              described_class.new(hosts: OPENSEARCH_HOSTS, compression: true, adapter: :patron)
             end
 
             it 'compresses the request and decompresses the response' do
@@ -1776,7 +1776,7 @@ describe Opensearch::Transport::Client do
           context 'when using the Net::HTTP::Persistent adapter' do
 
             let(:client) do
-              described_class.new(hosts: ELASTICSEARCH_HOSTS, compression: true, adapter: :net_http_persistent)
+              described_class.new(hosts: OPENSEARCH_HOSTS, compression: true, adapter: :net_http_persistent)
             end
 
             it 'compresses the request and decompresses the response' do
@@ -1795,7 +1795,7 @@ describe Opensearch::Transport::Client do
           context 'when using the Typhoeus adapter' do
 
             let(:client) do
-              described_class.new(hosts: ELASTICSEARCH_HOSTS, compression: true, adapter: :typhoeus)
+              described_class.new(hosts: OPENSEARCH_HOSTS, compression: true, adapter: :typhoeus)
             end
 
             it 'compresses the request and decompresses the response' do
@@ -1816,7 +1816,7 @@ describe Opensearch::Transport::Client do
       context 'when using Curb as the transport', unless: jruby? do
         let(:client) do
           described_class.new(
-            hosts: ELASTICSEARCH_HOSTS,
+            hosts: OPENSEARCH_HOSTS,
             compression: true,
             transport_class: Opensearch::Transport::Transport::HTTP::Curb
           )
@@ -1837,7 +1837,7 @@ describe Opensearch::Transport::Client do
 
       context 'when using Manticore as the transport', if: jruby? do
         let(:client) do
-          described_class.new(hosts: ELASTICSEARCH_HOSTS,
+          described_class.new(hosts: OPENSEARCH_HOSTS,
                               compression: true,
                               transport_class: Opensearch::Transport::Transport::HTTP::Manticore)
         end
@@ -1853,7 +1853,7 @@ describe Opensearch::Transport::Client do
         before do
           client.perform_request('DELETE', '_all')
           client.perform_request('DELETE', 'myindex') rescue
-          client.perform_request('PUT', 'myindex', {}, { settings: { number_of_shards: 2, number_of_replicas: 0 } })
+            client.perform_request('PUT', 'myindex', {}, { settings: { number_of_shards: 2, number_of_replicas: 0 } })
           client.perform_request('PUT', 'myindex/mydoc/1', { routing: 'XYZ', timeout: '1s' }, { foo: 'bar' })
           client.perform_request('GET', '_cluster/health?wait_for_status=green&timeout=2s', {})
         end

@@ -122,7 +122,7 @@ You can pass multiple URLs separated by a comma:
 
     Opensearch::Client.new urls: 'http://localhost:9200,http://localhost:9201'
 
-Another way to configure the URL(s) is to export the `ELASTICSEARCH_URL` variable.
+Another way to configure the URL(s) is to export the `OPENSEARCH_URL` variable.
 
 The client will automatically round-robin across the hosts
 (unless you select or implement a different [connection selector](#connection-selector)).

@@ -10,7 +10,7 @@ OpenSearch Ruby Client
 
 ## Welcome!
 
-**opensearch-ruby** is [a community-driven, open source fork](https://aws.amazon.com/blogs/opensource/introducing-opensearch/) of opensearch-ruby licensed under the [Apache v2.0 License](LICENSE.txt).
+**opensearch-ruby** is [a community-driven, open source fork](https://aws.amazon. com/blogs/opensource/introducing-opensearch/) of elasticsearch-ruby licensed under the [Apache v2.0 License](LICENSE. txt).
 For more information, see [opensearch.org](https://opensearch.org/).
 ## Project Resources
 

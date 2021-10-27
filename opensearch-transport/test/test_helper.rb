@@ -16,27 +16,21 @@
 # under the License.
 
 
-ELASTICSEARCH_HOSTS = if hosts = ENV['TEST_ES_SERVER'] || ENV['ELASTICSEARCH_HOSTS']
-                        hosts.split(',').map do |host|
-                          /(http\:\/\/)?(\S+)/.match(host)[2]
-                        end
-                      else
-                        ['localhost:9200']
-                      end.freeze
+OPENSEARCH_HOSTS = if hosts = ENV['TEST_OS_SERVER'] || ENV['OPENSEARCH_HOSTS']
+                     hosts.split(',').map do |host|
+                       /(http\:\/\/)?(\S+)/.match(host)[2]
+                     end
+                   else
+                     ['localhost:9200']
+                   end.freeze
 
-TEST_HOST, TEST_PORT = ELASTICSEARCH_HOSTS.first.split(':') if ELASTICSEARCH_HOSTS
+TEST_HOST, TEST_PORT = OPENSEARCH_HOSTS.first.split(':') if OPENSEARCH_HOSTS
 
 JRUBY    = defined?(JRUBY_VERSION)
 
 if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start { add_filter %r{^/test/} }
-end
-
-# Register `at_exit` handler for integration tests shutdown.
-# MUST be called before requiring `test/unit`.
-if defined?(RUBY_VERSION) && RUBY_VERSION > '1.9'
-  at_exit { Opensearch::Test::IntegrationTestCase.__run_at_exit_hooks }
 end
 
 require 'minitest/autorun'
@@ -52,12 +46,6 @@ require 'logger'
 require 'hashie'
 
 RequireProf.print_timing_infos if ENV["REQUIRE_PROF"]
-
-if defined?(RUBY_VERSION) && RUBY_VERSION > '1.9'
-  require 'opensearch/extensions/test/cluster'
-  require 'opensearch/extensions/test/startup_shutdown'
-  require 'opensearch/extensions/test/profiling' unless JRUBY
-end
 
 class FixedMinitestSpecReporter < Minitest::Reporters::SpecReporter
   def before_test(test)
@@ -98,22 +86,3 @@ module Minitest
 end
 
 Minitest::Reporters.use! FixedMinitestSpecReporter.new
-
-module Opensearch
-  module Test
-    class IntegrationTestCase < Minitest::Test
-      extend Opensearch::Extensions::Test::StartupShutdown
-
-      shutdown { Opensearch::Extensions::Test::Cluster.stop if ENV['SERVER'] && started? && Opensearch::Extensions::Test::Cluster.running? }
-    end
-  end
-
-  module Test
-    class ProfilingTest < Minitest::Test
-      extend Opensearch::Extensions::Test::StartupShutdown
-      extend Opensearch::Extensions::Test::Profiling
-
-      shutdown { Opensearch::Extensions::Test::Cluster.stop if ENV['SERVER'] && started? && Opensearch::Extensions::Test::Cluster.running? }
-    end unless JRUBY
-  end
-end

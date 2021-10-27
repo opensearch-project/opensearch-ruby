@@ -28,10 +28,6 @@ if File.exist? File.expand_path("../../opensearch/opensearch.gemspec", __FILE__)
   gem 'opensearch', path: File.expand_path("../../opensearch", __FILE__), require: false
 end
 
-if File.exist? File.expand_path("../../opensearch-extensions", __FILE__)
-  gem 'opensearch-extensions', path: File.expand_path("../../opensearch-extensions", __FILE__), require: false
-end
-
 group :development do
   gem 'rspec'
   gem 'rspec_junit_formatter'

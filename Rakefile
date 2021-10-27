@@ -60,7 +60,6 @@ SUBPROJECTS = [
   'opensearch-transport',
   'opensearch-dsl',
   'opensearch-api',
-  'opensearch-extensions',
 ].freeze
 
 RELEASE_TOGETHER = [
@@ -124,8 +123,6 @@ end
 desc "Release all subprojects to Rubygems"
 task :release do
   RELEASE_TOGETHER.each do |project|
-    next if project == 'opensearch-extensions'
-
     sh "cd #{CURRENT_PATH.join(project)} && bundle exec rake release"
     puts '-' * 80
   end

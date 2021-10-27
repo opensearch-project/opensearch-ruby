@@ -32,10 +32,6 @@ if File.exist? File.expand_path('../../opensearch-api', __FILE__)
   gem 'opensearch-api', path: File.expand_path('../../opensearch-api', __FILE__), require: false
 end
 
-if File.exist? File.expand_path('../../opensearch-extensions', __FILE__)
-  gem 'opensearch-extensions', path: File.expand_path('../../opensearch-extensions', __FILE__), require: false
-end
-
 group :development do
   gem 'rspec'
   if defined?(JRUBY_VERSION)

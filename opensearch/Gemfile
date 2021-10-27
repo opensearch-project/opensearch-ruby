@@ -27,7 +27,3 @@ end
 if File.exist? File.expand_path("../../opensearch-transport/opensearch-transport.gemspec", __FILE__)
   gem 'opensearch-transport', :path => File.expand_path("../../opensearch-transport", __FILE__), :require => false
 end
-
-if File.exist? File.expand_path("../../opensearch-extensions", __FILE__)
-  gem 'opensearch-extensions', :path => File.expand_path("../../opensearch-extensions", __FILE__), :require => true
-end

@@ -49,7 +49,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake', '~> 13'
 
   s.add_development_dependency 'opensearch'
-  s.add_development_dependency 'opensearch-extensions'
 
   s.add_development_dependency 'cane'
   s.add_development_dependency 'minitest', '~> 5'

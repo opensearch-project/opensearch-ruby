@@ -39,6 +39,6 @@ namespace :docker do
                  else
                    'free'
                  end
-    system("STACK_VERSION=#{params[:version]} TEST_SUITE=#{test_suite} ./.ci/run-elasticsearch.sh")
+    system("STACK_VERSION=#{params[:version]} TEST_SUITE=#{test_suite} ./.ci/run-opensearch.sh")
   end
 end

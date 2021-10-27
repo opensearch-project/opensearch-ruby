@@ -25,16 +25,16 @@ if [[ -z $es_node_name ]]; then
 
   export es_node_name=instance
   export elastic_password=changeme
-  export elasticsearch_image=elasticsearch-oss
-  export elasticsearch_url=https://elastic:${elastic_password}@${es_node_name}:9200
+  export opensearch_image=opensearch-oss
+  export opensearch_url=https://elastic:${elastic_password}@${es_node_name}:9200
   if [[ $TEST_SUITE != "platinum" ]]; then
-    export elasticsearch_url=http://${es_node_name}:9200
+    export opensearch_url=http://${es_node_name}:9200
   fi
-  export external_elasticsearch_url=${elasticsearch_url/$es_node_name/localhost}
-  export elasticsearch_container="${elasticsearch_image}:${STACK_VERSION}"
+  export external_opensearch_url=${opensearch_url/$es_node_name/localhost}
+  export opensearch_container="${opensearch_image}:${STACK_VERSION}"
 
   export suffix=rest-test
-  export moniker=$(echo "$elasticsearch_container" | tr -C "[:alnum:]" '-')
+  export moniker=$(echo "$opensearch_container" | tr -C "[:alnum:]" '-')
   export network_name=${moniker}${suffix}
 
   export ssl_cert="${script_path}/certs/testnode.crt"

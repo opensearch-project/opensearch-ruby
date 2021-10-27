@@ -8,13 +8,13 @@
     view-type: list
 - view:
     name: 'Ruby'
-    regex: '^.*elasticsearch-ruby.*$'
+    regex: '^.*opensearch-ruby.*$'
     view-type: list
 - view:
     name: 'Javascript'
-    regex: '^.*elasticsearch-js.*$'
+    regex: '^.*opensearch-js.*$'
     view-type: list
 - view:
     name: 'Python'
-    regex: '^.*elasticsearch-py.*$'
+    regex: '^.*opensearch-py.*$'
     view-type: list

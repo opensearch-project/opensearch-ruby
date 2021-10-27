@@ -15,8 +15,8 @@ set -euo pipefail
 echo -e "\033[34;1mINFO:\033[0m VERSION: ${STACK_VERSION}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m TEST_SUITE: ${TEST_SUITE}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m RUNSCRIPTS: ${RUNSCRIPTS}\033[0m"
-echo -e "\033[34;1mINFO:\033[0m URL: ${elasticsearch_url}\033[0m"
-echo -e "\033[34;1mINFO:\033[0m CONTAINER: ${elasticsearch_container}\033[0m"
+echo -e "\033[34;1mINFO:\033[0m URL: ${opensearch_url}\033[0m"
+echo -e "\033[34;1mINFO:\033[0m CONTAINER: ${opensearch_container}\033[0m"
 
 #
 # Ruby client setup:
@@ -26,15 +26,15 @@ export RUBY_TEST_VERSION=${RUBY_TEST_VERSION:-2.7.0}
 export STACK_VERSION=${STACK_VERSION:-8.0.0-SNAPSHOT}
 export SINGLE_TEST=${SINGLE_TEST:-}
 
-echo -e "\033[1m>>>>> Build [elastic/elasticsearch-ruby container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
+echo -e "\033[1m>>>>> Build [elastic/opensearch-ruby container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 # create client image
 docker build \
        --file .ci/Dockerfile \
-       --tag elastic/elasticsearch-ruby \
+       --tag elastic/opensearch-ruby \
        --build-arg RUBY_TEST_VERSION=${RUBY_TEST_VERSION} \
        .
 
-echo -e "\033[1m>>>>> Run [elastic/elasticsearch-ruby container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
+echo -e "\033[1m>>>>> Run [elastic/opensearch-ruby container] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m"
 
 repo=`pwd`
 
@@ -42,25 +42,25 @@ repo=`pwd`
 if [[ $TEST_SUITE != "platinum" ]]; then
     docker run \
            --network="${network_name}" \
-           --env "TEST_ES_SERVER=${elasticsearch_url}" \
+           --env "TEST_OPENSEARCH_SERVER=${opensearch_url}" \
            --env "TEST_SUITE=${TEST_SUITE}" \
            --volume $repo:/usr/src/app \
            --volume=/tmp:/tmp \
-           --name elasticsearch-ruby \
+           --name opensearch-ruby \
            --rm \
-           elastic/elasticsearch-ruby \
-           bundle exec rake elasticsearch:download_artifacts test:rest_api
+           elastic/opensearch-ruby \
+           bundle exec rake opensearch:download_artifacts test:rest_api
 else
     docker run \
            --network="${network_name}" \
-           --env "TEST_ES_SERVER=${elasticsearch_url}" \
+           --env "TEST_OPENSEARCH_SERVER=${opensearch_url}" \
            --env "ELASTIC_PASSWORD=${elastic_password}" \
            --env "TEST_SUITE=${TEST_SUITE}" \
            --env "ELASTIC_USER=elastic" \
            --env "SINGLE_TEST=${SINGLE_TEST}" \
            --volume $repo:/usr/src/app \
-           --name elasticsearch-ruby \
+           --name opensearch-ruby \
            --rm \
-           elastic/elasticsearch-ruby \
-           bundle exec rake elasticsearch:download_artifacts test:security
+           elastic/opensearch-ruby \
+           bundle exec rake opensearch:download_artifacts test:security
 fi

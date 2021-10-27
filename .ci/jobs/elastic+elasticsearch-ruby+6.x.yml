@@ -1,8 +1,8 @@
 ---
 - job:
-    name: elastic+elasticsearch-ruby+6.x
-    display-name: 'elastic / elasticsearch-ruby # 6.x'
-    description: Testing the elasticsearch-ruby 6.x branch.
+    name: elastic+opensearch-ruby+6.x
+    display-name: 'elastic / opensearch-ruby # 6.x'
+    description: Testing the opensearch-ruby 6.x branch.
     parameters:
     - string:
         name: branch_specifier

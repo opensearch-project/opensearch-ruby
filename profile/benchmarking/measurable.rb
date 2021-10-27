@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-module Elasticsearch
+module Opensearch
 
   module Benchmarking
     # Helper functions used by benchmarking tasks
@@ -67,7 +67,7 @@ module Elasticsearch
         send(type, opts)
       end
 
-      # Get the nodes info on the elasticsearch server used for the benchmarking tests.
+      # Get the nodes info on the opensearch server used for the benchmarking tests.
       #
       # @example Get the nodes info.
       #   task.nodes_info
@@ -79,7 +79,7 @@ module Elasticsearch
         client.nodes.info(os: true) if client.ping
       end
 
-      # Get the version of the elasticsearch server used for the benchmarking tests.
+      # Get the version of the opensearch server used for the benchmarking tests.
       #
       # @example Get the server version.
       #   task.server_version
@@ -143,7 +143,7 @@ module Elasticsearch
 
       attr_reader :adapter
 
-      # The elasticsearch url to use for the tests.
+      # The opensearch url to use for the tests.
       #
       # @return [ String ] The Elasticsearch URL to use in tests.
       #
@@ -230,7 +230,7 @@ module Elasticsearch
       end
 
       def client
-        @client ||= Elasticsearch::Transport::Client.new(host: ELASTICSEARCH_URL,
+        @client ||= Opensearch::Transport::Client.new(host: ELASTICSEARCH_URL,
                                                          adapter: adapter,
                                                          tracer: nil)
       end
@@ -279,7 +279,7 @@ module Elasticsearch
           opts = { host: ES_RESULT_CLUSTER_URL }
           opts.merge!(user: ES_RESULT_CLUSTER_USERNAME) if ES_RESULT_CLUSTER_USERNAME
           opts.merge!(password: ES_RESULT_CLUSTER_PASSWORD) if ES_RESULT_CLUSTER_PASSWORD
-          Elasticsearch::Client.new(opts)
+          Opensearch::Client.new(opts)
         end
       end
     end

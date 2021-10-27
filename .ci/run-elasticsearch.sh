@@ -8,7 +8,7 @@
 # Export the NUMBER_OF_NODES variable to start more than 1 node
 
 # Version 1.3.0
-# - Initial version of the run-elasticsearch.sh script
+# - Initial version of the run-opensearch.sh script
 # - Deleting the volume should not dependent on the container still running
 # - Fixed `ES_JAVA_OPTS` config
 # - Moved to STACK_VERSION and TEST_VERSION
@@ -54,7 +54,7 @@ fi
 docker_pull_attempts=0
 until [ "$docker_pull_attempts" -ge 5 ]
 do
-   docker pull docker.elastic.co/elasticsearch/"$elasticsearch_container" && break
+   docker pull docker.elastic.co/opensarch/"$elasticsearch_container" && break
    docker_pull_attempts=$((docker_pull_attempts+1))
    echo "Failed to pull image, retrying in 10 seconds (retry $docker_pull_attempts/5)..."
    sleep 10

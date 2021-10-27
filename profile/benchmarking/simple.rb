@@ -17,7 +17,7 @@
 
 require 'objspace'
 
-module Elasticsearch
+module Opensearch
   module Benchmarking
 
     # Class encapsulating all settings and functionality for running benchmarking
@@ -277,7 +277,7 @@ module Elasticsearch
           search_criteria = { match: { cuisine: 'mexican' } }
           request = { body: { query: search_criteria } }
           if noop_plugin?
-            Elasticsearch::API.const_set('UNDERSCORE_SEARCH', '_noop_search')
+            Opensearch::API.const_set('UNDERSCORE_SEARCH', '_noop_search')
           else
             request.merge!(index: INDEX)
           end
@@ -325,7 +325,7 @@ module Elasticsearch
           search_criteria = { match: { 'user.lang': 'en' } }
           request = { body: { query: search_criteria } }
           if noop_plugin?
-            Elasticsearch::API.const_set('UNDERSCORE_SEARCH', '_noop_search')
+            Opensearch::API.const_set('UNDERSCORE_SEARCH', '_noop_search')
           else
             request.merge!(index: INDEX)
           end

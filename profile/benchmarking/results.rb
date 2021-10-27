@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-module Elasticsearch
+module Opensearch
   module Benchmarking
 
     # Class encapsulating formatting and indexing the results from a benchmarking run.
@@ -35,7 +35,7 @@ module Elasticsearch
       # @example Create a results object.
       #   Benchmarking::Results.new(task, [...], options)
       #
-      # @param [ Elasticsearch::Benchmarking ] task The task that executed the benchmarking run.
+      # @param [ Opensearch::Benchmarking ] task The task that executed the benchmarking run.
       # @param [ Array<Fixnum> ] results An array of the results.
       # @param [ Hash ] options The options.
       #
@@ -46,12 +46,12 @@ module Elasticsearch
         @options = options
       end
 
-      # Index the results document into elasticsearch.
+      # Index the results document into opensearch.
       #
       # @example Index the results.
       #   results.index!(client)
       #
-      # @param [ Elasticsearch::Client ] client The client to use to index the results.
+      # @param [ Opensearch::Client ] client The client to use to index the results.
       #
       # @return [ Hash ] The results document.
       #
@@ -87,10 +87,10 @@ module Elasticsearch
 
       DEFAULT_METRICS = ['median'].freeze
 
-      CLIENT_NAME = 'elasticsearch-ruby-client'.freeze
+      CLIENT_NAME = 'opensearch-ruby-client'.freeze
 
-      COMPLEXITIES = { Elasticsearch::Benchmarking::Simple => :simple,
-                       Elasticsearch::Benchmarking::Complex => :complex }.freeze
+      COMPLEXITIES = { Opensearch::Benchmarking::Simple => :simple,
+                       Opensearch::Benchmarking::Complex => :complex }.freeze
 
       def action_iterations
         options[:action_iterations]
@@ -188,7 +188,7 @@ module Elasticsearch
       end
 
       def agent_doc
-        { version: Elasticsearch::VERSION,
+        { version: Opensearch::VERSION,
           name: CLIENT_NAME,
           git: git_doc,
           language: language_doc,
@@ -204,7 +204,7 @@ module Elasticsearch
         sha = `git rev-parse HEAD`
         branch = /\* (.+)/.match(`git branch`)[1]
         commit_message = `git log -1 --pretty=%B`
-        repository = 'elasticsearch-ruby'
+        repository = 'opensearch-ruby'
 
         { branch: branch,
           sha: sha.chomp,

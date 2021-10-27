@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-module Elasticsearch
+module Opensearch
   module Benchmarking
 
     # Class encapsulating all settings and functionality for running benchmarking

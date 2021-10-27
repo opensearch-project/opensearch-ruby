@@ -24,7 +24,7 @@ require_relative 'benchmarking/simple'
 require_relative 'benchmarking/complex'
 require_relative 'benchmarking/results'
 
-module Elasticsearch
+module Opensearch
 
   # Module with all functionality for running client benchmark tests.
   #

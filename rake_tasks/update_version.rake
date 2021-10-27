@@ -54,7 +54,7 @@ end
 task :update_changelog do
   puts "\n\n", '= CHANGELOG '.ansi(:faint) + ('='*88).ansi(:faint), "\n"
 
-  log = `git --no-pager log --reverse --no-color --pretty='* %s' HEAD --not v#{args[:old]} elasticsearch*`.split("\n")
+  log = `git --no-pager log --reverse --no-color --pretty='* %s' HEAD --not v#{args[:old]} opensearch*`.split("\n")
 
   puts log.join("\n")
 
@@ -112,7 +112,7 @@ task :update_changelog do
 
   puts "\n\n", "= DIFF ".ansi(:faint) + ('='*93).ansi(:faint)
 
-  diff = `git --no-pager diff --patch --word-diff=color --minimal elasticsearch*`.split("\n")
+  diff = `git --no-pager diff --patch --word-diff=color --minimal opensearch*`.split("\n")
 
   puts diff
          .reject { |l| l =~ /^\e\[1mdiff \-\-git/ }
@@ -124,7 +124,7 @@ task :update_changelog do
 
   puts "\n\n", '= COMMIT '.ansi(:faint) + ('='*91).ansi(:faint), "\n"
 
-  puts  'git add CHANGELOG.md elasticsearch*',
+  puts  'git add CHANGELOG.md opensearch*',
         "git commit --verbose --message='Release #{args[:new]}' --edit",
         'rake release',
         ''

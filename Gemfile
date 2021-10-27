@@ -17,10 +17,10 @@
 
 source 'https://rubygems.org'
 
-gem 'elasticsearch-api',        path: File.expand_path('../elasticsearch-api', __FILE__),        require: false
-gem 'elasticsearch-transport',  path: File.expand_path('../elasticsearch-transport', __FILE__),  require: false
-gem 'elasticsearch-extensions', path: File.expand_path('../elasticsearch-extensions', __FILE__), require: false
-gem 'elasticsearch',            path: File.expand_path('../elasticsearch', __FILE__),            require: false
+gem 'opensearch-api',        path: File.expand_path('../opensearch-api', __FILE__),        require: false
+gem 'opensearch-transport',  path: File.expand_path('../opensearch-transport', __FILE__),  require: false
+gem 'opensearch-extensions', path: File.expand_path('../opensearch-extensions', __FILE__), require: false
+gem 'opensearch',            path: File.expand_path('../opensearch', __FILE__),            require: false
 
 gem 'ansi'
 gem 'cane'

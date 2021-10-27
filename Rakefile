@@ -43,7 +43,7 @@ def admin_client
                         url = "http://#{uri&.host || 'localhost'}:#{uri&.port || 9200}"
                       end
                       puts "Elasticsearch Client url: #{url}"
-                      Elasticsearch::Client.new(host: url, transport_options: transport_options)
+                      Opensearch::Client.new(host: url, transport_options: transport_options)
                     end
 end
 
@@ -56,17 +56,17 @@ require 'pathname'
 
 CURRENT_PATH = Pathname(File.expand_path(__dir__))
 SUBPROJECTS = [
-  'elasticsearch',
-  'elasticsearch-transport',
-  'elasticsearch-dsl',
-  'elasticsearch-api',
-  'elasticsearch-extensions',
+  'opensearch',
+  'opensearch-transport',
+  'opensearch-dsl',
+  'opensearch-api',
+  'opensearch-extensions',
 ].freeze
 
 RELEASE_TOGETHER = [
-  'elasticsearch',
-  'elasticsearch-transport',
-  'elasticsearch-api',
+  'opensearch',
+  'opensearch-transport',
+  'opensearch-api',
 ].freeze
 
 CERT_DIR = ENV['CERT_DIR'] || '.ci/certs'
@@ -124,7 +124,7 @@ end
 desc "Release all subprojects to Rubygems"
 task :release do
   RELEASE_TOGETHER.each do |project|
-    next if project == 'elasticsearch-extensions'
+    next if project == 'opensearch-extensions'
 
     sh "cd #{CURRENT_PATH.join(project)} && bundle exec rake release"
     puts '-' * 80

@@ -642,8 +642,8 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 * Added, that trace logs are printed when the `TRACE` environment variable is set
 * Removed the "turn" dependency from generated test_helper.rb
 * Update the "Delete By Query" API to support :slices
-* Speed up `Elasticsearch::API::Utils.__listify`
-* Speed up `Elasticsearch::API::Utils.__pathify`
+* Speed up `Opensearch::API::Utils.__listify`
+* Speed up `Opensearch::API::Utils.__pathify`
 * Use "String#strip" and "String.empty?" in `Utils.__pathify`
 * Updated the inline documentation for using scripts in the "Update" API
 * Updated the "Scroll" API inline example with passing the scroll ID in the body
@@ -1003,7 +1003,7 @@ Elasticsearch 6.0 compatibility.
 * Improved the documentation for the "Backup" extension and added it to the main README
 * Added the information about the "Reindex" extension to the README
 * Added a reindex extension
-* Improved the `Elasticsearch::Extensions::Test::Cluster` extension
+* Improved the `Opensearch::Extensions::Test::Cluster` extension
 
 ## 1.0.17
 
@@ -1149,7 +1149,7 @@ Elasticsearch 6.0 compatibility.
 
 ## 1.0.9
 
-* Improved the `elasticsearch::build` task in the main Rakefile
+* Improved the `Opensearch::build` task in the main Rakefile
 * Merged the 'elasticsearch-dsl' gem into the main repository
 
 ### Client
@@ -1211,8 +1211,8 @@ Elasticsearch 6.0 compatibility.
 * Added the "Cat Segments" API
 * Updated the code and documentation for the "Cluster State" API
 * Fixed incorrect examples for the "Percolate" API
-* Added a `Elasticsearch::API.settings` method for accessing module settings
-* Added a `Elasticsearch::API.settings[:skip_parameter_validation]` setting support into `__validate_and_extract_params`
+* Added a `Opensearch::API.settings` method for accessing module settings
+* Added a `Opensearch::API.settings[:skip_parameter_validation]` setting support into `__validate_and_extract_params`
 * Added `master_timeout` parameters to the "Template Exists" and "Get Template" APIs
 * Fixed incorrect encoding of Array parameters
 * Added support for the `metric` parameter in the "Nodes Info" API
@@ -1344,4 +1344,4 @@ Elasticsearch 6.0 compatibility.
 
 ### Extensions
 
-* Improved the documentation for `Elasticsearch::Extensions::Test::Cluster`
+* Improved the documentation for `Opensearch::Extensions::Test::Cluster`

@@ -5,7 +5,7 @@ The specs in `elasticsearch-api` and `elasticsearch-xpack` automatically run the
 ## REST API YAML Spec
 
 The file that traverses the yaml files and loads a **TestFile** object per each of them:
-`elasticsearch-(api|xpack)/spec/elasticsearch/api/rest_api_yaml_spec.rb`
+`elasticsearch-(api|xpack)/spec/opensearch/api/rest_api_yaml_spec.rb`
 
 You can use the SINGLE_TEST env variable to run just one test or one test directory. E.g.:
 ```

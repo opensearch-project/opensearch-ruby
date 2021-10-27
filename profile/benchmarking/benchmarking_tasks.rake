@@ -23,9 +23,9 @@ namespace :benchmark do
 
     desc "Run the \'ping\' benchmark test"
     task :ping do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} PING #{'*' * 5} \n"
         puts "#{task.run(:ping)}"
       end
@@ -33,9 +33,9 @@ namespace :benchmark do
 
     desc "Run the \'create index\' benchmark test"
     task :create_index do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} CREATE INDEX #{'*' * 5} \n"
         puts "#{task.run(:create_index)}"
       end
@@ -43,14 +43,14 @@ namespace :benchmark do
 
     desc "Run the \'index smal document\' benchmark test with patron adapter"
     task :index_document_small_patron do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
         begin
           require 'patron'
         rescue LoadError
           puts "Patron not loaded, skipping test"
         else
-          task = Elasticsearch::Benchmarking::Simple.new(run, :patron)
+          task = Opensearch::Benchmarking::Simple.new(run, :patron)
           puts "#{'*' * 5} INDEX SMALL DOCUMENT, PATRON #{'*' * 5} \n"
           puts "#{task.run(:index_document_small)}"
         end
@@ -59,9 +59,9 @@ namespace :benchmark do
 
     desc "Run the \'index small document\' benchmark test"
     task :index_document_small do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} INDEX SMALL DOCUMENT #{'*' * 5} \n"
         puts "#{task.run(:index_document_small)}"
       end
@@ -69,9 +69,9 @@ namespace :benchmark do
 
     desc "Run the \'index large document\' benchmark test"
     task :index_document_large do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} INDEX LARGE DOCUMENT #{'*' * 5} \n"
         puts "#{task.run(:index_document_large)}"
       end
@@ -79,9 +79,9 @@ namespace :benchmark do
 
     desc "Run the \'get small document\' benchmark test"
     task :get_document_small do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} GET SMALL DOCUMENT #{'*' * 5} \n"
         puts "#{task.run(:get_document_small)}"
       end
@@ -89,9 +89,9 @@ namespace :benchmark do
 
     desc "Run the \'get large document\' benchmark test"
     task :get_document_large do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} GET LARGE DOCUMENT #{'*' * 5} \n"
         puts "#{task.run(:get_document_large)}"
       end
@@ -99,9 +99,9 @@ namespace :benchmark do
 
     desc "Run the \'search small document\' benchmark test"
     task :search_document_small do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} SEARCH SMALL DOCUMENT #{'*' * 5} \n"
         puts "#{task.run(:search_document_small)}"
       end
@@ -109,9 +109,9 @@ namespace :benchmark do
 
     desc "Run the \'search small document\' benchmark test"
     task :search_document_large do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} SEARCH LARGE DOCUMENT #{'*' * 5} \n"
         puts "#{task.run(:search_document_large)}"
       end
@@ -119,9 +119,9 @@ namespace :benchmark do
 
     desc "Run the \'update document\' benchmark test"
     task :update_document do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Simple.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Simple.new(run)
         puts "#{'*' * 5} UPDATE DOCUMENT #{'*' * 5} \n"
         puts "#{task.run(:update_document)}"
       end
@@ -140,7 +140,7 @@ namespace :benchmark do
           benchmark:simple:update_document
         ].each do |task_name|
         begin
-          require 'elasticsearch'
+          require 'opensearch'
           Rake::Task[task_name].invoke(*args)
         rescue => ex
           puts "Error in task [#{task_name}], #{ex.inspect}"
@@ -154,7 +154,7 @@ namespace :benchmark do
     #   desc "Run the \'search small document\' benchmark test with the noop plugin"
     #   task :search_document_small do
     #     puts "SIMPLE REQUEST BENCHMARK:: SEARCH SMALL DOCUMENT WITH NOOP PLUGIN"
-    #     Elasticsearch::Benchmarking::Simple.new.run(:search_document_small, noop: true)
+    #     Opensearch::Benchmarking::Simple.new.run(:search_document_small, noop: true)
     #   end
     # end
   end
@@ -171,9 +171,9 @@ namespace :benchmark do
 
     desc "Run the \'index documents\' benchmark test"
     task :index_documents => :download_dataset do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Complex.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Complex.new(run)
         puts "#{'*' * 5} INDEX DOCUMENTS #{'*' * 5} \n"
         puts "#{task.run(:index_documents)}"
       end
@@ -181,9 +181,9 @@ namespace :benchmark do
 
     desc "Run the \'search documents\' benchmark test"
     task :search_documents do
-      require 'elasticsearch'
-      Elasticsearch::Benchmarking.each_run(ENV['matrix']) do |run|
-        task = Elasticsearch::Benchmarking::Complex.new(run)
+      require 'opensearch'
+      Opensearch::Benchmarking.each_run(ENV['matrix']) do |run|
+        task = Opensearch::Benchmarking::Complex.new(run)
         puts "#{'*' * 5} SEARCH DOCUMENTS #{'*' * 5} \n"
         puts "#{task.run(:search_documents)}"
       end
@@ -193,7 +193,7 @@ namespace :benchmark do
     task :all do
       %w[ benchmark:complex:index_documents
         ].each do |task_name|
-        require 'elasticsearch'
+        require 'opensearch'
         Rake::Task[task_name].invoke
       end
     end

@@ -30,7 +30,7 @@ echo -e "\033[1m>>>>> Build [elastic/elasticsearch-ruby container] >>>>>>>>>>>>>
 # create client image
 docker build \
        --file .ci/Dockerfile \
-       --tag elastic/elasticsearch-ruby \
+       --tag elastic/opensarch-ruby \
        --build-arg RUBY_TEST_VERSION=${RUBY_TEST_VERSION} \
        .
 
@@ -46,10 +46,10 @@ if [[ $TEST_SUITE != "platinum" ]]; then
            --env "TEST_SUITE=${TEST_SUITE}" \
            --volume $repo:/usr/src/app \
            --volume=/tmp:/tmp \
-           --name elasticsearch-ruby \
+           --name opensarch-ruby \
            --rm \
-           elastic/elasticsearch-ruby \
-           bundle exec rake elasticsearch:download_artifacts test:rest_api
+           elastic/opensarch-ruby \
+           bundle exec rake opensarch:download_artifacts test:rest_api
 else
     docker run \
            --network="${network_name}" \
@@ -59,8 +59,8 @@ else
            --env "ELASTIC_USER=elastic" \
            --env "SINGLE_TEST=${SINGLE_TEST}" \
            --volume $repo:/usr/src/app \
-           --name elasticsearch-ruby \
+           --name opensarch-ruby \
            --rm \
-           elastic/elasticsearch-ruby \
-           bundle exec rake elasticsearch:download_artifacts test:security
+           elastic/opensarch-ruby \
+           bundle exec rake opensarch:download_artifacts test:security
 fi

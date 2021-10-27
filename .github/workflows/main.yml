@@ -41,11 +41,11 @@ jobs:
           ruby -v
           rake bundle:clean
           rake bundle:install
-      - name: elasticsearch
-        run: cd elasticsearch && bundle exec rake test:all
-      - name: elasticsearch-transport
-        run: cd elasticsearch-transport && bundle exec rake test:all
-      - name: elasticsearch-api
-        run: cd elasticsearch-api && bundle exec rake test:spec
-      - name: elasticsearch-dsl
-        run: cd elasticsearch-dsl && bundle exec rake test:all
+      - name: opensearch
+        run: cd opensearch && bundle exec rake test:all
+      - name: opensearch-transport
+        run: cd opensearch-transport && bundle exec rake test:all
+      - name: opensearch-api
+        run: cd opensearch-api && bundle exec rake test:spec
+      - name: opensearch-dsl
+        run: cd opensearch-dsl && bundle exec rake test:all

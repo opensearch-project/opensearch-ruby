@@ -1,8 +1,8 @@
 ---
 - job:
-    name: elastic+elasticsearch-ruby+master
-    display-name: 'elastic / elasticsearch-ruby # master'
-    description: Testing the elasticsearch-ruby master branch.
+    name: elastic+opensearch-ruby+master
+    display-name: 'elastic / opensearch-ruby # master'
+    description: Testing the opensearch-ruby master branch.
     parameters:
     - string:
         name: branch_specifier

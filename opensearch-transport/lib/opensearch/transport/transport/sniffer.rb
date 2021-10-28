@@ -34,7 +34,7 @@ module OpenSearch
           @timeout   = transport.options[:sniffer_timeout] || 1
         end
 
-        # Retrieves the node list from the Elasticsearch's
+        # Retrieves the node list from the OpenSearch's
         # _Nodes Info API_
         # and returns a normalized Array of information suitable for passing to transport.
         #

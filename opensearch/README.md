@@ -18,7 +18,7 @@ Features overview:
 
 The Elasticsearch client for Ruby is compatible with Ruby 1.9 and higher.
 
-The client's API is compatible with Elasticsearch's API versions from 0.90 till current,
+The client's API is compatible with OpenSearch's API versions from 0.90 till current,
 just use a release matching major version of Elasticsearch.
 
 | Ruby          |   | Elasticsearch |

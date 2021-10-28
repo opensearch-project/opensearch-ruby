@@ -29,7 +29,6 @@ module OpenSearch
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The shutdown type definition to register (*Required*)
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current
         #
         def put_node(arguments = {})
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]

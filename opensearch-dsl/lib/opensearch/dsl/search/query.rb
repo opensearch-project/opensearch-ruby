@@ -25,7 +25,6 @@ module OpenSearch
 
       # Wraps the `query` part of a search definition
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl.html
       #
       class Query
         def initialize(*args, &block)

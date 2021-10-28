@@ -33,7 +33,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-query-string-query.html
         # @see http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
         #
         class QueryString

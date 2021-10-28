@@ -31,9 +31,8 @@ module OpenSearch
         # @option arguments [String] :time The unit in which to display time values (options: d, h, m, s, ms, micros, nanos)
         # @option arguments [Boolean] :v Verbose mode. Display column headers
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/cat-snapshots.html
-        #
+      #
+      #
         def snapshots(arguments = {})
           headers = arguments.delete(:headers) || {}
 

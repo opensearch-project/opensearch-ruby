@@ -36,9 +36,8 @@ module OpenSearch
         # Specifying types in urls has been deprecated
         # Deprecated since version 7.0.0
         #
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-get-field-mapping.html
-        #
+      #
+      #
         def get_field_mapping(arguments = {})
           _fields = arguments.delete(:field) || arguments.delete(:fields)
           raise ArgumentError, "Required argument 'field' missing" unless _fields

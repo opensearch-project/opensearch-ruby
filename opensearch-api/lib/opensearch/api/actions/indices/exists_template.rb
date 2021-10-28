@@ -26,9 +26,8 @@ module OpenSearch
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
         # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-templates.html
-        #
+      #
+      #
         def exists_template(arguments = {})
           raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
 

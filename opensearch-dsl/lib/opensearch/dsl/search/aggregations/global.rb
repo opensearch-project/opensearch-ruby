@@ -33,9 +33,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-bucket-global-aggregation.html
-        #
+      #
+      #
         class Global
           include BaseAggregationComponent
         end

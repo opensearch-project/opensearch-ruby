@@ -54,7 +54,6 @@ module OpenSearch
   #     # => { query: { match: { title: "test"} } }
   #
   # @see Search
-  # @see https://www.elastic.co/guide/en/opensearch/guide/current/query-dsl-intro.html
   #
   module DSL
     def self.included(base)

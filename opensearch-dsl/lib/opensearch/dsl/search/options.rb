@@ -21,7 +21,6 @@ module OpenSearch
 
       # Wraps the "extra" options of a search definition
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-request-body.html
       #
       class Options
         DSL_METHODS = [

@@ -36,9 +36,8 @@ module OpenSearch
         #      end
         #    end
         #  end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-bucket-composite-aggregation.html
-        #
+      #
+      #
         class Composite
           include BaseAggregationComponent
 

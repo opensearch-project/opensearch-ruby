@@ -28,7 +28,6 @@ module OpenSearch
         # @option arguments [String] :node_id The node id of node to be removed from the shutdown state
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current
         #
         def delete_node(arguments = {})
           raise ArgumentError, "Required argument 'node_id' missing" unless arguments[:node_id]

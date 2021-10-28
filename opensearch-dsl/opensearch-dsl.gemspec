@@ -23,17 +23,17 @@ require 'opensearch/dsl/version'
 Gem::Specification.new do |s|
   s.name          = 'opensearch-dsl'
   s.version       = OpenSearch::DSL::VERSION
-  s.authors       = ['Karel Minarik']
-  s.email         = ['karel.minarik@opensearch.com']
-  s.description   = %q{A Ruby DSL builder for Elasticsearch}
+  s.authors       = ['<placeholder>']
+  s.email         = ['<placeholder>']
+  s.description   = %q{A Ruby DSL builder for OpenSearch}
   s.summary       = s.description
-  s.homepage      = 'https://www.elastic.co/guide/en/opensearch/client/ruby-api/7.x/index.html'
+  s.homepage      = 'https://opensearch.org/docs/latest/'
   s.license       = 'Apache-2.0'
   s.metadata = {
-    'homepage_uri' => 'https://www.elastic.co/guide/en/opensearch/client/ruby-api/7.x/index.html',
-    'changelog_uri' => 'https://github.com/elastic/opensearch-ruby/blob/7.x/CHANGELOG.md',
-    'source_code_uri' => 'https://github.com/elastic/opensearch-ruby/tree/7.x/opensearch-dsl',
-    'bug_tracker_uri' => 'https://github.com/elastic/opensearch-ruby/issues'
+    'homepage_uri' => 'https://opensearch.org/docs/latest/',
+    'changelog_uri' => 'https://github.com/opensearch-project/opensearch-ruby/blob/7.x/CHANGELOG.md',
+    'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/7.x/opensearch-dsl',
+    'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues'
   }
   s.files         = `git ls-files`.split($/)
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }

@@ -37,9 +37,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-bucket-terms-aggregation.html
-        #
+      #
+      #
         class Terms
           include BaseAggregationComponent
 

@@ -25,9 +25,8 @@ module OpenSearch
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/delete-pipeline-api.html
-        #
+      #
+      #
         def delete_pipeline(arguments = {})
           raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]
 

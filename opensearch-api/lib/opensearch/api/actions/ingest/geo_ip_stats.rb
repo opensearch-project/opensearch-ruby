@@ -22,9 +22,8 @@ module OpenSearch
         # Returns statistical information about geoip databases
         #
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/geoip-stats-api.html
-        #
+      #
+      #
         def geo_ip_stats(arguments = {})
           headers = arguments.delete(:headers) || {}
 

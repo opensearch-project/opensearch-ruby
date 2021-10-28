@@ -14,7 +14,7 @@
       numToKeep: 100
     properties:
     - github:
-        url: https://github.com/elastic/opensearch-ruby/
+        url: https://github.com/opensearch-project/opensearch-ruby/
     - inject:
         properties-content: HOME=$JENKINS_HOME
     concurrent: true

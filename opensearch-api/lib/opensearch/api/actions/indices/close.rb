@@ -29,9 +29,8 @@ module OpenSearch
         # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
         # @option arguments [String] :wait_for_active_shards Sets the number of active shards to wait for before the operation returns. Set to `index-setting` to wait according to the index setting `index.write.wait_for_active_shards`, or `all` to wait for all shards, or an integer. Defaults to `0`.
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-open-close.html
-        #
+      #
+      #
         def close(arguments = {})
           raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
 

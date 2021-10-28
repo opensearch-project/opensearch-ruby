@@ -2,7 +2,7 @@
 
 ## The Generator
 
-This directory hosts The Generator, a tool that generates the classes for each API endpoint from the [Elasticsearch REST API JSON Specification](https://github.com/elastic/opensearch/tree/master/rest-api-spec).
+This directory hosts The Generator, a tool that generates the classes for each API endpoint from the [Elasticsearch REST API JSON Specification](https://github.com/opensearch-project/opensearch/tree/master/rest-api-spec).
 
 ### Generate
 

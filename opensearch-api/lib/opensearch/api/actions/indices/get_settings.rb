@@ -31,9 +31,8 @@ module OpenSearch
         # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
         # @option arguments [Boolean] :include_defaults Whether to return all default setting for each of the indices.
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-get-settings.html
-        #
+      #
+      #
         def get_settings(arguments = {})
           headers = arguments.delete(:headers) || {}
 

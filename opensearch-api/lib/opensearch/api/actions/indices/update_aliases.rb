@@ -25,9 +25,8 @@ module OpenSearch
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The definition of `actions` to perform (*Required*)
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-aliases.html
-        #
+      #
+      #
         def update_aliases(arguments = {})
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 

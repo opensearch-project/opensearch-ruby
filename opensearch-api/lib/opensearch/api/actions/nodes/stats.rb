@@ -34,9 +34,8 @@ module OpenSearch
         # @option arguments [Boolean] :include_segment_file_sizes Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)
         # @option arguments [Boolean] :include_unloaded_segments If set to true segment stats will include stats for segments that are not currently loaded into memory
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/cluster-nodes-stats.html
-        #
+      #
+      #
         def stats(arguments = {})
           headers = arguments.delete(:headers) || {}
 

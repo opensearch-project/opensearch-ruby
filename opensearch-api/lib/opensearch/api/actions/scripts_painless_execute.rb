@@ -27,7 +27,6 @@ module OpenSearch
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body The script to execute
       #
-      # @see https://www.elastic.co/guide/en/opensearch/painless/7.x/painless-execute-api.html
       #
       def scripts_painless_execute(arguments = {})
         headers = arguments.delete(:headers) || {}

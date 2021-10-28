@@ -31,9 +31,8 @@ module OpenSearch
         # @option arguments [String] :parent_task_id Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.
         # @option arguments [Boolean] :wait_for_completion Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/tasks.html
-        #
+      #
+      #
         def cancel(arguments = {})
           headers = arguments.delete(:headers) || {}
 

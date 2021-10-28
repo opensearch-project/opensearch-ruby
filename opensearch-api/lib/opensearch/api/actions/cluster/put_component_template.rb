@@ -28,7 +28,6 @@ module OpenSearch
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The template definition (*Required*)
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-component-template.html
         #
         def put_component_template(arguments = {})
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]

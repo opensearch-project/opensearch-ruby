@@ -27,9 +27,8 @@ module OpenSearch
         # @option arguments [Boolean] :wait_for_completion Should this request wait until the operation has completed before returning
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body Details of what to restore
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/modules-snapshots.html
-        #
+      #
+      #
         def restore(arguments = {})
           raise ArgumentError, "Required argument 'repository' missing" unless arguments[:repository]
           raise ArgumentError, "Required argument 'snapshot' missing" unless arguments[:snapshot]

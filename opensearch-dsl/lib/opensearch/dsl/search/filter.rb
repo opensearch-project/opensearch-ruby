@@ -25,7 +25,6 @@ module OpenSearch
 
       # Wraps the `filter` part of a search definition, aggregation, etc
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-filters.html
       #
       class Filter
         def initialize(*args, &block)

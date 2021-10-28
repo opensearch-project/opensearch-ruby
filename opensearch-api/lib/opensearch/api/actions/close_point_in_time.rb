@@ -23,7 +23,6 @@ module OpenSearch
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body a point-in-time id to close
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/point-in-time-api.html
       #
       def close_point_in_time(arguments = {})
         headers = arguments.delete(:headers) || {}

@@ -178,7 +178,7 @@ module OpenSearch
         ].freeze
 
         # Wipe Cluster, based on PHP's implementation of ESRestTestCase.java:wipeCluster()
-        # https://github.com/elastic/opensearch-php/blob/7.10/tests/Elasticsearch/Tests/Utility.php#L97
+        # https://github.com/opensearch-project/opensearch-php/blob/7.10/tests/Elasticsearch/Tests/Utility.php#L97
         def wipe_cluster(client)
           if xpack?
             clear_rollup_jobs(client)

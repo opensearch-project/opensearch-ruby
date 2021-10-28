@@ -32,9 +32,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-geo-shape-query.html
-        #
+      #
+      #
         class GeoShape
           include BaseComponent
 

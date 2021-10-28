@@ -29,9 +29,8 @@ module OpenSearch
         #         extended_stats field: 'clicks'
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html
-        #
+      #
+      #
         class ExtendedStats
           include BaseComponent
         end

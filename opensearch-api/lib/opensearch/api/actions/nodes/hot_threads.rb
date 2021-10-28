@@ -34,9 +34,8 @@ module OpenSearch
         # The hot accepts /_cluster/nodes as prefix for backwards compatibility reasons
         # Deprecated since version 7.0.0
         #
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/cluster-nodes-hot-threads.html
-        #
+      #
+      #
         def hot_threads(arguments = {})
           headers = arguments.delete(:headers) || {}
 

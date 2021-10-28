@@ -51,9 +51,8 @@ module OpenSearch
         #     end
         #
         # See the integration test for a working example.
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-bool-filter.html
-        #
+      #
+      #
         class Bool
           include BaseComponent
 

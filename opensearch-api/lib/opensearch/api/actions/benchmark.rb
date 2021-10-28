@@ -61,7 +61,6 @@ module OpenSearch
       # @option arguments [Boolean] :verbose Specify whether to return verbose statistics about each iteration
       #                                      (default: false)
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/master/search-benchmark.html
       #
       def benchmark(arguments = {})
         method = HTTP_PUT

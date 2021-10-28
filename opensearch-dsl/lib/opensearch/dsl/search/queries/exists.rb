@@ -47,9 +47,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/5.1/query-dsl-exists-query.html
-        #
+      #
+      #
         class Exists
           include BaseComponent
 

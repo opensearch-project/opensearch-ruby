@@ -26,7 +26,6 @@ module OpenSearch
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The index, shard, and primary flag to explain. Empty means 'explain the first unassigned shard'
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/cluster-allocation-explain.html
         #
         def allocation_explain(arguments = {})
           headers = arguments.delete(:headers) || {}

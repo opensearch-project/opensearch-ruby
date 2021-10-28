@@ -31,9 +31,8 @@ module OpenSearch
         # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The index settings to be updated (*Required*)
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-update-settings.html
-        #
+      #
+      #
         def put_settings(arguments = {})
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 

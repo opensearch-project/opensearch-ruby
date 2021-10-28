@@ -14,9 +14,6 @@ Features overview:
 * Extensive documentation and examples
 * Emphasis on modularity and extendability of both the client and API libraries
 
-(For integration with Ruby models and Rails applications,
-see the <https://github.com/opensearch/opensearch-rails> project.)
-
 ## Compatibility
 
 The Elasticsearch client for Ruby is compatible with Ruby 1.9 and higher.
@@ -42,11 +39,11 @@ Install the package from [Rubygems](https://rubygems.org):
 
 To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
-    gem 'opensearch', git: 'git://github.com/opensearch/opensearch-ruby.git'
+    gem 'opensearch', git: 'git://github.com/opensearch-project/opensearch-ruby.git'
 
 or install it from a source code checkout:
 
-    git clone https://github.com/opensearch-project/opensearch-ruby.git
+    git clone https://github.com/opensearch-project/opensearch-ruby
     cd opensearch-ruby/opensearch
     bundle install
     rake install
@@ -55,9 +52,9 @@ or install it from a source code checkout:
 
 This library is a wrapper for two separate libraries:
 
-* [`opensearch-transport`](https://github.com/opensearch/opensearch-ruby/tree/master/opensearch-transport),
+* [`opensearch-transport`](https://github.com/opensearch-project/opensearch-ruby/tree/master/opensearch-transport),
   which provides a low-level Ruby client for connecting to an [Elasticsearch](http://opensearch.com) cluster
-* [`opensearch-api`](https://github.com/opensearch/opensearch-ruby/tree/master/opensearch-api),
+* [`opensearch-api`](https://github.com/opensearch-project/opensearch-ruby/tree/master/opensearch-api),
   which provides a Ruby API for the Elasticsearch RESTful API
 
 Install the `opensearch` package and use the API directly:
@@ -79,12 +76,12 @@ client.search q: 'test'
 Please refer to the specific library documentation for details:
 
 * **Transport**:
-   [[README]](https://github.com/opensearch/opensearch-ruby/blob/master/opensearch-transport/README.md)
-   [[Documentation]](http://rubydoc.info/gems/opensearch-transport/file/README.markdown)
+   [[README]](https://github.com/opensearch-project/opensearch-ruby/blob/master/opensearch-transport/README.md)
+   [[Documentation]](<placeholder_rubydoc_opensearch_transport>)
 
 * **API**:
-   [[README]](https://github.com/opensearch/opensearch-ruby/blob/master/opensearch-api/README.md)
-   [[Documentation]](http://rubydoc.info/gems/opensearch-api/file/README.markdown)
+   [[README]](https://github.com/opensearch-project/opensearch-ruby/blob/master/opensearch-api/README.md)
+   [[Documentation]](placeholder_rubydoc_opensearch_api)
 
 ## Development
 

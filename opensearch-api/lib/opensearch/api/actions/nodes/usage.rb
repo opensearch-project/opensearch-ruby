@@ -25,9 +25,8 @@ module OpenSearch
         # @option arguments [List] :metric Limit the information returned to the specified metrics (options: _all, rest_actions)
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/cluster-nodes-usage.html
-        #
+      #
+      #
         def usage(arguments = {})
           headers = arguments.delete(:headers) || {}
 

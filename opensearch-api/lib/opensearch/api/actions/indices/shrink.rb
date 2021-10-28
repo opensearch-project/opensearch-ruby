@@ -29,9 +29,8 @@ module OpenSearch
         # @option arguments [String] :wait_for_active_shards Set the number of active shards to wait for on the shrunken index before the operation returns.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The configuration for the target index (`settings` and `aliases`)
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-shrink-index.html
-        #
+      #
+      #
         def shrink(arguments = {})
           raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
           raise ArgumentError, "Required argument 'target' missing" unless arguments[:target]

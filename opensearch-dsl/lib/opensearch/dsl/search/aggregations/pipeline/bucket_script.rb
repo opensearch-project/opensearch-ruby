@@ -36,9 +36,8 @@ module OpenSearch
         #         script 'tShirtSales / totalSales * 100'
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
-        #
+      #
+      #
         class BucketScript
           include BaseAggregationComponent
 

@@ -32,9 +32,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-match-query-phrase.html
-        #
+      #
+      #
         class MatchPhrase
           include BaseComponent
 

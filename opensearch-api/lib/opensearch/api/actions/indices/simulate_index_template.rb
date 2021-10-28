@@ -27,9 +27,8 @@ module OpenSearch
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body New index template definition, which will be included in the simulation, as if it already exists in the system
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-templates.html
-        #
+      #
+      #
         def simulate_index_template(arguments = {})
           raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
 

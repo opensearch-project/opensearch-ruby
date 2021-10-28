@@ -1,6 +1,6 @@
 # Rest API YAML Test Runner
 
-The specs in `opensearch-api` and `opensearch-xpack` automatically run the tests from [Elasticsearch's REST API Spec tests](https://github.com/elastic/opensearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#test-suite). The test runner is defined in each of these project's `spec` folder, starting with the `rest_api_yaml_spec.rb` file.
+The specs in `opensearch-api` and `opensearch-xpack` automatically run the tests from [Elasticsearch's REST API Spec tests](https://github.com/opensearch-project/opensearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#test-suite). The test runner is defined in each of these project's `spec` folder, starting with the `rest_api_yaml_spec.rb` file.
 
 ## REST API YAML Spec
 

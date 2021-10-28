@@ -11,7 +11,7 @@
 ### Client
 
 - Support for Elasticsearch version 7.13.1
-- Fixes thread safety issue in `get_connection` - [Pull Request](https://github.com/elastic/opensearch-ruby/pull/1325).
+- Fixes thread safety issue in `get_connection`
 
 ## 7.13.0
 
@@ -45,7 +45,7 @@
 
 - Support for Elasticsearch version 7.12.0
 - Ruby 3 is now tested, it was added to the entire test suite.
-- New official documentation pages for configuration: [Basic Configuration](https://www.elastic.co/guide/en/opensearch/client/ruby-api/current/basic-config.html) and [Advanced Configuration](https://www.elastic.co/guide/en/opensearch/client/ruby-api/current/advanced-config.html).
+- New official documentation pages for configuration: Basic Configuration
 - Integration tests runner refactored to keep skipped tests in a yaml file.
 
 ### API
@@ -68,20 +68,20 @@
 
 ### Client
 
-* Bug fix in meta header, fixes fail when http adapter library hasn't been loaded yet: [Issue](https://github.com/elastic/opensearch-ruby/issues/1224).
+* Bug fix in meta header, fixes fail when http adapter library hasn't been loaded yet: [Issue](https://github.com/opensearch-project/opensearch-ruby/issues/1224).
 
 
 ## 7.11.1
 
 ### Client
 
-* Bug fix in meta header, adds support for unknown Faraday adapters. [Pull Request](https://github.com/elastic/opensearch-ruby/pull/1204).
+* Bug fix in meta header, adds support for unknown Faraday adapters.
 
 ## 7.11.0
 
 ### Client
 
-- Fixes a bug with headers in our default Faraday class. [Commit](https://github.com/elastic/opensearch-ruby/commit/9c4afc452467cc6344359b54b98bbe5af1469219).
+- Fixes a bug with headers in our default Faraday class. [Commit](https://github.com/opensearch-project/opensearch-ruby/commit/9c4afc452467cc6344359b54b98bbe5af1469219).
 - Adds the `X-Elastic-Client-Meta` HTTP header which is used by Elastic Cloud and can be disabled with the `enable_meta_header` parameter set to `false`.
 
 ### API
@@ -111,7 +111,7 @@
 
 - Support for Elasticsearch version `7.10.0`.
 - Fixes a bug when building the complete endpoint URL could end with duplicate slashes `//`.
-- Fixes a bug when building the complete endpoint URL with cloud id could end with duplicate ports [#1081](https://github.com/elastic/opensearch-ruby/issues/1081).
+- Fixes a bug when building the complete endpoint URL with cloud id could end with duplicate ports [#1081](https://github.com/opensearch-project/opensearch-ruby/issues/1081).
 
 
 ### API
@@ -152,7 +152,7 @@ Deprecation notice: `searchable_snapshots.repository_stats` is deprecated and is
 ### Client
 
 - Support for Elasticsearch version `7.9.0`.
-- Transport/Connection: Considers attributes values for equality - [Commit](https://github.com/elastic/opensearch-ruby/commit/06ffd03bf51f5f33a0d87e9914e66b39357d40af).
+- Transport/Connection: Considers attributes values for equality - [Commit](https://github.com/opensearch-project/opensearch-ruby/commit/06ffd03bf51f5f33a0d87e9914e66b39357d40af).
 - When an API endpoint accepts both `GET` and `POST`, the client will always use `POST` when a request body is present.
 
 ### API
@@ -287,7 +287,7 @@ This version drops support for Ruby 2.4 since it's reached it's end of life.
 
 #### Custom Headers
 
-You can set custom HTTP headers on the client's initializer or pass them as a parameter to any API endpoint. [More info and code examples](https://github.com/elastic/opensearch-ruby/tree/7.x/opensearch-transport#custom-http-headers).
+You can set custom HTTP headers on the client's initializer or pass them as a parameter to any API endpoint. [More info and code examples](https://github.com/opensearch-project/opensearch-ruby/tree/7.x/opensearch-transport#custom-http-headers).
 
 ### API
 
@@ -346,23 +346,21 @@ You can set custom HTTP headers on the client's initializer or pass them as a pa
 - Last release supporting Ruby 2.4. Ruby 2.4 has reached it's end of life and no more security updates will be provided, users are suggested to update to a newer version of Ruby.
 
 #### API Key Support
-The client now supports API Key Authentication, check "Authentication" on the [transport README](https://github.com/elastic/opensearch-ruby/tree/7.x/opensearch-transport#authentication) for information on how to use it.
+The client now supports API Key Authentication, check "Authentication" on the [transport README](https://github.com/opensearch-project/opensearch-ruby/tree/7.x/opensearch-transport#authentication) for information on how to use it.
 
 #### X-Opaque-Id Support
 
-The client now supports identifying running tasks with X-Opaque-Id. Check [transport README](https://github.com/elastic/opensearch-ruby/tree/7.x/opensearch-transport#identifying-running-tasks-with-x-opaque-id) for information on how to use X-Opaque-Id.
+The client now supports identifying running tasks with X-Opaque-Id. Check [transport README](https://github.com/opensearch-project/opensearch-ruby/tree/7.x/opensearch-transport#identifying-running-tasks-with-x-opaque-id) for information on how to use X-Opaque-Id.
 
 #### Faraday migrated to 1.0
 
 We're now using version 1.0 of Faraday:
-- The client initializer was modified but this should not disrupt final users at all, check [this commit](https://github.com/elastic/opensearch-ruby/commit/0fdc6533f4621a549a4cb99e778bbd827461a2d0) for more information.
+- The client initializer was modified but this should not disrupt final users at all, check [this commit](https://github.com/opensearch-project/opensearch-ruby/commit/0fdc6533f4621a549a4cb99e778bbd827461a2d0) for more information.
 - Migrated error checking to remove the deprecated `Faraday::Error` namespace.
 - **This change is not compatible with [Typhoeus](https://github.com/typhoeus/typhoeus)**. The latest release is 1.3.1, but it's [still using the deprecated `Faraday::Error` namespace](https://github.com/typhoeus/typhoeus/blob/v1.3.1/lib/typhoeus/adapters/faraday.rb#L100). This has been fixed on master, but the last release was November 6, 2018. Version 1.4.0 should be ok once it's released.
 - Note: Faraday 1.0 drops official support for JRuby. It installs fine on the tests we run with JRuby in this repo, but it's something we should pay attention to.
 
 Reference: [Upgrading - Faraday 1.0](https://github.com/lostisland/faraday/blob/master/UPGRADING.md)
-
-[Pull Request](https://github.com/elastic/opensearch-ruby/pull/808)
 
 ### API
 
@@ -772,7 +770,7 @@ Some urls changed internally to remove `_xpack`, but it shouldn't affect the cli
 * Fix version check for skipping test
 
 _Note: Up-to-date changelogs for each version can be found in their respective branches
-(e.g. [1.x/CHANGELOG.md](https://github.com/elastic/opensearch-ruby/blob/1.x/CHANGELOG.md))_
+(e.g. [1.x/CHANGELOG.md](https://github.com/opensearch-project/opensearch-ruby/blob/1.x/CHANGELOG.md))_
 
 ## 6.0.0
 
@@ -902,14 +900,14 @@ Elasticsearch 6.0 compatibility.
 
 ## DSL:0.1.5
 
-* Added support for the ["Exists" Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-exists-query.html)
-* Added missing `like` and `unlike` options to the ["More Like This" Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-query-string-query.html)
-* Added missing `time_zone` option to the ["Query String" Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-query-string-query.html)
-* Added missing `inner_hits` option to the [Nested Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-nested-query.html)
-* Allow calling the `filter` method for the [Bool Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-bool-query.html) multiple times
-* Added missing `minimum_should_match`, `prefix_length`, `max_expansions`, `fuzzy_rewrite`, `analyzer`, `lenient`, `zero_terms_query` and `cutoff_frequency` options to the [Match Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-match-query.html)
-* Added missing `minimum_should_match` and `boost` options to the [Bool Query](https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-bool-query.html)
-* Refactored the [Aggregations](https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations.html) collection into its own `AggregationsCollection` class
+* Added support for the "Exists" Query
+* Added missing `like` and `unlike` options to the "More Like This" Query
+* Added missing `time_zone` option to the "Query String" Query
+* Added missing `inner_hits` option to the Nested Query
+* Allow calling the `filter` method for the Bool Query
+* Added missing `minimum_should_match`, `prefix_length`, `max_expansions`, `fuzzy_rewrite`, `analyzer`, `lenient`, `zero_terms_query` and `cutoff_frequency` options to the Match Query
+* Added missing `minimum_should_match` and `boost` options to the Bool Query
+* Refactored the Aggregations
 
 ## EXT:0.0.23
 

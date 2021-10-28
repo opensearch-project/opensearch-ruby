@@ -26,9 +26,8 @@ module OpenSearch
         # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/cluster-nodes-info.html
-        #
+      #
+      #
         def info(arguments = {})
           headers = arguments.delete(:headers) || {}
 

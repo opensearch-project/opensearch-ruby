@@ -31,9 +31,8 @@ module OpenSearch
         # @option arguments [String] :wait_for_active_shards Set the number of active shards to wait for on the newly created rollover index before the operation returns.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The conditions that needs to be met for executing rollover
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-rollover-index.html
-        #
+      #
+      #
         def rollover(arguments = {})
           raise ArgumentError, "Required argument 'alias' missing" unless arguments[:alias]
 

@@ -39,9 +39,8 @@ module OpenSearch
         #         settings({ alpha: 0.5 })
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-movavg-aggregation.html
-        #
+      #
+      #
         class MovingAvg
           include BaseAggregationComponent
 

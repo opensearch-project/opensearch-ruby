@@ -33,7 +33,6 @@ module OpenSearch
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body The search definition using the Query DSL and the prototype for the index request. (*Required*)
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/docs-reindex.html
       #
       def reindex(arguments = {})
         raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]

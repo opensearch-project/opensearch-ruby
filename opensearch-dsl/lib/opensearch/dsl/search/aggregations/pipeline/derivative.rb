@@ -35,9 +35,8 @@ module OpenSearch
         #         buckets_path 'sales'
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-derivative-aggregation.html
-        #
+      #
+      #
         class Derivative
           include BaseAggregationComponent
 

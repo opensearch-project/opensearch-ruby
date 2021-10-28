@@ -35,9 +35,8 @@ module OpenSearch
         #         buckets_path 'sales_per_month>sales'
         #       end
         #     end
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html
-        #
+      #
+      #
         class AvgBucket
           include BaseAggregationComponent
 

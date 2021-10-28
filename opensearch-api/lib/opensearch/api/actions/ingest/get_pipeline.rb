@@ -25,9 +25,8 @@ module OpenSearch
         # @option arguments [Boolean] :summary Return pipelines without their definitions (default: false)
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/get-pipeline-api.html
-        #
+      #
+      #
         def get_pipeline(arguments = {})
           headers = arguments.delete(:headers) || {}
 

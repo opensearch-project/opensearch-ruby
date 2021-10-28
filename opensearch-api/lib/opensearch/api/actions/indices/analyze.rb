@@ -24,9 +24,8 @@ module OpenSearch
         # @option arguments [String] :index The name of the index to scope the operation
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body Define analyzer/tokenizer parameters and the text on which the analysis should be performed
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-analyze.html
-        #
+      #
+      #
         def analyze(arguments = {})
           headers = arguments.delete(:headers) || {}
 

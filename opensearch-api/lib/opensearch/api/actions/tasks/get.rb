@@ -29,9 +29,8 @@ module OpenSearch
         # @option arguments [Boolean] :wait_for_completion Wait for the matching tasks to complete (default: false)
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/tasks.html
-        #
+      #
+      #
         def get(arguments = {})
           headers = arguments.delete(:headers) || {}
 

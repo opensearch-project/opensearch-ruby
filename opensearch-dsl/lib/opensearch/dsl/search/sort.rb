@@ -30,7 +30,6 @@ module OpenSearch
 
       # Wraps the `sort` part of a search definition
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-request-sort.html
       #
       class Sort
         include BaseComponent

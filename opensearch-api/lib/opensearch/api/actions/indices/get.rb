@@ -41,7 +41,6 @@ module OpenSearch
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-get-index.html
         #
         def get(arguments = {})
           raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]

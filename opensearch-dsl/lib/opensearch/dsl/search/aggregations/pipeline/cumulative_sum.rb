@@ -45,7 +45,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-cumulative-sum-aggregation.html
         #
         class CumulativeSum
           include BaseAggregationComponent

@@ -41,7 +41,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-term-query.html
         #
         class Term
           include BaseComponent

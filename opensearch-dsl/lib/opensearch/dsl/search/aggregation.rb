@@ -40,7 +40,6 @@ module OpenSearch
 
       # Wraps the `aggregations` part of a search definition
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations.html
       #
       class Aggregation
         def initialize(*args, &block)

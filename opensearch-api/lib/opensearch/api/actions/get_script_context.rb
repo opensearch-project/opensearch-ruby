@@ -35,7 +35,6 @@ module OpenSearch
       #
       # @option arguments [Hash] :headers Custom HTTP headers
       #
-      # @see https://www.elastic.co/guide/en/opensearch/painless/7.x/painless-contexts.html
       #
       def get_script_context(arguments = {})
         headers = arguments.delete(:headers) || {}

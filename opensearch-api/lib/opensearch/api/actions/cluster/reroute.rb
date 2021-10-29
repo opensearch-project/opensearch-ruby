@@ -39,7 +39,6 @@ module OpenSearch
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The definition of `commands` to perform (`move`, `cancel`, `allocate`)
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/cluster-reroute.html
         #
         def reroute(arguments = {})
           headers = arguments.delete(:headers) || {}

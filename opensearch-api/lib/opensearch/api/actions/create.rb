@@ -49,8 +49,6 @@ module OpenSearch
       # Deprecated since version 7.0.0
       #
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/docs-index_.html
-      #
       def create(arguments = {})
         if arguments[:id]
           index arguments.update op_type: 'create'

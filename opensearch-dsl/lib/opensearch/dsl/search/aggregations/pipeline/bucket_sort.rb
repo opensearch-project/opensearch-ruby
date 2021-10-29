@@ -48,7 +48,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-bucket-sort-aggregation.html
         #
         class BucketSort
           include BaseAggregationComponent

@@ -40,7 +40,6 @@ module OpenSearch
         # @option arguments [Boolean] :v Verbose mode. Display column headers
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/cat-plugins.html
         #
         def plugins(arguments = {})
           headers = arguments.delete(:headers) || {}

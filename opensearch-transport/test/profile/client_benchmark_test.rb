@@ -27,7 +27,7 @@
 require 'test_helper'
 
 class OpenSearch::Transport::ClientProfilingTest < OpenSearch::Test::ProfilingTest
-  context "Elasticsearch client benchmark" do
+  context "OpenSearch client benchmark" do
     setup do
       @port = (ENV['TEST_CLUSTER_PORT'] || 9250).to_i
       client = OpenSearch::Client.new host: "localhost:#{@port}", adapter: ::Faraday.default_adapter

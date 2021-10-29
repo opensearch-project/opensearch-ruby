@@ -35,7 +35,6 @@ module OpenSearch
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-templates.html
         #
         def delete_template(arguments = {})
           raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]

@@ -46,7 +46,6 @@ module OpenSearch
         # @note The specified terms are *not analyzed* (lowercased, stemmed, etc),
         #       so they must match the indexed terms.
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/query-dsl-term-filter.html
         #
         class Term
           include BaseComponent

@@ -49,12 +49,12 @@ namespace :opensearch do
       rescue OpenSearch::Transport::Transport::Errors::RequestTimeout => e
         puts "Couldn't confirm green status.\n#{e.inspect}."
       rescue Faraday::ConnectionFailed => e
-        puts "Couldn't connect to Elasticsearch.\n#{e.inspect}."
+        puts "Couldn't connect to OpenSearch.\n#{e.inspect}."
         sleep(30)
       end
     end
     unless ready
-      puts "Couldn't connect to Elasticsearch, aborting program."
+      puts "Couldn't connect to OpenSearch, aborting program."
       exit(1)
     end
   end
@@ -90,7 +90,7 @@ namespace :opensearch do
   end
 
   desc <<-DESC
-    Build Elasticsearch for the specified branch ('origin/master' by default)
+    Build OpenSearch for the specified branch ('origin/main' by default)
 
     Build a specific branch:
 
@@ -102,7 +102,7 @@ namespace :opensearch do
     Rake::Task['opensearch:status'].invoke
     puts '-' * 80
 
-    gitref = args[:branch] || 'origin/master'
+    gitref = args[:branch] || 'origin/main'
     es_version = gitref.gsub(/^v|origin\/(\d\.+)/, '\1').to_f
 
     current_branch = `git --git-dir=#{CURRENT_PATH.join('tmp/opensearch/.git')} --work-tree=#{CURRENT_PATH.join('tmp/opensearch')} branch --no-color`.split("\n").select { |b| b =~ /^\*/ }.first.gsub(/^\*\s*/, '')
@@ -183,7 +183,7 @@ namespace :opensearch do
     Rake::Task['opensearch:builds'].invoke
   end
 
-  desc "Display the info for all branches in the Elasticsearch submodule"
+  desc "Display the info for all branches in the OpenSearch submodule"
   task :status do
     sh "git --git-dir=#{CURRENT_PATH.join('tmp/opensearch/.git')} --work-tree=#{CURRENT_PATH.join('tmp/opensearch')} branch -v -v", :verbose => false
   end
@@ -203,7 +203,7 @@ namespace :opensearch do
     sh "git --git-dir=#{CURRENT_PATH.join('tmp/opensearch/.git')} --work-tree=#{CURRENT_PATH.join('tmp/opensearch')} log --pretty=format:'%C(yellow)%h%Creset %s \e[2m[%ar by %an]\e[0m' -- rest-api-spec", :verbose => false
   end
 
-  desc "Checkout the build hash from the running Elasticsearch server"
+  desc "Checkout the build hash from the running OpenSearch server"
   task :checkout_build do
     require 'opensearch'
 
@@ -216,8 +216,8 @@ namespace :opensearch do
         first
 
     unless current_branch
-      STDERR.puts "[!] Unable to determine current branch, defaulting to 'master'"
-      current_branch = 'master'
+      STDERR.puts "[!] Unable to determine current branch, defaulting to 'main'"
+      current_branch = 'main'
     end
 
     es_version_info = admin_client.info['version']
@@ -226,7 +226,7 @@ namespace :opensearch do
       exit(1)
     end
 
-    $stdout.puts "ELASTICSEARCH INFO: #{es_version_info}"
+    $stdout.puts "OPENSEARCH INFO: #{es_version_info}"
 
     name = ENV['CI'] ? build_hash : "[\e[1m#{build_hash}\e[0m]"
     STDERR.puts '-'*80, "YAML tests: Switching to #{name} from #{current_branch}", '-'*80

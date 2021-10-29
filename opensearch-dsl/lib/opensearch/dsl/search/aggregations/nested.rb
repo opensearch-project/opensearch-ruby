@@ -46,7 +46,6 @@ module OpenSearch
         #
         # See the integration test for a full example.
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-bucket-nested-aggregation.html
         #
         class Nested
           include BaseAggregationComponent

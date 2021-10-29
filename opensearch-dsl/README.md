@@ -1,9 +1,9 @@
 # OpenSearch::DSL
 
 The `opensearch-dsl` library provides a Ruby API for
-the [Elasticsearch Query DSL](http://www.opensearch.com/guide/en/opensearch/reference/current/query-dsl.html).
+the `OpenSearch Query DSL`
 
-The library is compatible with Ruby 1.9 or higher and Elasticsearch 1.0 and higher.
+The library is compatible with Ruby 1.9 or higher and OpenSearch 1.0.0 and higher.
 
 ## Installation
 
@@ -13,11 +13,11 @@ Install the package from [Rubygems](https://rubygems.org):
 
 To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
-    gem 'opensearch-dsl', git: 'git://github.com/opensearch/opensearch-ruby.git'
+    gem 'opensearch-dsl', git: 'git://github.com/opensearch-project/opensearch-ruby.git'
 
 or install it from a source code checkout:
 
-    git clone https://github.com/opensearch-project/opensearch-ruby.git
+    git clone https://github.com/opensearch-project/opensearch-ruby
     cd opensearch-ruby/opensearch-dsl
     bundle install
     rake install
@@ -25,8 +25,7 @@ or install it from a source code checkout:
 ## Usage
 
 The library is designed as a group of standalone Ruby modules, classes and DSL methods,
-which provide an idiomatic way to build complex
-[search definitions](http://www.opensearch.com/guide/en/opensearch/reference/current/search-request-body.html).
+which provide an idiomatic way to build complex search definitions
 
 Let's have a simple example using the declarative variant:
 
@@ -72,7 +71,7 @@ definition.to_hash
 ```
 
 The library doesn't depend on an Elasticsearch client -- its sole purpose is to facilitate
-building search definitions in Ruby. This makes it possible to use it with any Elasticsearch client:
+building search definitions in Ruby. This makes it possible to use it with any OpenSearch client:
 
 ```ruby
 require 'opensearch/dsl'
@@ -96,24 +95,20 @@ response = JSON.parse(
 ## Features Overview
 
 The library allows to programatically build complex search definitions for Elasticsearch in Ruby,
-which are translated to Hashes, and ultimately, JSON, the language of Elasticsearch.
+which are translated to Hashes, and ultimately, JSON, the language of OpenSearch.
 
 All Elasticsearch DSL features are supported, namely:
 
-* [Queries and Filter context](https://www.elastic.co/guide/en/opensearch/reference/current/query-filter-context.html)
-* [Aggregations](https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations.html)
-* [Suggestions](https://www.elastic.co/guide/en/opensearch/reference/current/search-suggesters.html)
-* [Sorting](https://www.elastic.co/guide/en/opensearch/reference/current/search-request-body.html#request-body-search-sort)
-* [Pagination](https://www.elastic.co/guide/en/opensearch/reference/current/search-request-body.html#request-body-search-from-size)
-* [Options](https://www.elastic.co/guide/en/opensearch/reference/current/search-request-body.html) (source filtering, highlighting, etc)
+* Queries and Filter context
+* Aggregations
+* Suggestions
+* Sorting
+* Pagination
+* Options
 
 An example of a complex search definition is below.
 
 **NOTE:** In order to run the example, you have to allow restoring from the `data.opensearch.org` repository by adding the following configuration line to your `opensearch.yml`:
-
-```yaml
-repositories.url.allowed_urls: ["https://s3.amazonaws.com/data.opensearch.com/*"]
-```
 
 ```ruby
 require 'awesome_print'
@@ -129,7 +124,7 @@ puts "Recovering the 'bicycles.stackexchange.com' index...".yellow
 
 client.indices.delete index: 'bicycles.stackexchange.com', ignore: 404
 
-client.snapshot.create_repository repository: 'data.opensearch.com', body: { type: 'url', settings: { url: 'https://s3.amazonaws.com/data.opensearch.com/bicycles.stackexchange.com/' } }
+client.snapshot.create_repository repository: 'data.opensearch.com', body: { type: 'url', settings: { url: 'https://s3.amazonaws.com/<placeholder>/bicycles.stackexchange.com/' } }
 client.snapshot.restore repository: 'data.opensearch.com', snapshot: 'bicycles.stackexchange.com', body: { indices: 'bicycles.stackexchange.com' }
 until client.cluster.health(level: 'indices')['indices']['bicycles.stackexchange.com']['status'] == 'green'
   r = client.indices.recovery(index: 'bicycles.stackexchange.com', human: true)['bicycles.stackexchange.com']['shards'][0] rescue nil
@@ -243,7 +238,7 @@ NOTE: You have to enable dynamic scripting to be able to execute the `function_s
 To work on the code, clone the repository and install the dependencies:
 
 ```
-git clone https://github.com/opensearch-project/opensearch-ruby.git
+git clone https://github.com/opensearch-project/opensearch-ruby
 cd opensearch-ruby/opensearch-dsl/
 bundle install
 ```
@@ -255,7 +250,7 @@ bundle exec rake test:unit
 bundle exec rake test:integration
 ```
 
-To launch a separate Elasticsearch server for integration tests,
+To launch a separate OpenSearch server for integration tests,
 see instructions in the main [README](../README.md#development).
 
 ## License

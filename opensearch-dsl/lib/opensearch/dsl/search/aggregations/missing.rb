@@ -48,7 +48,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/master/search-aggregations-bucket-missing-aggregation.html
         #
         class Missing
           include BaseAggregationComponent

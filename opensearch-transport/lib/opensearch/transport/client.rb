@@ -29,7 +29,7 @@ require 'opensearch/transport/meta_header'
 
 module OpenSearch
   module Transport
-    # Handles communication with an Elasticsearch cluster.
+    # Handles communication with an OpenSearch cluster.
     #
     # See {file:README.md README} for usage and code examples.
     #
@@ -76,7 +76,7 @@ module OpenSearch
       #
       attr_accessor :transport
 
-      # Create a client connected to an Elasticsearch cluster.
+      # Create a client connected to an OpenSearch cluster.
       #
       # Specify the URL via arguments or set the `OPENSEARCH_URL` environment variable.
       #
@@ -353,7 +353,6 @@ module OpenSearch
 
       # Encode credentials for the Authorization Header
       # Credentials is the base64 encoding of id and api_key joined by a colon
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/security-api-create-api-key.html
       def __encode(api_key)
         Base64.strict_encode64([api_key[:id], api_key[:api_key]].join(':'))
       end

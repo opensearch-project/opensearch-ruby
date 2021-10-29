@@ -26,7 +26,7 @@
 require 'spec_helper'
 require 'logger'
 
-context 'Elasticsearch client' do
+context 'OpenSearch client' do
   let(:logger) { Logger.new($stderr) }
 
   let(:client) do

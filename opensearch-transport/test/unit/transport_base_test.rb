@@ -455,7 +455,7 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
       @transport.perform_request('GET', '/') {OpenSearch::Transport::Transport::Response.new 200, '{"foo":"bar"}' }
     end
 
-    should "log a failed Elasticsearch request as fatal" do
+    should "log a failed OpenSearch request as fatal" do
       @block = Proc.new { |c, u| puts "ERROR" }
       @block.expects(:call).returns(OpenSearch::Transport::Transport::Response.new 500, 'ERROR')
 
@@ -467,7 +467,7 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
       end
     end
 
-    should "not log a failed Elasticsearch request as fatal" do
+    should "not log a failed OpenSearch request as fatal" do
       @block = Proc.new { |c, u| puts "ERROR" }
       @block.expects(:call).returns(OpenSearch::Transport::Transport::Response.new 500, 'ERROR')
 
@@ -531,7 +531,7 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
                  end
     end
 
-    should "trace a failed Elasticsearch request" do
+    should "trace a failed OpenSearch request" do
       @block = Proc.new { |c, u| puts "ERROR" }
       @block.expects(:call).returns(OpenSearch::Transport::Transport::Response.new 500, 'ERROR')
 

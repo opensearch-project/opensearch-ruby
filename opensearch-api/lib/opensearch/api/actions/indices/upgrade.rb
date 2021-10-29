@@ -43,7 +43,6 @@ module OpenSearch
         # Deprecated since version 8.0.0
         #
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-upgrade.html
         #
         def upgrade(arguments = {})
           headers = arguments.delete(:headers) || {}

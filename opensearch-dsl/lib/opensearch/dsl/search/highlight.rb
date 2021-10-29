@@ -30,7 +30,6 @@ module OpenSearch
 
       # Wraps the `highlight` part of a search definition
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-request-highlighting.html
       #
       class Highlight
         include BaseComponent

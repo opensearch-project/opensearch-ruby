@@ -47,7 +47,6 @@ module OpenSearch
         # Deprecated since version 7.0.0
         #
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-put-mapping.html
         #
         def put_mapping(arguments = {})
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]

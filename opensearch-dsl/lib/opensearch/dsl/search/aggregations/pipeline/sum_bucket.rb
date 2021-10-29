@@ -45,7 +45,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
         #
         class SumBucket
           include BaseAggregationComponent

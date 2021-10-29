@@ -52,7 +52,6 @@ module OpenSearch
       #     definition.to_hash
       #     # => {:query=>{:match=>{:title=>"test"}}}
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/search.html
       #
       def search(*args, &block)
         Search.new(*args, &block)

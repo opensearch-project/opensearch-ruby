@@ -36,7 +36,6 @@ module OpenSearch
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/modules-snapshots.html
         #
         def reset_features(arguments = {})
           headers = arguments.delete(:headers) || {}

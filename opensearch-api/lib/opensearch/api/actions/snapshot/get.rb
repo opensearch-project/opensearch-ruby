@@ -39,7 +39,6 @@ module OpenSearch
         # @option arguments [Boolean] :verbose Whether to show verbose snapshot info or only show the basic info found in the repository index blob
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/modules-snapshots.html
         #
         def get(arguments = {})
           raise ArgumentError, "Required argument 'repository' missing" unless arguments[:repository]

@@ -40,7 +40,6 @@ module OpenSearch
       # Deprecated since version 7.0.0
       #
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/search-request-body.html#request-body-search-scroll
       #
       def scroll(arguments = {})
         headers = arguments.delete(:headers) || {}

@@ -1,22 +1,22 @@
 # OpenSearch::Transport
 
-**This library is part of the [`opensearch-ruby`](https://github.com/opensearch/opensearch-ruby/) package;
+**This library is part of the [`opensearch-ruby`](https://github.com/opensearch-project/opensearch-ruby/) package;
 please refer to it, unless you want to use this library standalone.**
 
 ----
 
 The `opensearch-transport` library provides a low-level Ruby client for connecting
-to an [Elasticsearch](http://opensearch.com) cluster.
+to an [OpenSearch](http://opensearch.com) cluster.
 
 It handles connecting to multiple nodes in the cluster, rotating across connections,
 logging and tracing requests and responses, maintaining failed connections,
 discovering nodes in the cluster, and provides an abstraction for
 data serialization and transport.
 
-It does not handle calling the Elasticsearch API;
-see the [`opensearch-api`](https://github.com/opensearch/opensearch-ruby/tree/master/opensearch-api) library.
+It does not handle calling the OpenSearch API;
+see the [`opensearch-api`](https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-api) library.
 
-The library is compatible with Ruby 1.9 or higher and with all versions of Elasticsearch since 0.90.
+The library is compatible with Ruby 1.9 or higher and with all versions of OpenSearch since 1.0.0.
 
 Features overview:
 
@@ -49,11 +49,11 @@ Install the package from [Rubygems](https://rubygems.org):
 
 To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
-    gem 'opensearch-transport', git: 'git://github.com/opensearch/opensearch-ruby.git'
+    gem 'opensearch-transport', git: 'git://github.com/opensearch-project/opensearch-ruby.git'
 
 or install it from a source code checkout:
 
-    git clone https://github.com/opensearch-project/opensearch-ruby.git
+    git clone https://github.com/opensearch-project/opensearch-ruby
     cd opensearch-ruby/opensearch-transport
     bundle install
     rake install
@@ -69,13 +69,12 @@ without any configuration:
     response = client.perform_request 'GET', '_cluster/health'
     # => #<OpenSearch::Transport::Transport::Response:0x007fc5d506ce38 @status=200, @body={ ... } >
 
-Full documentation is available at <http://rubydoc.info/gems/opensearch-transport>.
+Full documentation is available at <placeholder_rubydoc_opensearch_transport>.
 
 ## Configuration
 
 * [Setting Hosts](#setting-hosts)
 * [Default port](#default-port)
-* [Connect using an Elastic Cloud ID](#connect-using-an-elastic-cloud-id)
 * [Authentication](#authentication)
 * [Logging](#logging)
 * [Custom HTTP Headers](#custom-http-headers)
@@ -95,7 +94,7 @@ configuring logging, customizing the transport library, etc.
 
 ### Setting Hosts
 
-To connect to a specific Elasticsearch host:
+To connect to a specific OpenSearch host:
 
     OpenSearch::Client.new host: 'search.myserver.com'
 
@@ -130,18 +129,6 @@ The client will automatically round-robin across the hosts
 ### Default port
 
 The default port is `9200`. Please specify a port for your host(s) if they differ from this default.
-Please see below for an exception to this when connecting using an Elastic Cloud ID.
-
-### Connect using an Elastic Cloud ID
-
-If you are using [Elastic Cloud](https://www.elastic.co/cloud), you can provide your cloud id to the client.
-You must supply your username and password separately, and optionally a port. If no port is supplied,
-port 443 will be used.
-
-Note: Do not enable sniffing when using Elastic Cloud. The nodes are behind a load balancer so
-Elastic Cloud will take care of everything for you.
-
-    OpenSearch::Client.new(cloud_id: 'name:bG9jYWxob3N0JGFiY2QkZWZnaA==', user: 'elastic', password: 'changeme')
 
 ### Authentication
 
@@ -165,7 +152,7 @@ use the `transport_options` option:
     OpenSearch::Client.new url: 'https://username:password@example.com:9200',
                               transport_options: { ssl: { ca_file: '/path/to/cacert.pem' } }
 
-You can also use [**API Key authentication**](https://www.elastic.co/guide/en/opensearch/reference/current/security-api-create-api-key.html):
+You can also use **API Key authentication**
 
 ``` ruby
 OpenSearch::Client.new(
@@ -192,8 +179,6 @@ To log requests and responses to standard output with the default logger (an ins
 ```ruby
 OpenSearch::Client.new(log: true)
 ```
-
-You can also use [ecs-logging](https://github.com/elastic/ecs-logging-ruby). `ecs-logging` is a set of libraries that allows you to transform your application logs to structured logs that comply with the [Elastic Common Schema (ECS)](https://www.elastic.co/guide/en/ecs/current/ecs-reference.html):
 
 ```ruby
 logger = EcsLogging::Logger.new($stdout)
@@ -251,10 +236,6 @@ You can also pass in `headers` as a parameter to any of the API Endpoints to set
 client.search(index: 'myindex', q: 'title:test', headers: {user_agent: "My App"})
 ```
 
-### Identifying running tasks with X-Opaque-Id
-
-The X-Opaque-Id header allows to track certain calls, or associate certain tasks with the client that started them ([more on the Elasticsearch docs](https://www.elastic.co/guide/en/opensearch/reference/master/tasks.html#_identifying_running_tasks)). To use this feature, you need to set an id for `opaque_id` on the client on each request. Example:
-
 ```ruby
 client = OpenSearch::Client.new
 client.search(index: 'myindex', q: 'title:test', opaque_id: '123456')
@@ -311,11 +292,11 @@ OpenSearch::Client.new hosts: ['localhost:9200', 'localhost:9201'], retry_on_sta
 
 ### Reloading Hosts
 
-Elasticsearch by default dynamically discovers new nodes in the cluster. You can leverage this
+OpenSearch by default dynamically discovers new nodes in the cluster. You can leverage this
 in the client, and periodically check for new nodes to spread the load.
 
 To retrieve and use the information from the
-[_Nodes Info API_](http://www.elastic.co/guide/en/opensearch/reference/current/cluster-nodes-info.html)
+Nodes Info API
 on every 10,000th request:
 
     OpenSearch::Client.new hosts: ['localhost:9200', 'localhost:9201'], reload_connections: true
@@ -347,7 +328,7 @@ By default, the client will rotate the connections in a round-robin fashion, usi
 
 You can implement your own strategy to customize the behaviour. For example,
 let's have a "rack aware" strategy, which will prefer the nodes with a specific
-[attribute](https://github.com/opensearch/opensearch/blob/1.0/config/opensearch.yml#L81-L85).
+attribute
 Only when these would be unavailable, the strategy will use the other nodes:
 
     class RackIdSelector
@@ -504,7 +485,7 @@ and passing it to the client as the `serializer_class` or `serializer` parameter
 
 ### Exception Handling
 
-The library defines a [number of exception classes](https://github.com/opensearch/opensearch-ruby/blob/master/opensearch-transport/lib/opensearch/transport/transport/errors.rb)
+The library defines a [number of exception classes](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-transport/lib/opensearch/transport/transport/errors.rb)
 for various client and server errors, as well as unsuccessful HTTP responses,
 making it possible to `rescue` specific exceptions with desired granularity.
 
@@ -539,7 +520,7 @@ Github's pull requests and issues are used to communicate, send bug reports and 
   ie. an instance of [`Logger`](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/logger/rdoc/Logger.html),
   [_log4r_](https://rubygems.org/gems/log4r), [_logging_](https://github.com/TwP/logging/), etc.
 
-* The {OpenSearch::Transport::Transport::Serializer::Base} implementations handle converting data for Elasticsearch
+* The {OpenSearch::Transport::Transport::Serializer::Base} implementations handle converting data for OpenSearch
   (eg. to JSON). You can implement your own serializer.
 
 * {OpenSearch::Transport::Transport::Sniffer} allows to discover nodes in the cluster and use them as connections.

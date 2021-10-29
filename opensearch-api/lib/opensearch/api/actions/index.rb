@@ -51,7 +51,6 @@ module OpenSearch
       # Deprecated since version 7.0.0
       #
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/docs-index_.html
       #
       def index(arguments = {})
         raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]

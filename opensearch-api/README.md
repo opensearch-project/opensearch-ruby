@@ -1,29 +1,19 @@
 # OpenSearch::API
 
-**This library is part of the [`opensearch-ruby`](https://github.com/opensearch/opensearch-ruby/) package;
+**This library is part of the [`opensearch-ruby`](https://github.com/opensearch-project/opensearch-ruby/) package;
 please refer to it, unless you want to use this library standalone.**
 
 ----
 
 The `opensearch-api` library provides a Ruby implementation of
-the [Elasticsearch](http://opensearch.com) REST API.
+the [OpenSearch](http://opensearch.com) REST API.
 
 It does not provide an Elasticsearch client; see the
-[`opensearch-transport`](https://github.com/opensearch/opensearch-ruby/tree/master/opensearch-transport) library.
+[`opensearch-transport`](https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-transport) library.
 
 The library is compatible with Ruby 1.9 and higher.
 
-It is compatible with Elasticsearch's API versions from 0.90 till current, just use a release matching major version of Elasticsearch.
-
-| Ruby          |   | Elasticsearch |
-|:-------------:|:-:| :-----------: |
-| 0.90          | → | 0.90          |
-| 1.x           | → | 1.x           |
-| 2.x           | → | 2.x           |
-| 5.x           | → | 5.x           |
-| 6.x           | → | 6.x           |
-| 7.x           | → | 7.x           |
-| master        | → | master        |
+It is compatible with OpenSearch's API versions from 1.0.0 till current.
 
 ## Installation
 
@@ -33,11 +23,11 @@ Install the package from [Rubygems](https://rubygems.org):
 
 To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
-    gem 'opensearch-api', git: 'git://github.com/opensearch/opensearch-ruby.git'
+    gem 'opensearch-api', git: 'git://github.com/opensearch-project/opensearch-ruby.git'
 
 or install it from a source code checkout:
 
-    git clone https://github.com/opensearch-project/opensearch-ruby.git
+    git clone https://github.com/opensearch-project/opensearch-ruby
     cd opensearch-ruby/opensearch-api
     bundle install
     rake install
@@ -45,11 +35,11 @@ or install it from a source code checkout:
 ## Usage
 
 The library is designed as a group of standalone Ruby modules, which can be mixed into a class
-providing connection to Elasticsearch -- an Elasticsearch client.
+providing connection to OpenSearch -- an OpenSearch client.
 
 ### Usage with the `opensearch` gem
 
-**When you use the client from the [`opensearch-ruby`](https://github.com/opensearch/opensearch-ruby/) package,
+**When you use the client from the [`opensearch-ruby`](https://github.com/opensearch-project/opensearch-ruby/) package,
 the library modules have been already included**, so you just call the API methods:
 
 ```ruby
@@ -65,7 +55,7 @@ client.search(index: 'myindex', body: { query: { match: { title: 'test' } } })
 ```
 
 Full documentation and examples are included as RDoc annotations in the source code
-and available online at <http://rubydoc.info/gems/opensearch-api>.
+will be available online at <placeholder_rubydoc_opensearch_api>.
 
 ### Usage with a custom client
 
@@ -198,9 +188,9 @@ time rake test:unit
 time rake test:integration
 ```
 
-We run the test suite for Elasticsearch's Rest API tests. You can read more about this in [the test runner README](https://github.com/elastic/opensearch-ruby/tree/master/api-spec-testing#rest-api-yaml-test-runner).
+We run the test suite for OpenSearch's Rest API tests. You can read more about this in [the test runner README](https://github.com/opensearch-project/opensearch-ruby/tree/main/api-spec-testing#rest-api-yaml-test-runner).
 
-The `rest_api` needs the test files from Elasticsearch. You can run the rake task to download the test artifacts in the root folder of the project. This task needs a running cluster to determine which version and build hash of Elasticsearch to use and test against. `TEST_OPENSEARCH_SERVER=http://localhost:9200 rake opensearch:download_artifacts`. This will download the necessary files used for the integration tests to `./tmp`.
+The `rest_api` needs the test files from OpenSearch. You can run the rake task to download the test artifacts in the root folder of the project. This task needs a running cluster to determine which version and build hash of Elasticsearch to use and test against. `TEST_OPENSEARCH_SERVER=http://localhost:9200 rake opensearch:download_artifacts`. This will download the necessary files used for the integration tests to `./tmp`.
 
 ## License
 

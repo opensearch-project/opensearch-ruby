@@ -35,7 +35,6 @@ module OpenSearch
       #
       # @option arguments [String] :name A benchmark name
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/master/search-benchmark.html
       #
       def abort_benchmark(arguments = {})
         method = HTTP_POST

@@ -87,7 +87,7 @@ module OpenSearch
         begin
           server_version = client.info['version']['number']
         rescue
-          warn('Could not determine Elasticsearch version when checking if test should be skipped.')
+          warn('Could not determine OpenSearch version when checking if test should be skipped.')
         end
         range.cover?(Gem::Version.new(server_version))
       end
@@ -187,7 +187,7 @@ module OpenSearch
         ].freeze
 
         # Wipe Cluster, based on PHP's implementation of ESRestTestCase.java:wipeCluster()
-        # https://github.com/elastic/opensearch-php/blob/7.10/tests/Elasticsearch/Tests/Utility.php#L97
+        # https://github.com/opensearch-project/opensearch-php/blob/main/tests/Utility.php#L77
         def wipe_cluster(client)
           if xpack?
             clear_rollup_jobs(client)

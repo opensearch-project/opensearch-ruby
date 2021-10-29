@@ -37,7 +37,6 @@ module OpenSearch
         # @option arguments [String] :node_id Which node for which to retrieve the shutdown status
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current
         #
         def get_node(arguments = {})
           headers = arguments.delete(:headers) || {}

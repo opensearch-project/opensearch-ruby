@@ -37,7 +37,6 @@ module OpenSearch
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The settings for the alias, such as `routing` or `filter`
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-aliases.html
         #
         def put_alias(arguments = {})
           raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]

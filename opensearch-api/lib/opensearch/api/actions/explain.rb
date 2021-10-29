@@ -52,7 +52,6 @@ module OpenSearch
       # Deprecated since version 7.0.0
       #
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/search-explain.html
       #
       def explain(arguments = {})
         raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]

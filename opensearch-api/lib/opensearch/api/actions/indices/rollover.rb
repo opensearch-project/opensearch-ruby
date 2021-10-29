@@ -41,7 +41,6 @@ module OpenSearch
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The conditions that needs to be met for executing rollover
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/indices-rollover-index.html
         #
         def rollover(arguments = {})
           raise ArgumentError, "Required argument 'alias' missing" unless arguments[:alias]

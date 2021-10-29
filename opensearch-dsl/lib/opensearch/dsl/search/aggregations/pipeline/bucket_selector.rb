@@ -46,7 +46,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-bucket-selector-aggregation.html
         #
         class BucketSelector
           include BaseAggregationComponent

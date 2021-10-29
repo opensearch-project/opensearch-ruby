@@ -51,7 +51,7 @@ def admin_client
                       else
                         url = "http://#{uri&.host || 'localhost'}:#{uri&.port || 9200}"
                       end
-                      puts "Elasticsearch Client url: #{url}"
+                      puts "OpenSearch Client url: #{url}"
                       OpenSearch::Client.new(host: url, transport_options: transport_options)
                     end
 end

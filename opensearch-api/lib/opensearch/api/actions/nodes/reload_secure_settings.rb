@@ -35,7 +35,6 @@ module OpenSearch
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body An object containing the password for the opensearch keystore
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/secure-settings.html#reloadable-secure-settings
         #
         def reload_secure_settings(arguments = {})
           headers = arguments.delete(:headers) || {}

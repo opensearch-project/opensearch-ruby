@@ -49,7 +49,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-metrics-stats-aggregation.html
         #
         class Stats
           include BaseComponent

@@ -46,7 +46,6 @@ module OpenSearch
         #       end
         #     end
         #
-        # @see https://www.elastic.co/guide/en/opensearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
         #
         class SerialDiff
           include BaseAggregationComponent

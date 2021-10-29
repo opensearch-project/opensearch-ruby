@@ -35,7 +35,6 @@ module OpenSearch
       #
       # @option arguments [Hash] :headers Custom HTTP headers
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/7.x/modules-scripting.html
       #
       def get_script_languages(arguments = {})
         headers = arguments.delete(:headers) || {}

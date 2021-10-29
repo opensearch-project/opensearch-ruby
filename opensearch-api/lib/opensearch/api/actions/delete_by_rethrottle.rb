@@ -32,7 +32,6 @@ module OpenSearch
       # @option arguments [String] :task_id The task id to rethrottle (*Required*)
       # @option arguments [Number] :requests_per_second The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.
       #
-      # @see https://www.elastic.co/guide/en/opensearch/reference/current/docs-delete-by-query.html
       #
       def delete_by_query_rethrottle(arguments = {})
         raise ArgumentError, "Required argument 'task_id' missing" unless arguments[:task_id]

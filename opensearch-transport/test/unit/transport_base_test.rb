@@ -458,7 +458,7 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
       end
     end
 
-    should "not log a failed Elasticsearch request as fatal" do
+    should "not log a failed OpenSearch request as fatal" do
       @block = Proc.new { |c, u| puts "ERROR" }
       @block.expects(:call).returns(OpenSearch::Transport::Transport::Response.new 500, 'ERROR')
 

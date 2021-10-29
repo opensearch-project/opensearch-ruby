@@ -20,7 +20,7 @@ require 'opensearch/transport/meta_header'
 
 module OpenSearch
   module Transport
-    # Handles communication with an Elasticsearch cluster.
+    # Handles communication with an OpenSearch cluster.
     #
     # See {file:README.md README} for usage and code examples.
     #
@@ -67,7 +67,7 @@ module OpenSearch
       #
       attr_accessor :transport
 
-      # Create a client connected to an Elasticsearch cluster.
+      # Create a client connected to an OpenSearch cluster.
       #
       # Specify the URL via arguments or set the `OPENSEARCH_URL` environment variable.
       #

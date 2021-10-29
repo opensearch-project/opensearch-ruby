@@ -217,7 +217,7 @@ namespace :opensearch do
       exit(1)
     end
 
-    $stdout.puts "ELASTICSEARCH INFO: #{es_version_info}"
+    $stdout.puts "OPENSEARCH INFO: #{es_version_info}"
 
     name = ENV['CI'] ? build_hash : "[\e[1m#{build_hash}\e[0m]"
     STDERR.puts '-'*80, "YAML tests: Switching to #{name} from #{current_branch}", '-'*80

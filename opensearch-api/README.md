@@ -13,12 +13,7 @@ It does not provide an Elasticsearch client; see the
 
 The library is compatible with Ruby 1.9 and higher.
 
-It is compatible with OpenSearch's API versions from 1.0.0 till current, just use a release matching major version of OpenSearch.
-
-| Ruby          |   | OpenSearch   |
-|:-------------:|:-:| :-----------:|
-| 1.0.0         | → | 1.0.0        |
-| master        | → | master       |
+It is compatible with OpenSearch's API versions from 1.0.0 till current.
 
 ## Installation
 

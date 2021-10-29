@@ -1470,7 +1470,7 @@ describe OpenSearch::Transport::Client do
         OpenSearch::Transport::Client.new(hosts: hosts)
       end
 
-      let(:warning) { 'Elasticsearch warning: "deprecation warning"' }
+      let(:warning) { 'OpenSearch warning: "deprecation warning"' }
 
       it 'prints a warning' do
         allow_any_instance_of(OpenSearch::Transport::Transport::Response).to receive(:headers) do

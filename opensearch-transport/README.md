@@ -75,7 +75,6 @@ Full documentation is available at <placeholder_rubydoc_opensearch_transport>.
 
 * [Setting Hosts](#setting-hosts)
 * [Default port](#default-port)
-* [Connect using an Elastic Cloud ID](#connect-using-an-elastic-cloud-id)
 * [Authentication](#authentication)
 * [Logging](#logging)
 * [Custom HTTP Headers](#custom-http-headers)
@@ -130,7 +129,6 @@ The client will automatically round-robin across the hosts
 ### Default port
 
 The default port is `9200`. Please specify a port for your host(s) if they differ from this default.
-Please see below for an exception to this when connecting using an Elastic Cloud ID.
 
 ### Authentication
 
@@ -522,7 +520,7 @@ Github's pull requests and issues are used to communicate, send bug reports and 
   ie. an instance of [`Logger`](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/logger/rdoc/Logger.html),
   [_log4r_](https://rubygems.org/gems/log4r), [_logging_](https://github.com/TwP/logging/), etc.
 
-* The {OpenSearch::Transport::Transport::Serializer::Base} implementations handle converting data for Elasticsearch
+* The {OpenSearch::Transport::Transport::Serializer::Base} implementations handle converting data for OpenSearch
   (eg. to JSON). You can implement your own serializer.
 
 * {OpenSearch::Transport::Transport::Sniffer} allows to discover nodes in the cluster and use them as connections.

@@ -27,7 +27,7 @@ require 'rake/testtask'
 require 'rspec/core/rake_task'
 
 namespace :test do
-  desc 'Wait for Elasticsearch to be in a green state'
+  desc 'Wait for OpenSearch to be in a green state'
   task :wait_for_green do
     sh '../scripts/wait-cluster.sh'
   end

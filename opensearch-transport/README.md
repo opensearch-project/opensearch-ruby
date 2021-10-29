@@ -13,10 +13,10 @@ logging and tracing requests and responses, maintaining failed connections,
 discovering nodes in the cluster, and provides an abstraction for
 data serialization and transport.
 
-It does not handle calling the Elasticsearch API;
-see the [`opensearch-api`](https://github.com/opensearch-project/opensearch-ruby/tree/master/opensearch-api) library.
+It does not handle calling the OpenSearch API;
+see the [`opensearch-api`](https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-api) library.
 
-The library is compatible with Ruby 1.9 or higher and with all versions of Elasticsearch since 0.90.
+The library is compatible with Ruby 1.9 or higher and with all versions of OpenSearch since 1.0.0.
 
 Features overview:
 
@@ -95,7 +95,7 @@ configuring logging, customizing the transport library, etc.
 
 ### Setting Hosts
 
-To connect to a specific Elasticsearch host:
+To connect to a specific OpenSearch host:
 
     OpenSearch::Client.new host: 'search.myserver.com'
 
@@ -294,7 +294,7 @@ OpenSearch::Client.new hosts: ['localhost:9200', 'localhost:9201'], retry_on_sta
 
 ### Reloading Hosts
 
-Elasticsearch by default dynamically discovers new nodes in the cluster. You can leverage this
+OpenSearch by default dynamically discovers new nodes in the cluster. You can leverage this
 in the client, and periodically check for new nodes to spread the load.
 
 To retrieve and use the information from the
@@ -487,7 +487,7 @@ and passing it to the client as the `serializer_class` or `serializer` parameter
 
 ### Exception Handling
 
-The library defines a [number of exception classes](https://github.com/opensearch-project/opensearch-ruby/blob/master/opensearch-transport/lib/opensearch/transport/transport/errors.rb)
+The library defines a [number of exception classes](https://github. com/opensearch-project/opensearch-ruby/blob/main/opensearch-transport/lib/opensearch/transport/transport/errors.rb)
 for various client and server errors, as well as unsuccessful HTTP responses,
 making it possible to `rescue` specific exceptions with desired granularity.
 

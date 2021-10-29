@@ -1,6 +1,6 @@
 # Rest API YAML Test Runner
 
-The specs in `opensearch-api` and `opensearch-xpack` automatically run the tests from [OpenSearch's REST API Spec tests](https://github.com/opensearch-project/opensearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#test-suite). The test runner is defined in each of these project's `spec` folder, starting with the `rest_api_yaml_spec.rb` file.
+The specs in `opensearch-api` and `opensearch-xpack` automatically run the tests from [OpenSearch's REST API Spec tests](https://github.com/opensearch-project/opensearch/tree/main/rest-api-spec/src/main/resources/rest-api-spec/test#test-suite). The test runner is defined in each of these project's `spec` folder, starting with the `rest_api_yaml_spec.rb` file.
 
 ## REST API YAML Spec
 
@@ -87,7 +87,7 @@ To enable logging, set the environment `QUIET` to false before running the tests
 
 The tests use custom [RSpec Matchers](https://www.rubydoc.info/gems/rspec-expectations/RSpec/Matchers) defined in `api-spec-testing/rspec_matchers.rb`.
 
-From the [Rest API test docs](https://github.com/opensearch-project/opensearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#do):
+From the [Rest API test docs](https://github.com/opensearch-project/opensearch/tree/main/rest-api-spec/src/main/resources/rest-api-spec/test#do):
 
 ## `catch`
 

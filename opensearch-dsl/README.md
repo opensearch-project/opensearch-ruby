@@ -3,7 +3,7 @@
 The `opensearch-dsl` library provides a Ruby API for
 the `OpenSearch Query DSL`
 
-The library is compatible with Ruby 1.9 or higher and Elasticsearch 1.0 and higher.
+The library is compatible with Ruby 1.9 or higher and OpenSearch 1.0.0 and higher.
 
 ## Installation
 
@@ -71,7 +71,7 @@ definition.to_hash
 ```
 
 The library doesn't depend on an Elasticsearch client -- its sole purpose is to facilitate
-building search definitions in Ruby. This makes it possible to use it with any Elasticsearch client:
+building search definitions in Ruby. This makes it possible to use it with any OpenSearch client:
 
 ```ruby
 require 'opensearch/dsl'
@@ -95,7 +95,7 @@ response = JSON.parse(
 ## Features Overview
 
 The library allows to programatically build complex search definitions for Elasticsearch in Ruby,
-which are translated to Hashes, and ultimately, JSON, the language of Elasticsearch.
+which are translated to Hashes, and ultimately, JSON, the language of OpenSearch.
 
 All Elasticsearch DSL features are supported, namely:
 
@@ -250,7 +250,7 @@ bundle exec rake test:unit
 bundle exec rake test:integration
 ```
 
-To launch a separate Elasticsearch server for integration tests,
+To launch a separate OpenSearch server for integration tests,
 see instructions in the main [README](../README.md#development).
 
 ## License

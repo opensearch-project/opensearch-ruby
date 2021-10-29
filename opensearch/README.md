@@ -1,6 +1,6 @@
-# Elasticsearch
+# OpenSearch
 
-The `opensearch` library provides a Ruby client and API for [Elasticsearch](http://opensearch.com).
+The `opensearch` library provides a Ruby client and API for [OpenSearch](http://opensearch.com).
 
 Features overview:
 
@@ -10,25 +10,20 @@ Features overview:
 * Pluggable serializer implementation
 * Request retries and dead connections handling
 * Node reloading (based on cluster state) on errors or on demand
-* Consistent API support for the whole Elasticsearch API
+* Consistent API support for the whole OpenSearch API
 * Extensive documentation and examples
 * Emphasis on modularity and extendability of both the client and API libraries
 
 ## Compatibility
 
-The Elasticsearch client for Ruby is compatible with Ruby 1.9 and higher.
+The OpenSearch client for Ruby is compatible with Ruby 1.9 and higher.
 
-The client's API is compatible with OpenSearch's API versions from 0.90 till current,
+The client's API is compatible with OpenSearch's API versions from 1.0.0 till current.
 just use a release matching major version of Elasticsearch.
 
-| Ruby          |   | Elasticsearch |
+| Ruby          |   | OpenSearch |
 |:-------------:|:-:| :-----------: |
-| 0.90          | → | 0.90          |
-| 1.x           | → | 1.x           |
-| 2.x           | → | 2.x           |
-| 5.x           | → | 5.x           |
-| 6.x           | → | 6.x           |
-| 7.x           | → | 7.x           |
+| 1.0.0         | → | 1.0.0        |
 | master        | → | master        |
 
 ## Installation
@@ -52,10 +47,10 @@ or install it from a source code checkout:
 
 This library is a wrapper for two separate libraries:
 
-* [`opensearch-transport`](https://github.com/opensearch-project/opensearch-ruby/tree/master/opensearch-transport),
-  which provides a low-level Ruby client for connecting to an [Elasticsearch](http://opensearch.com) cluster
-* [`opensearch-api`](https://github.com/opensearch-project/opensearch-ruby/tree/master/opensearch-api),
-  which provides a Ruby API for the Elasticsearch RESTful API
+* [`opensearch-transport`](https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-transport),
+  which provides a low-level Ruby client for connecting to an [OpenSearch](http://opensearch.com) cluster
+* [`opensearch-api`](https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-api),
+  which provides a Ruby API for the OpenSearch RESTful API
 
 Install the `opensearch` package and use the API directly:
 
@@ -76,11 +71,11 @@ client.search q: 'test'
 Please refer to the specific library documentation for details:
 
 * **Transport**:
-   [[README]](https://github.com/opensearch-project/opensearch-ruby/blob/master/opensearch-transport/README.md)
+   [[README]](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-transport/README.md)
    [[Documentation]](<placeholder_rubydoc_opensearch_transport>)
 
 * **API**:
-   [[README]](https://github.com/opensearch-project/opensearch-ruby/blob/master/opensearch-api/README.md)
+   [[README]](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-api/README.md)
    [[Documentation]](placeholder_rubydoc_opensearch_api)
 
 ## Development

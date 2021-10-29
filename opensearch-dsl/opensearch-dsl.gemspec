@@ -31,8 +31,7 @@ Gem::Specification.new do |s|
   s.license       = 'Apache-2.0'
   s.metadata = {
     'homepage_uri' => 'https://opensearch.org/docs/latest/',
-    'changelog_uri' => 'https://github.com/opensearch-project/opensearch-ruby/blob/7.x/CHANGELOG.md',
-    'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/7.x/opensearch-dsl',
+    'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-dsl',
     'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues'
   }
   s.files         = `git ls-files`.split($/)

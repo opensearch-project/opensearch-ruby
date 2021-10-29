@@ -2,11 +2,11 @@
 
 ## The Generator
 
-This directory hosts The Generator, a tool that generates the classes for each API endpoint from the [Elasticsearch REST API JSON Specification](https://github.com/opensearch-project/opensearch/tree/master/rest-api-spec).
+This directory hosts The Generator, a tool that generates the classes for each API endpoint from the [OpenSearch REST API JSON Specification](https://github.com/opensearch-project/opensearch/tree/main/rest-api-spec).
 
 ### Generate
 
-To generate the code, you need to have the Elasticsearch REST API spec files in `tmp/rest-api-spec` in the root of the project. You can run a rake task from the root of the project to download the specs corresponding to the current running cluster:
+To generate the code, you need to have the OpenSearch REST API spec files in `tmp/rest-api-spec` in the root of the project. You can run a rake task from the root of the project to download the specs corresponding to the current running cluster:
 ```bash
 $ rake opensearch:download_artifacts
 ```

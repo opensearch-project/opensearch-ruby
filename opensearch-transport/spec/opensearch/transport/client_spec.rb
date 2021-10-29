@@ -1465,7 +1465,7 @@ describe OpenSearch::Transport::Client do
       end
     end
 
-    context 'when Elasticsearch response includes a warning header' do
+    context 'when OpenSearch response includes a warning header' do
       let(:client) do
         OpenSearch::Transport::Client.new(hosts: hosts)
       end
@@ -1525,7 +1525,7 @@ describe OpenSearch::Transport::Client do
     end
   end
 
-  context 'when the client connects to Elasticsearch' do
+  context 'when the client connects to OpenSearch' do
     let(:logger) do
       Logger.new(STDERR).tap do |logger|
         logger.formatter = proc do |severity, datetime, progname, msg|

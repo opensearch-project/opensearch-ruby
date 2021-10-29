@@ -30,8 +30,7 @@ Gem::Specification.new do |s|
   s.license       = 'Apache-2.0'
   s.metadata = {
     'homepage_uri' => 'https://opensearch.org/docs/latest/',
-    'changelog_uri' => 'https://github.com/opensearch-project/opensearch-ruby/blob/7.x/CHANGELOG.md',
-    'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/7.x/opensearch-api',
+    'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-api',
     'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues'
   }
   s.files         = `git ls-files`.split($/)
@@ -71,6 +70,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ruby-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
 
   s.description = <<-DESC.gsub(/^    /, '')
-    Ruby API for Elasticsearch. See the `opensearch` gem for full integration.
+    Ruby API for OpenSearch. See the `opensearch` gem for full integration.
   DESC
 end

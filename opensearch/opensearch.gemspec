@@ -29,8 +29,7 @@ Gem::Specification.new do |s|
   s.license       = 'Apache-2.0'
   s.metadata = {
     'homepage_uri' => 'https://opensearch.org/docs/latest/',
-    'changelog_uri' => 'https://github.com/opensearch-project/opensearch-ruby/blob/7.x/CHANGELOG.md',
-    'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/7.x',
+    'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/main',
     'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues'
   }
   s.files         = `git ls-files`.split($/)
@@ -60,6 +59,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'yard'
 
   s.description = <<-DESC.gsub(/^    /, '')
-    Ruby integrations for Elasticsearch (client, API, etc.)
+    Ruby integrations for OpenSearch (client, API, etc.)
   DESC
 end

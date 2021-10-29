@@ -28,8 +28,8 @@ module OpenSearch
         # @option arguments [String] :wait_for_active_shards Set the number of active shards to wait for on the cloned index before the operation returns.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The configuration for the target index (`settings` and `aliases`)
-      #
-      #
+        #
+        #
         def clone(arguments = {})
           raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
           raise ArgumentError, "Required argument 'target' missing" unless arguments[:target]

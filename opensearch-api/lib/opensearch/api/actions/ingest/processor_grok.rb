@@ -22,8 +22,8 @@ module OpenSearch
         # Returns a list of the built-in patterns.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def processor_grok(arguments = {})
           headers = arguments.delete(:headers) || {}
 

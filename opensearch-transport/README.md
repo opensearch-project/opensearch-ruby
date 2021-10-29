@@ -487,7 +487,7 @@ and passing it to the client as the `serializer_class` or `serializer` parameter
 
 ### Exception Handling
 
-The library defines a [number of exception classes](https://github. com/opensearch-project/opensearch-ruby/blob/main/opensearch-transport/lib/opensearch/transport/transport/errors.rb)
+The library defines a [number of exception classes](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-transport/lib/opensearch/transport/transport/errors.rb)
 for various client and server errors, as well as unsuccessful HTTP responses,
 making it possible to `rescue` specific exceptions with desired granularity.
 

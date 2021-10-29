@@ -23,8 +23,8 @@ module OpenSearch
         #
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def get_features(arguments = {})
           headers = arguments.delete(:headers) || {}
 

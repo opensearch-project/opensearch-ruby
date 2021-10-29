@@ -29,8 +29,8 @@ module OpenSearch
         # @option arguments [Number] :max_num_segments The number of segments the index should be merged into (default: dynamic)
         # @option arguments [Boolean] :only_expunge_deletes Specify whether the operation should only expunge deleted documents
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def forcemerge(arguments = {})
           headers = arguments.delete(:headers) || {}
 

@@ -29,8 +29,8 @@ module OpenSearch
         # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
         # @option arguments [Boolean] :include_defaults Whether to return all default setting for each of the indices.
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def exists(arguments = {})
           raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
 

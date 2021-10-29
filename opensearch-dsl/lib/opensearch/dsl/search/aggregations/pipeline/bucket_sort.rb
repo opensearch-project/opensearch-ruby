@@ -38,8 +38,8 @@ module OpenSearch
         #         size 3
         #       end
         #     end
-      #
-      #
+        #
+        #
         class BucketSort
           include BaseAggregationComponent
 

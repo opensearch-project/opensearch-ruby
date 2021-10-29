@@ -25,8 +25,8 @@ module OpenSearch
         # @option arguments [Boolean] :verbose Verbose mode. Display data output for each processor in executed pipeline
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The simulate definition (*Required*)
-      #
-      #
+        #
+        #
         def simulate(arguments = {})
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 

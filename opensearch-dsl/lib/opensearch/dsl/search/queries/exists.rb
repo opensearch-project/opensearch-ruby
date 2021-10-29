@@ -47,8 +47,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-      #
-      #
+        #
+        #
         class Exists
           include BaseComponent
 

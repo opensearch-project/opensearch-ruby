@@ -28,8 +28,8 @@ module OpenSearch
         # @option arguments [List] :name A comma-separated list of names or wildcard expressions
         # @option arguments [String] :expand_wildcards Whether wildcard expressions should get expanded to open or closed indices (default: open) (options: open, closed, hidden, none, all)
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def resolve_index(arguments = {})
           raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
 

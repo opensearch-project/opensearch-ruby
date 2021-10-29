@@ -29,8 +29,8 @@ module OpenSearch
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The definition of `commands` to perform (`move`, `cancel`, `allocate`)
-      #
-      #
+        #
+        #
         def reroute(arguments = {})
           headers = arguments.delete(:headers) || {}
 

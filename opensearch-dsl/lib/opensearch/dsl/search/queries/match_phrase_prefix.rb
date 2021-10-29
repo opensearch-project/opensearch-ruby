@@ -32,8 +32,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-      #
-      #
+        #
+        #
         class MatchPhrasePrefix
           include BaseComponent
 

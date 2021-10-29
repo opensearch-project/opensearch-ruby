@@ -27,8 +27,8 @@ module OpenSearch
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The snapshot clone definition (*Required*)
-      #
-      #
+        #
+        #
         def clone(arguments = {})
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
           raise ArgumentError, "Required argument 'repository' missing" unless arguments[:repository]

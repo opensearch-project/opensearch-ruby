@@ -26,8 +26,8 @@ module OpenSearch
         # support SLA of official GA features.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def reset_features(arguments = {})
           headers = arguments.delete(:headers) || {}
 

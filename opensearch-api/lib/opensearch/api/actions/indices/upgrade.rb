@@ -33,8 +33,8 @@ module OpenSearch
         # The _upgrade API is no longer useful and will be removed. Instead, see _reindex API.
         # Deprecated since version 8.0.0
         #
-      #
-      #
+        #
+        #
         def upgrade(arguments = {})
           headers = arguments.delete(:headers) || {}
 

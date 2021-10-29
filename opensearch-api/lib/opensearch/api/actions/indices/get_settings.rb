@@ -31,8 +31,8 @@ module OpenSearch
         # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
         # @option arguments [Boolean] :include_defaults Whether to return all default setting for each of the indices.
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def get_settings(arguments = {})
           headers = arguments.delete(:headers) || {}
 

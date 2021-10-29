@@ -42,8 +42,8 @@ module OpenSearch
         # Specifying types in urls has been deprecated
         # Deprecated since version 7.0.0
         #
-      #
-      #
+        #
+        #
         def validate_query(arguments = {})
           headers = arguments.delete(:headers) || {}
 

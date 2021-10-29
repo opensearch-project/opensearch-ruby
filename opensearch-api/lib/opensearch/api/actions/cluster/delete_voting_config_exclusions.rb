@@ -23,8 +23,8 @@ module OpenSearch
         #
         # @option arguments [Boolean] :wait_for_removal Specifies whether to wait for all excluded nodes to be removed from the cluster before clearing the voting configuration exclusions list.
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def delete_voting_config_exclusions(arguments = {})
           headers = arguments.delete(:headers) || {}
 

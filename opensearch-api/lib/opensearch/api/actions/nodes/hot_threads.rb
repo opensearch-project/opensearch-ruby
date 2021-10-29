@@ -34,8 +34,8 @@ module OpenSearch
         # The hot accepts /_cluster/nodes as prefix for backwards compatibility reasons
         # Deprecated since version 7.0.0
         #
-      #
-      #
+        #
+        #
         def hot_threads(arguments = {})
           headers = arguments.delete(:headers) || {}
 

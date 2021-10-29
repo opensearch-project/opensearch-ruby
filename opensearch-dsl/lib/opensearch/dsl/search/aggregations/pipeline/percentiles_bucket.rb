@@ -36,8 +36,8 @@ module OpenSearch
         #         percents [25.0 50.0 75.0]
         #       end
         #     end
-      #
-      #
+        #
+        #
         class PercentilesBucket
           include BaseAggregationComponent
 

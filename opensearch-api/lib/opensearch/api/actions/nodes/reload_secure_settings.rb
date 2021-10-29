@@ -25,8 +25,8 @@ module OpenSearch
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body An object containing the password for the opensearch keystore
-      #
-      #
+        #
+        #
         def reload_secure_settings(arguments = {})
           headers = arguments.delete(:headers) || {}
 

@@ -36,8 +36,8 @@ module OpenSearch
         #         script 'totalSales <= 50'
         #       end
         #     end
-      #
-      #
+        #
+        #
         class BucketSelector
           include BaseAggregationComponent
 

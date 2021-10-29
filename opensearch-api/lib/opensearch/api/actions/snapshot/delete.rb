@@ -25,8 +25,8 @@ module OpenSearch
         # @option arguments [String] :snapshot A snapshot name
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def delete(arguments = {})
           raise ArgumentError, "Required argument 'repository' missing" unless arguments[:repository]
           raise ArgumentError, "Required argument 'snapshot' missing" unless arguments[:snapshot]

@@ -36,8 +36,8 @@ module OpenSearch
         #         script 'tShirtSales / totalSales * 100'
         #       end
         #     end
-      #
-      #
+        #
+        #
         class BucketScript
           include BaseAggregationComponent
 

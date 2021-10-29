@@ -31,8 +31,8 @@ module OpenSearch
         # Synced flush is deprecated and will be removed in 8.0. Use flush instead.
         # Deprecated since version 7.6.0
         #
-      #
-      #
+        #
+        #
         def flush_synced(arguments = {})
           headers = arguments.delete(:headers) || {}
 

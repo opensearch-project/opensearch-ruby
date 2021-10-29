@@ -39,8 +39,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-      #
-      #
+        #
+        #
         class Stats
           include BaseComponent
 

@@ -27,8 +27,8 @@ module OpenSearch
         # @option arguments [Boolean] :verify Whether to verify the repository after creation
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The repository definition (*Required*)
-      #
-      #
+        #
+        #
         def create_repository(arguments = {})
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
           raise ArgumentError, "Required argument 'repository' missing" unless arguments[:repository]

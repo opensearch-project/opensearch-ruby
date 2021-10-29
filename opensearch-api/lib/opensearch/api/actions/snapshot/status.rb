@@ -26,8 +26,8 @@ module OpenSearch
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
         # @option arguments [Boolean] :ignore_unavailable Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def status(arguments = {})
           headers = arguments.delete(:headers) || {}
 

@@ -33,8 +33,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-      #
-      #
+        #
+        #
         class MatchAll
           include BaseComponent
         end

@@ -35,8 +35,8 @@ module OpenSearch
         # Specifying types in urls has been deprecated
         # Deprecated since version 7.0.0
         #
-      #
-      #
+        #
+        #
         def get_mapping(arguments = {})
           headers = arguments.delete(:headers) || {}
 

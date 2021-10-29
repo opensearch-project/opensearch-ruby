@@ -34,8 +34,8 @@ module OpenSearch
         # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
         # @option arguments [Boolean] :forbid_closed_indices If set to false stats will also collected from closed indices if explicitly specified or if expand_wildcards expands to closed indices
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def stats(arguments = {})
           headers = arguments.delete(:headers) || {}
 

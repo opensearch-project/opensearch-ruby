@@ -35,8 +35,8 @@ module OpenSearch
         #         buckets_path 'sales'
         #       end
         #     end
-      #
-      #
+        #
+        #
         class CumulativeSum
           include BaseAggregationComponent
 

@@ -38,8 +38,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-      #
-      #
+        #
+        #
         class Missing
           include BaseAggregationComponent
 

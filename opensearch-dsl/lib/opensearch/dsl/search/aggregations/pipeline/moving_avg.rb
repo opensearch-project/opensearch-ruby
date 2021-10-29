@@ -39,8 +39,8 @@ module OpenSearch
         #         settings({ alpha: 0.5 })
         #       end
         #     end
-      #
-      #
+        #
+        #
         class MovingAvg
           include BaseAggregationComponent
 

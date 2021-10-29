@@ -22,8 +22,8 @@ module OpenSearch
         # Returns statistical information about geoip databases
         #
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def geo_ip_stats(arguments = {})
           headers = arguments.delete(:headers) || {}
 

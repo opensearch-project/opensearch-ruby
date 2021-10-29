@@ -29,8 +29,8 @@ module OpenSearch
         # @option arguments [Boolean] :include_repository Whether to include the repository name in the snapshot info. Defaults to true.
         # @option arguments [Boolean] :verbose Whether to show verbose snapshot info or only show the basic info found in the repository index blob
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def get(arguments = {})
           raise ArgumentError, "Required argument 'repository' missing" unless arguments[:repository]
           raise ArgumentError, "Required argument 'snapshot' missing" unless arguments[:snapshot]

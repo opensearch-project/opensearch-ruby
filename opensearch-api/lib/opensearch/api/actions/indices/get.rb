@@ -31,8 +31,8 @@ module OpenSearch
         # @option arguments [Boolean] :include_defaults Whether to return all default setting for each of the indices.
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def get(arguments = {})
           raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
 

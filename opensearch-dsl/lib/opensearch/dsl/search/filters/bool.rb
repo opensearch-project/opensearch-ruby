@@ -51,8 +51,8 @@ module OpenSearch
         #     end
         #
         # See the integration test for a working example.
-      #
-      #
+        #
+        #
         class Bool
           include BaseComponent
 

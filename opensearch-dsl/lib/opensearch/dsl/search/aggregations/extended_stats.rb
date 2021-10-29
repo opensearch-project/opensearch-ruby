@@ -29,8 +29,8 @@ module OpenSearch
         #         extended_stats field: 'clicks'
         #       end
         #     end
-      #
-      #
+        #
+        #
         class ExtendedStats
           include BaseComponent
         end

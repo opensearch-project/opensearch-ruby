@@ -32,8 +32,8 @@ module OpenSearch
         # @option arguments [List] :s Comma-separated list of column names or column aliases to sort by
         # @option arguments [Boolean] :v Verbose mode. Display column headers
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def thread_pool(arguments = {})
           headers = arguments.delete(:headers) || {}
 

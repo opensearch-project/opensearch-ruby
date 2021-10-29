@@ -30,8 +30,8 @@ module OpenSearch
         # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
         # @option arguments [Boolean] :request Clear request cache
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def clear_cache(arguments = {})
           headers = arguments.delete(:headers) || {}
 

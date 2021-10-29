@@ -37,8 +37,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-      #
-      #
+        #
+        #
         class Terms
           include BaseAggregationComponent
 

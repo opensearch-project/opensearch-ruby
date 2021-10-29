@@ -25,8 +25,8 @@ module OpenSearch
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def delete_index_template(arguments = {})
           raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
 

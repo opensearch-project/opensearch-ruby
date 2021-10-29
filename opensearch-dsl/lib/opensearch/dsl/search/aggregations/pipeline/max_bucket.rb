@@ -35,8 +35,8 @@ module OpenSearch
         #         buckets_path 'sales_per_month>sales'
         #       end
         #     end
-      #
-      #
+        #
+        #
         class MaxBucket
           include BaseAggregationComponent
 

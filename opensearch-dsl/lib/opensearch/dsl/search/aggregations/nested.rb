@@ -36,8 +36,8 @@ module OpenSearch
         #    end
         #
         # See the integration test for a full example.
-      #
-      #
+        #
+        #
         class Nested
           include BaseAggregationComponent
 

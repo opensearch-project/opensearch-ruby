@@ -33,8 +33,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-      #
-      #
+        #
+        #
         class Global
           include BaseAggregationComponent
         end

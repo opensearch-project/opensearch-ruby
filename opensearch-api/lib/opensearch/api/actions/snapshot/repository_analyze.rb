@@ -34,8 +34,8 @@ module OpenSearch
         # @option arguments [Boolean] :detailed Whether to return detailed results or a summary. Defaults to 'false' so that only the summary is returned.
         # @option arguments [Boolean] :rarely_abort_writes Whether to rarely abort writes before they complete. Defaults to 'true'.
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def repository_analyze(arguments = {})
           raise ArgumentError, "Required argument 'repository' missing" unless arguments[:repository]
 

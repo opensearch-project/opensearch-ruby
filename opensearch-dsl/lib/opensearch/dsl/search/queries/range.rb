@@ -44,8 +44,8 @@ module OpenSearch
         #         end
         #       end
         #     end
-      #
-      #
+        #
+        #
         class Range
           include BaseComponent
 

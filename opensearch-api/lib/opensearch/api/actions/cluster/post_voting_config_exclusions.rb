@@ -25,8 +25,8 @@ module OpenSearch
         # @option arguments [String] :node_names A comma-separated list of the names of the nodes to exclude from the voting configuration. If specified, you may not also specify ?node_ids.
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def post_voting_config_exclusions(arguments = {})
           headers = arguments.delete(:headers) || {}
 

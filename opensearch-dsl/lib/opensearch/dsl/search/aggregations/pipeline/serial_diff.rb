@@ -36,8 +36,8 @@ module OpenSearch
         #         lag 30
         #       end
         #     end
-      #
-      #
+        #
+        #
         class SerialDiff
           include BaseAggregationComponent
 

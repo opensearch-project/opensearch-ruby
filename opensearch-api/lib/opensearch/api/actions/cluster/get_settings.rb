@@ -26,8 +26,8 @@ module OpenSearch
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Boolean] :include_defaults Whether to return all default clusters setting.
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def get_settings(arguments = {})
           headers = arguments.delete(:headers) || {}
 

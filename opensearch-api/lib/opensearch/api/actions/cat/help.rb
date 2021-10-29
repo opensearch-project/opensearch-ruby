@@ -24,8 +24,8 @@ module OpenSearch
         # @option arguments [Boolean] :help Return help information
         # @option arguments [List] :s Comma-separated list of column names or column aliases to sort by
         # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
+        #
+        #
         def help(arguments = {})
           headers = arguments.delete(:headers) || {}
 

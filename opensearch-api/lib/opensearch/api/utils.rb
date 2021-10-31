@@ -90,7 +90,7 @@ module OpenSearch
           squeeze('/')
       end
 
-      # Convert an array of payloads into Elasticsearch `header\ndata` format
+      # Convert an array of payloads into OpenSearch `header\ndata` format
       #
       # Supports various different formats of the payload: Array of Strings, Header/Data pairs,
       # or the conveniency "combined" format where data is passed along with the header

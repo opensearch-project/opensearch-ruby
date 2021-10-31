@@ -154,7 +154,7 @@ module OpenSearch
 
       # The opensearch url to use for the tests.
       #
-      # @return [ String ] The Elasticsearch URL to use in tests.
+      # @return [ String ] The OpenSearch URL to use in tests.
       #
       # @since 7.0.0
       OPENSEARCH_URL = ENV['OPENSEARCH_URL'] || "localhost:#{(ENV['TEST_CLUSTER_PORT'] || 9200)}"

@@ -8,7 +8,7 @@ please refer to it, unless you want to use this library standalone.**
 The `opensearch-api` library provides a Ruby implementation of
 the [OpenSearch](http://opensearch.com) REST API.
 
-It does not provide an Elasticsearch client; see the
+It does not provide an OpenSearch client; see the
 [`opensearch-transport`](https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-transport) library.
 
 The library is compatible with Ruby 1.9 and higher.
@@ -190,7 +190,7 @@ time rake test:integration
 
 We run the test suite for OpenSearch's Rest API tests. You can read more about this in [the test runner README](https://github.com/opensearch-project/opensearch-ruby/tree/main/api-spec-testing#rest-api-yaml-test-runner).
 
-The `rest_api` needs the test files from OpenSearch. You can run the rake task to download the test artifacts in the root folder of the project. This task needs a running cluster to determine which version and build hash of Elasticsearch to use and test against. `TEST_OPENSEARCH_SERVER=http://localhost:9200 rake opensearch:download_artifacts`. This will download the necessary files used for the integration tests to `./tmp`.
+The `rest_api` needs the test files from OpenSearch. You can run the rake task to download the test artifacts in the root folder of the project. This task needs a running cluster to determine which version and build hash of OpenSearch to use and test against. `TEST_OPENSEARCH_SERVER=http://localhost:9200 rake opensearch:download_artifacts`. This will download the necessary files used for the integration tests to `./tmp`.
 
 ## License
 

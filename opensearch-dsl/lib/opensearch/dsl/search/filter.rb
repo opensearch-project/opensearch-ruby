@@ -28,7 +28,7 @@ module OpenSearch
   module DSL
     module Search
 
-      # Contains the classes for Elasticsearch filters
+      # Contains the classes for OpenSearch filters
       #
       module Filters;end
 

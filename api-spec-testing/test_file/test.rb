@@ -104,12 +104,12 @@ module OpenSearch
         ].freeze
 
 
-        # The maximum Elasticsearch version this client version can successfully run tests against.
+        # The maximum OpenSearch version this client version can successfully run tests against.
         #
         # @since 6.2.0
         MAX_REQUIRED_VERSION = nil
 
-        # The minimum Elasticsearch version this client version can successfully run tests against.
+        # The minimum OpenSearch version this client version can successfully run tests against.
         #
         # @since 6.2.0
         MIN_REQUIRED_VERSION = nil

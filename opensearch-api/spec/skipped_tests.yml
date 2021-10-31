@@ -1,4 +1,4 @@
-# Response from Elasticsearch is just a String, so it's not possible to compare using headers.
+# Response from OpenSearch is just a String, so it's not possible to compare using headers.
 -
   :file:        'cat.aliases/20_headers.yml'
   :description: 'Simple alias with yaml body through Accept header'

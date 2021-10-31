@@ -29,7 +29,7 @@ module OpenSearch
     module Actions
       # Allows to evaluate the quality of ranked search results over a set of typical search queries
       # This functionality is Experimental and may be changed or removed
-      # completely in a future release. Elastic will take a best effort approach
+      # completely in a future release. OpenSearch will take a best effort approach
       # to fix any issues, but experimental features are not subject to the
       # support SLA of official GA features.
       #

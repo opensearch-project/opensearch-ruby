@@ -29,7 +29,7 @@ require 'mkmf'
 
 namespace :docker do
   desc <<~DOC
-    Start Elasticsearch in a Docker container.
+    Start OpenSearch in a Docker container.
 
     Default:
       rake docker:start[version]

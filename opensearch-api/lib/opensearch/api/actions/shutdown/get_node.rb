@@ -30,7 +30,7 @@ module OpenSearch
       module Actions
         # Retrieve status of a node or nodes that are currently marked as shutting down
         # This functionality is Experimental and may be changed or removed
-        # completely in a future release. Elastic will take a best effort approach
+        # completely in a future release. OpenSearch will take a best effort approach
         # to fix any issues, but experimental features are not subject to the
         # support SLA of official GA features.
         #

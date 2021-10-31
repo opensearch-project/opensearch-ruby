@@ -73,7 +73,7 @@ namespace :opensearch do
     Dir.mkdir(CURRENT_PATH.join('tmp'), 0700) unless File.directory?(CURRENT_PATH.join('tmp'))
 
     # Download json file with package information for version:
-    json_url = "https://artifacts-api.elastic.co/v1/versions/#{version_number}"
+    json_url = "<placeholder_opensearch_artifiact_url>"
     download_file!(json_url, json_filename)
 
     # Get the package url from the json file given the build hash

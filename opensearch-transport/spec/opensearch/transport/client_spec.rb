@@ -106,7 +106,7 @@ describe OpenSearch::Transport::Client do
     let(:client) do
       described_class.new(
         api_key: { id: 'my_id', api_key: 'my_api_key' },
-        host: 'http://opensearch:password@localhost:9200'
+        host: 'http://admin:admin@localhost:9200'
       )
     end
     let(:authorization_header) do

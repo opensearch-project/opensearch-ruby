@@ -29,8 +29,8 @@ module OpenSearch
     # Class representing a single action. An action is one of the following:
     #
     #   1. Applying header settings on a client.
-    #   2. Sending some request to Elasticsearch.
-    #   3. Sending some request to Elasticsearch, expecting an exception.
+    #   2. Sending some request to OpenSearch.
+    #   3. Sending some request to OpenSearch, expecting an exception.
     #
     # @since 6.2.0
     class Action
@@ -134,7 +134,7 @@ module OpenSearch
                     args[key] = value
                   end
                 when Time
-                  # The YAML parser reads in dates as Time objects, reconvert to a format Elasticsearch accepts
+                  # The YAML parser reads in dates as Time objects, reconvert to a format OpenSearch accepts
                   args[key] = (value.to_f * 1000).to_i
                 end
               end

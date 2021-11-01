@@ -79,7 +79,6 @@ end
 #
 # @return [ OpenSearch::Client ] The default client.
 #
-# @since 7.0.0
 def default_client
   $client ||= OpenSearch::Client.new(hosts: OPENSEARCH_HOSTS)
 end

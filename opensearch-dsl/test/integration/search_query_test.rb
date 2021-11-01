@@ -79,8 +79,6 @@ module OpenSearch
           end
 
           should "find the document with a filter" do
-            skip "Not supported on this Elasticsearch version" unless @version > '2'
-
             response = @client.search index: 'test', body: search {
                 query do
                   bool do

@@ -30,7 +30,7 @@ module OpenSearch
       module Actions
         # Returns information about a task.
         # This functionality is Experimental and may be changed or removed
-        # completely in a future release. Elastic will take a best effort approach
+        # completely in a future release. OpenSearch will take a best effort approach
         # to fix any issues, but experimental features are not subject to the
         # support SLA of official GA features.
         #

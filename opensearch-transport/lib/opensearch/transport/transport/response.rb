@@ -27,7 +27,7 @@
 module OpenSearch
   module Transport
     module Transport
-      # Wraps the response from Elasticsearch.
+      # Wraps the response from OpenSearch.
       #
       class Response
         attr_reader :status, :body, :headers

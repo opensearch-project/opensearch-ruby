@@ -70,7 +70,7 @@ definition.to_hash
 # => { query: { match: { title: "test"} } }
 ```
 
-The library doesn't depend on an Elasticsearch client -- its sole purpose is to facilitate
+The library doesn't depend on an OpenSearch client -- its sole purpose is to facilitate
 building search definitions in Ruby. This makes it possible to use it with any OpenSearch client:
 
 ```ruby
@@ -94,10 +94,10 @@ response = JSON.parse(
 
 ## Features Overview
 
-The library allows to programatically build complex search definitions for Elasticsearch in Ruby,
+The library allows to programatically build complex search definitions for OpenSearch in Ruby,
 which are translated to Hashes, and ultimately, JSON, the language of OpenSearch.
 
-All Elasticsearch DSL features are supported, namely:
+All OpenSearch DSL features are supported, namely:
 
 * Queries and Filter context
 * Aggregations

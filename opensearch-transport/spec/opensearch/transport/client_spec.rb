@@ -25,6 +25,7 @@
 # under the License.
 
 require 'spec_helper'
+require 'opensearch'
 
 describe OpenSearch::Transport::Client do
   let(:client) do
@@ -105,7 +106,7 @@ describe OpenSearch::Transport::Client do
     let(:client) do
       described_class.new(
         api_key: { id: 'my_id', api_key: 'my_api_key' },
-        host: 'http://elastic:password@localhost:9200'
+        host: 'https://admin:admin@localhost:9200'
       )
     end
     let(:authorization_header) do
@@ -252,7 +253,7 @@ describe OpenSearch::Transport::Client do
       end
 
       let(:client) do
-        described_class.new(adapter: :patron, enable_meta_header: false)
+        described_class.new(adapter: :patron)
       end
 
       it 'uses Faraday with the adapter' do
@@ -266,7 +267,7 @@ describe OpenSearch::Transport::Client do
       end
 
       let(:client) do
-        described_class.new(adapter: :typhoeus, enable_meta_header: false)
+        described_class.new(adapter: :typhoeus)
       end
 
       it 'uses Faraday with the adapter' do
@@ -280,7 +281,7 @@ describe OpenSearch::Transport::Client do
       end
 
       let(:client) do
-        described_class.new(adapter: :patron, enable_meta_header: false)
+        described_class.new(adapter: :patron)
       end
 
       it 'uses Faraday with the adapter' do
@@ -1747,7 +1748,7 @@ describe OpenSearch::Transport::Client do
           context 'when using the HTTPClient adapter' do
 
             let(:client) do
-              described_class.new(hosts: OPENSEARCH_HOSTS, compression: true, adapter: :httpclient, enable_meta_header: false)
+              described_class.new(hosts: OPENSEARCH_HOSTS, compression: true, adapter: :httpclient)
             end
 
             it 'compresses the request and decompresses the response' do

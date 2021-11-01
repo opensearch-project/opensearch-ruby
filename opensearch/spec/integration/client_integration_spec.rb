@@ -56,11 +56,4 @@ context 'OpenSearch client' do
       end.not_to raise_error
     end
   end
-
-  context 'Reports the right meta header' do
-    it 'Reports es service name and gem version' do
-      headers = client.transport.transport.connections.first.connection.headers
-      expect(headers['x-elastic-client-meta']).to match /^es=#{OpenSearch::VERSION}/
-    end
-  end
 end

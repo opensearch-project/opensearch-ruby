@@ -86,7 +86,7 @@ namespace :test do
 
     puts 'Downloading artifacts file...'
     filename = 'tmp/artifacts.json'
-    `curl -s https://artifacts-api.elastic.co/v1/versions/#{version_number} -o #{filename}`
+    `curl -s <placeholder_opensearch_artifact_url> -o #{filename}`
 
     unless File.exists?("./#{filename}")
       STDERR.puts '[!] Couldn\'t download artifacts file'

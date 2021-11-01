@@ -28,7 +28,7 @@ module OpenSearch
   module DSL
     module Search
 
-      # Contains the classes for Elasticsearch aggregations
+      # Contains the classes for OpenSearch aggregations
       #
       module Aggregations;end
 

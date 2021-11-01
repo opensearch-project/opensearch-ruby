@@ -28,7 +28,7 @@ module OpenSearch
   module DSL
     module Search
 
-      # Contains the classes for Elasticsearch queries
+      # Contains the classes for OpenSearch queries
       #
       module Queries;end
 

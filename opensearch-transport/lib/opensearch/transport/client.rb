@@ -25,7 +25,6 @@
 # under the License.
 
 require 'base64'
-require 'opensearch/transport/meta_header'
 
 module OpenSearch
   module Transport
@@ -34,7 +33,6 @@ module OpenSearch
     # See {file:README.md README} for usage and code examples.
     #
     class Client
-      include MetaHeader
       DEFAULT_TRANSPORT_CLASS = Transport::HTTP::Faraday
 
       DEFAULT_LOGGER = lambda do
@@ -133,8 +131,6 @@ module OpenSearch
       # @option opaque_id_prefix [String] :opaque_id_prefix set a prefix for X-Opaque-Id when initializing the client.
       #                                                     This will be prepended to the id you set before each request
       #                                                     if you're using X-Opaque-Id
-      # @option enable_meta_header [Boolean] :enable_meta_header Enable sending the meta data header to Cloud.
-      #                                                          (Default: true)
       #
       # @yield [faraday] Access and configure the `Faraday::Connection` instance directly with a block
       #
@@ -149,7 +145,6 @@ module OpenSearch
         @arguments[:randomize_hosts]    ||= false
         @arguments[:transport_options]  ||= {}
         @arguments[:http]               ||= {}
-        @arguments[:enable_meta_header] = arguments.fetch(:enable_meta_header) { true }
         @options[:http]                 ||= {}
 
         set_api_key if (@api_key = @arguments[:api_key])
@@ -176,13 +171,11 @@ module OpenSearch
           @transport_class = @arguments[:transport_class] || DEFAULT_TRANSPORT_CLASS
           @transport = if @transport_class == Transport::HTTP::Faraday
                          @arguments[:adapter] ||= __auto_detect_adapter
-                         set_meta_header # from include MetaHeader
                          @transport_class.new(hosts: @seeds, options: @arguments) do |faraday|
                            faraday.adapter(@arguments[:adapter])
                            block&.call faraday
                          end
                        else
-                         set_meta_header # from include MetaHeader
                          @transport_class.new(hosts: @seeds, options: @arguments)
                        end
         end

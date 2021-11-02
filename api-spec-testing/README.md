@@ -1,11 +1,11 @@
 # Rest API YAML Test Runner
 
-The specs in `opensearch-api` and `opensearch-xpack` automatically run the tests from [OpenSearch's REST API Spec tests](https://github.com/opensearch-project/opensearch/tree/main/rest-api-spec/src/main/resources/rest-api-spec/test#test-suite). The test runner is defined in each of these project's `spec` folder, starting with the `rest_api_yaml_spec.rb` file.
+The specs in `opensearch-api`  automatically run the tests from [OpenSearch's REST API Spec tests](https://github.com/opensearch-project/opensearch/tree/main/rest-api-spec/src/main/resources/rest-api-spec/test#test-suite). The test runner is defined in each of these project's `spec` folder, starting with the `rest_api_yaml_spec.rb` file.
 
 ## REST API YAML Spec
 
 The file that traverses the yaml files and loads a **TestFile** object per each of them:
-`opensearch-(api|xpack)/spec/opensearch/api/rest_api_yaml_spec.rb`
+`opensearch-api/spec/opensearch/api/rest_api_yaml_spec.rb`
 
 You can use the SINGLE_TEST env variable to run just one test or one test directory. E.g.:
 ```
@@ -18,15 +18,9 @@ $ cd opensearch-api && SINGLE_TEST=indices.resolve_index TEST_OPENSEARCH_SERVER=
 
 ## Skipped tests
 
-We sometimes skip tests, generally due to limitations on how we run the CI server or for stuff that hasn't been completely implemented on the client yet. Skipped tests are located in `opensearch-(api|xpack)/spec/skipped_tests.yml`. You can run just the tests which are currently being skipped by running:
+We sometimes skip tests, generally due to limitations on how we run the CI server or for stuff that hasn't been completely implemented on the client yet. Skipped tests are located in `opensearch-api/spec/skipped_tests.yml`. You can run just the tests which are currently being skipped by running:
 ```
 $ cd opensearch-api && RUN_SKIPPED_TESTS=true TEST_OPENSEARCH_SERVER='http://localhost:9200' be rake test:rest_api
-```
-
-Or
-
-```
-$ cd opensearch-xpack && RUN_SKIPPED_TESTS=true ELASTIC_PASSWORD=changeme TEST_SUITE=platinum TEST_OPENSEARCH_SERVER='http://localhost:9200' be rake test:rest_api
 ```
 
 ## TestFile
@@ -55,7 +49,7 @@ Task Groups are a representation of a block of actions consisting of 'do' action
  - match:   { _version: 1}
 ```
 
-**Before** each test, the spec runner runs `clear_data` on the test_file. This clears indices, index templates, snapshots and repositories. For xpack it also clears roles, users, privileges, datafeeds, ml_jobs and more.
+**Before** each test, the spec runner runs `clear_data` on the test_file. This clears indices, index templates, snapshots and repositories.
 
 **After** each test, it runs the test file teardown and `clear_data` again.
 
@@ -67,7 +61,7 @@ This file is where the action is executed, where we call the client with the met
 
 ## Rest YAML tests Helper
 
-`opensearch-(api|xpack)/spec/rest_yaml_tests_helper.rb`
+`opensearch-api/spec/rest_yaml_tests_helper.rb`
 
 - `ADMIN_CLIENT` is defined here.
 - `SINGLE_TEST` is defined here.

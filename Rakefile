@@ -28,8 +28,6 @@
 def admin_client
   $admin_client ||= begin
                       transport_options = {}
-                      test_suite = ENV['TEST_SUITE'].freeze
-
                       if (hosts = ENV['TEST_OPENSEARCH_SERVER'] || ENV['OPENSEARCH_HOSTS'])
                         split_hosts = hosts.split(',').map do |host|
                           /(http\:\/\/)?\S+/.match(host)

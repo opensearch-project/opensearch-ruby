@@ -77,7 +77,7 @@ RELEASE_TOGETHER = [
   'opensearch-api',
 ].freeze
 
-CERT_DIR = ENV['CERT_DIR'] || '.ci/certs'
+CERT_DIR = ENV['CERT_DIR']
 
 # Import build task after setting constants:
 import 'rake_tasks/unified_release_tasks.rake'

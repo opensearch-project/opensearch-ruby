@@ -136,12 +136,11 @@ describe 'OpenSearch: Validation' do
   end
 
 
-  context 'When the Elasticsearch version is >= 7.14' do
+  context 'When the Elasticsearch version is >= 6.0' do
     context 'With a valid Elasticsearch response' do
-      let(:body) { { 'version' => { 'number' => '7.14.0' } }.to_json }
+      let(:body) { { 'version' => { 'number' => '6.0.0' } }.to_json }
       let(:headers) do
         {
-          'X-Elastic-Product' => 'Elasticsearch',
           'content-type' => 'json'
         }
       end
@@ -154,15 +153,6 @@ describe 'OpenSearch: Validation' do
       end
     end
 
-    context 'When the header is not present' do
-      let(:body) { { 'version' => { 'number' => '7.14.0' } }.to_json }
-      it 'Makes requests and passes validation' do
-        verify_request_stub
-        count_request_stub
-
-        valid_requests_and_expectations
-      end
-    end
   end
 
   context 'When the Elasticsearch version is >= 8.0.0' do
@@ -170,7 +160,6 @@ describe 'OpenSearch: Validation' do
       let(:body) { { 'version' => { 'number' => '8.0.0' } }.to_json }
       let(:headers) do
         {
-          'X-Elastic-Product' => 'Elasticsearch',
           'content-type' => 'json'
         }
       end

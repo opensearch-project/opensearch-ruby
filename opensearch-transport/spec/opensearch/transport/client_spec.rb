@@ -1251,40 +1251,6 @@ describe OpenSearch::Transport::Client do
       end
     end
 
-    context 'when x-opaque-id is set' do
-      let(:client) { described_class.new(host: hosts) }
-
-      it 'uses x-opaque-id on a request' do
-        expect(client.perform_request('GET', '/', { opaque_id: '12345' }).headers['x-opaque-id']).to eq('12345')
-      end
-    end
-
-    context 'when an x-opaque-id prefix is set on initialization' do
-      let(:prefix) { 'elastic_cloud' }
-      let(:client) do
-        described_class.new(host: hosts, opaque_id_prefix: prefix)
-      end
-
-      it 'uses x-opaque-id on a request' do
-        expect(client.perform_request('GET', '/', { opaque_id: '12345' }).headers['x-opaque-id']).to eq("#{prefix}12345")
-      end
-
-      context 'when using an API call' do
-        let(:client) { described_class.new(host: hosts) }
-
-        it 'doesnae raise an ArgumentError' do
-          expect { client.perform_request('GET', '_search', opaque_id: 'no_error') }.not_to raise_error
-        end
-
-        it 'uses X-Opaque-Id in the header' do
-          allow(client).to receive(:perform_request) { OpenStruct.new(body: '') }
-          expect { client.perform_request('GET', '_search', {}, nil, opaque_id: 'opaque_id') }.not_to raise_error
-          expect(client).to have_received(:perform_request)
-                              .with('GET', '_search', {}, nil, { opaque_id: 'opaque_id' })
-        end
-      end
-    end
-
     context 'when using the API Compatibility Header' do
       it 'sets the API compatibility headers' do
         ENV['ELASTIC_CLIENT_APIVERSIONING'] = 'true'

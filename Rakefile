@@ -28,8 +28,6 @@
 def admin_client
   $admin_client ||= begin
                       transport_options = {}
-                      test_suite = ENV['TEST_SUITE'].freeze
-
                       if (hosts = ENV['TEST_OPENSEARCH_SERVER'] || ENV['OPENSEARCH_HOSTS'])
                         split_hosts = hosts.split(',').map do |host|
                           /(http\:\/\/)?\S+/.match(host)
@@ -37,20 +35,7 @@ def admin_client
                         uri = URI.parse(split_hosts.first[0])
                       end
 
-                      if test_suite == 'platinum'
-                        transport_options.merge!(
-                          ssl: {
-                            verify: false,
-                            ca_path: CERT_DIR
-                          }
-                        )
-
-                        password = ENV['ELASTIC_PASSWORD']
-                        user     = ENV['ELASTIC_USER'] || 'elastic'
-                        url      = "https://#{user}:#{password}@#{uri.host}:#{uri.port}"
-                      else
-                        url = "http://#{uri&.host || 'localhost'}:#{uri&.port || 9200}"
-                      end
+                      url = "http://#{uri&.host || 'localhost'}:#{uri&.port || 9200}"
                       puts "OpenSearch Client url: #{url}"
                       OpenSearch::Client.new(host: url, transport_options: transport_options)
                     end
@@ -77,7 +62,7 @@ RELEASE_TOGETHER = [
   'opensearch-api',
 ].freeze
 
-CERT_DIR = ENV['CERT_DIR'] || '.ci/certs'
+CERT_DIR = ENV['CERT_DIR']
 
 # Import build task after setting constants:
 import 'rake_tasks/unified_release_tasks.rake'

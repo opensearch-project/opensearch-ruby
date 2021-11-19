@@ -31,8 +31,8 @@ require 'opensearch/version'
 Gem::Specification.new do |s|
   s.name          = 'opensearch'
   s.version       = OpenSearch::VERSION
-  s.authors       = ['<placeholder>']
-  s.email         = ['<placeholder>']
+  s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian' , 'Yuvraj Jaiswal']
+  s.email         = ['jayehh@amazon.com', 'vamshin@amazon.com', 'balasvij@amazon.com', 'jaiyuvra@amazon.com']
   s.summary       = 'Ruby integrations for OpenSearch'
   s.homepage      = 'https://opensearch.org/docs/latest'
   s.license       = 'Apache-2.0'
@@ -53,8 +53,8 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.4'
 
-  s.add_dependency 'opensearch-transport', '7.15.0'
-  s.add_dependency 'opensearch-api',       '7.15.0'
+  s.add_dependency 'opensearch-transport', '1.0.0'
+  s.add_dependency 'opensearch-api',       '1.0.0'
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'byebug' unless defined?(JRUBY_VERSION) || defined?(Rubinius)

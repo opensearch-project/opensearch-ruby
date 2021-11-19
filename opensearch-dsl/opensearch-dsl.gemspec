@@ -32,8 +32,8 @@ require 'opensearch/dsl/version'
 Gem::Specification.new do |s|
   s.name          = 'opensearch-dsl'
   s.version       = OpenSearch::DSL::VERSION
-  s.authors       = ['<placeholder>']
-  s.email         = ['<placeholder>']
+  s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian' , 'Yuvraj Jaiswal']
+  s.email         = ['jayehh@amazon.com', 'vamshin@amazon.com', 'balasvij@amazon.com', 'jaiyuvra@amazon.com']
   s.description   = %q{A Ruby DSL builder for OpenSearch}
   s.summary       = s.description
   s.homepage      = 'https://opensearch.org/docs/latest/'

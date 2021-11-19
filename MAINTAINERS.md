@@ -19,6 +19,7 @@ This document explains who the maintainers are (see below), what they do in this
 
 | Maintainer               | GitHub ID                                       | Affiliation |
 | ------------------------ | ---------------------------------------         | ----------- |
+| Vijayan Balasubramanian  | [VijayanB](https://github.com/VijayanB)         |   Amazon    |
 | Jayesh Hathila           | [jayeshathila](https://github.com/jayeshathila) |   Amazon    |
 | Rob Sears                | [robsears](https://github.com/robsears)         |   Bonsai    |
 | Vamshi Vijay Nakkirtha   | [vamshin](https://github.com/vamshin)           |   Amazon    |

@@ -32,8 +32,8 @@ require 'opensearch/api/version'
 Gem::Specification.new do |s|
   s.name          = 'opensearch-api'
   s.version       = OpenSearch::API::VERSION
-  s.authors       = ['<placeholder>']
-  s.email         = ['<placeholder>']
+  s.authors       = ['Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian' 'Jayesh Hathila', 'Yuvraj Jaiswal']
+  s.email         = ['vamshin@amazon.com', 'balasvij@amazon.com' , 'jayehh@amazon.com', 'jaiyuvra@amazon.com']
   s.summary       = 'Ruby API for OpenSearch.'
   s.homepage      = 'https://opensearch.org/docs/latest/'
   s.license       = 'Apache-2.0'

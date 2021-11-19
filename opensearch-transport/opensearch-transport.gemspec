@@ -32,8 +32,8 @@ require 'opensearch/transport/version'
 Gem::Specification.new do |s|
   s.name          = 'opensearch-transport'
   s.version       = OpenSearch::Transport::VERSION
-  s.authors       = ['Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian' 'Jayesh Hathila', 'Yuvraj Jaiswal']
-  s.email         = ['vamshin@amazon.com', 'balasvij@amazon.com' , 'jayehh@amazon.com', 'jaiyuvra@amazon.com']
+  s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian' , 'Yuvraj Jaiswal']
+  s.email         = ['jayehh@amazon.com', 'vamshin@amazon.com', 'balasvij@amazon.com', 'jaiyuvra@amazon.com']
   s.summary       = 'Ruby client for OpenSearch.'
   s.homepage      = 'https://opensearch.org/docs/latest/'
   s.license       = 'Apache-2.0'

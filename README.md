@@ -30,10 +30,12 @@ If you prefer to add the client manually or just want to examine the source code
 ```
 require 'opensearch'
 
-client = Opensearch::Client.new url: 'http://localhost:9200', log: true
 
 # If you want to use authentication credentials
-# client = Opensearch::Client.new url: 'http://USERNAME:PASSWORD@myhost:8080', log: true
+client = Opensearch::Client.new url: 'https://admin:admin@localhost:9200', log: true
+
+# If you don't want to use authentication credentials
+#client = Opensearch::Client.new url: 'http://localhost:9200', log: true
 
 # Create an index with non-default settings.
 index_name = 'ruby-test-index'

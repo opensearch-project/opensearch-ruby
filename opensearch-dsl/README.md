@@ -30,66 +30,84 @@ which provide an idiomatic way to build complex search definitions
 Let's have a simple example using the declarative variant:
 
 ```ruby
-require 'opensearch/dsl'
-include OpenSearch::DSL
-
-definition = search do
-  query do
-    match title: 'test'
-  end
-end
-
-definition.to_hash
-# => { query: { match: { title: "test"} } }
-
 require 'opensearch'
-client = OpenSearch::Client.new trace: true
-
-client.search body: definition
-# curl -X GET 'http://localhost:9200/test/_search?pretty' -d '{
-#   "query":{
-#     "match":{
-#       "title":"test"
-#     }
-#   }
-# }'
-# ...
-# => {"took"=>10, "hits"=> {"total"=>42, "hits"=> [...] } }
-```
-
-Let's build the same definition in a more imperative fashion:
-
-```ruby
 require 'opensearch/dsl'
 include OpenSearch::DSL
 
-definition = Search::Search.new
-definition.query = Search::Queries::Match.new title: 'test'
+# If you want to use authentication credentials
+client = Opensearch::Client.new url: 'http://admin:admin@localhost:9200', log: true
 
-definition.to_hash
-# => { query: { match: { title: "test"} } }
-```
+# If you don't want to use authentication credentials
+# client = Opensearch::Client.new url: 'http://localhost:9200', log: true
 
-The library doesn't depend on an OpenSearch client -- its sole purpose is to facilitate
-building search definitions in Ruby. This makes it possible to use it with any OpenSearch client:
+index_name = 'my-dsl-index'
+index_body = {
+  'settings': {
+    'index': {
+      'number_of_shards': 4
+    }
+  }
+}
+response = client.indices.create(
+        index: index_name,
+        body: index_body
+)
 
-```ruby
-require 'opensearch/dsl'
-include OpenSearch::DSL
+puts 'Creating index:'
+puts response
 
-definition = search { query { match title: 'test' } }
+# Add a document to the index.
+document = {
+        'title': 'ruby',
+        'description': 'beta',
+        'category': 'search'
+}
+id = '1'
 
-require 'json'
-require 'faraday'
-client   = Faraday.new(url: 'http://localhost:9200')
-response = JSON.parse(
-              client.post(
-                '/_search',
-                JSON.dump(definition.to_hash),
-                { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-              ).body
-            )
-# => {"took"=>10, "hits"=> {"total"=>42, "hits"=> [...] } }
+response = client.index(
+        index: index_name,
+        body: document,
+        id: id,
+        refresh: true
+)
+
+puts 'Adding document:'
+puts response
+
+response = client.search index: index_name, body: search {
+      query do
+            bool do
+                  filter do
+                        term category: "search"
+                  end
+                  must do
+                        match title: "ruby"
+                  end
+            end
+      end
+}.to_hash
+
+puts 'Search results:'
+puts response
+
+
+# Delete the document.
+response = client.delete(
+        index: index_name,
+        id: id
+)
+
+puts 'Deleting document:'
+puts response
+
+# Delete the index.
+response = client.indices.delete(
+        index: index_name
+)
+
+puts 'Deleting index:'
+puts response
+
 ```
 
 ## Features Overview
@@ -105,133 +123,6 @@ All OpenSearch DSL features are supported, namely:
 * Sorting
 * Pagination
 * Options
-
-An example of a complex search definition is below.
-
-**NOTE:** In order to run the example, you have to allow restoring from the `data.opensearch.org` repository by adding the following configuration line to your `opensearch.yml`:
-
-```ruby
-require 'awesome_print'
-
-require 'opensearch'
-require 'opensearch/dsl'
-
-include OpenSearch::DSL
-
-client = OpenSearch::Client.new transport_options: { request: { timeout: 3600, open_timeout: 3600 } }
-
-puts "Recovering the 'bicycles.stackexchange.com' index...".yellow
-
-client.indices.delete index: 'bicycles.stackexchange.com', ignore: 404
-
-client.snapshot.create_repository repository: 'data.opensearch.com', body: { type: 'url', settings: { url: 'https://s3.amazonaws.com/<placeholder>/bicycles.stackexchange.com/' } }
-client.snapshot.restore repository: 'data.opensearch.com', snapshot: 'bicycles.stackexchange.com', body: { indices: 'bicycles.stackexchange.com' }
-until client.cluster.health(level: 'indices')['indices']['bicycles.stackexchange.com']['status'] == 'green'
-  r = client.indices.recovery(index: 'bicycles.stackexchange.com', human: true)['bicycles.stackexchange.com']['shards'][0] rescue nil
-  print "\r#{r['index']['size']['recovered'] rescue '0b'} of #{r['index']['size']['total'] rescue 'N/A'}".ljust(52).gray
-  sleep 1
-end; puts
-
-# The search definition
-#
-definition = search {
-  query do
-
-    # Use a `function_score` query to modify the default score
-    #
-    function_score do
-      query do
-        filtered do
-
-          # Use a `multi_match` query for the fulltext part of the search
-          #
-          query do
-            multi_match do
-              query    'fixed fixie'
-              operator 'or'
-              fields   %w[ title^10 body ]
-            end
-          end
-
-          # Use a `range` filter on the `creation_date` field
-          #
-          filter do
-            range :creation_date do
-              gte '2013-01-01'
-            end
-          end
-        end
-      end
-
-      # Multiply the default `_score` by the document rating
-      #
-      functions << { script_score: { script: '_score * doc["rating"].value' } }
-    end
-  end
-
-  # Calculate the most frequently used tags
-  #
-  aggregation :tags do
-    terms do
-      field 'tags'
-
-      # Calculate average view count per tag (inner aggregation)
-      #
-      aggregation :avg_view_count do
-        avg field: 'view_count'
-      end
-    end
-  end
-
-  # Calculate the posting frequency
-  #
-  aggregation :frequency do
-    date_histogram do
-      field    'creation_date'
-      interval 'month'
-      format   'yyyy-MM'
-
-      # Calculate the statistics on comment count per day (inner aggregation)
-      #
-      aggregation :comments do
-        stats field: 'comment_count'
-      end
-    end
-  end
-
-  # Calculate the statistical information about the number of comments
-  #
-  aggregation :comment_count_stats do
-    stats field: 'comment_count'
-  end
-
-  # Highlight the `title` and `body` fields
-  #
-  highlight fields: {
-    title: { fragment_size: 50 },
-    body:  { fragment_size: 50 }
-  }
-
-  # Return only a selection of the fields
-  #
-  source ['title', 'tags', 'creation_date', 'rating', 'user.location', 'user.display_name']
-}
-
-puts "Search definition #{'-'*63}\n".yellow
-ap   definition.to_hash
-
-# Execute the search request
-#
-response = client.search index: 'bicycles.stackexchange.com', type: ['question','answer'], body: definition
-
-puts "\nSearch results #{'-'*66}\n".yellow
-ap   response
-```
-
-NOTE: You have to enable dynamic scripting to be able to execute the `function_score` query, either
-      by adding `script.disable_dynamic: false` to your opensearch.yml or command line parameters.
-
-**Please see the extensive RDoc examples in the source code and the integration tests.**
 
 ## Development
 

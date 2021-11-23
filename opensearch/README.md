@@ -66,11 +66,9 @@ Please refer to the specific library documentation for details:
 
 * **Transport**:
    [[README]](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-transport/README.md)
-   [[Documentation]](<placeholder_rubydoc_opensearch_transport>)
 
 * **API**:
    [[README]](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-api/README.md)
-   [[Documentation]](placeholder_rubydoc_opensearch_api)
 
 ## Development
 

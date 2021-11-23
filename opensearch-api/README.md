@@ -54,9 +54,6 @@ client.search(index: 'myindex', body: { query: { match: { title: 'test' } } })
 # => {"took"=>2, ..., "hits"=>{"total":5, ...}}
 ```
 
-Full documentation and examples are included as RDoc annotations in the source code
-will be available online at <placeholder_rubydoc_opensearch_api>.
-
 ### Usage with a custom client
 
 When you want to mix the library into your own client, it must conform to a following _contract_:

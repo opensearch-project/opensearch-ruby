@@ -4,13 +4,12 @@ $LOAD_PATH.unshift(File.expand_path('../../opensearch/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../opensearch-transport/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../opensearch-dsl/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../opensearch-api/lib', __dir__))
-$LOAD_PATH.unshift(File.expand_path('../../opensearch-xpack/lib', __dir__))
 
 require 'opensearch'
 require 'opensearch-transport'
 require 'opensearch-api'
 
-gems_not_loaded = ['opensearch-dsl', 'opensearch/xpack'].reject do |gem|
+gems_not_loaded = ['opensearch-dsl'].reject do |gem|
   begin
     (require gem) || true
   rescue LoadError

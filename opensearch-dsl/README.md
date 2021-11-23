@@ -35,10 +35,10 @@ require 'opensearch/dsl'
 include OpenSearch::DSL
 
 # If you want to use authentication credentials
-client = Opensearch::Client.new url: 'https://admin:admin@localhost:9200', log: true
+client = OpenSearch::Client.new url: 'https://admin:admin@localhost:9200', log: true
 
 # If you don't want to use authentication credentials
-# client = Opensearch::Client.new url: 'http://localhost:9200', log: true
+# client = OpenSearch::Client.new url: 'http://localhost:9200', log: true
 
 index_name = 'my-dsl-index'
 index_body = {

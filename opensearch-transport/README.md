@@ -69,8 +69,6 @@ without any configuration:
     response = client.perform_request 'GET', '_cluster/health'
     # => #<OpenSearch::Transport::Transport::Response:0x007fc5d506ce38 @status=200, @body={ ... } >
 
-Full documentation is available at <placeholder_rubydoc_opensearch_transport>.
-
 ## Configuration
 
 * [Setting Hosts](#setting-hosts)

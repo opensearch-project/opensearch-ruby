@@ -21,7 +21,7 @@ To add the client to your project, install it using [RubyGem](https://rubygems.o
 
 or install it from a source code checkout:
 
-git clone https://github.com/elasticsearch/opensearch-ruby.git
+git clone https://github.com/opensearch-project/opensearch-ruby.git
 cd opensearch-ruby/opensearch
 gem build opensearch.gemspec
 gem install opensearch-<version>.gem

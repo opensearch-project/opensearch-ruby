@@ -34,20 +34,14 @@ namespace :docker do
     Default:
       rake docker:start[version]
     E.g.:
-      rake docker:start[7.x-SNAPSHOT]
+      rake docker:start[1.0.0]
 
-    To start the container with X-Pack, pass it in as a parameter:
-      rake docker:start[7.x-SNAPSHOT,xpack]
   DOC
   task :start, [:version,:suite] do |_, params|
     abort 'Docker not installed' unless find_executable 'docker'
-    abort 'You need to set a version, e.g. rake docker:start[7.x-SNAPSHOT]' unless params[:version]
+    abort 'You need to set a version, e.g. rake docker:start[1.0.0]' unless params[:version]
 
-    test_suite = if ['xpack', 'x-pack'].include? :suite
-                   'platinum'
-                 else
-                   'free'
-                 end
+    test_suite = 'free'
     system("STACK_VERSION=#{params[:version]} TEST_SUITE=#{test_suite} ./.ci/run-opensearch.sh")
   end
 end

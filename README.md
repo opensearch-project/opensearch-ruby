@@ -2,7 +2,7 @@
 [![Chat](https://img.shields.io/badge/chat-on%20forums-blue)](https://discuss.opendistrocommunity.dev/c/clients/)
 ![PRs welcome!](https://img.shields.io/badge/PRs-welcome!-success)
 
-![OpenSearch logo](OpenSearch.svg)
+![OpenSearch logo](https://raw.githubusercontent.com/opensearch-project/opensearch-ruby/main/OpenSearch.svg)
 
 OpenSearch Ruby Client
 
@@ -23,12 +23,13 @@ To add the client to your project, install it using [RubyGem](https://rubygems.o
 
 `gem install opensearch`
 
-or install it from a source code checkout:
-
+or, install it from a source code checkout:
+```bash
 git clone https://github.com/opensearch-project/opensearch-ruby.git
 cd opensearch-ruby/opensearch
 gem build opensearch.gemspec
 gem install opensearch-<version>.gem
+```
 
 Import the client as a module:
 
@@ -38,7 +39,7 @@ If you prefer to add the client manually or just want to examine the source code
 
 ## Sample code
 
-```
+```ruby
 require 'opensearch'
 
 

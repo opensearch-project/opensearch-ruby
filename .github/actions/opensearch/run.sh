@@ -32,7 +32,7 @@ do
     --env "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
     --env "http.port=${port}" \
     --env "action.destructive_requires_name=false" \
-    --env "plugins.security.disabled=true" \
+    --env "plugins.security.disabled=${DISABLE_SECURITY}" \
     --ulimit nofile=65536:65536 \
     --ulimit memlock=-1:-1 \
     --publish "${port}:${port}" \

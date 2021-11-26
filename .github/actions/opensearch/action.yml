@@ -26,3 +26,4 @@ runs:
     STACK_VERSION: ${{ inputs.stack-version }}
     NODES: ${{ inputs.nodes }}
     PORT: ${{ inputs.port }}
+    DISABLE_SECURITY: ${{ inputs.disable-security }}

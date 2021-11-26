@@ -65,6 +65,7 @@ else
     --retry-connrefused \
     --show-error \
     --silent \
+    --insecure \
     https://admin:admin@os1:$PORT
 fi
 

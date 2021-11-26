@@ -30,7 +30,8 @@ describe 'OpenSearch validation integration with security plugin enabled' do
   it 'Validates for OpenSearch 1.0.0-SNAPSHOT' do
     client = OpenSearch::Client.new(
       host: OPENSEARCH_URL,
-      logger: Logger.new($stderr)
+      logger: Logger.new($stderr),
+      transport_options: { ssl: { verify: false } }
     )
     expect(client.instance_variable_get('@verified')).to be false
     client.count

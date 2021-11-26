@@ -31,7 +31,7 @@ context 'OpenSearch client with security plugin enabled' do
 
   let(:client) do
     OpenSearch::Client.new(
-      host: "https://admin:admin@localhost:9200",
+      host: OPENSEARCH_URL,
       logger: logger,
       transport_options: { ssl: { verify: false } }
     )

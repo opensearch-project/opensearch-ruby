@@ -85,7 +85,7 @@ jobs:
           rake bundle:clean
           rake bundle:install
       - name: opensearch
-        run: cd opensearch && bundle exec rake test:all
+        run: cd opensearch && bundle exec rake test_security:all
 
   test-opendistro:
     name: test-opendistro

@@ -26,13 +26,14 @@
 require 'spec_helper'
 require 'logger'
 
-context 'OpenSearch client' do
+context 'OpenSearch client with security plugin enabled' do
   let(:logger) { Logger.new($stderr) }
 
   let(:client) do
     OpenSearch::Client.new(
-      host: OPENSEARCH_URL,
-      logger: logger
+      host: "https://admin:admin@localhost:9200",
+      logger: logger,
+      transport_options: { ssl: { verify: false } }
     )
   end
 

@@ -26,14 +26,34 @@
 require 'spec_helper'
 require 'logger'
 
-describe 'OpenSearch validation integration' do
-  it 'Validates for OpenSearch 1.0.0-SNAPSHOT' do
-    client = OpenSearch::Client.new(
+context 'OpenSearch client ' do
+  let(:logger) { Logger.new($stderr) }
+
+  let(:client) do
+    OpenSearch::Client.new(
       host: OPENSEARCH_URL,
-      logger: Logger.new($stderr)
+      logger: logger
     )
-    expect(client.instance_variable_get('@verified')).to be false
-    client.count
-    expect(client.instance_variable_get('@verified')).to be true
+  end
+
+  context 'Integrates with opensearch API' do
+    it 'should perform the API methods' do
+      expect do
+        # Index a document
+        client.index(index: 'test-index', id: '1', body: { title: 'Test' })
+
+        # Refresh the index
+        client.indices.refresh(index: 'test-index')
+
+        # Search
+        response = client.search(index: 'test-index', body: { query: { match: { title: 'test' } } })
+
+        expect(response['hits']['total']['value']).to eq 1
+        expect(response['hits']['hits'][0]['_source']['title']).to eq 'Test'
+
+        # Delete the index
+        client.indices.delete(index: 'test-index')
+      end.not_to raise_error
+    end
   end
 end

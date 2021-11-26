@@ -14,6 +14,10 @@ inputs:
     description: 'Port where you want to run the cluster'
     required: false
     default: 9200
+  disable-security:
+    description: 'Port where you want to run the cluster'
+    required: false
+    default: true
   opensearch_password:
     description: 'The password for the user admin in your cluster'
     required: false

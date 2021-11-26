@@ -31,10 +31,10 @@ jobs:
       - uses: ./.github/actions/opensearch
         with:
           stack-version: latest
+          disable-security: true
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          disable-security: true
       - name: Build and test with Rake
         run: |
           sudo apt-get update
@@ -72,10 +72,10 @@ jobs:
       - uses: ./.github/actions/opensearch
         with:
           stack-version: latest
+          disable-security: false
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          disable-security: false
       - name: Build and test with Rake
         run: |
           sudo apt-get update

@@ -42,17 +42,31 @@ do
     opensearchproject/opensearch:${STACK_VERSION}
 done
 
-docker run \
-  --network cluster \
-  --rm \
-  appropriate/curl \
-  --max-time 120 \
-  --retry 120 \
-  --retry-delay 1 \
-  --retry-connrefused \
-  --show-error \
-  --silent \
-  http://os1:$PORT
+if [ $DISABLE_SECURITY = true]; then
+  docker run \
+    --network cluster \
+    --rm \
+    appropriate/curl \
+    --max-time 120 \
+    --retry 120 \
+    --retry-delay 1 \
+    --retry-connrefused \
+    --show-error \
+    --silent \
+    http://os1:$PORT
+else
+  docker run \
+    --network cluster \
+    --rm \
+    appropriate/curl \
+    --max-time 120 \
+    --retry 120 \
+    --retry-delay 1 \
+    --retry-connrefused \
+    --show-error \
+    --silent \
+    https://admin:admin@os1:$PORT
+fi
 
 sleep 10
 

@@ -42,7 +42,7 @@ do
     opensearchproject/opensearch:${STACK_VERSION}
 done
 
-if [ $DISABLE_SECURITY = true]; then
+if [[ $DISABLE_SECURITY = true ]]; then
   docker run \
     --network cluster \
     --rm \

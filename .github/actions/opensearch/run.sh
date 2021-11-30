@@ -2,12 +2,12 @@
 
 set -euxo pipefail
 
-if [[ -z $STACK_VERSION ]]; then
-  echo -e "\033[31;1mERROR:\033[0m Required environment variable [STACK_VERSION] not set\033[0m"
+if [[ -z $CLUSTER_VERSION ]]; then
+  echo -e "\033[31;1mERROR:\033[0m Required environment variable [CLUSTER_VERSION] not set\033[0m"
   exit 1
 fi
 
-MAJOR_VERSION=`echo ${STACK_VERSION} | cut -c 1`
+MAJOR_VERSION=`echo ${CLUSTER_VERSION} | cut -c 1`
 
 docker network create cluster
 
@@ -39,7 +39,7 @@ do
     --detach \
     --network=cluster \
     --name="os${node}" \
-    opensearchproject/opensearch:${STACK_VERSION}
+    opensearchproject/opensearch:${CLUSTER_VERSION}
 done
 
 if [[ $DISABLE_SECURITY = true ]]; then

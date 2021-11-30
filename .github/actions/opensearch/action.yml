@@ -3,7 +3,7 @@ description: 'This action spins up a Cluster instance that can be accessed and u
 author: 'opensearch-dev'
 
 inputs:
-  stack-version:
+  cluster-version:
     description: 'The version of the Opensearch Stack you want to run'
     required: true
   nodes:
@@ -23,7 +23,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    STACK_VERSION: ${{ inputs.stack-version }}
+    CLUSTER_VERSION: ${{ inputs.cluster-version }}
     NODES: ${{ inputs.nodes }}
     PORT: ${{ inputs.port }}
     DISABLE_SECURITY: ${{ inputs.disable-security }}

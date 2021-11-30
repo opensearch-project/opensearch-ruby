@@ -18,10 +18,6 @@ inputs:
     description: 'Disable security plugin for the OpenSearch engine'
     required: false
     default: true
-  opensearch_password:
-    description: 'The password for the user admin in your cluster'
-    required: false
-    default: 'admin'
 
 runs:
   using: 'docker'

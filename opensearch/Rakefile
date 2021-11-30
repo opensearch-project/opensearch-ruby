@@ -35,11 +35,6 @@ task test: 'test:spec'
 require 'rspec/core/rake_task'
 
 namespace :test do
-  desc 'Wait for OpenSearch to be in a green state'
-  task :wait_for_green do
-    sh '../scripts/wait-cluster.sh'
-  end
-
   RSpec::Core::RakeTask.new(:integration) do |t|
     t.pattern = 'spec/integration/security_disabled/**{,/*/**}/*_spec.rb'
   end
@@ -56,11 +51,6 @@ namespace :test do
 end
 
 namespace :test_security do
-  desc 'Wait for OpenSearch to be in a green state'
-  task :wait_for_green do
-    sh '../scripts/wait-cluster.sh'
-  end
-
   RSpec::Core::RakeTask.new(:integration) do |t|
     t.pattern = 'spec/integration/security_enabled/**{,/*/**}/*_spec.rb'
   end

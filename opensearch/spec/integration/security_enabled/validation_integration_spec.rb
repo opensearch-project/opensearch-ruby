@@ -27,7 +27,7 @@ require 'spec_helper'
 require 'logger'
 
 describe 'OpenSearch validation integration with security plugin enabled' do
-  it 'Validates for OpenSearch 1.0.0-SNAPSHOT' do
+  it 'Validates for OpenSearch' do
     client = OpenSearch::Client.new(
       host: OPENSEARCH_URL,
       logger: Logger.new($stderr),

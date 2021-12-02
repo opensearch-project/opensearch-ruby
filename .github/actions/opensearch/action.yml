@@ -3,7 +3,7 @@ description: 'This action spins up a Cluster instance that can be accessed and u
 author: 'opensearch-dev'
 
 inputs:
-  stack-version:
+  cluster-version:
     description: 'The version of the Opensearch Stack you want to run'
     required: true
   nodes:
@@ -14,15 +14,16 @@ inputs:
     description: 'Port where you want to run the cluster'
     required: false
     default: 9200
-  opensearch_password:
-    description: 'The password for the user admin in your cluster'
+  disable-security:
+    description: 'Disable security plugin for the OpenSearch engine'
     required: false
-    default: 'admin'
+    default: true
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    STACK_VERSION: ${{ inputs.stack-version }}
+    CLUSTER_VERSION: ${{ inputs.cluster-version }}
     NODES: ${{ inputs.nodes }}
     PORT: ${{ inputs.port }}
+    DISABLE_SECURITY: ${{ inputs.disable-security }}

@@ -2,12 +2,12 @@
 
 set -euxo pipefail
 
-if [[ -z $STACK_VERSION ]]; then
-  echo -e "\033[31;1mERROR:\033[0m Required environment variable [STACK_VERSION] not set\033[0m"
+if [[ -z $CLUSTER_VERSION ]]; then
+  echo -e "\033[31;1mERROR:\033[0m Required environment variable [CLUSTER_VERSION] not set\033[0m"
   exit 1
 fi
 
-MAJOR_VERSION=`echo ${STACK_VERSION} | cut -c 1`
+MAJOR_VERSION=`echo ${CLUSTER_VERSION} | cut -c 1`
 
 docker network create cluster
 
@@ -32,27 +32,42 @@ do
     --env "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
     --env "http.port=${port}" \
     --env "action.destructive_requires_name=false" \
-    --env "plugins.security.disabled=true" \
+    --env "plugins.security.disabled=${DISABLE_SECURITY}" \
     --ulimit nofile=65536:65536 \
     --ulimit memlock=-1:-1 \
     --publish "${port}:${port}" \
     --detach \
     --network=cluster \
     --name="os${node}" \
-    opensearchproject/opensearch:${STACK_VERSION}
+    opensearchproject/opensearch:${CLUSTER_VERSION}
 done
 
-docker run \
-  --network cluster \
-  --rm \
-  appropriate/curl \
-  --max-time 120 \
-  --retry 120 \
-  --retry-delay 1 \
-  --retry-connrefused \
-  --show-error \
-  --silent \
-  http://os1:$PORT
+if [[ $DISABLE_SECURITY = true ]]; then
+  docker run \
+    --network cluster \
+    --rm \
+    appropriate/curl \
+    --max-time 120 \
+    --retry 120 \
+    --retry-delay 1 \
+    --retry-connrefused \
+    --show-error \
+    --silent \
+    http://os1:$PORT
+else
+  docker run \
+    --network cluster \
+    --rm \
+    appropriate/curl \
+    --max-time 120 \
+    --retry 120 \
+    --retry-delay 1 \
+    --retry-connrefused \
+    --show-error \
+    --silent \
+    --insecure \
+    https://admin:admin@os1:$PORT
+fi
 
 sleep 10
 

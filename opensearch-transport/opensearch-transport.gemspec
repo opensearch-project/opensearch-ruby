@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'cane'
   s.add_development_dependency 'curb' unless defined? JRUBY_VERSION
-  s.add_development_dependency 'opensearch', ['>= 7', '< 8.0.0']
+  s.add_development_dependency 'opensearch-ruby'
   s.add_development_dependency 'hashie'
   s.add_development_dependency 'httpclient'
   s.add_development_dependency 'manticore' if defined? JRUBY_VERSION

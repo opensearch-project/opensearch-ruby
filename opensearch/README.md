@@ -24,11 +24,11 @@ The client's API is compatible with OpenSearch's API versions from 1.0.0 till cu
 
 Install the package from [Rubygems](https://rubygems.org):
 
-    gem install opensearch
+    gem install opensearch-ruby
 
 To use an unreleased version, either add it to your `Gemfile` for [Bundler](http://gembundler.com):
 
-    gem 'opensearch', git: 'git://github.com/opensearch-project/opensearch-ruby.git'
+    gem 'opensearch-ruby', git: 'git://github.com/opensearch-project/opensearch-ruby.git'
 
 or install it from a source code checkout:
 

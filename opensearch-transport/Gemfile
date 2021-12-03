@@ -34,7 +34,7 @@ if File.exist? File.expand_path('../opensearch-api/opensearch-api.gemspec', __di
 end
 
 if File.exist? File.expand_path('../opensearch/opensearch.gemspec', __dir__)
-  gem 'opensearch', path: File.expand_path('../opensearch', __dir__), require: false
+  gem 'opensearch-ruby', path: File.expand_path('../opensearch', __dir__), require: false
 end
 
 group :development, :test do

@@ -29,6 +29,8 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'opensearch/api/version'
 
+signing_key_path = File.expand_path("../gem-private_key.pem")
+
 Gem::Specification.new do |s|
   s.name          = 'opensearch-api'
   s.version       = OpenSearch::API::VERSION
@@ -45,7 +47,12 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files`.split($/)
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
-  s.cert_chain  = ['../certs/opensearch-rubygems.pem']
+
+  if $PROGRAM_NAME.end_with?("gem") && ARGV == ["build", __FILE__] && File.exist?(signing_key_path)
+    s.signing_key = signing_key_path
+    s.cert_chain  = ['../certs/opensearch-rubygems.pem']
+  end
+
   s.require_paths = ['lib']
 
   s.extra_rdoc_files  = [ 'README.md', 'LICENSE' ]

@@ -29,7 +29,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'opensearch/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'opensearch'
+  s.name          = 'opensearch-ruby'
   s.version       = OpenSearch::VERSION
   s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian' , 'Yuvraj Jaiswal']
   s.email         = ['jayehh@amazon.com', 'vamshin@amazon.com', 'balasvij@amazon.com', 'jaiyuvra@amazon.com']

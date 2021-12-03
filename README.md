@@ -21,14 +21,14 @@ For more information, see [opensearch.org](https://opensearch.org/).
 
 To add the client to your project, install it using [RubyGem](https://rubygems.org/)
 
-`gem install opensearch`
+`gem install opensearch-ruby`
 
 or, install it from a source code checkout:
 ```bash
 git clone https://github.com/opensearch-project/opensearch-ruby.git
 cd opensearch-ruby/opensearch
 gem build opensearch.gemspec
-gem install opensearch-<version>.gem
+gem install opensearch-ruby-<version>.gem
 ```
 
 Import the client as a module:
@@ -44,7 +44,10 @@ require 'opensearch'
 
 
 # If you want to use authentication credentials
-client = OpenSearch::Client.new url: 'https://admin:admin@localhost:9200', log: true
+client = OpenSearch::Client.new(
+  host: 'https://admin:admin@localhost:9200',    # For testing only. Don't store credentials in code.
+  transport_options: { ssl: { verify: false } }  # For testing only. Use certificate for validation.
+)
 
 # If you don't want to use authentication credentials
 #client = OpenSearch::Client.new url: 'http://localhost:9200', log: true

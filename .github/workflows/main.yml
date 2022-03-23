@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [ 2.5, 2.6, 2.7, 3.0, jruby-9.3 ]
+        ruby: [ 2.5, 2.6, 2.7, '3.0', 3.1, jruby-9.3 ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -61,7 +61,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [ 2.5, 2.6, 2.7, 3.0, jruby-9.3 ]
+        ruby: [ 2.5, 2.6, 2.7, '3.0', 3.1, jruby-9.3 ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: [ 2.5, 2.6, 2.7, 3.0, jruby-9.3 ]
+        ruby: [ 2.5, 2.6, 2.7, '3.0', 3.1, jruby-9.3 ]
     steps:
       - uses: actions/checkout@v2
       - name: Increase system limits

@@ -185,7 +185,7 @@ time rake test:unit
 time rake test:integration
 ```
 
-We run the test suite for OpenSearch's Rest API tests. You can read more about this in [the test runner README](https://github.com/opensearch-project/opensearch-ruby/tree/main/api-spec-testing#rest-api-yaml-test-runner).
+We run the test suite for OpenSearch's Rest API tests.
 
 The `rest_api` needs the test files from OpenSearch. You can run the rake task to download the test artifacts in the root folder of the project. This task needs a running cluster to determine which version and build hash of OpenSearch to use and test against. `TEST_OPENSEARCH_SERVER=http://localhost:9200 rake opensearch:download_artifacts`. This will download the necessary files used for the integration tests to `./tmp`.
 

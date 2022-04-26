@@ -33,7 +33,6 @@ module OpenSearch
         #
         # @option arguments [String] :alias The name of the alias to rollover
         # @option arguments [String] :new_index The name of the rollover index
-        # @option arguments [Boolean] :include_type_name Whether a type should be included in the body of the mappings.
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Boolean] :dry_run If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
@@ -69,7 +68,6 @@ module OpenSearch
         #
         # @since 6.2.0
         ParamsRegistry.register(:rollover, [
-          :include_type_name,
           :timeout,
           :dry_run,
           :master_timeout,

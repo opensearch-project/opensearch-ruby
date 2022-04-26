@@ -31,7 +31,6 @@ module OpenSearch
         # Updates the index mappings.
         #
         # @option arguments [List] :index A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.
-        # @option arguments [Boolean] :include_type_name Whether a type should be expected in the body of the mappings.
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
         # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
@@ -68,7 +67,6 @@ module OpenSearch
         #
         # @since 6.2.0
         ParamsRegistry.register(:put_mapping, [
-          :include_type_name,
           :timeout,
           :master_timeout,
           :ignore_unavailable,

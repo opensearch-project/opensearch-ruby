@@ -32,7 +32,6 @@ module OpenSearch
         #
         # @option arguments [List] :fields A comma-separated list of fields
         # @option arguments [List] :index A comma-separated list of index names
-        # @option arguments [Boolean] :include_type_name Whether a type should be returned in the body of the mappings.
         # @option arguments [Boolean] :include_defaults Whether the default mapping values should be returned as well
         # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
         # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
@@ -72,7 +71,6 @@ module OpenSearch
         #
         # @since 6.2.0
         ParamsRegistry.register(:get_field_mapping, [
-          :include_type_name,
           :include_defaults,
           :ignore_unavailable,
           :allow_no_indices,

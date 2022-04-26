@@ -43,7 +43,7 @@ describe 'client#update' do
   end
 
   let(:url) do
-    'foo/bar/1/_update'
+    'foo/_update/1'
   end
 
   let(:client) do
@@ -56,24 +56,24 @@ describe 'client#update' do
 
   it 'requires the :index argument' do
     expect {
-      client.update(type: 'bar', id: '1')
+      client.update(id: '1')
     }.to raise_exception(ArgumentError)
   end
 
   it 'requires the :id argument' do
     expect {
-      client.update(index: 'foo', type: 'bar')
+      client.update(index: 'foo')
     }.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do
-    expect(client_double.update(index: 'foo', type: 'bar', id: '1', body: { doc: {} })).to eq({})
+    expect(client_double.update(index: 'foo', id: '1', body: { doc: {} })).to eq({})
   end
 
   context 'when URL parameters are provided' do
 
     let(:url) do
-      'foo/bar/1/_update'
+      'foo/_update/1'
     end
 
     let(:body) do
@@ -81,7 +81,7 @@ describe 'client#update' do
     end
 
     it 'performs the request' do
-      expect(client_double.update(index: 'foo', type: 'bar', id: '1', body: {}))
+      expect(client_double.update(index: 'foo', id: '1', body: {}))
     end
   end
 
@@ -89,7 +89,7 @@ describe 'client#update' do
 
     it 'raises an ArgumentError' do
       expect {
-        client.update(index: 'foo', type: 'bar', id: '1', body: { doc: {} }, qwertypoiuy: 'asdflkjhg')
+        client.update(index: 'foo', id: '1', body: { doc: {} }, qwertypoiuy: 'asdflkjhg')
       }.to raise_exception(ArgumentError)
     end
   end
@@ -97,7 +97,7 @@ describe 'client#update' do
   context 'when the request needs to be URL-escaped' do
 
     let(:url) do
-      'foo%5Ebar/bar%2Fbam/1/_update'
+      'foo%5Ebar/_update/1'
     end
 
     let(:body) do
@@ -105,7 +105,7 @@ describe 'client#update' do
     end
 
     it 'escapes the parts' do
-      expect(client_double.update(index: 'foo^bar', type: 'bar/bam', id: '1', body: {}))
+      expect(client_double.update(index: 'foo^bar', id: '1', body: {}))
     end
   end
 
@@ -117,14 +117,14 @@ describe 'client#update' do
 
     it 'raises it to the user' do
       expect {
-        client.update(index: 'foo', type: 'bar', id: 'XXX', body: {})
+        client.update(index: 'foo', id: 'XXX', body: {})
       }.to raise_exception(NotFound)
     end
 
     context 'when the :ignore parameter is specified' do
 
       it 'does not raise the error to the user' do
-        expect(client.update(index: 'foo', type: 'bar', id: 'XXX', body: {}, ignore: 404)).to eq(false)
+        expect(client.update(index: 'foo', id: 'XXX', body: {}, ignore: 404)).to eq(false)
       end
     end
   end

@@ -32,7 +32,6 @@ module OpenSearch
         #
         # @option arguments [List] :fields A comma-separated list of fields
         # @option arguments [List] :index A comma-separated list of index names
-        # @option arguments [List] :type A comma-separated list of document types *Deprecated*
         # @option arguments [Boolean] :include_type_name Whether a type should be returned in the body of the mappings.
         # @option arguments [Boolean] :include_defaults Whether the default mapping values should be returned as well
         # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
@@ -57,15 +56,9 @@ module OpenSearch
 
           _index = arguments.delete(:index)
 
-          _type = arguments.delete(:type)
-
           method = OpenSearch::API::HTTP_GET
-          path   = if _index && _type && _fields
-                     "#{Utils.__listify(_index)}/_mapping/#{Utils.__listify(_type)}/field/#{Utils.__listify(_fields)}"
-                   elsif _index && _fields
+          path   = if _index && _fields
                      "#{Utils.__listify(_index)}/_mapping/field/#{Utils.__listify(_fields)}"
-                   elsif _type && _fields
-                     "_mapping/#{Utils.__listify(_type)}/field/#{Utils.__listify(_fields)}"
                    else
                      "_mapping/field/#{Utils.__listify(_fields)}"
                    end

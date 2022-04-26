@@ -42,12 +42,12 @@ describe 'client#count' do
     expect(client_double.count).to eq({})
   end
 
-  context 'when an index and type are specified' do
+  context 'when an index is specified' do
 
     let(:expected_args) do
       [
         'POST',
-        'foo,bar/t1,t2/_count',
+        'foo,bar/_count',
         {},
         nil,
         {}
@@ -55,7 +55,7 @@ describe 'client#count' do
     end
 
     it 'performs the request' do
-      expect(client_double.count(index: ['foo','bar'], type: ['t1','t2'])).to eq({})
+      expect(client_double.count(index: ['foo','bar'])).to eq({})
     end
   end
 

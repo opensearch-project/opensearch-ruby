@@ -31,7 +31,6 @@ module OpenSearch
       #
       # @option arguments [String] :id Document ID
       # @option arguments [String] :index The name of the index
-      # @option arguments [String] :type The type of the document *Deprecated*
       # @option arguments [String] :wait_for_active_shards Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
       # @option arguments [List] :_source True or false to return the _source field or not, or a list of fields to return
       # @option arguments [List] :_source_excludes A list of fields to exclude from the returned _source field
@@ -66,14 +65,8 @@ module OpenSearch
 
         _index = arguments.delete(:index)
 
-        _type = arguments.delete(:type)
-
         method = OpenSearch::API::HTTP_POST
-        path   = if _index && _type && _id
-                   "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/#{Utils.__listify(_id)}/_update"
-                 else
-                   "#{Utils.__listify(_index)}/_update/#{Utils.__listify(_id)}"
-                 end
+        path   = "#{Utils.__listify(_index)}/_update/#{Utils.__listify(_id)}"
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]

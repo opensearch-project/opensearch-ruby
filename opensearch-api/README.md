@@ -47,7 +47,7 @@ require 'opensearch'
 
 client = OpenSearch::Client.new(log: true)
 
-client.index(index: 'myindex', type: 'mytype', id: 1, body: { title: 'Test' })
+client.index(index: 'myindex', id: 1, body: { title: 'Test' })
 # => {"_index"=>"myindex", ... "created"=>true}
 
 client.search(index: 'myindex', body: { query: { match: { title: 'test' } } })
@@ -106,7 +106,7 @@ p client.cluster.health
 # --> GET _cluster/health {}
 # => "{"cluster_name":"opensearch" ... }"
 
-p client.index index: 'myindex', type: 'mytype', id: 'custom', body: { title: "Indexing from my client" }
+p client.index index: 'myindex', id: 'custom', body: { title: "Indexing from my client" }
 # --> PUT myindex/mytype/custom {} {:title=>"Indexing from my client"}
 # => "{"ok":true, ... }"
 ```

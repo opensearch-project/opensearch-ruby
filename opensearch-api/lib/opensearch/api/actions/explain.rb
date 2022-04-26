@@ -31,7 +31,6 @@ module OpenSearch
       #
       # @option arguments [String] :id The document ID
       # @option arguments [String] :index The name of the index
-      # @option arguments [String] :type The type of the document *Deprecated*
       # @option arguments [Boolean] :analyze_wildcard Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)
       # @option arguments [String] :analyzer The analyzer for the query string query
       # @option arguments [String] :default_operator The default operator for query string query (AND or OR) (options: AND, OR)
@@ -65,19 +64,13 @@ module OpenSearch
 
         _index = arguments.delete(:index)
 
-        _type = arguments.delete(:type)
-
         method = if arguments[:body]
                    OpenSearch::API::HTTP_POST
                  else
                    OpenSearch::API::HTTP_GET
                  end
 
-        path = if _index && _type && _id
-                 "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/#{Utils.__listify(_id)}/_explain"
-               else
-                 "#{Utils.__listify(_index)}/_explain/#{Utils.__listify(_id)}"
-               end
+        path = "#{Utils.__listify(_index)}/_explain/#{Utils.__listify(_id)}"
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]

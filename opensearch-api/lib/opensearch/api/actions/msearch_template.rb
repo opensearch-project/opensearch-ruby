@@ -30,7 +30,6 @@ module OpenSearch
       # Allows to execute several search template operations in one request.
       #
       # @option arguments [List] :index A comma-separated list of index names to use as default
-      # @option arguments [List] :type A comma-separated list of document types to use as default
       # @option arguments [String] :search_type Search operation type (options: query_then_fetch, dfs_query_then_fetch)
       # @option arguments [Boolean] :typed_keys Specify whether aggregation and suggester names should be prefixed by their respective types in the response
       # @option arguments [Number] :max_concurrent_searches Controls the maximum number of concurrent searches the multi search api will execute
@@ -54,12 +53,8 @@ module OpenSearch
 
         _index = arguments.delete(:index)
 
-        _type = arguments.delete(:type)
-
         method = OpenSearch::API::HTTP_POST
-        path   = if _index && _type
-                   "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/_msearch/template"
-                 elsif _index
+        path   = if _index
                    "#{Utils.__listify(_index)}/_msearch/template"
                  else
                    "_msearch/template"

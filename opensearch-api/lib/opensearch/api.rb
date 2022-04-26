@@ -42,7 +42,7 @@ module OpenSearch
 
     COMMON_PARAMS = [
       :ignore,                        # Client specific parameters
-      :index, :type, :id,             # :index/:type/:id
+      :index, :id,                    # :index/:id
       :body,                          # Request body
       :node_id,                       # Cluster
       :name,                          # Alias, template, settings, warmer, ...

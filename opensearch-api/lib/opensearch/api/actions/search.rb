@@ -30,7 +30,6 @@ module OpenSearch
       # Returns results matching a query.
       #
       # @option arguments [List] :index A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
-      # @option arguments [List] :type A comma-separated list of document types to search; leave empty to perform the operation on all types
       # @option arguments [String] :analyzer The analyzer to use for the query string
       # @option arguments [Boolean] :analyze_wildcard Specify whether wildcard and prefix queries should be analyzed (default: false)
       # @option arguments [Boolean] :ccs_minimize_roundtrips Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
@@ -87,11 +86,8 @@ module OpenSearch
         headers = arguments.delete(:headers) || {}
 
         arguments = arguments.clone
-        arguments[:index] = UNDERSCORE_ALL if !arguments[:index] && arguments[:type]
 
         _index = arguments.delete(:index)
-
-        _type = arguments.delete(:type)
 
         method = if arguments[:body]
                    OpenSearch::API::HTTP_POST
@@ -99,9 +95,7 @@ module OpenSearch
                    OpenSearch::API::HTTP_GET
                  end
 
-        path = if _index && _type
-                 "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/_search"
-               elsif _index
+        path = if _index
                  "#{Utils.__listify(_index)}/_search"
                else
                  "_search"

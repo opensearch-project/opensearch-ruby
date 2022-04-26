@@ -31,7 +31,6 @@ module OpenSearch
       #
       # @option arguments [String] :id The document ID
       # @option arguments [String] :index The name of the index
-      # @option arguments [String] :type The type of the document; deprecated and optional starting with 7.0 *Deprecated*
       # @option arguments [String] :preference Specify the node or shard the operation should be performed on (default: random)
       # @option arguments [Boolean] :realtime Specify whether to perform the operation in realtime or search mode
       # @option arguments [Boolean] :refresh Refresh the shard containing the document before performing the operation
@@ -61,14 +60,8 @@ module OpenSearch
 
         _index = arguments.delete(:index)
 
-        _type = arguments.delete(:type)
-
         method = OpenSearch::API::HTTP_GET
-        path   = if _index && _type && _id
-                   "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/#{Utils.__listify(_id)}/_source"
-                 else
-                   "#{Utils.__listify(_index)}/_source/#{Utils.__listify(_id)}"
-                 end
+        path   = "#{Utils.__listify(_index)}/_source/#{Utils.__listify(_id)}"
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = nil

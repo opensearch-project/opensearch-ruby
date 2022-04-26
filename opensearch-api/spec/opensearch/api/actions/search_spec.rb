@@ -47,11 +47,11 @@ describe 'client#search' do
   end
 
   let(:url) do
-    '_all/foo/_search'
+    '_search'
   end
 
   it 'has a default value for index' do
-    expect(client_double.search(type: 'foo'))
+    expect(client_double.search())
   end
 
   context 'when a request definition is specified' do
@@ -80,14 +80,14 @@ describe 'client#search' do
     end
   end
 
-  context 'when an index and type are specified' do
+  context 'when an index is specified' do
 
     let(:url) do
-      'foo/bar/_search'
+      'foo/_search'
     end
 
     it 'performs the request' do
-      expect(client_double.search(index: 'foo', type: 'bar'))
+      expect(client_double.search(index: 'foo'))
     end
   end
 
@@ -99,17 +99,6 @@ describe 'client#search' do
 
     it 'performs the request' do
       expect(client_double.search(index: ['foo', 'bar']))
-    end
-  end
-
-  context 'when multiple indices and types are specified' do
-
-    let(:url) do
-      'foo,bar/lam,bam/_search'
-    end
-
-    it 'performs the request' do
-      expect(client_double.search(index: ['foo', 'bar'], type: ['lam', 'bam']))
     end
   end
 

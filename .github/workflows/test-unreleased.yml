@@ -1,0 +1,64 @@
+name: Integration with Unreleased OpenSearch
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        entry:
+          - { opensearch_ref: '1.x' }
+          - { opensearch_ref: '2.x' }
+          - { opensearch_ref: '2.0' }
+          - { opensearch_ref: 'main' }
+    steps:
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+
+      - name: Checkout OpenSearch
+        uses: actions/checkout@v2
+        with:
+          repository: opensearch-project/OpenSearch
+          ref: ${{ matrix.entry.opensearch_ref }}
+          path: opensearch
+
+      - name: Assemble OpenSearch
+        run: |
+          cd opensearch
+          ./gradlew assemble
+
+        # This step runs the docker image generated during gradle assemble in OpenSearch. It is tagged as opensearch:test.
+        # Reference: https://github.com/opensearch-project/OpenSearch/blob/2.0/distribution/docker/build.gradle#L190
+      - name: Run Docker Image
+        run: |
+          docker run -p 9200:9200 -p 9600:9600 -d -e "discovery.type=single-node" -e "bootstrap.memory_lock=true" opensearch:test
+          sleep 90
+
+      - name: Checkout Ruby Client
+        uses: actions/checkout@v2
+
+      - name: Build and test with Rake
+        run: |
+          sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev
+          ruby -v
+          rake bundle:clean
+          rake bundle:install
+
+      - name: opensearch-ruby
+        run: cd opensearch && bundle exec rake test:all
+      - name: opensearch-transport
+        run: cd opensearch-transport && bundle exec rake test:all
+      - name: opensearch-api
+        run: cd opensearch-api && bundle exec rake test:spec
+      - name: opensearch-dsl
+        run: cd opensearch-dsl && bundle exec rake test:all

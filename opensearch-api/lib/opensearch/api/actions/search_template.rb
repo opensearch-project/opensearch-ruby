@@ -30,7 +30,6 @@ module OpenSearch
       # Allows to use the Mustache language to pre-render a search definition.
       #
       # @option arguments [List] :index A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
-      # @option arguments [List] :type A comma-separated list of document types to search; leave empty to perform the operation on all types
       # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
       # @option arguments [Boolean] :ignore_throttled Whether specified concrete, expanded or aliased indices should be ignored when throttled
       # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
@@ -62,12 +61,8 @@ module OpenSearch
 
         _index = arguments.delete(:index)
 
-        _type = arguments.delete(:type)
-
         method = OpenSearch::API::HTTP_POST
-        path   = if _index && _type
-                   "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/_search/template"
-                 elsif _index
+        path   = if _index
                    "#{Utils.__listify(_index)}/_search/template"
                  else
                    "_search/template"

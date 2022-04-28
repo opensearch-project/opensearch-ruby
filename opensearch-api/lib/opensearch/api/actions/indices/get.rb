@@ -31,7 +31,6 @@ module OpenSearch
         # Returns information about one or more indices.
         #
         # @option arguments [List] :index A comma-separated list of index names
-        # @option arguments [Boolean] :include_type_name Whether to add the type name to the response (default: false)
         # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
         # @option arguments [Boolean] :ignore_unavailable Ignore unavailable indexes (default: false)
         # @option arguments [Boolean] :allow_no_indices Ignore if a wildcard expression resolves to no concrete indices (default: false)
@@ -63,7 +62,6 @@ module OpenSearch
         #
         # @since 6.2.0
         ParamsRegistry.register(:get, [
-          :include_type_name,
           :local,
           :ignore_unavailable,
           :allow_no_indices,

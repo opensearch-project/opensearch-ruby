@@ -64,16 +64,6 @@ describe 'client.cluster#validate_query' do
     end
   end
 
-  context 'when a type and index are specified' do
-    let(:url) do
-      'foo/bar/_validate/query'
-    end
-
-    it 'performs the request' do
-      expect(client_double.indices.validate_query(index: 'foo', type: 'bar')).to eq({})
-    end
-  end
-
   context 'when multiple indicies are specified as a list' do
     let(:url) do
       'foo,bar/_validate/query'

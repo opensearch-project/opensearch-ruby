@@ -47,22 +47,22 @@ describe 'client#bulk' do
 
     let(:body) do
       <<-PAYLOAD.gsub(/^\s+/, '')
-        {"index":{"_index":"myindexA","_type":"mytype","_id":"1"}}
+        {"index":{"_index":"myindexA","_id":"1"}}
         {"title":"Test"}
-        {"update":{"_index":"myindexB","_type":"mytype","_id":"2"}}
+        {"update":{"_index":"myindexB","_id":"2"}}
         {"doc":{"title":"Update"}}
-        {"delete":{"_index":"myindexC","_type":"mytypeC","_id":"3"}}
-        {"index":{"_index":"myindexD","_type":"mytype","_id":"1"}}
+        {"delete":{"_index":"myindexC","_id":"3"}}
+        {"index":{"_index":"myindexD","_id":"1"}}
         {"data":"MYDATA"}
       PAYLOAD
     end
 
     it 'performs the request' do
       expect(client_double.bulk(:body => [
-          { :index =>  { :_index => 'myindexA', :_type => 'mytype', :_id => '1', :data => { :title => 'Test' } } },
-          { :update => { :_index => 'myindexB', :_type => 'mytype', :_id => '2', :data => { :doc => { :title => 'Update' } } } },
-          { :delete => { :_index => 'myindexC', :_type => 'mytypeC', :_id => '3' } },
-          { :index =>  { :_index => 'myindexD', :_type => 'mytype', :_id => '1', :data => { :data => 'MYDATA' } } },
+          { :index =>  { :_index => 'myindexA', :_id => '1', :data => { :title => 'Test' } } },
+          { :update => { :_index => 'myindexB', :_id => '2', :data => { :doc => { :title => 'Update' } } } },
+          { :delete => { :_index => 'myindexC', :_id => '3' } },
+          { :index =>  { :_index => 'myindexD', :_id => '1', :data => { :data => 'MYDATA' } } },
       ])).to eq({})
     end
   end
@@ -80,13 +80,13 @@ describe 'client#bulk' do
 
     let(:body) do
       <<-PAYLOAD.gsub(/^\s+/, '')
-        {"update":{"_index":"myindex","_type":"mytype","_id":"1"}}
+        {"update":{"_index":"myindex","_id":"1"}}
         {"doc":{"data":{"title":"Update"}}}
       PAYLOAD
     end
 
     it 'performs the request' do
-      expect(client_double.bulk(body:[ { :update => { :_index => 'myindex', :_type => 'mytype', :_id => '1' } },
+      expect(client_double.bulk(body:[ { :update => { :_index => 'myindex', :_id => '1' } },
                                        { :doc => { :data => { :title => 'Update' } } } ])).to eq({})
     end
   end
@@ -132,17 +132,6 @@ describe 'client#bulk' do
 
     it 'performs the request' do
       expect(client_double.bulk(index: 'foo^bar', body: [])).to eq({})
-    end
-  end
-
-  context 'when the type is provided' do
-
-    let(:url) do
-      'myindex/mytype/_bulk'
-    end
-
-    it 'performs the request' do
-      expect(client_double.bulk(index: 'myindex', type: 'mytype', body: [])).to eq({})
     end
   end
 end

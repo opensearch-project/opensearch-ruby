@@ -65,7 +65,6 @@ module OpenSearch
       #
       # @option arguments [List] :index A comma-separated list of index names; use `_all` or empty string
       #                                 to perform the operation on all indices
-      # @option arguments [String] :type The name of the document type
       # @option arguments [Hash] :body The search definition using the Query DSL
       # @option arguments [Boolean] :verbose Specify whether to return verbose statistics about each iteration
       #                                      (default: false)

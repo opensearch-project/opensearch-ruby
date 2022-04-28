@@ -31,7 +31,6 @@ module OpenSearch
         # Returns an index template.
         #
         # @option arguments [List] :name The comma separated names of the index templates
-        # @option arguments [Boolean] :include_type_name Whether a type should be returned in the body of the mappings.
         # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
         # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
@@ -61,7 +60,6 @@ module OpenSearch
         #
         # @since 6.2.0
         ParamsRegistry.register(:get_template, [
-          :include_type_name,
           :flat_settings,
           :master_timeout,
           :local

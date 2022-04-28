@@ -31,7 +31,6 @@ module OpenSearch
         # Creates an index with optional settings and mappings.
         #
         # @option arguments [String] :index The name of the index
-        # @option arguments [Boolean] :include_type_name Whether a type should be expected in the body of the mappings.
         # @option arguments [String] :wait_for_active_shards Set the number of active shards to wait for before the operation returns.
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
@@ -60,7 +59,6 @@ module OpenSearch
         #
         # @since 6.2.0
         ParamsRegistry.register(:create, [
-          :include_type_name,
           :wait_for_active_shards,
           :timeout,
           :master_timeout

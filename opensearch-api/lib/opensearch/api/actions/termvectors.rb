@@ -31,7 +31,6 @@ module OpenSearch
       #
       # @option arguments [String] :index The index in which the document resides. (*Required*)
       # @option arguments [String] :id The id of the document, when not specified a doc param should be supplied.
-      # @option arguments [String] :type The type of the document.
       # @option arguments [Boolean] :term_statistics Specifies if total term frequency and document frequency should be returned.
       # @option arguments [Boolean] :field_statistics Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.
       # @option arguments [List] :fields A comma-separated list of fields to return.
@@ -63,8 +62,6 @@ module OpenSearch
 
         _id = arguments.delete(:id)
 
-        _type = arguments.delete(:type)
-
         method = if arguments[:body]
                    OpenSearch::API::HTTP_POST
                  else
@@ -72,11 +69,7 @@ module OpenSearch
                  end
 
         endpoint = arguments.delete(:endpoint) || '_termvectors'
-        path = if _index && _type && _id
-                 "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/#{Utils.__listify(_id)}/#{endpoint}"
-               elsif _index && _type
-                 "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/#{endpoint}"
-               elsif _index && _id
+        path = if _index && _id
                  "#{Utils.__listify(_index)}/#{endpoint}/#{Utils.__listify(_id)}"
                else
                  "#{Utils.__listify(_index)}/#{endpoint}"

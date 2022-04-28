@@ -30,7 +30,6 @@ module OpenSearch
       # Returns multiple termvectors in one request.
       #
       # @option arguments [String] :index The index in which the document resides.
-      # @option arguments [String] :type The type of the document.
       # @option arguments [List] :ids A comma-separated list of documents ids. You must define ids as parameter or set "ids" or "docs" in the request body
       # @option arguments [Boolean] :term_statistics Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".
       # @option arguments [Boolean] :field_statistics Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".
@@ -60,17 +59,13 @@ module OpenSearch
 
         _index = arguments.delete(:index)
 
-        _type = arguments.delete(:type)
-
         method = if arguments[:body]
                    OpenSearch::API::HTTP_POST
                  else
                    OpenSearch::API::HTTP_GET
                  end
 
-        path = if _index && _type
-                 "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/_mtermvectors"
-               elsif _index
+        path = if _index
                  "#{Utils.__listify(_index)}/_mtermvectors"
                else
                  "_mtermvectors"

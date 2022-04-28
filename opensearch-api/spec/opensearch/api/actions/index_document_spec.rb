@@ -47,7 +47,7 @@ describe 'client#index' do
   end
 
   let(:url) do
-    'foo/bar'
+    'foo/_doc'
   end
 
   let(:body) do
@@ -60,12 +60,12 @@ describe 'client#index' do
 
   it 'requires the :index argument' do
     expect {
-      client.index(type: 'bar')
+      client.index()
     }.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do
-    expect(client_double.index(index: 'foo', type: 'bar', body: body)).to eq({})
+    expect(client_double.index(index: 'foo', body: body)).to eq({})
   end
 
   context 'when a specific id is provided' do
@@ -75,11 +75,11 @@ describe 'client#index' do
     end
 
     let(:url) do
-      'foo/bar/1'
+      'foo/_doc/1'
     end
 
     it 'performs the request' do
-      expect(client_double.index(index: 'foo', type: 'bar', id: '1', body: body)).to eq({})
+      expect(client_double.index(index: 'foo', id: '1', body: body)).to eq({})
     end
   end
 
@@ -90,7 +90,7 @@ describe 'client#index' do
     end
 
     let(:url) do
-      'foo/bar'
+      'foo/_doc'
     end
 
     let(:params) do
@@ -98,7 +98,7 @@ describe 'client#index' do
     end
 
     it 'passes the URL params' do
-      expect(client_double.index(index: 'foo', type: 'bar', op_type: 'create', body: body)).to eq({})
+      expect(client_double.index(index: 'foo', op_type: 'create', body: body)).to eq({})
     end
 
     context 'when a specific id is provided' do
@@ -108,7 +108,7 @@ describe 'client#index' do
       end
 
       let(:url) do
-        'foo/bar/1'
+        'foo/_doc/1'
       end
 
       let(:params) do
@@ -116,7 +116,7 @@ describe 'client#index' do
       end
 
       it 'passes the URL params' do
-        expect(client_double.index(index: 'foo', type: 'bar', id: '1', op_type: 'create', body: body)).to eq({})
+        expect(client_double.index(index: 'foo', id: '1', op_type: 'create', body: body)).to eq({})
       end
     end
   end
@@ -127,11 +127,11 @@ describe 'client#index' do
     end
 
     let(:url) do
-      'foo/bar%2Fbam/123'
+      'foo%5Ebar/_doc/123'
     end
 
     it 'URL-escapes the parts' do
-      expect(client_double.index(index: 'foo', type: 'bar/bam', id: '123', body: body)).to eq({})
+      expect(client_double.index(index: 'foo^bar', id: '123', body: body)).to eq({})
     end
   end
 
@@ -139,7 +139,7 @@ describe 'client#index' do
 
     it 'raises and ArgumentError' do
       expect {
-        client.index(index: 'foo', type: 'bar', id: '1', qwerty: 'yuiop')
+        client.index(index: 'foo', id: '1', qwerty: 'yuiop')
       }.to raise_exception(ArgumentError)
     end
   end

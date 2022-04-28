@@ -31,7 +31,6 @@ module OpenSearch
       # for example to pick up a mapping change.
       #
       # @option arguments [List] :index A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices (*Required*)
-      # @option arguments [List] :type A comma-separated list of document types to search; leave empty to perform the operation on all types
       # @option arguments [String] :analyzer The analyzer to use for the query string
       # @option arguments [Boolean] :analyze_wildcard Specify whether wildcard and prefix queries should be analyzed (default: false)
       # @option arguments [String] :default_operator The default operator for query string query (AND or OR) (options: AND, OR)
@@ -85,14 +84,8 @@ module OpenSearch
 
         _index = arguments.delete(:index)
 
-        _type = arguments.delete(:type)
-
         method = OpenSearch::API::HTTP_POST
-        path   = if _index && _type
-                   "#{Utils.__listify(_index)}/#{Utils.__listify(_type)}/_update_by_query"
-                 else
-                   "#{Utils.__listify(_index)}/_update_by_query"
-                 end
+        path   = "#{Utils.__listify(_index)}/_update_by_query"
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]

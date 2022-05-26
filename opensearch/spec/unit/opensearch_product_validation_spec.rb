@@ -84,7 +84,7 @@ describe 'OpenSearch: Validation' do
     end
   end
 
-  context 'When Elasticsearch replies with status 403' do
+  context 'When OpenSearch replies with status 403' do
     let(:status) { 403 }
     let(:body) { {}.to_json }
 
@@ -105,9 +105,9 @@ describe 'OpenSearch: Validation' do
     end
   end
 
-  context 'When the OpenSearch version is 1.0.0-SNAPSHOT' do
+  context 'When the OpenSearch version is 2.0.0' do
     context 'With a valid OpenSearch response' do
-      let(:body) { { 'version' => { 'number' => '1.0.0-SNAPSHOT', 'distribution' => 'opensearch' } }.to_json }
+      let(:body) { { 'version' => { 'number' => '2.0.0', 'distribution' => 'opensearch' } }.to_json }
       let(:headers) do
         {
           'content-type' => 'json'
@@ -123,7 +123,7 @@ describe 'OpenSearch: Validation' do
     end
 
     context 'When the distribution is not present' do
-      let(:body) { { 'version' => { 'number' => '1.0.0-SNAPSHOT' } }.to_json }
+      let(:body) { { 'version' => { 'number' => '2.0.0' } }.to_json }
       it 'Fails validation' do
         verify_request_stub
 
@@ -187,7 +187,7 @@ describe 'OpenSearch: Validation' do
     end
 
     let(:headers) { { 'content-type' => 'application/yaml'} }
-    let(:body) { "---\nversion:\n  number: \"1.0.0-SNAPSHOT\"\n  distribution: \"opensearch\"\n" }
+    let(:body) { "---\nversion:\n  number: \"2.0.0\"\n  distribution: \"opensearch\"\n" }
 
     it 'validates' do
       verify_request_stub

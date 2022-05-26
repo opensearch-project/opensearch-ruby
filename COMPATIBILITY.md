@@ -1,4 +1,5 @@
 - [Compatibility with OpenSearch](#compatibility-with-opensearch)
+- [Upgrading](#upgrading)
 
 ## Compatibility with OpenSearch
 

@@ -56,8 +56,8 @@ describe OpenSearch::API::Utils do
     it 'uses the escape_utils gem when available', unless: defined?(JRUBY_VERSION) do
       require 'escape_utils'
       expect(CGI).not_to receive(:escape)
-      expect(EscapeUtils).to receive(:escape_url).and_call_original
-      expect(utils.__escape('foo bar')).to eq('foo+bar')
+      expect(EscapeUtils).to receive(:escape_uri).and_call_original
+      expect(utils.__escape('foo bar')).to eq('foo%20bar')
     end
   end
 

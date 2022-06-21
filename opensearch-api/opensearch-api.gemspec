@@ -79,7 +79,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'hashie'
 
   s.add_development_dependency 'cane'
-  s.add_development_dependency 'escape_utils' unless defined? JRUBY_VERSION
   s.add_development_dependency 'jbuilder'
   s.add_development_dependency 'require-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
   s.add_development_dependency 'simplecov'

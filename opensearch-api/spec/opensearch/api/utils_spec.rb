@@ -48,16 +48,9 @@ describe OpenSearch::API::Utils do
       expect(utils.__escape('*')).to eq('*')
     end
 
-    it 'users CGI.escape by default' do
+    it 'uses CGI.escape by default' do
       expect(CGI).to receive(:escape).and_call_original
       expect(utils.__escape('foo bar')).to eq('foo+bar')
-    end
-
-    it 'uses the escape_utils gem when available', unless: defined?(JRUBY_VERSION) do
-      require 'escape_utils'
-      expect(CGI).not_to receive(:escape)
-      expect(EscapeUtils).to receive(:escape_uri).and_call_original
-      expect(utils.__escape('foo bar')).to eq('foo%20bar')
     end
   end
 

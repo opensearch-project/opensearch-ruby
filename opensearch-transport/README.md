@@ -28,16 +28,22 @@ Features overview:
 * Node reloading (based on cluster state) on errors or on demand
 
 For optimal performance, use a HTTP library which supports persistent ("keep-alive") connections,
-such as [patron](https://github.com/toland/patron) or [Typhoeus](https://github.com/typhoeus/typhoeus).
-Just require the library (`require 'patron'`) in your code, and it will be automatically used.
+such as [Patron](https://github.com/toland/patron) or [Typhoeus](https://github.com/typhoeus/typhoeus).
+Most such HTTP libraries are used through the [Faraday](https://rubygems.org/gems/faraday) HTTP library
+and its [adapters](https://github.com/lostisland/awesome-faraday/#adapters).
+
+Just include the library's gem and adapter gem, and require the library and adapter in your code, and it will be automatically used.
+If you don't use Bundler, you may need to require the library explicitly (like `require 'faraday/patron'`).
 
 Currently these libraries will be automatically detected and used:
-- [Patron](https://github.com/toland/patron)
-- [Typhoeus](https://github.com/typhoeus/typhoeus)
-- [HTTPClient](https://rubygems.org/gems/httpclient)
-- [Net::HTTP::Persistent](https://rubygems.org/gems/net-http-persistent)
+- [Patron](https://github.com/toland/patron) through [faraday-patron](https://github.com/lostisland/faraday-patron)
+- [Typhoeus](https://github.com/typhoeus/typhoeus) through [faraday-typhoeus](https://github.com/lostisland/faraday-typhoeus) or its built-in adapter.
+- [HTTPClient](https://rubygems.org/gems/httpclient) through [faraday-httpclient](https://github.com/lostisland/faraday-httpclient)
+- [Net::HTTP::Persistent](https://rubygems.org/gems/net-http-persistent) through [faraday-net_http_persistent](https://github.com/lostisland/faraday-net_http_persistent)
 
-**Note on [Typhoeus](https://github.com/typhoeus/typhoeus)**: You need to use v1.4.0 or up since older versions are not compatible with Faraday 1.0.
+**Note on [Typhoeus](https://github.com/typhoeus/typhoeus)**: You need to use v1.4.0 or up since older versions are not compatible with Faraday 1.0 or higher.
+
+**Note on [Faraday](https://rubygems.org/gems/faraday)**: If you use Faraday 2.0 or higher, if the adapter is in a separate gem, you will likely need to declare that gem as well. Only the Net::HTTP adapter gem is included by default. Faraday 1.x includes most common adapter gems already.
 
 For detailed information, see example configurations [below](#transport-implementations).
 
@@ -350,10 +356,22 @@ as a transport implementation.
 It will auto-detect and use an _adapter_ for _Faraday_ based on gems loaded in your code,
 preferring HTTP clients with support for persistent connections.
 
-To use the [_Patron_](https://github.com/toland/patron) HTTP, for example, just require it:
+Faraday uses adapters, usually in separate gems, to connect to the HTTP library. You need to
+make sure that your code refers to both the HTTP library gem and the adapter gem. See this
+list of [Faraday adapters](https://github.com/lostisland/awesome-faraday/#adapters) for details.
+
+To use the [_Patron_](https://github.com/toland/patron) HTTP, for example, you need to refer to these gems:
+
+```ruby
+gem 'patron'
+gem 'faraday-patron'
+```
+
+If you don't use Bundler, you may need to require the libraries explicitly in your code:
 
 ```ruby
 require 'patron'
+require 'faraday/patron'
 ```
 
 Then, create a new client, and the _Patron_  gem will be used as the "driver":
@@ -396,8 +414,6 @@ constructor, use the `transport_options` key:
 
 To configure the _Faraday_ instance directly, use a block:
 
-    require 'patron'
-
     client = OpenSearch::Client.new(host: 'localhost', port: '9200') do |f|
       f.response :logger
       f.adapter  :patron
@@ -406,8 +422,6 @@ To configure the _Faraday_ instance directly, use a block:
 You can use any standard Faraday middleware and plugins in the configuration block. You can also initialize the transport class yourself, and pass it to the client constructor as the `transport` argument:
 
 ```ruby
-require 'patron'
-
 transport_configuration = lambda do |f|
   f.response :logger
   f.adapter  :patron

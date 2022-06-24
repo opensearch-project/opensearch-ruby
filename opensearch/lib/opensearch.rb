@@ -65,7 +65,7 @@ module OpenSearch
 
       body = if response.headers['content-type'] == 'application/yaml'
                require 'yaml'
-               YAML.load(response.body)
+               YAML.safe_load(response.body)
              else
                response.body
              end

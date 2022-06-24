@@ -79,7 +79,7 @@ module OpenSearch
     def each_run(file)
       if file
         file = File.new(file)
-        matrix = YAML.load(ERB.new(file.read).result)
+        matrix = YAML.safe_load(ERB.new(file.read).result)
         file.close
 
         matrix.each_with_index do |run, i|

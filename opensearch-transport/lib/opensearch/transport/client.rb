@@ -330,14 +330,17 @@ module OpenSearch
       # @api private
       #
       def __auto_detect_adapter
+        # Get the Faraday adapter list without initializing it.
+        adapters = Faraday::Adapter.instance_variable_get(:@registered_middleware) || {}
+        # Pick an adapter that has both the client and adapter defined.
         case
-        when defined?(::Patron)
+        when defined?(::Patron) && adapters.key?(:patron)
           :patron
-        when defined?(::Typhoeus)
+        when defined?(::Typhoeus) && adapters.key?(:typhoeus)
           :typhoeus
-        when defined?(::HTTPClient)
+        when defined?(::HTTPClient) && adapters.key?(:httpclient)
           :httpclient
-        when defined?(::Net::HTTP::Persistent)
+        when defined?(::Net::HTTP::Persistent) && adapters.key?(:net_http_persistent)
           :net_http_persistent
         else
           ::Faraday.default_adapter

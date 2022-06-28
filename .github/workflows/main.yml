@@ -46,6 +46,8 @@ jobs:
         run: cd opensearch && bundle exec rake test:all
       - name: opensearch-transport
         run: cd opensearch-transport && bundle exec rake test:all
+      - name: opensearch-transport with faraday 1
+        run: cd opensearch-transport && rm -f Gemfile.lock && FARADAY_VERSION='~> 1.0' bundle exec rake test:all
       - name: opensearch-api
         run: cd opensearch-api && bundle exec rake test:spec
       - name: opensearch-dsl

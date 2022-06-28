@@ -40,7 +40,11 @@ if defined?(JRUBY_VERSION)
 else
   require 'pry-byebug'
   require 'faraday/patron'
-  require 'faraday/typhoeus'
+  begin
+    require 'faraday/typhoeus'
+  rescue LoadError
+    # Only needed for Faraday 2.
+  end
   require 'opensearch/transport/transport/http/curb'
   require 'curb'
 end

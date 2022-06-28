@@ -34,8 +34,14 @@ class OpenSearch::Transport::ClientIntegrationTest < Minitest::Test
     end
 
     should "allow to customize the Faraday adapter to Typhoeus" do
+      # Require the library so autodetection finds it.
       require 'typhoeus'
-      require 'typhoeus/adapters/faraday'
+      # Require the adapter so autodetection finds it.
+      begin
+        require 'faraday/typhoeus'
+      rescue LoadError
+        # Only needed for Faraday 2.
+      end
 
       transport = OpenSearch::Transport::Transport::HTTP::Faraday.new \
         :hosts => [ { host: @host, port: @port } ] do |f|
@@ -48,7 +54,10 @@ class OpenSearch::Transport::ClientIntegrationTest < Minitest::Test
     end unless jruby?
 
     should "allow to customize the Faraday adapter to NetHttpPersistent" do
+      # Require the library so autodetection finds it.
       require 'net/http/persistent'
+      # Require the adapter so autodetection finds it.
+      require 'faraday/net_http_persistent'
 
       transport = OpenSearch::Transport::Transport::HTTP::Faraday.new \
                                                                        :hosts => [ { host: @host, port: @port } ] do |f|

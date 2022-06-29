@@ -62,7 +62,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.4'
 
   s.add_dependency 'opensearch-transport', '2.0.0'
-  s.add_dependency 'opensearch-api',       '2.0.0'
+  s.add_dependency 'opensearch-api',       '2.0.1'
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'byebug' unless defined?(JRUBY_VERSION) || defined?(Rubinius)

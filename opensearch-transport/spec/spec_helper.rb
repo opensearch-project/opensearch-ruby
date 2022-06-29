@@ -40,11 +40,7 @@ if defined?(JRUBY_VERSION)
 else
   require 'pry-byebug'
   require 'faraday/patron'
-  begin
-    require 'faraday/typhoeus'
-  rescue LoadError
-    # Only needed for Faraday 2.
-  end
+  require 'faraday/typhoeus' if Gem::Version.new('2') >= Faraday::VERSION
   require 'opensearch/transport/transport/http/curb'
   require 'curb'
 end

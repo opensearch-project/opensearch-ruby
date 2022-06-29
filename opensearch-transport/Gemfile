@@ -37,7 +37,7 @@ if File.exist? File.expand_path('../opensearch/opensearch.gemspec', __dir__)
   gem 'opensearch-ruby', path: File.expand_path('../opensearch', __dir__), require: false
 end
 
-ENV['FARADAY_VERSION'] = '~> 1.0' if RUBY_VERSION.to_f < 2.7
+ENV['FARADAY_VERSION'] = '~> 1.0' if Gem::Version.new('2.7.0') <= RUBY_VERSION
 gem 'faraday', ENV['FARADAY_VERSION'], require: false if ENV['FARADAY_VERSION']
 
 group :development, :test do

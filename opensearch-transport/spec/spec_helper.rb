@@ -40,7 +40,7 @@ if defined?(JRUBY_VERSION)
 else
   require 'pry-byebug'
   require 'faraday/patron'
-  require 'faraday/typhoeus' if Gem::Version.new('2') >= Faraday::VERSION
+  require 'faraday/typhoeus' if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2')
   require 'opensearch/transport/transport/http/curb'
   require 'curb'
 end

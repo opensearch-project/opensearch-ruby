@@ -29,6 +29,8 @@ if ENV['COVERAGE'] && ENV['CI'].nil?
 end
 
 require 'opensearch-transport'
+require 'faraday/httpclient'
+require 'faraday/net_http_persistent'
 require 'logger'
 require 'ansi/code'
 require 'hashie/mash'
@@ -37,6 +39,8 @@ if defined?(JRUBY_VERSION)
   require 'pry-nav'
 else
   require 'pry-byebug'
+  require 'faraday/patron'
+  require 'faraday/typhoeus' if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2')
   require 'opensearch/transport/transport/http/curb'
   require 'curb'
 end

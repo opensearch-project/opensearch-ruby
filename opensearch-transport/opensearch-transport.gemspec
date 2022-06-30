@@ -61,7 +61,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.4'
 
   s.add_dependency 'multi_json'
-  s.add_dependency 'faraday', '~> 1'
+  s.add_dependency 'faraday', '>= 1.0', '< 3'
 
   s.add_development_dependency 'ansi'
   s.add_development_dependency 'bundler'
@@ -70,12 +70,15 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'opensearch-ruby'
   s.add_development_dependency 'hashie'
   s.add_development_dependency 'httpclient'
+  s.add_development_dependency 'faraday-httpclient'
   s.add_development_dependency 'manticore' if defined? JRUBY_VERSION
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'minitest-reporters'
   s.add_development_dependency 'mocha'
   s.add_development_dependency 'net-http-persistent'
+  s.add_development_dependency 'faraday-net_http_persistent'
   s.add_development_dependency 'patron' unless defined? JRUBY_VERSION
+  s.add_development_dependency 'faraday-patron' unless defined? JRUBY_VERSION
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rake', '~> 13'
   s.add_development_dependency 'require-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
@@ -84,6 +87,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'test-unit', '~> 2'
   s.add_development_dependency 'typhoeus', '~> 1.4'
+  s.add_development_dependency 'faraday-typhoeus' if !ENV.key?('FARADAY_VERSION') && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.7')
   s.add_development_dependency 'yard'
 
   s.description = <<-DESC.gsub(/^    /, '')

@@ -247,7 +247,7 @@ describe OpenSearch::Transport::Client do
       end unless jruby?
     end
 
-    context 'when the adapter is patron' do
+    context 'when the adapter is patron', unless: jruby? do
       let(:adapter) do
         client.transport.connections.all.first.connection.builder.adapter
       end
@@ -275,7 +275,7 @@ describe OpenSearch::Transport::Client do
       end
     end unless jruby?
 
-    context 'when the adapter is specified as a string key' do
+    context 'when the adapter is specified as a string key', unless: jruby? do
       let(:adapter) do
         client.transport.connections.all.first.connection.builder.adapter
       end
@@ -305,7 +305,7 @@ describe OpenSearch::Transport::Client do
       end
     end
 
-    context 'when the Faraday adapter is configured' do
+    context 'when the Faraday adapter is configured', unless: jruby? do
 
       let(:client) do
         described_class.new do |faraday|

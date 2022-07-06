@@ -87,7 +87,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'test-unit', '~> 2'
   s.add_development_dependency 'typhoeus', '~> 1.4'
-  s.add_development_dependency 'faraday-typhoeus' if !ENV.key?('FARADAY_VERSION') && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.7')
+  s.add_development_dependency 'faraday-typhoeus' if !ENV.key?('FARADAY_VERSION') && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.6')
   s.add_development_dependency 'yard'
 
   s.description = <<-DESC.gsub(/^    /, '')

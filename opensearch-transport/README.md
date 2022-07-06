@@ -37,11 +37,11 @@ If you don't use Bundler, you may need to require the library explicitly (like `
 
 Currently these libraries will be automatically detected and used:
 - [Patron](https://github.com/toland/patron) through [faraday-patron](https://github.com/lostisland/faraday-patron)
-- [Typhoeus](https://github.com/typhoeus/typhoeus) through [faraday-typhoeus](https://github.com/dleavitt/faraday-typhoeus) for Faraday 2 or higher, or its built-in adapter for Faraday 1.
+- [Typhoeus](https://github.com/typhoeus/typhoeus) through [faraday-typhoeus](https://github.com/dleavitt/faraday-typhoeus) for Faraday 2 or higher, or Faraday's built-in adapter for Faraday 1.
 - [HTTPClient](https://rubygems.org/gems/httpclient) through [faraday-httpclient](https://github.com/lostisland/faraday-httpclient)
 - [Net::HTTP::Persistent](https://rubygems.org/gems/net-http-persistent) through [faraday-net_http_persistent](https://github.com/lostisland/faraday-net_http_persistent)
 
-**Note on [Typhoeus](https://github.com/typhoeus/typhoeus)**: You need to use v1.4.0 or up since older versions are not compatible with Faraday 1.0 or higher. You can't use Typhoeus with Faraday 2.0 or higher with Ruby versions less than 2.7 because [faraday-typhoeus](https://github.com/dleavitt/faraday-typhoeus) doesn't support it, so use Faraday 1.x and its built-in Typhoeus adapter.
+**Note on [Typhoeus](https://github.com/typhoeus/typhoeus)**: You need to use v1.4.0 or up since older versions are not compatible with Faraday 1.0 or higher.
 
 **Note on [Faraday](https://rubygems.org/gems/faraday)**: If you use Faraday 2.0 or higher, if the adapter is in a separate gem, you will likely need to declare that gem as well. Only the Net::HTTP adapter gem is included by default. Faraday 1.x includes most common adapter gems already.
 

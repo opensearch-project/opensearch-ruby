@@ -46,7 +46,11 @@ class OpenSearch::Transport::ClientIntegrationTest < Minitest::Test
         end
 
       client = OpenSearch::Transport::Client.new transport: transport
-      client.perform_request 'GET', ''
+      response = client.perform_request 'GET', ''
+
+      assert_respond_to(response.body, :to_hash)
+      assert_not_nil response.body['name']
+      assert_equal 'application/json; charset=UTF-8', response.headers['content-type']
     end unless jruby?
 
     should "allow to customize the Faraday adapter to NetHttpPersistent" do

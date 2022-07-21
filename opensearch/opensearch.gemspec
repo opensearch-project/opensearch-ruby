@@ -61,7 +61,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.4'
 
-  s.add_dependency 'opensearch-transport', '1.0.0'
+  s.add_dependency 'opensearch-transport', '~> 1.0.0'
   s.add_dependency 'opensearch-api',       '1.0.0'
 
   s.add_development_dependency 'bundler'

@@ -1,15 +1,5 @@
 SHELL := /bin/bash
 
-cluster.opendistro.build:
-	docker-compose --project-directory .ci/opendistro build;
-
-cluster.opendistro.start:
-	docker-compose --project-directory .ci/opendistro up -d ;
-	sleep 20;
-
-cluster.opendistro.stop:
-	docker-compose --project-directory .ci/opendistro down ;
-
 cluster.clean: ## Remove unused Docker volumes and networks
 	@printf "\033[2m→ Cleaning up Docker assets...\033[0m\n"
 	docker volume prune --force
@@ -29,11 +19,6 @@ workflow: ## Run all github workflow commands here sequentially
 	make test-unit race=true
 # Benchmarks Test
 	make test-bench
-# Integration Test
-### OpenDistro
-	make cluster.clean cluster.opendistro.build cluster.opendistro.start
-	make test-integ race=true
-	make cluster.opendistro.stop
 
 ##@ Other
 #------------------------------------------------------------------------------
@@ -42,4 +27,4 @@ help:  ## Display help
 #------------- <https://suva.sh/posts/well-documented-makefiles> --------------
 
 .DEFAULT_GOAL := help
-.PHONY: help backport cluster cluster.opendistro.build cluster.opendistro.start cluster.opendistro.stop cluster.clean coverage  godoc lint release test test-bench test-integ test-unit
+.PHONY: help backport cluster cluster.clean coverage  godoc lint release test test-bench test-integ test-unit

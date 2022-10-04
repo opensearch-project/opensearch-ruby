@@ -31,8 +31,10 @@ module OpenSearch
         # Returns one or more component templates
         #
         # @option arguments [List] :name The comma separated names of the component templates
+        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
-        # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
+        # @option arguments [Boolean] :local Return local information, do not retrieve the state from cluster_manager node (default: false)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         #
@@ -60,6 +62,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:get_component_template, [
           :master_timeout,
+          :cluster_manager_timeout,
           :local
         ].freeze)
       end

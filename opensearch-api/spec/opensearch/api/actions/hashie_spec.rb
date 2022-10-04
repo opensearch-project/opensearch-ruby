@@ -45,7 +45,6 @@ describe 'Hashie' do
                 "hits": [
                   {
                     "_index": "myindex",
-                    "_type": "mytype",
                     "_id": "1",
                     "_score": 0.51104903,
                     "_source": {
@@ -63,7 +62,6 @@ describe 'Hashie' do
               },
               "facets": {
                 "tags": {
-                  "_type": "terms",
                   "missing": 0,
                   "total": 10,
                   "other": 0,

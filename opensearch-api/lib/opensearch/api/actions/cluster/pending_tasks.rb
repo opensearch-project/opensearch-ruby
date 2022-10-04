@@ -31,8 +31,10 @@ module OpenSearch
         # Returns a list of any cluster-level changes (e.g. create index, update mapping,
         # allocate or fail shard) which have not yet been executed.
         #
-        # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
+        # @option arguments [Boolean] :local Return local information, do not retrieve the state from cluster_manager node (default: false)
+        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         #
@@ -54,7 +56,8 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:pending_tasks, [
           :local,
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

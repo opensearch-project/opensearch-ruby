@@ -247,7 +247,7 @@ module OpenSearch
       def dataset_slices(slice_size=10000)
         @dataset_slices ||= begin
           dataset.collect do |d|
-            { index: { _index: INDEX, _type: '_doc', data: d } }
+            { index: { _index: INDEX, data: d } }
           end.each_slice(slice_size)
         end
       end

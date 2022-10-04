@@ -31,7 +31,9 @@ module OpenSearch
         # Removes stale data from repository.
         #
         # @option arguments [String] :repository A repository name
+        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Hash] :headers Custom HTTP headers
         #
@@ -58,6 +60,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:cleanup_repository, [
           :master_timeout,
+          :cluster_manager_timeout,
           :timeout
         ].freeze)
       end

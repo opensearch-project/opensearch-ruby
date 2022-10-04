@@ -109,19 +109,19 @@ describe OpenSearch::API::Utils do
 
       let(:result) do
         utils.__bulkify [
-          { :index =>  { :_index => 'myindexA', :_type => 'mytype', :_id => '1', :data => { :title => 'Test' } } },
-          { :update => { :_index => 'myindexB', :_type => 'mytype', :_id => '2', :data => { :doc => { :title => 'Update' } } } },
-          { :delete => { :_index => 'myindexC', :_type => 'mytypeC', :_id => '3' } }
+          { :index =>  { :_index => 'myindexA', :_id => '1', :data => { :title => 'Test' } } },
+          { :update => { :_index => 'myindexB', :_id => '2', :data => { :doc => { :title => 'Update' } } } },
+          { :delete => { :_index => 'myindexC', :_id => '3' } }
         ]
       end
 
       let(:expected_string) do
         <<-PAYLOAD.gsub(/^\s+/, '')
-                {"index":{"_index":"myindexA","_type":"mytype","_id":"1"}}
+                {"index":{"_index":"myindexA","_id":"1"}}
                 {"title":"Test"}
-                {"update":{"_index":"myindexB","_type":"mytype","_id":"2"}}
+                {"update":{"_index":"myindexB","_id":"2"}}
                 {"doc":{"title":"Update"}}
-                {"delete":{"_index":"myindexC","_type":"mytypeC","_id":"3"}}
+                {"delete":{"_index":"myindexC","_id":"3"}}
         PAYLOAD
       end
 

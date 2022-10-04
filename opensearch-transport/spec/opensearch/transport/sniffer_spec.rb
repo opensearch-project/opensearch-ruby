@@ -93,7 +93,7 @@ describe OpenSearch::Transport::Transport::Sniffer do
                 "ip"   => "127.0.0.1",
                 "version" => "7.0.0",
                 "roles" => [
-                  "master",
+                  "cluster_manager",
                   "data",
                   "ingest"
                 ],
@@ -135,7 +135,7 @@ describe OpenSearch::Transport::Transport::Sniffer do
       end
 
       it 'parses the roles' do
-        expect(sniffer.hosts[0][:roles]).to eq(['master',
+        expect(sniffer.hosts[0][:roles]).to eq(['cluster_manager',
                                                 'data',
                                                 'ingest'])
       end

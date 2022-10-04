@@ -33,7 +33,9 @@ module OpenSearch
         # @option arguments [List] :index A comma separated list of indices to add a block to
         # @option arguments [String] :block The block to add (one of read, write, read_only or metadata)
         # @option arguments [Time] :timeout Explicit operation timeout
+        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
         # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
         # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
         # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
@@ -66,6 +68,7 @@ module OpenSearch
         ParamsRegistry.register(:add_block, [
           :timeout,
           :master_timeout,
+          :cluster_manager_timeout,
           :ignore_unavailable,
           :allow_no_indices,
           :expand_wildcards

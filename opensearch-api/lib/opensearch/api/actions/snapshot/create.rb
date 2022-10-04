@@ -32,7 +32,9 @@ module OpenSearch
         #
         # @option arguments [String] :repository A repository name
         # @option arguments [String] :snapshot A snapshot name
+        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
         # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Boolean] :wait_for_completion Should this request wait until the operation has completed before returning
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The snapshot definition
@@ -63,6 +65,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:create, [
           :master_timeout,
+          :cluster_manager_timeout,
           :wait_for_completion
         ].freeze)
       end

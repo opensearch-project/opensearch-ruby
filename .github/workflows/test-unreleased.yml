@@ -62,3 +62,5 @@ jobs:
         run: cd opensearch-api && bundle exec rake test:spec
       - name: opensearch-dsl
         run: cd opensearch-dsl && bundle exec rake test:all
+      - name: opensearch-aws-sigv4
+        run: cd opensearch-aws-sigv4 && bundle exec rake test:all

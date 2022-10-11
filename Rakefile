@@ -54,12 +54,14 @@ SUBPROJECTS = [
   'opensearch-transport',
   'opensearch-dsl',
   'opensearch-api',
+  'opensearch-aws-sigv4',
 ].freeze
 
 RELEASE_TOGETHER = [
   'opensearch',
   'opensearch-transport',
   'opensearch-api',
+  'opensearch-aws-sigv4',
 ].freeze
 
 CERT_DIR = ENV['CERT_DIR']

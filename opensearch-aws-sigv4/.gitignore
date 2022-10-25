@@ -13,6 +13,7 @@
 .config
 .yardoc
 .ruby-version
+.idea/
 Gemfile.lock
 InstalledFiles
 _yardoc

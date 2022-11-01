@@ -12,7 +12,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Removed
 
 ### Fixed
-
+- Mocha Dependency issue in `opensearch-dsl` gem ([#108](https://github.com/opensearch-project/opensearch-ruby/pull/108))
+ 
 ### Security
 
 

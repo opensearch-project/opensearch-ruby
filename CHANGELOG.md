@@ -7,6 +7,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added Sigv4 Support with `opensearch-aws-sigv4` gem ([#71](https://github.com/opensearch-project/opensearch-ruby/issues/71))
 
 ### Changed
+- Updated release/build.sh and root folder's Gemfile to include `opensearch-aws-sigv4` ([#71](https://github.com/opensearch-project/opensearch-ruby/issues/71))
 
 ### Deprecated
 

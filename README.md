@@ -130,6 +130,13 @@ puts response
     
 ```
 
+## AWS Managed Opensearch with Sigv4
+
+If you have the need to sign every request with AWS Sigv4 to be able to communicate with an Opensearch cluster managed by AWS, use `opensearch-aws-sigv4` gem in place of `opensearch-ruby` gem. 
+
+For more information,
+checkout the [README](opensearch-aws-sigv4/README.md) of [opensearch-aws-sigv4](opensearch-aws-sigv4)
+
 ## Project Resources
 
 * [Project Website](https://opensearch.org/)

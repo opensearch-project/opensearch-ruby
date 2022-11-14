@@ -34,8 +34,7 @@ module OpenSearch
         # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
         # @option arguments [String] :level Specify the level of detail for returned information (options: cluster, indices, shards)
         # @option arguments [Boolean] :local Return local information, do not retrieve the state from cluster_manager node (default: false)
-        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
         # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [String] :wait_for_active_shards Wait until the specified number of shards is active

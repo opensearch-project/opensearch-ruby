@@ -33,8 +33,7 @@ module OpenSearch
         # @option arguments [List] :metric Limit the information returned to the specified metrics (options: _all, blocks, metadata, nodes, routing_table, routing_nodes, cluster_manager_node, version)
         # @option arguments [List] :index A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
         # @option arguments [Boolean] :local Return local information, do not retrieve the state from cluster_manager node (default: false)
-        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
         # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
         # @option arguments [Number] :wait_for_metadata_version Wait for the metadata version to be equal or greater than the specified metadata version

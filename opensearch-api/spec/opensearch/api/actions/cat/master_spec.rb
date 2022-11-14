@@ -26,7 +26,6 @@
 
 require 'spec_helper'
 
-# <b>DEPRECATED:</b> Please use <tt>cluster_manager</tt> instead.
 describe 'client.cat#master' do
 
   let(:expected_args) do

@@ -31,8 +31,7 @@ module OpenSearch
         # Returns information about a repository.
         #
         # @option arguments [List] :repository A comma-separated list of repository names
-        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
-        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Boolean] :local Return local information, do not retrieve the state from cluster_manager node (default: false)
         # @option arguments [Hash] :headers Custom HTTP headers
         #

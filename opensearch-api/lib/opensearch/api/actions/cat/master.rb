@@ -24,7 +24,7 @@
 # specific language governing permissions and limitations
 # under the License.
         
-# <b>DEPRECATED:</b> Please use <tt>cluster_manager</tt> instead.
+# @deprecated Please use cluster_manager instead.
 module OpenSearch
   module API
     module Cat

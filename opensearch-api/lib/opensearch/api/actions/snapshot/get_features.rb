@@ -30,8 +30,7 @@ module OpenSearch
       module Actions
         # Returns a list of features which can be snapshotted in this cluster.
         #
-        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
-        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         #

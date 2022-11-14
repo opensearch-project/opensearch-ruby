@@ -33,8 +33,7 @@ module OpenSearch
         # @option arguments [String] :index The name of the source index to clone
         # @option arguments [String] :target The name of the target index to clone into
         # @option arguments [Time] :timeout Explicit operation timeout
-        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
         # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [String] :wait_for_active_shards Set the number of active shards to wait for on the cloned index before the operation returns.
         # @option arguments [Hash] :headers Custom HTTP headers

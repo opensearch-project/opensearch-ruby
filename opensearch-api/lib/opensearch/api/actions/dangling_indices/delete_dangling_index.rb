@@ -33,8 +33,7 @@ module OpenSearch
         # @option arguments [String] :index_uuid The UUID of the dangling index
         # @option arguments [Boolean] :accept_data_loss Must be set to true in order to delete the dangling index
         # @option arguments [Time] :timeout Explicit operation timeout
-        # <b>DEPRECATED:</b> Please use <tt>cluster_manager_timeout</tt> instead.
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
         # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Hash] :headers Custom HTTP headers
         #

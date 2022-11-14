@@ -33,7 +33,8 @@ module OpenSearch
         # @option arguments [String] :name The name of the template
         # @option arguments [Number] :order The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)
         # @option arguments [Boolean] :create Whether the index template should only be added if new or can also replace an existing one
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The template definition (*Required*)
         #

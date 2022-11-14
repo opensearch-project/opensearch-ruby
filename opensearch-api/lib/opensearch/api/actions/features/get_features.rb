@@ -30,7 +30,8 @@ module OpenSearch
       module Actions
         # Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
         #
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         #

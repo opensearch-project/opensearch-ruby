@@ -32,8 +32,9 @@ module OpenSearch
         #
         # @option arguments [List] :name The comma separated names of the index templates
         # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
-        # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
+        # @option arguments [Boolean] :local Return local information, do not retrieve the state from cluster_manager node (default: false)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         #

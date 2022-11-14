@@ -32,7 +32,8 @@ module OpenSearch
         #
         # @option arguments [String] :repository A repository name
         # @option arguments [String] :snapshot A snapshot name
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Boolean] :wait_for_completion Should this request wait until the operation has completed before returning
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body Details of what to restore

@@ -34,7 +34,8 @@ module OpenSearch
         # @option arguments [String] :target The name of the target index to shrink into
         # @option arguments [Boolean] :copy_settings whether or not to copy settings from the source index (defaults to false)
         # @option arguments [Time] :timeout Explicit operation timeout
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [String] :wait_for_active_shards Set the number of active shards to wait for on the shrunken index before the operation returns.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The configuration for the target index (`settings` and `aliases`)

@@ -35,7 +35,8 @@ module OpenSearch
         # @option arguments [String] :new_index The name of the rollover index
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Boolean] :dry_run If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [String] :wait_for_active_shards Set the number of active shards to wait for on the newly created rollover index before the operation returns.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The conditions that needs to be met for executing rollover

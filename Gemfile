@@ -28,7 +28,8 @@ source 'https://rubygems.org'
 
 gem 'opensearch-api',        path: File.expand_path('../opensearch-api', __FILE__),        require: false
 gem 'opensearch-transport',  path: File.expand_path('../opensearch-transport', __FILE__),  require: false
-gem 'opensearch',            path: File.expand_path('../opensearch', __FILE__),            require: false
+gem 'opensearch-ruby',       path: File.expand_path('../opensearch', __FILE__),            require: false
+gem 'opensearch-aws-sigv4',  path: File.expand_path('../opensearch-aws-sigv4', __FILE__),  require: false
 
 gem 'ansi'
 gem 'cane'

@@ -68,5 +68,20 @@ gem build opensearch-dsl.gemspec
 echo 'Move Gem Location'
 mv -v opensearch-dsl*.gem $GIT_ROOT/dist/
 
+
+#####################################################
+#      Building opensearch-aws-sigv4                #
+#                                                   #
+#####################################################
+cd $GIT_ROOT
+echo 'Building opensearch-aws-sigv4'
+cd opensearch-aws-sigv4;
+gem build opensearch-aws-sigv4.gemspec
+
+echo 'Move Gem Location'
+mv -v opensearch-aws-sigv4*.gem $GIT_ROOT/dist/
+
+
+#####################################################
 echo 'List gems to be published: '
 ls -l $GIT_ROOT/dist

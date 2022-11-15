@@ -8,7 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 - Updated for inclusive naming ([#112](https://github.com/opensearch-project/opensearch-ruby/issues/112))
-
+- Updated release/build.sh and root folder's Gemfile to include `opensearch-aws-sigv4` ([#71](https://github.com/opensearch-project/opensearch-ruby/issues/71))
 
 ### Deprecated
 

@@ -68,6 +68,7 @@ module OpenSearch
       ParamsRegistry.register(:put_script, [
         :timeout,
         :master_timeout,
+        :cluster_manager_timeout,
         :context
       ].freeze)
     end

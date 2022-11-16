@@ -70,6 +70,7 @@ module OpenSearch
         ParamsRegistry.register(:put_mapping, [
           :timeout,
           :master_timeout,
+          :cluster_manager_timeout,
           :ignore_unavailable,
           :allow_no_indices,
           :expand_wildcards,

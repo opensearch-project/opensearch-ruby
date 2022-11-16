@@ -73,6 +73,7 @@ module OpenSearch
         ParamsRegistry.register(:state, [
           :local,
           :master_timeout,
+          :cluster_manager_timeout,
           :flat_settings,
           :wait_for_metadata_version,
           :wait_for_timeout,

@@ -27,18 +27,17 @@
 require 'spec_helper'
 
 describe 'client.cat#allocation' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cat/allocation',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cat/allocation',
+      {cluster_manager_timeout: 2},
+      nil,
+      {}
     ]
   end
 
   it 'performs the request' do
-    expect(client_double.cat.allocation).to eq({})
+    expect(client_double.cat.allocation(cluster_manager_timeout: 2)).to eq({})
   end
 end

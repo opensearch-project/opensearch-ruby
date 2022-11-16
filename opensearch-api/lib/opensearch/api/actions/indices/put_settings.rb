@@ -69,6 +69,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:put_settings, [
           :master_timeout,
+          :cluster_manager_timeout,
           :timeout,
           :preserve_existing,
           :ignore_unavailable,

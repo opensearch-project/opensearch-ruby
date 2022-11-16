@@ -72,6 +72,7 @@ module OpenSearch
           :timeout,
           :dry_run,
           :master_timeout,
+          :cluster_manager_timeout,
           :wait_for_active_shards
         ].freeze)
       end

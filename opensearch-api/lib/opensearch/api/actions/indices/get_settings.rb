@@ -73,6 +73,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:get_settings, [
           :master_timeout,
+          :cluster_manager_timeout,
           :ignore_unavailable,
           :allow_no_indices,
           :expand_wildcards,

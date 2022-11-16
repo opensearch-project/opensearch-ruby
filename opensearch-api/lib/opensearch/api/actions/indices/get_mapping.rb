@@ -72,6 +72,7 @@ module OpenSearch
           :allow_no_indices,
           :expand_wildcards,
           :master_timeout,
+          :cluster_manager_timeout,
           :local
         ].freeze)
       end

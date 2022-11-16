@@ -68,6 +68,7 @@ module OpenSearch
           :copy_settings,
           :timeout,
           :master_timeout,
+          :cluster_manager_timeout,
           :wait_for_active_shards
         ].freeze)
       end

@@ -63,6 +63,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:delete_repository, [
           :master_timeout,
+          :cluster_manager_timeout,
           :timeout
         ].freeze)
       end

@@ -56,9 +56,9 @@ namespace :test do
       url = ENV['TEST_CLUSTER_URL'] || ENV['TEST_OPENSEARCH_SERVER']
       url = "http://localhost:#{ENV['TEST_CLUSTER_PORT'] || 9200}" unless url
       client = OpenSearch::Client.new :url => url
-      es_version_info = client.info['version']
-      version_number = es_version_info['number']
-      build_hash      = es_version_info['build_hash']
+      os_version_info = client.info['version']
+      version_number = os_version_info['number']
+      build_hash      = os_version_info['build_hash']
     rescue Faraday::ConnectionFailed
       STDERR.puts "[!] Test cluster not running?"
       exit 1

@@ -73,6 +73,7 @@ module OpenSearch
           :level,
           :local,
           :master_timeout,
+          :cluster_manager_timeout,
           :timeout,
           :wait_for_active_shards,
           :wait_for_nodes,

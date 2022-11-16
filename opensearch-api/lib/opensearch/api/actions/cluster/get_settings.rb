@@ -57,6 +57,7 @@ module OpenSearch
         ParamsRegistry.register(:get_settings, [
           :flat_settings,
           :master_timeout,
+          :cluster_manager_timeout,
           :timeout,
           :include_defaults
         ].freeze)

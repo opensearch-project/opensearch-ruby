@@ -70,6 +70,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:get, [
           :master_timeout,
+          :cluster_manager_timeout,
           :ignore_unavailable,
           :index_details,
           :include_repository,

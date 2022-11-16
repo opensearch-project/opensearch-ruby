@@ -68,6 +68,7 @@ module OpenSearch
           :full_id,
           :local,
           :master_timeout,
+          :cluster_manager_timeout,
           :h,
           :help,
           :s,

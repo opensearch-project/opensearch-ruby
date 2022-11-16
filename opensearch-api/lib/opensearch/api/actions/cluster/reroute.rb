@@ -63,6 +63,7 @@ module OpenSearch
           :retry_failed,
           :metric,
           :master_timeout,
+          :cluster_manager_timeout,
           :timeout
         ].freeze)
       end

@@ -64,6 +64,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:get_repository, [
           :master_timeout,
+          :cluster_manager_timeout,
           :local
         ].freeze)
       end

@@ -23,7 +23,8 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-
+        
+# @deprecated Please use cluster_manager instead.
 module OpenSearch
   module API
     module Cat
@@ -60,6 +61,7 @@ module OpenSearch
           :format,
           :local,
           :master_timeout,
+          :cluster_manager_timeout,
           :h,
           :help,
           :s,

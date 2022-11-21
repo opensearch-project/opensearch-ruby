@@ -31,8 +31,9 @@ module OpenSearch
         # Returns information about installed plugins across nodes node.
         #
         # @option arguments [String] :format a short version of the Accept header, e.g. json, yaml
-        # @option arguments [Boolean] :local Return local information, do not retrieve the state from master node (default: false)
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Boolean] :local Return local information, do not retrieve the state from cluster_manager node (default: false)
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [List] :h Comma-separated list of column names to display
         # @option arguments [Boolean] :help Return help information
         # @option arguments [Boolean] :include_bootstrap Include bootstrap plugins in the response
@@ -61,6 +62,7 @@ module OpenSearch
           :format,
           :local,
           :master_timeout,
+          :cluster_manager_timeout,
           :h,
           :help,
           :include_bootstrap,

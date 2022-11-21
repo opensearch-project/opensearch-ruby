@@ -32,7 +32,8 @@ module OpenSearch
         #
         # @option arguments [String] :id Comma separated list of pipeline ids. Wildcards supported
         # @option arguments [Boolean] :summary Return pipelines without their definitions (default: false)
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         #
@@ -60,7 +61,8 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:get_pipeline, [
           :summary,
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

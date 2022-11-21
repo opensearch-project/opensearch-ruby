@@ -32,7 +32,8 @@ module OpenSearch
         #
         # @option arguments [List] :index A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices
         # @option arguments [Time] :timeout Explicit operation timeout
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Boolean] :ignore_unavailable Ignore unavailable indexes (default: false)
         # @option arguments [Boolean] :allow_no_indices Ignore if a wildcard expression resolves to no concrete indices (default: false)
         # @option arguments [String] :expand_wildcards Whether wildcard expressions should get expanded to open or closed indices (default: open) (options: open, closed, hidden, none, all)
@@ -66,6 +67,7 @@ module OpenSearch
         ParamsRegistry.register(:delete, [
           :timeout,
           :master_timeout,
+          :cluster_manager_timeout,
           :ignore_unavailable,
           :allow_no_indices,
           :expand_wildcards

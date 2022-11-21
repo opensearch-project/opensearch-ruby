@@ -30,7 +30,8 @@ module OpenSearch
       module Actions
         # Returns a list of features which can be snapshotted in this cluster.
         #
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         #
@@ -51,7 +52,8 @@ module OpenSearch
         #
         # @since 6.2.0
         ParamsRegistry.register(:get_features, [
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

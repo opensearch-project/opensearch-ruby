@@ -63,6 +63,7 @@ module OpenSearch
         ParamsRegistry.register(:exists_index_template, [
           :flat_settings,
           :master_timeout,
+          :cluster_manager_timeout,
           :local
         ].freeze)
       end

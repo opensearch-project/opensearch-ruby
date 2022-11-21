@@ -69,6 +69,7 @@ module OpenSearch
           :format,
           :ignore_unavailable,
           :master_timeout,
+          :cluster_manager_timeout,
           :h,
           :help,
           :s,

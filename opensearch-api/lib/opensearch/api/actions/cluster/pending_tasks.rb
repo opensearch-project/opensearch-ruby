@@ -55,7 +55,8 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:pending_tasks, [
           :local,
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

@@ -60,7 +60,8 @@ module OpenSearch
         ParamsRegistry.register(:import_dangling_index, [
           :accept_data_loss,
           :timeout,
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

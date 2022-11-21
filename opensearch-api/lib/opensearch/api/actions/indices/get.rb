@@ -69,7 +69,8 @@ module OpenSearch
           :expand_wildcards,
           :flat_settings,
           :include_defaults,
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

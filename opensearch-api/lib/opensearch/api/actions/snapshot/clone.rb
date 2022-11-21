@@ -67,7 +67,8 @@ module OpenSearch
         #
         # @since 6.2.0
         ParamsRegistry.register(:clone, [
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

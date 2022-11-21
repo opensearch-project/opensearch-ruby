@@ -62,7 +62,8 @@ module OpenSearch
         ParamsRegistry.register(:simulate_index_template, [
           :create,
           :cause,
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

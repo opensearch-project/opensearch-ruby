@@ -32,7 +32,8 @@ module OpenSearch
         #
         # @option arguments [List] :index A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
         # @option arguments [List] :name The name of the settings that should be included
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
         # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
         # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
@@ -72,6 +73,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:get_settings, [
           :master_timeout,
+          :cluster_manager_timeout,
           :ignore_unavailable,
           :allow_no_indices,
           :expand_wildcards,

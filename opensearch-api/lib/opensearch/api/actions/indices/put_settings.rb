@@ -31,7 +31,8 @@ module OpenSearch
         # Updates the index settings.
         #
         # @option arguments [List] :index A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Boolean] :preserve_existing Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`
         # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
@@ -68,6 +69,7 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:put_settings, [
           :master_timeout,
+          :cluster_manager_timeout,
           :timeout,
           :preserve_existing,
           :ignore_unavailable,

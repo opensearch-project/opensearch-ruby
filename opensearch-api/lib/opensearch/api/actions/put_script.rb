@@ -32,7 +32,8 @@ module OpenSearch
       # @option arguments [String] :id Script ID
       # @option arguments [String] :context Script context
       # @option arguments [Time] :timeout Explicit operation timeout
-      # @option arguments [Time] :master_timeout Specify timeout for connection to master
+      # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+      # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body The document (*Required*)
       #
@@ -67,6 +68,7 @@ module OpenSearch
       ParamsRegistry.register(:put_script, [
         :timeout,
         :master_timeout,
+        :cluster_manager_timeout,
         :context
       ].freeze)
     end

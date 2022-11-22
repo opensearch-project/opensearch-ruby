@@ -49,11 +49,11 @@ describe 'client#get_script' do
   context 'when the `lang` parameter is specificed' do
 
     let(:params) do
-      { master_timeout: '1s' }
+      { cluster_manager_timeout: '1s' }
     end
 
     it 'performs the request' do
-      expect(client_double.get_script(master_timeout: '1s', id: 'foo')).to eq({})
+      expect(client_double.get_script(cluster_manager_timeout: '1s', id: 'foo')).to eq({})
     end
   end
 end

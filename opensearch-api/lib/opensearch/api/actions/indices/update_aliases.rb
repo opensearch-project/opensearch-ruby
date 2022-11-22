@@ -31,7 +31,8 @@ module OpenSearch
         # Updates index aliases.
         #
         # @option arguments [Time] :timeout Request timeout
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body The definition of `actions` to perform (*Required*)
         #
@@ -56,7 +57,8 @@ module OpenSearch
         # @since 6.2.0
         ParamsRegistry.register(:update_aliases, [
           :timeout,
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

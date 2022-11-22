@@ -31,7 +31,8 @@ module OpenSearch
         # Returns cluster settings.
         #
         # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Boolean] :include_defaults Whether to return all default clusters setting.
         # @option arguments [Hash] :headers Custom HTTP headers
@@ -56,6 +57,7 @@ module OpenSearch
         ParamsRegistry.register(:get_settings, [
           :flat_settings,
           :master_timeout,
+          :cluster_manager_timeout,
           :timeout,
           :include_defaults
         ].freeze)

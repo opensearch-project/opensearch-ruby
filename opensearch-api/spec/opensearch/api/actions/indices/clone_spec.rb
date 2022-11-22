@@ -88,7 +88,7 @@ describe 'client.indices#clone' do
     let(:params) do
       {
           timeout: '1s',
-          master_timeout: '10s',
+          cluster_manager_timeout: '10s',
           wait_for_active_shards: 1
       }
     end
@@ -97,7 +97,7 @@ describe 'client.indices#clone' do
       expect(client_double.indices.clone(index: 'my_source_index',
                                          target: 'my_target_index',
                                          timeout: '1s',
-                                         master_timeout: '10s',
+                                         cluster_manager_timeout: '10s',
                                          wait_for_active_shards: 1)).to eq({})
     end
   end

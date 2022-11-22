@@ -33,7 +33,8 @@ module OpenSearch
         # @option arguments [List] :repository Name of repository from which to fetch the snapshot information
         # @option arguments [String] :format a short version of the Accept header, e.g. json, yaml
         # @option arguments [Boolean] :ignore_unavailable Set to true to ignore unavailable snapshots
-        # @option arguments [Time] :master_timeout Explicit operation timeout for connection to master node
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
+        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
         # @option arguments [List] :h Comma-separated list of column names to display
         # @option arguments [Boolean] :help Return help information
         # @option arguments [List] :s Comma-separated list of column names or column aliases to sort by
@@ -68,6 +69,7 @@ module OpenSearch
           :format,
           :ignore_unavailable,
           :master_timeout,
+          :cluster_manager_timeout,
           :h,
           :help,
           :s,

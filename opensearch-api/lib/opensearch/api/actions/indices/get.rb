@@ -37,7 +37,8 @@ module OpenSearch
         # @option arguments [String] :expand_wildcards Whether wildcard expressions should get expanded to open or closed indices (default: open) (options: open, closed, hidden, none, all)
         # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
         # @option arguments [Boolean] :include_defaults Whether to return all default setting for each of the indices.
-        # @option arguments [Time] :master_timeout Specify timeout for connection to master
+        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
+        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         #
@@ -68,7 +69,8 @@ module OpenSearch
           :expand_wildcards,
           :flat_settings,
           :include_defaults,
-          :master_timeout
+          :master_timeout,
+          :cluster_manager_timeout
         ].freeze)
       end
     end

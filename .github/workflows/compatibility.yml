@@ -40,7 +40,7 @@ jobs:
           rake bundle:clean
           rake bundle:install
       - name: opensearch-ruby
-        run: cd opensearch && bundle exec rake test:all
+        run: cd opensearch-ruby && bundle exec rake test:all
       - name: opensearch-transport
         run: cd opensearch-transport && bundle exec rake test:all
       - name: opensearch-api
@@ -84,4 +84,4 @@ jobs:
           rake bundle:clean
           rake bundle:install
       - name: opensearch-ruby
-        run: cd opensearch && bundle exec rake test_security:all
+        run: cd opensearch-ruby && bundle exec rake test_security:all

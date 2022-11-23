@@ -29,8 +29,8 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in opensearch-dsl.gemspec
 gemspec
 
-if File.exist? File.expand_path('../../opensearch/opensearch.gemspec', __FILE__)
-  gem 'opensearch-ruby', path: File.expand_path('../../opensearch', __FILE__), require: false
+if File.exist? File.expand_path('../../opensearch-ruby/opensearch-ruby.gemspec', __FILE__)
+  gem 'opensearch-ruby', path: File.expand_path('../../opensearch-ruby', __FILE__), require: false
 end
 
 if File.exist? File.expand_path('../../opensearch-transport', __FILE__)

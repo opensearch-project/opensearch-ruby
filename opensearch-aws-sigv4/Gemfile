@@ -20,6 +20,6 @@ if File.exist? File.expand_path("../../opensearch-transport/opensearch-transport
   gem 'opensearch-transport', :path => File.expand_path("../../opensearch-transport", __FILE__), :require => false
 end
 
-if File.exist? File.expand_path("../../opensearch/opensearch.gemspec", __FILE__)
-  gem 'opensearch-ruby', :path => File.expand_path("../../opensearch", __FILE__), :require => false
+if File.exist? File.expand_path("../../opensearch-ruby/opensearch-ruby.gemspec", __FILE__)
+  gem 'opensearch-ruby', :path => File.expand_path("../../opensearch-ruby", __FILE__), :require => false
 end

@@ -50,7 +50,7 @@ require 'pathname'
 
 CURRENT_PATH = Pathname(File.expand_path(__dir__))
 SUBPROJECTS = [
-  'opensearch',
+  'opensearch-ruby',
   'opensearch-transport',
   'opensearch-dsl',
   'opensearch-api',
@@ -58,7 +58,7 @@ SUBPROJECTS = [
 ].freeze
 
 RELEASE_TOGETHER = [
-  'opensearch',
+  'opensearch-ruby',
   'opensearch-transport',
   'opensearch-api',
   'opensearch-aws-sigv4',

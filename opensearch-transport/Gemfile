@@ -33,8 +33,8 @@ if File.exist? File.expand_path('../opensearch-api/opensearch-api.gemspec', __di
   gem 'opensearch-api', path: File.expand_path('../opensearch-api', __dir__), require: false
 end
 
-if File.exist? File.expand_path('../opensearch/opensearch.gemspec', __dir__)
-  gem 'opensearch-ruby', path: File.expand_path('../opensearch', __dir__), require: false
+if File.exist? File.expand_path('../opensearch-ruby/opensearch-ruby.gemspec', __dir__)
+  gem 'opensearch-ruby', path: File.expand_path('../opensearch-ruby', __dir__), require: false
 end
 
 gem 'faraday', ENV['FARADAY_VERSION'], require: false if ENV.key?('FARADAY_VERSION')

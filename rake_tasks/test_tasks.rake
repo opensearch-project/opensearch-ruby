@@ -25,10 +25,11 @@
 # under the License.
 
 UNIT_TESTED_PROJECTS = [
-  'opensearch',
+  'opensearch-ruby',
   'opensearch-transport',
   'opensearch-dsl',
   'opensearch-api',
+  'opensearch-aws-sigv4',
 ].freeze
 
 INTEGRATION_TESTED_PROJECTS = (UNIT_TESTED_PROJECTS - ['opensearch-api']).freeze

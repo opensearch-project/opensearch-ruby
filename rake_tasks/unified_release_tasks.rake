@@ -25,7 +25,7 @@
 # under the License.
 
 require 'fileutils'
-require_relative '../opensearch/lib/opensearch/version'
+require_relative '../opensearch-ruby/lib/opensearch/version'
 
 namespace :unified_release do
   desc 'Build gem releases and snapshots'

@@ -8,80 +8,20 @@
 # Modifications Copyright OpenSearch Contributors. See
 # GitHub history for details.
 
-# This is intended to be run the  root directory. `release/build.sh`
+# This script accepts a gem name as argument. It builds the gem and package it as an artifact
 set -e
 
-GIT_ROOT=`git rev-parse --show-toplevel`
+if [[ "$1" == "" ]]; then
+  echo "Please provide the gem name"
+  exit 1
+fi
 
-cd $GIT_ROOT # We need to start from repository root
+GIT_ROOT=$(git rev-parse --show-toplevel)
 
-rm -rf dist
-mkdir dist
-
-#####################################################
-#      Building opensearch-api                      #
-#                                                   #
-#####################################################
-
-echo 'Building opensearch-api'
-cd opensearch-api;
-gem build opensearch-api.gemspec
-
-echo 'Move Gem Location'
-mv -v opensearch-api*.gem $GIT_ROOT/dist/
-
-#####################################################
-#      Building opensearch-transport                #
-#                                                   #
-#####################################################
-cd $GIT_ROOT
-echo 'Building opensearch-transport'
-cd opensearch-transport;
-gem build opensearch-transport.gemspec
-
-echo 'Move Gem Location'
-mv -v opensearch-transport*.gem $GIT_ROOT/dist/
-
-
-#####################################################
-#      Building opensearch                          #
-#                                                   #
-#####################################################
-cd $GIT_ROOT
-echo 'Building opensearch'
-cd opensearch;
-gem build opensearch.gemspec
-
-echo 'Move Gem Location'
-mv -v opensearch*.gem $GIT_ROOT/dist/
-
-
-#####################################################
-#      Building opensearch-dsl                      #
-#                                                   #
-#####################################################
-cd $GIT_ROOT
-echo 'Building opensearch-dsl'
-cd opensearch-dsl;
-gem build opensearch-dsl.gemspec
-
-echo 'Move Gem Location'
-mv -v opensearch-dsl*.gem $GIT_ROOT/dist/
-
-
-#####################################################
-#      Building opensearch-aws-sigv4                #
-#                                                   #
-#####################################################
-cd $GIT_ROOT
-echo 'Building opensearch-aws-sigv4'
-cd opensearch-aws-sigv4;
-gem build opensearch-aws-sigv4.gemspec
-
-echo 'Move Gem Location'
-mv -v opensearch-aws-sigv4*.gem $GIT_ROOT/dist/
-
-
-#####################################################
-echo 'List gems to be published: '
-ls -l $GIT_ROOT/dist
+echo Building "$1" gem
+cd "$GIT_ROOT/$1";
+rm -rf dist && mkdir dist
+gem build "$1.gemspec"
+mv -v "$1"*.gem dist
+tar -vczf "$GIT_ROOT/artifacts.tar.gz" dist
+cd "$GIT_ROOT"

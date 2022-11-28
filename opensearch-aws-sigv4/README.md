@@ -30,7 +30,7 @@ or install it from a source code checkout:
 ## Usage
 
 This library is an AWS Sigv4 wrapper for 
-[`opensearch-ruby`](https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch),
+[`opensearch-ruby`](https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-ruby),
 which is a Ruby client for OpenSearch. The `OpenSearch::Aws::Sigv4Client` is, therefore, has all features of `OpenSearch::Client`.
 And since `opensearch-ruby` is a dependency of `opensearch-aws-sigv4`, you only need to install `opensearch-aws-sigv4`.
 
@@ -52,7 +52,7 @@ client.transport.reload_connections!
 client.search q: 'test'
 ```
 
-Please refer to [opensearch-ruby](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch/README.md) documentation for further details.
+Please refer to [opensearch-ruby](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-ruby/README.md) documentation for further details.
 
 ## Development
 

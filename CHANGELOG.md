@@ -22,5 +22,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
  
 ### Security
 
+### Miscellaneous
+- Fixed broken links in opensearch-aws-sigv4/README.md
 
 [Unreleased]: https://github.com/opensearch-project/opensearch-ruby/compare/2.0...HEAD

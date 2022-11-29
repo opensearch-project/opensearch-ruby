@@ -8,6 +8,9 @@ on:
 jobs:
   draft_release:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -16,7 +19,7 @@ jobs:
         with:
           ruby-version: 3.1
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@8eba69932f928f2bc1b9837d16a095e7e1cb0845
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.GET_SECRET_IAM_ROLE }}
           aws-region: us-east-1

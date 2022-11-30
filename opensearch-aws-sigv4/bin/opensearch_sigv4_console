@@ -1,13 +1,12 @@
 #!/usr/bin/env ruby
 
 $LOAD_PATH.unshift(File.expand_path('../../opensearch-aws-sigv4/lib', __dir__))
+$LOAD_PATH.unshift(File.expand_path('../../opensearch-ruby/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../opensearch-transport/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../opensearch-dsl/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../opensearch-api/lib', __dir__))
 
 require 'opensearch-aws-sigv4'
-require 'opensearch-transport'
-require 'opensearch-api'
 
 gems_not_loaded = ['opensearch-dsl'].reject do |gem|
   begin
@@ -35,10 +34,10 @@ rescue LoadError
 end
 
 if defined?(Pry)
-  Pry.config.prompt_name = 'opensearch_ruby'
+  Pry.config.prompt_name = 'opensearch_sigv4'
   Pry.start
 elsif defined?(IRB)
   IRB.start
 else
-  abort 'LoadError: opensearch_ruby_console requires Pry or IRB'
+  abort 'LoadError: opensearch_sigv4_console requires Pry or IRB'
 end

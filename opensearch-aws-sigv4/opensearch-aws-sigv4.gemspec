@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   }
   s.files         = `git ls-files`.split($/)
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.executables   << 'opensearch_ruby_console'
+  s.executables   << 'opensearch_sigv4_console'
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
 
   if $PROGRAM_NAME.end_with?("gem") && ARGV == ["build", __FILE__] && File.exist?(signing_key_path)

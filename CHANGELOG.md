@@ -15,6 +15,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - `release/build.sh` now only builds 1 gem at a time, then packages it into an artifact file for release ([#113](https://github.com/opensearch-project/opensearch-ruby/issues/113))
 - Renamed folder for `opensearch-ruby` gem from `opensearch` to `opensearch-ruby` ([#116](https://github.com/opensearch-project/opensearch-ruby/issues/116))
 - Update the public key ([118](https://github.com/opensearch-project/opensearch-ruby/pull/118))
+- Renamed opensearch sigv4 console to avoid conflict with opensearch-ruby when both are installed ([#124](https://github.com/opensearch-project/opensearch-ruby/pull/124))
 
 ### Deprecated
 

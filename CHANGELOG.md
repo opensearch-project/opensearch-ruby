@@ -25,7 +25,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Fix token permissions on GitHub release drafter workflow ([#119](https://github.com/opensearch-project/opensearch-ruby/pull/119))
 - Fix token permissions so that it can create a GitHub release ([#120](https://github.com/opensearch-project/opensearch-ruby/pull/120))
 - Bump jenkins library version to accomodate bug fix ([#121](https://github.com/opensearch-project/opensearch-ruby/pull/121))
- 
+- Bump jenkins library version to accomodate bug fix for signed gem verification ([#122](https://github.com/opensearch-project/opensearch-ruby/pull/122))
+
 ### Security
 
 

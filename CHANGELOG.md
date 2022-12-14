@@ -17,6 +17,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Update the public key ([118](https://github.com/opensearch-project/opensearch-ruby/pull/118))
 - Renamed opensearch sigv4 console to avoid conflict with opensearch-ruby when both are installed ([#124](https://github.com/opensearch-project/opensearch-ruby/pull/124))
 - Bumped version for dsl and transport gem ([#125](https://github.com/opensearch-project/opensearch-ruby/pull/125))
+- Replaced `opensearch` with `opensearch-ruby` as dev dependency ([#128](https://github.com/opensearch-project/opensearch-ruby/issues/128))
 ### Deprecated
 
 ### Removed

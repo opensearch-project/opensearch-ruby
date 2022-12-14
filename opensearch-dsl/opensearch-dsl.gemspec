@@ -63,9 +63,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rake', '~> 13'
-
-  s.add_development_dependency 'opensearch'
-
+  s.add_development_dependency 'opensearch-ruby', '~> 2'
   s.add_development_dependency 'cane'
   s.add_development_dependency 'minitest', '~> 5'
   s.add_development_dependency 'minitest-reporters', '~> 1'

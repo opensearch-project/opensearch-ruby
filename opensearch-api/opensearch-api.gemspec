@@ -64,7 +64,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'ansi'
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'opensearch'
+  s.add_development_dependency 'opensearch-ruby', '~> 2'
   s.add_development_dependency 'opensearch-transport'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'minitest-reporters'
@@ -86,6 +86,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ruby-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
 
   s.description = <<-DESC.gsub(/^    /, '')
-    Ruby API for OpenSearch. See the `opensearch` gem for full integration.
+    Ruby API for OpenSearch. See the `opensearch-ruby` gem for full integration.
   DESC
 end

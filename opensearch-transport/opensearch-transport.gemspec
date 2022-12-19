@@ -67,7 +67,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'cane'
   s.add_development_dependency 'curb' unless defined? JRUBY_VERSION
-  s.add_development_dependency 'opensearch-ruby'
+  s.add_development_dependency 'opensearch-ruby', '~> 2'
   s.add_development_dependency 'hashie'
   s.add_development_dependency 'httpclient'
   s.add_development_dependency 'faraday-httpclient'
@@ -91,6 +91,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'yard'
 
   s.description = <<-DESC.gsub(/^    /, '')
-    Ruby client for OpenSearch. See the `opensearch` gem for full integration.
+    Ruby client for OpenSearch. See the `opensearch-ruby` gem for full integration.
   DESC
 end

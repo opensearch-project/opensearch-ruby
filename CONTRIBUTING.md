@@ -127,19 +127,17 @@ New files in your code contributions should contain the following license header
 
 ## Changelog
 
-OpenSearch-ruby maintains a version specific changelog by enforcing a change to the ongoing [CHANGELOG](CHANGELOG.md) file adhering to the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
+OpenSearch-ruby maintains a version specific changelog for each gem adhering to the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 
 The changes are curated by version, with the changes to the main branch added chronologically to the `Unreleased` version. Each version has corresponding sections which list out the category of the change - `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
 
 
 ### Adding Changes
 
-As a contributor, you must ensure that every pull request has its changes listed out within the corresponding version and appropriate section of the [CHANGELOG](CHANGELOG.md) file.
+As a contributor, you must ensure that every pull request has its changes listed out within the corresponding gem, version, and appropriate section of the file.
 
-Adding in the change is a two step process -
-1. Add your changes to the corresponding section within the CHANGELOG file with dummy pull request information, publish the PR.
+Each change must reference the Pull Request or the Issue it addresses.
 
-2. Update the entry for your change in [`CHANGELOG.md`](CHANGELOG.md) and make sure that you reference the pull request there.
 
 ## Review Process
 

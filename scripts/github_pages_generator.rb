@@ -13,15 +13,17 @@ require_relative '../opensearch-ruby/lib/opensearch/version'
 require_relative '../opensearch-api/lib/opensearch/api/version'
 require_relative '../opensearch-dsl/lib/opensearch/dsl/version'
 require_relative '../opensearch-transport/lib/opensearch/transport/version'
+require_relative '../opensearch-aws-sigv4/lib/opensearch-aws-sigv4/version'
 
 # Generate Docs for Github Pages
 class GithubPagesGenerator
   INDEX_FILE = 'index.md'
   GEMS = [
-    { folder: 'opensearch', version: OpenSearch::VERSION, name: 'OpenSearch Ruby' },
+    { folder: 'opensearch-ruby', version: OpenSearch::VERSION, name: 'OpenSearch Ruby' },
     { folder: 'opensearch-dsl', version: OpenSearch::DSL::VERSION, name: 'OpenSearch DSL' },
     { folder: 'opensearch-api', version: OpenSearch::API::VERSION, name: 'OpenSearch API' },
     { folder: 'opensearch-transport', version: OpenSearch::Transport::VERSION, name: 'OpenSearch Transport' },
+    { folder: 'opensearch-aws-sigv4', version: OpenSearch::Aws::Sigv4::VERSION, name: 'OpenSearch AWS Sigv4 Client' },
   ].freeze
 
   attr_reader :root, :index_file

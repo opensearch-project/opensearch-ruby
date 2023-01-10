@@ -9,7 +9,7 @@
 
 require 'pathname'
 require 'bundler/gem_helper'
-require_relative '../opensearch/lib/opensearch/version'
+require_relative '../opensearch-ruby/lib/opensearch/version'
 require_relative '../opensearch-api/lib/opensearch/api/version'
 require_relative '../opensearch-dsl/lib/opensearch/dsl/version'
 require_relative '../opensearch-transport/lib/opensearch/transport/version'

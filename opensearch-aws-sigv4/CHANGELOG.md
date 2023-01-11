@@ -3,6 +3,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+- Added support for Amazon OpenSearch Serverless ([#131](https://github.com/opensearch-project/opensearch-ruby/issues/131))
+
 ### Changed
 ### Deprecated
 ### Removed

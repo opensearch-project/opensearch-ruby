@@ -108,6 +108,13 @@ namespace :bundle do
   end
 end
 
+
+require_relative 'scripts/github_pages_generator'
+desc "Generate documentation for all subprojects to be published to gh-pages"
+task :gh_pages do
+  GithubPagesGenerator.new(CURRENT_PATH).generate('docs')
+end
+
 desc "Generate documentation for all subprojects"
 task :doc do
   SUBPROJECTS.each do |project|

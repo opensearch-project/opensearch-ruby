@@ -16,8 +16,8 @@ signing_key_path = File.expand_path("../gem-private_key.pem")
 Gem::Specification.new do |s|
   s.name          = 'opensearch-aws-sigv4'
   s.version       = OpenSearch::Aws::Sigv4::VERSION
-  s.authors       = ['Theo Truong']
-  s.email         = ['theo.nam.truong@gmail.com']
+  s.authors       = ['Theo Truong', 'Robin Roestenburg']
+  s.email         = ['theo.nam.truong@gmail.com', 'robin.roestenburg@4me.com']
   s.summary       = 'Ruby AWS Sigv4 Client for OpenSearch'
   s.homepage      = 'https://opensearch.org/docs/latest'
   s.license       = 'Apache-2.0'

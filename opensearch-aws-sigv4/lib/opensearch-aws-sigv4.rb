@@ -45,12 +45,11 @@ module OpenSearch
         end
 
         @sigv4_signer = sigv4_signer
-        super transport_args, &block
+        super(transport_args, &block)
       end
 
       # @see OpenSearch::Transport::Transport::Base::perform_request
       def perform_request(method, path, params = {}, body = nil, headers = nil)
-        verify_open_search unless @verified
         signature_body = body.is_a?(Hash) ? body.to_json : body.to_s
         signature = sigv4_signer.sign_request(
           http_method: method,
@@ -58,7 +57,7 @@ module OpenSearch
           headers: headers,
           body: signature_body)
         headers = (headers || {}).merge(signature.headers)
-        @transport.perform_request(method, path, params, body, headers)
+        super(method, path, params, body, headers)
       end
 
       private
@@ -68,6 +67,13 @@ module OpenSearch
         path = '/' + path unless path.start_with?('/')
         query_string = params.empty? ? '' : "#{Faraday::Utils::ParamsHash[params].to_query}"
         URI::HTTP.build(host: host, path: path, query: query_string)
+      end
+
+      def open_search_validation_request
+        verify_signature = sigv4_signer.sign_request(
+          http_method: 'GET',
+          url: signature_url('/', {}))
+        @transport.perform_request('GET', '/', {}, nil, verify_signature.headers)
       end
     end
   end

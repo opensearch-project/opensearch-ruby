@@ -3,6 +3,12 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+- Added create_pit API ([#136](https://github.com/opensearch-project/opensearch-ruby/issues/136))
+- Added get_all_pits API ([#136](https://github.com/opensearch-project/opensearch-ruby/issues/136))
+- Added delete_pit API ([#136](https://github.com/opensearch-project/opensearch-ruby/issues/136))
+- Added delete_all_pits API ([#136](https://github.com/opensearch-project/opensearch-ruby/issues/136))
+- Added cat.pits_segments API ([#136](https://github.com/opensearch-project/opensearch-ruby/issues/136))
+- Added cat.all_pits_segments API ([#136](https://github.com/opensearch-project/opensearch-ruby/issues/136))
 ### Changed
 ### Deprecated
 ### Removed

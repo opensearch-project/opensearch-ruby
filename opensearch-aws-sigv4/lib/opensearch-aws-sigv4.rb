@@ -62,18 +62,15 @@ module OpenSearch
 
       private
 
+      def verify_open_search
+        @verified = true
+      end
+
       def signature_url(path, params)
         host = @transport.transport.hosts.dig(0, :host)
         path = '/' + path unless path.start_with?('/')
         query_string = params.empty? ? '' : "#{Faraday::Utils::ParamsHash[params].to_query}"
         URI::HTTP.build(host: host, path: path, query: query_string)
-      end
-
-      def open_search_validation_request
-        verify_signature = sigv4_signer.sign_request(
-          http_method: 'GET',
-          url: signature_url('/', {}))
-        @transport.perform_request('GET', '/', {}, nil, verify_signature.headers)
       end
     end
   end

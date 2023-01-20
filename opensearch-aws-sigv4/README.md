@@ -34,6 +34,9 @@ This library is an AWS Sigv4 wrapper for
 which is a Ruby client for OpenSearch. The `OpenSearch::Aws::Sigv4Client` is, therefore, has all features of `OpenSearch::Client`.
 And since `opensearch-ruby` is a dependency of `opensearch-aws-sigv4`, you only need to install `opensearch-aws-sigv4`.
 
+### Amazon Managed OpenSearch
+Via the Sigv4 Client, you can interact with an Amazon Managed OpenSearch cluster just like would with a self-managed cluster:
+
 ```ruby
 require 'opensearch-aws-sigv4'
 require 'aws-sigv4'
@@ -43,7 +46,10 @@ signer = Aws::Sigv4::Signer.new(service: 'es',
                                 access_key_id: 'key_id',
                                 secret_access_key: 'secret')
 
-client = OpenSearch::Aws::Sigv4Client.new({ log: true }, signer)
+client = OpenSearch::Aws::Sigv4Client.new(
+  { host: 'https://your.amz-managed-opensearch.domain',
+    log: true }, 
+  signer)
 
 client.cluster.health
 
@@ -53,6 +59,39 @@ client.search q: 'test'
 ```
 
 Please refer to [opensearch-ruby](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-ruby/README.md) documentation for further details.
+
+### Amazon OpenSearch Serverless
+You can also use this client to connect to Amazon OpenSearch Serverless (AOSS). Remember to change the service for the signer to `aoss`:
+
+```ruby
+require 'opensearch-aws-sigv4'
+require 'aws-sigv4'
+
+signer = Aws::Sigv4::Signer.new(service: 'aoss',
+                                region: 'us-west-2',
+                                access_key_id: 'key_id',
+                                secret_access_key: 'secret')
+
+client = OpenSearch::Aws::Sigv4Client.new(
+  { host: 'https://your.amz-opensearch-serverless.endpoint',
+    log: true },
+  signer)
+
+index = 'prime'
+client.indices.create(index: index)
+client.index(index: index, id: '1', body: { name: 'Amazon Echo', 
+                                            msrp: '5999', 
+                                            year: 2011 })
+client.search(body: { query: { match: { name: 'Echo' } } })
+client.delete(index: index, id: '1')
+client.indices.delete(index: index)
+
+# Most administrative commands like the ones below will result in a 404 error for AOSS
+client.cluster.stats
+client.cat.health
+```
+
+*NOTES:* AOSS does NOT support all API endpoints provided by a standard OpenSearch cluster. Refer to [AOSS Developer's Guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-genref.html) for more detail.
 
 ## Development
 

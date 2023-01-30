@@ -1,15 +1,8 @@
-# OpenSearch Ruby Client Admins
+## Admins
 
-## Current Admins
+| Admin                    | GitHub ID                               | Affiliation |
+| -------------------------| --------------------------------------- | ----------- |
+| Charlotte Henkle         | [CEHENKLE](https://github.com/cehenkle) | Amazon |
+| Henri Yandell            | [hyandell](https://github.com/hyandell) | Amazon |
 
-| Admin                    | GitHub ID                                           | Affiliation |
-| -------------------------| ----------------------------------------------------| ----------- |
-| Charlotte                | [cehenkle](https://github.com/CEHENKLE)             | Amazon      |
-| Henri Yandell            | [hyandell](https://github.com/hyandell)             | Amazon      |
-| Jayesh Hathila           | [jayeshathila](https://github.com/jayeshathila)     | Amazon      |
-| Vamshi Vijay Nakkirtha   | [vamshin](https://github.com/vamshin)               | Amazon      |
-| Yuvraj Jaiswal           | [yuvi17](https://github.com/yuvi17)                 | Amazon      |
-
-
-[This document](https://github.com/opensearch-project/.github/blob/main/ADMINS.md)
-explains what an admin's responsibilities are.
+[This document](https://github.com/opensearch-project/.github/blob/main/ADMINS.md) explains what admins do in this repo. and how they should be doing it. If you're interested in becoming a maintainer, see [MAINTAINERS](MAINTAINERS.md). If you're interested in contributing, see [CONTRIBUTING](CONTRIBUTING.md).

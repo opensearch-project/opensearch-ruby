@@ -10,7 +10,9 @@ OpenSearch Ruby Client
 - [Sample Code](#sample-code)
 - [Project Resources](#project-resources)
 - [Code of Conduct](#code-of-conduct)
+- [User Guide](#user-guide)
 - [Compatibility with OpenSearch](#compatibility-with-opensearch)
+- [Developer Guide](#developer-guide)
 - [Security](#security)
 - [License](#license)
 - [Copyright](#copyright)
@@ -41,9 +43,17 @@ Please see the [USER_GUIDE](USER_GUIDE.md) for code snippets.
 
 This project has adopted the [Amazon Open Source Code of Conduct](CODE_OF_CONDUCT.md). For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq), or contact [opensource-codeofconduct@amazon.com](mailto:opensource-codeofconduct@amazon.com) with any additional questions or comments.
 
+## User Guide
+
+See [USER_GUIDE](USER_GUIDE.md).
+
 ## Compatibility with OpenSearch
 
 See [Compatibility](COMPATIBILITY.md).
+
+## Developer Guide
+
+See [DEVELOPER_GUIDE](DEVELOPER_GUIDE.md).
 
 ## Security
 

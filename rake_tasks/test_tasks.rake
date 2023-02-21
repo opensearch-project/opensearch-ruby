@@ -108,7 +108,7 @@ namespace :test do
     end
     puts "Successfully downloaded #{filename}"
 
-    unless File.exists?(filename)
+    unless File.exist?(filename)
       STDERR.puts "[!] Couldn't download #{filename}"
       exit 1
     end

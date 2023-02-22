@@ -88,7 +88,7 @@ namespace :test do
     filename = 'tmp/artifacts.json'
     `curl -s <placeholder_opensearch_artifact_url> -o #{filename}`
 
-    unless File.exists?("./#{filename}")
+    unless File.exist?("./#{filename}")
       STDERR.puts '[!] Couldn\'t download artifacts file'
       exit 1
     end
@@ -105,7 +105,7 @@ namespace :test do
     puts 'Downloading zip file:'
     `curl -s #{zip_url} -o tmp/#{filename}`
 
-    unless File.exists?("./tmp/#{filename}")
+    unless File.exist?("./tmp/#{filename}")
       STDERR.puts '[!] Couldn\'t download artifact'
       exit 1
     end

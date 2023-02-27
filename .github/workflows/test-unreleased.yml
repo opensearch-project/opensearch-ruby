@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         opensearch_ref: [ '1.x', '2.x', '2.0', 'main' ]
-        ruby_version: '3.1'
+        ruby_version: ['3.1']
     steps:
       - uses: ruby/setup-ruby@v1
         with:

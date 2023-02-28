@@ -39,12 +39,16 @@ module OpenSearch
       # @param [Hash] transport_args arguments for OpenSearch::Transport::Client.
       # @param [&block] block code block to be passed to OpenSearch::Transport::Client.
       # @param [Aws::Sigv4::Signer] sigv4_signer an instance of AWS Sigv4 Signer.
-      def initialize(transport_args = {}, sigv4_signer, &block)
+      # @param [Hash] options
+      # @option options [Boolean] :sigv4_debug whether to log debug info for Sigv4 Signing
+      def initialize(transport_args = {}, sigv4_signer, options: {}, &block)
         unless sigv4_signer.is_a?(::Aws::Sigv4::Signer)
           raise ArgumentError, "Please pass a Aws::Sigv4::Signer. A #{sigv4_signer.class} was given."
         end
 
         @sigv4_signer = sigv4_signer
+        @sigv4_debug = options[:sigv4_debug]
+        @logger = nil
         super(transport_args, &block)
       end
 
@@ -57,6 +61,8 @@ module OpenSearch
           headers: headers,
           body: signature_body)
         headers = (headers || {}).merge(signature.headers)
+
+        log_signature_info(signature)
         super(method, path, params, body, headers)
       end
 
@@ -71,6 +77,29 @@ module OpenSearch
         path = '/' + path unless path.start_with?('/')
         query_string = params.empty? ? '' : "#{Faraday::Utils::ParamsHash[params].to_query}"
         URI::HTTP.build(host: host, path: path, query: query_string)
+      end
+
+      # @param [Aws::Sigv4::Signature] signature
+      def log_signature_info(signature)
+        return unless @sigv4_debug
+
+        log('string to sign', signature.string_to_sign)
+        log('canonical request', signature.canonical_request)
+        log('signature headers', signature.headers)
+      end
+
+      def log(title, message)
+        logger.debug("#{title.upcase}:\n\e[36m#{message}\e[0m")
+      end
+
+      def logger
+        return @logger if @logger
+
+        require 'logger'
+        @logger = Logger.new(
+          STDOUT,
+          progname: 'Sigv4',
+          formatter: proc { |_severity, datetime, progname, msg| "\e[34m(#{datetime})  #{progname} - #{msg}\e[0m\n\n" })
       end
     end
   end

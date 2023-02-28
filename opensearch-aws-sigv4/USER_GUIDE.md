@@ -57,3 +57,14 @@ client.delete(index: index, id: '1')
 # delete the index
 client.indices.delete(index: index)
 ```
+
+### Debugging
+The client also has debug mode for Sigv4. Simply add `options: { sigv4_debug: true }` to when initializing the client
+
+```ruby
+OpenSearch::Aws::Sigv4Client.new(
+  { host: 'https://your.amz-managed-opensearch.domain' },
+  signer,
+  options: { sigv4_debug: true }
+)
+```

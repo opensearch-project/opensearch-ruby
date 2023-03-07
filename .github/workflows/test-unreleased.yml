@@ -14,19 +14,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        opensearch_ref: ['1.x', '2.x', '2.0', 'main']
-        ruby_version: ['3.1']
+        entry:
+          - { ruby_version: '3.1', opensearch_ref: '1.x' }
+          - { ruby_version: '3.1', opensearch_ref: '2.x' }
+          - { ruby_version: '3.1', opensearch_ref: '2.0' }
+          - { ruby_version: '3.1', opensearch_ref: 'main' }
 
     steps:
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby_version }}
+          ruby-version: ${{ matrix.entry.ruby_version }}
 
       - name: Checkout OpenSearch
         uses: actions/checkout@v3
         with:
           repository: opensearch-project/OpenSearch
-          ref: ${{ matrix.opensearch_ref }}
+          ref: ${{ matrix.entry.opensearch_ref }}
           path: opensearch
 
       - name: Get OpenSearch branch top
@@ -110,6 +113,6 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: opensearch-logs-${{ matrix.opensearch_ref }}-ruby-${{ matrix.ruby_version }}
+          name: opensearch-logs-${{ matrix.entry.opensearch_ref }}-ruby-${{ matrix.entry.ruby_version }}
           path: |
             opensearch/distribution/archives/linux-tar/build/distributions/**/logs/*

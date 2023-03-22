@@ -39,7 +39,7 @@ module OpenSearch
         arguments = arguments.clone
 
         method = OpenSearch::API::HTTP_DELETE
-        path   = "_pit"
+        path   = "_search/point_in_time"
         params = {}
 
         body = arguments[:body]

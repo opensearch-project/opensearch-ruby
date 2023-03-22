@@ -30,7 +30,7 @@ describe 'client#close_point_in_time' do
   let(:expected_args) do
     [
       'DELETE',
-      '_pit',
+      '_search/point_in_time',
       {},
       nil,
       {}

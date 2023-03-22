@@ -37,14 +37,14 @@ describe 'client#open_point_in_time' do
     ]
   end
 
-  let (:url) { '_pit'}
+  let (:url) { '_search/point_in_time'}
 
   it 'performs the request' do
     expect(client_double.open_point_in_time).to eq({})
   end
 
   context 'with index' do
-    let (:url) { 'foo/_pit'}
+    let (:url) { 'foo/_search/point_in_time'}
 
     it 'performs the request' do
       expect(client_double.open_point_in_time(index: 'foo')).to eq({})

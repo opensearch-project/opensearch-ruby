@@ -46,11 +46,7 @@ module OpenSearch
         _index = arguments.delete(:index)
 
         method = OpenSearch::API::HTTP_POST
-        path   = if _index
-                   "#{Utils.__listify(_index)}/_pit"
-                 else
-                   "_pit"
-                 end
+        path   = "#{Utils.__listify(_index)}/_search/point_in_time"
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = nil

@@ -1,6 +1,8 @@
 - [User Guide](#user-guide)
   - [Setup](#setup)
   - [Sample code](#sample-code)
+    - [Basic Usage](#basic-usage)
+    - [Point in Time](#point-in-time)
   - [Amazon OpenSearch Service](#amazon-opensearch-service)
 
 # User Guide
@@ -24,7 +26,8 @@ Import the client:
 `require 'opensearch'`
 
 ## Sample code
-
+<a name="basic-usage" /></a>
+### Basic Usage
 ```ruby
 require 'opensearch'
 
@@ -104,6 +107,37 @@ response = client.indices.delete(
   index: index_name
 )
 puts response   
+```
+
+### Point in Time
+Refer to OpenSearch [documentation](https://opensearch.org/docs/latest/point-in-time-api/) for more information on point in time.
+```ruby
+require 'opensearch-ruby'
+client = OpenSearch::Client.new({ host: 'localhost' })
+index = :movies
+client.indices.create(index: 'movies')
+
+# CREATE 3 PITS
+client.create_pit index: index, keep_alive: '1m'
+client.create_pit index: index, keep_alive: '1m'
+client.create_pit index: index, keep_alive: '1m'
+
+# GET ALL PITS
+pits = client.get_all_pits
+puts pits
+
+# DELETE FIRST PIT
+client.delete_pit body: { pit_id: [pits.dig('pits', 0, 'pit_id')] }
+
+# ALL PITS SEGMENTS
+puts client.cat.all_pit_segments
+
+# SEGMENTS FOR A SPECIFIC PIT
+puts client.cat.pit_segments body: { pit_id: [pits.dig('pits', 1, 'pit_id')] }
+
+
+# DELETE ALL PITS
+puts client.delete_all_pits
 ```
 
 ## Amazon OpenSearch Service

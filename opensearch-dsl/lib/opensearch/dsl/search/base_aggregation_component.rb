@@ -27,18 +27,15 @@
 module OpenSearch
   module DSL
     module Search
-
       # Module containing common functionality for aggregation DSL classes
       #
       module BaseAggregationComponent
-
         def self.included(base)
           base.__send__ :include, BaseComponent
           base.__send__ :include, InstanceMethods
         end
 
         module InstanceMethods
-
           attr_reader :aggregations
 
           # Looks up the corresponding class for a method being invoked, and initializes it
@@ -48,7 +45,7 @@ module OpenSearch
           def method_missing(name, *args, &block)
             klass = Utils.__camelize(name)
             if Aggregations.const_defined? klass
-              @value = Aggregations.const_get(klass).new *args, &block
+              @value = Aggregations.const_get(klass).new(*args, &block)
             else
               raise NoMethodError, "undefined method '#{name}' for #{self}"
             end
@@ -70,21 +67,16 @@ module OpenSearch
           #
           # @return [Hash]
           #
-          def to_hash(options={})
+          def to_hash(_options = {})
             call
 
-            @hash = { name => @args } unless @hash && @hash[name] && ! @hash[name].empty?
+            @hash = { name => @args } unless @hash && @hash[name] && !@hash[name].empty?
 
-            if @aggregations
-              @hash[:aggregations] = @aggregations.to_hash
-            end
+            @hash[:aggregations] = @aggregations.to_hash if @aggregations
             @hash
           end
         end
-
       end
-
     end
   end
 end
-

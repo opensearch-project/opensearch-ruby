@@ -28,14 +28,13 @@ require 'spec_helper'
 
 describe 'client#delete_script' do
   context 'when lang parameter is not provided' do
-
     let(:expected_args) do
       [
-          'DELETE',
-          '_scripts/foo',
-          {},
-          nil,
-          {}
+        'DELETE',
+        '_scripts/foo',
+        {},
+        nil,
+        {}
       ]
     end
 

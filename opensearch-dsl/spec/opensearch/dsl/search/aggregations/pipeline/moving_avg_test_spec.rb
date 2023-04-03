@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::MovingAvg do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(moving_avg: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#buckets_path' do
-
       before do
         search.buckets_path('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Aggregations::MovingAvg do
     end
 
     describe '#gap_policy' do
-
       before do
         search.gap_policy('bar')
       end
@@ -68,18 +63,16 @@ describe OpenSearch::DSL::Search::Aggregations::MovingAvg do
     end
 
     describe '#minimize' do
-
       before do
         search.minimize(false)
       end
 
       it 'applies the option' do
-        expect(search.to_hash[:moving_avg][:foo][:minimize]).to eq(false)
+        expect(search.to_hash[:moving_avg][:foo][:minimize]).to be(false)
       end
     end
 
     describe '#model' do
-
       before do
         search.model('simple')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Aggregations::MovingAvg do
     end
 
     describe '#settings' do
-
       before do
         search.settings(period: 7)
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Aggregations::MovingAvg do
     end
 
     describe '#window' do
-
       before do
         search.window(5)
       end
@@ -112,7 +103,6 @@ describe OpenSearch::DSL::Search::Aggregations::MovingAvg do
     end
 
     describe '#format' do
-
       before do
         search.format('bar')
       end
@@ -124,9 +114,7 @@ describe OpenSearch::DSL::Search::Aggregations::MovingAvg do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new(:foo) do
           format 'bar'

@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#forcemerge' do
-
   let(:expected_args) do
     [
-        'POST',
-        '_forcemerge',
-        {},
-        nil,
-        {}
+      'POST',
+      '_forcemerge',
+      {},
+      nil,
+      {}
     ]
   end
 

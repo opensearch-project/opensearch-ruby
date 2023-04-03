@@ -31,37 +31,36 @@ module OpenSearch
     class GeoAggregationIntegrationTest < ::OpenSearch::Test::IntegrationTestCase
       include OpenSearch::DSL::Search
 
-      context "A geo aggregation" do
-
+      context 'A geo aggregation' do
         setup do
           @client.indices.create index: 'venues-test', body: {
-              mappings: {
-                  properties: {
-                      location: {type: 'geo_point'}
-                  }
+            mappings: {
+              properties: {
+                location: { type: 'geo_point' }
               }
+            }
           }
           @client.index index: 'venues-test',
-                        body: { name: 'Space', location: "38.886214,1.403889" }
+                        body: { name: 'Space', location: '38.886214,1.403889' }
           @client.index index: 'venues-test',
-                        body: { name: 'Pacha', location: "38.9184427,1.4433646" }
+                        body: { name: 'Pacha', location: '38.9184427,1.4433646' }
           @client.index index: 'venues-test',
-                        body: { name: 'Amnesia', location: "38.948045,1.408341" }
+                        body: { name: 'Amnesia', location: '38.948045,1.408341' }
           @client.index index: 'venues-test',
-                        body: { name: 'Privilege', location: "38.958082,1.408288" }
+                        body: { name: 'Privilege', location: '38.958082,1.408288' }
           @client.index index: 'venues-test',
-                        body: { name: 'Es Paradis', location: "38.979071,1.307394" }
+                        body: { name: 'Es Paradis', location: '38.979071,1.307394' }
           @client.indices.refresh index: 'venues-test'
         end
 
-        should "return the geo distances from a location" do
+        should 'return the geo distances from a location' do
           response = @client.search index: 'venues-test', size: 0, body: search {
             aggregation :venue_distances do
               geo_distance do
                 field  :location
                 origin '38.9126352,1.4350621'
                 unit   'km'
-                ranges [ { to: 1 }, { from: 1, to: 5 }, { from: 5, to: 10 }, { from: 10 } ]
+                ranges [{ to: 1 }, { from: 1, to: 5 }, { from: 5, to: 10 }, { from: 10 }]
 
                 aggregation :top_venues do
                   top_hits _source: { include: 'name' }
@@ -79,7 +78,7 @@ module OpenSearch
           assert_equal 2,       result['buckets'][1]['top_venues']['hits']['total']['value']
         end
 
-        should "return the geohash grid distribution" do
+        should 'return the geohash grid distribution' do
           #
           # See the geohash plot eg. at http://openlocation.org/geohash/geohash-js/
           # See the locations visually eg. at http://geohash.org/sncj8h17r2
@@ -103,7 +102,9 @@ module OpenSearch
           assert_equal 'sncj8', result['buckets'][0]['key']
           assert_equal 2,       result['buckets'][0]['doc_count']
 
-          assert_same_elements %w[ Privilege Amnesia ], result['buckets'][0]['top_venues']['hits']['hits'].map { |h| h['_source']['name'] }
+          assert_same_elements %w[Privilege Amnesia], result['buckets'][0]['top_venues']['hits']['hits'].map { |h|
+                                                        h['_source']['name']
+                                                      }
         end
       end
     end

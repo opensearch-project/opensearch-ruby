@@ -68,21 +68,21 @@ module OpenSearch
         perform_request(method, path, params, body, headers).body
       end
 
-      alias_method :exists_source?, :exists_source
+      alias exists_source? exists_source
 
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:exists_source, [
-        :preference,
-        :realtime,
-        :refresh,
-        :routing,
-        :_source,
-        :_source_excludes,
-        :_source_includes,
-        :version,
-        :version_type
+      ParamsRegistry.register(:exists_source, %i[
+        preference
+        realtime
+        refresh
+        routing
+        _source
+        _source_excludes
+        _source_includes
+        version
+        version_type
       ].freeze)
     end
   end

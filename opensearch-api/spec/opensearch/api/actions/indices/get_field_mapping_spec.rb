@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#get_field_mapping' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        {},
-        nil,
-        {}
+      'GET',
+      url,
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -47,7 +46,6 @@ describe 'client.cluster#get_field_mapping' do
   end
 
   context 'when an index is specified' do
-
     let(:url) do
       'foo/_mapping/field/bam'
     end

@@ -47,7 +47,7 @@ module OpenSearch
                      OpenSearch::API::HTTP_GET
                    end
 
-          path = "_cluster/allocation/explain"
+          path = '_cluster/allocation/explain'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = arguments[:body]
@@ -57,9 +57,9 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:allocation_explain, [
-          :include_yes_decisions,
-          :include_disk_info
+        ParamsRegistry.register(:allocation_explain, %i[
+          include_yes_decisions
+          include_disk_info
         ].freeze)
       end
     end

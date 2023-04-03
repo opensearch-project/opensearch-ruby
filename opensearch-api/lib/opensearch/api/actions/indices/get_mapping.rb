@@ -56,7 +56,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_mapping"
                    else
-                     "_mapping"
+                     '_mapping'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -67,13 +67,13 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get_mapping, [
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :local
+        ParamsRegistry.register(:get_mapping, %i[
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          master_timeout
+          cluster_manager_timeout
+          local
         ].freeze)
       end
     end

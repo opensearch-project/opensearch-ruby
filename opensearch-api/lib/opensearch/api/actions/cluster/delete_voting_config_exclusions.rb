@@ -40,7 +40,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_DELETE
-          path   = "_cluster/voting_config_exclusions"
+          path   = '_cluster/voting_config_exclusions'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil

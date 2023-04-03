@@ -27,7 +27,6 @@
 module OpenSearch
   module DSL
     module Search
-
       # Module containing common functionality for a "compound" (wrapping) filters, such as `and`, `or`, `not`
       #
       module BaseCompoundFilterComponent
@@ -54,7 +53,9 @@ module OpenSearch
           # @api private
           #
           def call
-            @block.arity < 1 ? self.instance_eval(&@block) : @block.call(self) if @block && ! @_block_called
+            if @block && !@_block_called
+              @block.arity < 1 ? instance_eval(&@block) : @block.call(self)
+            end
             @_block_called = true
             self
           end
@@ -65,11 +66,10 @@ module OpenSearch
           #
           # @return [Hash]
           #
-          def to_hash(options={})
-            case
-            when @value.empty? && ! @block
+          def to_hash(options = {})
+            if @value.empty? && !@block
               @hash = super
-            when @block
+            elsif @block
               call
               @hash = { name.to_sym => @value.map { |i| i.to_hash } }
             else
@@ -88,7 +88,7 @@ module OpenSearch
 
           def slice(*args)
             @value.slice(*args)
-          end; alias :[] :slice
+          end; alias [] slice
 
           def size
             @value.size

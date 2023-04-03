@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.snapshot#delete' do
-
   let(:expected_args) do
     [
-        'DELETE',
-        '_snapshot/foo/bar',
-        {},
-        nil,
-        {}
+      'DELETE',
+      '_snapshot/foo/bar',
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -43,15 +42,15 @@ describe 'client.snapshot#delete' do
   end
 
   it 'requires the :snapshot argument' do
-    expect {
+    expect do
       client.snapshot.delete(repository: 'foo')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :repository argument' do
-    expect {
+    expect do
       client.snapshot.delete(snapshot: 'bar')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do

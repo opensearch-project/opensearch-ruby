@@ -26,23 +26,21 @@
 
 module OpenSearch
   module Transport
-
     # Class for wrapping a hash that could have sensitive data.
     # When printed, the sensitive values will be redacted.
     #
     # @since 6.1.1
     class Redacted < ::Hash
-
       def initialize(elements = nil)
         super()
-        (elements || {}).each_pair{ |key, value| self[key] = value }
+        (elements || {}).each_pair { |key, value| self[key] = value }
       end
 
       # The keys whose values will be redacted.
       #
       # @since 6.1.1
-      SENSITIVE_KEYS = [ :password,
-                         :pwd ].freeze
+      SENSITIVE_KEYS = %i[password
+                          pwd].freeze
 
       # The replacement string used in place of the value for sensitive keys.
       #
@@ -77,6 +75,7 @@ module OpenSearch
 
       def redact(k, v, method)
         return STRING_REPLACEMENT if SENSITIVE_KEYS.include?(k.to_sym)
+
         v.send(method)
       end
     end

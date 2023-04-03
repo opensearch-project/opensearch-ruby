@@ -67,14 +67,14 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:put_mapping, [
-          :timeout,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :write_index_only
+        ParamsRegistry.register(:put_mapping, %i[
+          timeout
+          master_timeout
+          cluster_manager_timeout
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          write_index_only
         ].freeze)
       end
     end

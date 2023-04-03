@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns children documents for parent documents matching a query or a filter
         #
         # @example Return comments for articles about Ruby
@@ -83,16 +82,15 @@ module OpenSearch
             hash = super
             if @query
               _query = @query.respond_to?(:to_hash) ? @query.to_hash : @query
-              hash[self.name].update(query: _query)
+              hash[name].update(query: _query)
             end
             if @filter
               _filter = @filter.respond_to?(:to_hash) ? @filter.to_hash : @filter
-              hash[self.name].update(filter: _filter)
+              hash[name].update(filter: _filter)
             end
             hash
           end
         end
-
       end
     end
   end

@@ -49,7 +49,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_shard_stores"
                    else
-                     "_shard_stores"
+                     '_shard_stores'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -60,11 +60,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:shard_stores, [
-          :status,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards
+        ParamsRegistry.register(:shard_stores, %i[
+          status
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
         ].freeze)
       end
     end

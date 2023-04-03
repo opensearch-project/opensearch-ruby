@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.snapshot#create_repository' do
-
   let(:expected_args) do
     [
-        'PUT',
-        '_snapshot/foo',
-        {},
-        {},
-        {}
+      'PUT',
+      '_snapshot/foo',
+      {},
+      {},
+      {}
     ]
   end
 
@@ -43,15 +42,15 @@ describe 'client.snapshot#create_repository' do
   end
 
   it 'requires the :body argument' do
-    expect {
+    expect do
       client.snapshot.create_repository(repository: 'foo')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :repository argument' do
-    expect {
+    expect do
       client.snapshot.create_repository(body: {})
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do

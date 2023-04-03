@@ -51,7 +51,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_forcemerge"
                    else
-                     "_forcemerge"
+                     '_forcemerge'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -62,13 +62,13 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:forcemerge, [
-          :flush,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :max_num_segments,
-          :only_expunge_deletes
+        ParamsRegistry.register(:forcemerge, %i[
+          flush
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          max_num_segments
+          only_expunge_deletes
         ].freeze)
       end
     end

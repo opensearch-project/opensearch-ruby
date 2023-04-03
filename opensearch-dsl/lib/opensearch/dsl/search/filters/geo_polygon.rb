@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents which fall into a specified geographical polygon
         #
         # @example
@@ -60,7 +59,6 @@ module OpenSearch
 
           option_method :points
         end
-
       end
     end
   end

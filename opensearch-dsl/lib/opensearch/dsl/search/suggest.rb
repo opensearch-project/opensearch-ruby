@@ -27,14 +27,13 @@
 module OpenSearch
   module DSL
     module Search
-
       # Wraps the `suggest` part of a search definition
       #
       #
       class Suggest
         include BaseComponent
 
-        def initialize(key, options={}, &block)
+        def initialize(key, options = {}, &block)
           @key     = key
           @options = options
           @block   = block

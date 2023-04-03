@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::HasChild do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::HasChild do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#type' do
-
       before do
         search.type('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::HasChild do
     end
 
     describe '#query' do
-
       before do
         search.query('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::HasChild do
     end
 
     describe '#score_mode' do
-
       before do
         search.score_mode('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Queries::HasChild do
     end
 
     describe '#min_children' do
-
       before do
         search.min_children('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Queries::HasChild do
     end
 
     describe '#max_children' do
-
       before do
         search.max_children('bar')
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Queries::HasChild do
     end
 
     describe '#inner_hits' do
-
       before do
         search.inner_hits(size: 1)
       end
@@ -113,9 +104,7 @@ describe OpenSearch::DSL::Search::Queries::HasChild do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           type 'bar'
@@ -128,7 +117,7 @@ describe OpenSearch::DSL::Search::Queries::HasChild do
       end
 
       it 'executes the block' do
-        expect(search.to_hash).to eq(has_child: { type: 'bar', query: { match: { foo: { query: 'bar'} } } })
+        expect(search.to_hash).to eq(has_child: { type: 'bar', query: { match: { foo: { query: 'bar' } } } })
       end
     end
   end

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation. The specified metric must be numeric and the sibling aggregation must be a multi-bucket aggregation.
         #
         # @example Passing the options as a Hash

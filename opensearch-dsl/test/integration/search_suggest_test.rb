@@ -33,48 +33,48 @@ module OpenSearch
     class SuggestIntegrationTest < ::OpenSearch::Test::IntegrationTestCase
       include OpenSearch::DSL::Search
 
-      context "Suggest integration" do
+      context 'Suggest integration' do
         setup do
           @client.indices.create index: 'test', body: {
-              mappings: {
+            mappings: {
+              properties: {
+                title: { type: 'text' },
+                suggest: {
+                  type: 'object',
                   properties: {
-                      title: {type: 'text'},
-                      suggest: {
-                          type: 'object',
-                          properties: {
-                              title: {type: 'completion'},
-                              payload: {type: 'object', enabled: false}
-                          }
-                      }
+                    title: { type: 'completion' },
+                    payload: { type: 'object', enabled: false }
                   }
+                }
               }
+            }
           }
 
           @client.index index: 'test', id: '1', body: {
             title: 'One',
             suggest: {
-              title: { input: ['one', 'uno', 'jedna'] },
+              title: { input: %w[one uno jedna] },
               payload: { id: '1' }
             }
           }
           @client.index index: 'test', id: '2', body: {
             title: 'Two',
             suggest: {
-              title: { input: ['two', 'due', 'dvě'] },
+              title: { input: %w[two due dvě] },
               payload: { id: '2' }
             }
           }
           @client.index index: 'test', id: '3', body: {
             title: 'Three',
             suggest: {
-              title: { input: ['three', 'tres', 'tři'] },
+              title: { input: %w[three tres tři] },
               payload: { id: '3' }
             }
           }
           @client.indices.refresh index: 'test'
         end
 
-        should "return suggestions" do
+        should 'return suggestions' do
           s = search do
             suggest :title, text: 't', completion: { field: 'suggest.title' }
           end
@@ -83,10 +83,12 @@ module OpenSearch
 
           assert_equal 2, response['suggest']['title'][0]['options'].size
 
-          assert_same_elements %w[2 3], response['suggest']['title'][0]['options'].map { |d| d['_source']['suggest']['payload']['id'] }
+          assert_same_elements %w[2 3], response['suggest']['title'][0]['options'].map { |d|
+                                          d['_source']['suggest']['payload']['id']
+                                        }
         end
 
-        should "return a single suggestion" do
+        should 'return a single suggestion' do
           s = search do
             suggest :title, text: 'th', completion: { field: 'suggest.title' }
           end
@@ -95,7 +97,9 @@ module OpenSearch
 
           assert_equal 1, response['suggest']['title'][0]['options'].size
 
-          assert_same_elements %w[3], response['suggest']['title'][0]['options'].map { |d| d['_source']['suggest']['payload']['id'] }
+          assert_same_elements %w[3], response['suggest']['title'][0]['options'].map { |d|
+                                        d['_source']['suggest']['payload']['id']
+                                      }
         end
       end
     end

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which wraps a query so it can be used as a filter
         #
         # @example
@@ -68,12 +67,11 @@ module OpenSearch
             hash = super
             if @query
               _query = @query.respond_to?(:to_hash) ? @query.to_hash : @query
-              hash[self.name].update(_query)
+              hash[name].update(_query)
             end
             hash
           end
         end
-
       end
     end
   end

@@ -49,7 +49,7 @@ module OpenSearch
           _index = arguments.delete(:index)
 
           method = OpenSearch::API::HTTP_PUT
-          path   = "#{Utils.__listify(_index)}"
+          path   = Utils.__listify(_index).to_s
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = arguments[:body]
@@ -59,11 +59,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:create, [
-          :wait_for_active_shards,
-          :timeout,
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:create, %i[
+          wait_for_active_shards
+          timeout
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

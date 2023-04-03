@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.indices#clear_cache' do
-
   let(:expected_args) do
     [
-        'POST',
-        url,
-        params,
-        nil,
-        {}
+      'POST',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
@@ -51,7 +50,6 @@ describe 'client.indices#clear_cache' do
   end
 
   context 'when an index is specified' do
-
     let(:url) do
       'foo/_cache/clear'
     end
@@ -62,7 +60,6 @@ describe 'client.indices#clear_cache' do
   end
 
   context 'when params are specified' do
-
     let(:params) do
       { fielddata: true }
     end
@@ -73,13 +70,12 @@ describe 'client.indices#clear_cache' do
   end
 
   context 'when the path must be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_cache/clear'
     end
 
     let(:params) do
-      { }
+      {}
     end
 
     it 'performs the request' do

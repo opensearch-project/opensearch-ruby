@@ -59,7 +59,7 @@ module OpenSearch
                    elsif _metric
                      "_cluster/state/#{Utils.__listify(_metric)}"
                    else
-                     "_cluster/state"
+                     '_cluster/state'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -70,16 +70,16 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:state, [
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :flat_settings,
-          :wait_for_metadata_version,
-          :wait_for_timeout,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards
+        ParamsRegistry.register(:state, %i[
+          local
+          master_timeout
+          cluster_manager_timeout
+          flat_settings
+          wait_for_metadata_version
+          wait_for_timeout
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
         ].freeze)
       end
     end

@@ -48,7 +48,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_cat/plugins"
+          path   = '_cat/plugins'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
@@ -58,16 +58,16 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:plugins, [
-          :format,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :h,
-          :help,
-          :include_bootstrap,
-          :s,
-          :v
+        ParamsRegistry.register(:plugins, %i[
+          format
+          local
+          master_timeout
+          cluster_manager_timeout
+          h
+          help
+          include_bootstrap
+          s
+          v
         ].freeze)
       end
     end

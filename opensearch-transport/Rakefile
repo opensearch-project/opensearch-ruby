@@ -24,11 +24,11 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require "bundler/gem_tasks"
+require 'bundler/gem_tasks'
 
-desc "Run unit tests"
-task :default => 'test:unit'
-task :test    => 'test:unit'
+desc 'Run unit tests'
+task default: 'test:unit'
+task test: 'test:unit'
 
 # ----- Test tasks ------------------------------------------------------------
 
@@ -68,14 +68,13 @@ namespace :test do
     test.libs << 'lib' << 'test'
     test.test_files = FileList['test/profile/**/*_test.rb']
   end
-
 end
 
 # ----- Documentation tasks ---------------------------------------------------
 
 require 'yard'
 YARD::Rake::YardocTask.new(:doc) do |t|
-  t.options = %w| --embed-mixins --markup=markdown |
+  t.options = %w[--embed-mixins --markup=markdown]
 end
 
 # ----- Code analysis tasks ---------------------------------------------------

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching a specified expression in the Lucene Query String syntax
         #
         # @example
@@ -70,7 +69,6 @@ module OpenSearch
           option_method :tie_breaker
           option_method :time_zone
         end
-
       end
     end
   end

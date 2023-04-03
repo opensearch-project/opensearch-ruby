@@ -53,7 +53,7 @@ module OpenSearch
                    elsif _repository
                      "_snapshot/#{Utils.__listify(_repository)}/_status"
                    else
-                     "_snapshot/_status"
+                     '_snapshot/_status'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -68,10 +68,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:status, [
-          :master_timeout,
-          :cluster_manager_timeout,
-          :ignore_unavailable
+        ParamsRegistry.register(:status, %i[
+          master_timeout
+          cluster_manager_timeout
+          ignore_unavailable
         ].freeze)
       end
     end

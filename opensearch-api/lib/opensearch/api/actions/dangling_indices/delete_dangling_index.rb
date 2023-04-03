@@ -58,11 +58,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:delete_dangling_index, [
-          :accept_data_loss,
-          :timeout,
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:delete_dangling_index, %i[
+          accept_data_loss
+          timeout
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

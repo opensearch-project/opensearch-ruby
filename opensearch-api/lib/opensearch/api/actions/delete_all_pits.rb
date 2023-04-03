@@ -13,7 +13,7 @@ module OpenSearch
       # Deletes all PITs.
       def delete_all_pits(arguments = {})
         method = OpenSearch::API::HTTP_DELETE
-        path = "_search/point_in_time/_all"
+        path = '_search/point_in_time/_all'
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
         body = nil
 

@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#upgrade' do
-
   let(:expected_args) do
     [
-        'POST',
-        '_upgrade',
-        {},
-        nil,
-        {}
+      'POST',
+      '_upgrade',
+      {},
+      nil,
+      {}
     ]
   end
 

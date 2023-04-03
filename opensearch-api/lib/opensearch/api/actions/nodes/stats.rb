@@ -68,7 +68,7 @@ module OpenSearch
                    elsif _metric
                      "_nodes/stats/#{Utils.__listify(_metric)}"
                    else
-                     "_nodes/stats"
+                     '_nodes/stats'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -79,16 +79,16 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:stats, [
-          :completion_fields,
-          :fielddata_fields,
-          :fields,
-          :groups,
-          :level,
-          :types,
-          :timeout,
-          :include_segment_file_sizes,
-          :include_unloaded_segments
+        ParamsRegistry.register(:stats, %i[
+          completion_fields
+          fielddata_fields
+          fields
+          groups
+          level
+          types
+          timeout
+          include_segment_file_sizes
+          include_unloaded_segments
         ].freeze)
       end
     end

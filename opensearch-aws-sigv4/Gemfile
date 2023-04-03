@@ -12,14 +12,14 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in opensearch-aws-sigv4.gemspec
 gemspec
 
-if File.exist? File.expand_path("../../opensearch-api/opensearch-api.gemspec", __FILE__)
-  gem 'opensearch-api', :path => File.expand_path("../../opensearch-api", __FILE__), :require => false
+if File.exist? File.expand_path('../opensearch-api/opensearch-api.gemspec', __dir__)
+  gem 'opensearch-api', path: File.expand_path('../opensearch-api', __dir__), require: false
 end
 
-if File.exist? File.expand_path("../../opensearch-transport/opensearch-transport.gemspec", __FILE__)
-  gem 'opensearch-transport', :path => File.expand_path("../../opensearch-transport", __FILE__), :require => false
+if File.exist? File.expand_path('../opensearch-transport/opensearch-transport.gemspec', __dir__)
+  gem 'opensearch-transport', path: File.expand_path('../opensearch-transport', __dir__), require: false
 end
 
-if File.exist? File.expand_path("../../opensearch-ruby/opensearch-ruby.gemspec", __FILE__)
-  gem 'opensearch-ruby', :path => File.expand_path("../../opensearch-ruby", __FILE__), :require => false
+if File.exist? File.expand_path('../opensearch-ruby/opensearch-ruby.gemspec', __dir__)
+  gem 'opensearch-ruby', path: File.expand_path('../opensearch-ruby', __dir__), require: false
 end

@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Ids do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::Ids do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#type' do
-
       before do
         search.type('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::Ids do
     end
 
     describe '#values' do
-
       before do
         search.values('bar')
       end
@@ -69,9 +64,7 @@ describe OpenSearch::DSL::Search::Queries::Ids do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           type 'bar'

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A metric aggregation which uses scripts for the computation
         #
         # @example
@@ -58,7 +57,6 @@ module OpenSearch
           option_method :params
           option_method :lang
         end
-
       end
     end
   end

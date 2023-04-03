@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-bucket aggregation which returns document counts for defined IP ranges
         #
         # @example
@@ -50,7 +49,6 @@ module OpenSearch
           option_method :field
           option_method :ranges
         end
-
       end
     end
   end

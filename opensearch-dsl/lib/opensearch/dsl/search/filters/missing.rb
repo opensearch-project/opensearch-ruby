@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents which have a `null` value in the specified field
         # (ie. the reverse of the `exists` filter)
         #
@@ -53,7 +52,6 @@ module OpenSearch
           option_method :existence
           option_method :null_value
         end
-
       end
     end
   end

@@ -36,7 +36,7 @@ describe 'client.indices#add_block' do
       {}
     ]
   end
-  let(:url) { "#{index}/_block/#{block}"}
+  let(:url) { "#{index}/_block/#{block}" }
   let(:index) { 'test_index' }
   let(:block) { 'test_block' }
 

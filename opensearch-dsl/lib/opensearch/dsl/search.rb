@@ -26,12 +26,10 @@
 
 module OpenSearch
   module DSL
-
     # Provides DSL methods for building the search definition
     # (queries, filters, aggregations, sorting, etc)
     #
     module Search
-
       # Initialize a new Search object
       #
       # @example Building a search definition declaratively
@@ -62,11 +60,13 @@ module OpenSearch
       # Wraps the whole search definition (queries, filters, aggregations, sorting, etc)
       #
       class Search
-        attr_reader :aggregations
+        attr_accessor :aggregations
 
         def initialize(*args, &block)
-          @options = Options.new *args
-          block.arity < 1 ? self.instance_eval(&block) : block.call(self) if block
+          @options = Options.new(*args)
+          if block
+            block.arity < 1 ? instance_eval(&block) : block.call(self)
+          end
         end
 
         # DSL method for building or accessing the `query` part of a search definition
@@ -74,15 +74,14 @@ module OpenSearch
         # @return [self, {Query}]
         #
         def query(*args, &block)
-          case
-            when block
-              @query = Query.new(*args, &block)
-              self
-            when !args.empty?
-              @query = args.first
-              self
-            else
-              @query
+          if block
+            @query = Query.new(*args, &block)
+            self
+          elsif !args.empty?
+            @query = args.first
+            self
+          else
+            @query
           end
         end
 
@@ -97,15 +96,14 @@ module OpenSearch
         # @return [self]
         #
         def filter(*args, &block)
-          case
-            when block
-              @filter = Filter.new(*args, &block)
-              self
-            when !args.empty?
-              @filter = args.first
-              self
-            else
-              @filter
+          if block
+            @filter = Filter.new(*args, &block)
+            self
+          elsif !args.empty?
+            @filter = args.first
+            self
+          else
+            @filter
           end
         end
 
@@ -120,15 +118,14 @@ module OpenSearch
         # @return [self]
         #
         def post_filter(*args, &block)
-          case
-            when block
-              @post_filter = Filter.new(*args, &block)
-              self
-            when !args.empty?
-              @post_filter = args.first
-              self
-            else
-              @post_filter
+          if block
+            @post_filter = Filter.new(*args, &block)
+            self
+          elsif !args.empty?
+            @post_filter = args.first
+            self
+          else
+            @post_filter
           end
         end
 
@@ -156,9 +153,6 @@ module OpenSearch
 
         # Set the aggregations part of a search definition
         #
-        def aggregations=(value)
-          @aggregations = value
-        end
 
         # DSL method for building the `highlight` part of a search definition
         #
@@ -188,48 +182,46 @@ module OpenSearch
 
         # Set the sort part of a search definition
         #
-        def sort=(value)
-          @sort = value
-        end
+        attr_writer :sort
 
         # DSL method for building the `stored_fields` part of a search definition
         #
         # @return [self]
         #
-        def stored_fields(value=nil)
+        def stored_fields(value = nil)
           if value
             @stored_fields = value
             self
           else
             @stored_fields
           end
-        end; alias_method :stored_fields=, :stored_fields
+        end; alias stored_fields= stored_fields
 
         # DSL method for building the `size` part of a search definition
         #
         # @return [self]
         #
-        def size(value=nil)
+        def size(value = nil)
           if value
             @size = value
             self
           else
             @size
           end
-        end; alias_method :size=, :size
+        end; alias size= size
 
         # DSL method for building the `from` part of a search definition
         #
         # @return [self]
         #
-        def from(value=nil)
+        def from(value = nil)
           if value
             @from = value
             self
           else
             @from
           end
-        end; alias_method :from=, :from
+        end; alias from= from
 
         # DSL method for building the `suggest` part of a search definition
         #
@@ -248,9 +240,7 @@ module OpenSearch
 
         # Set the suggest part of a search definition
         #
-        def suggest=(value)
-          @suggest = value
-        end
+        attr_writer :suggest
 
         # Delegates to the methods provided by the {Options} class
         #
@@ -272,12 +262,16 @@ module OpenSearch
           hash.update(query: @query.to_hash)   if @query
           hash.update(filter: @filter.to_hash) if @filter
           hash.update(post_filter: @post_filter.to_hash) if @post_filter
-          hash.update(aggregations: @aggregations.reduce({}) { |sum,item| sum.update item.first => item.last.to_hash }) if @aggregations
+          if @aggregations
+            hash.update(aggregations: @aggregations.reduce({}) do |sum, item|
+                                        sum.update item.first => item.last.to_hash
+                                      end)
+          end
           hash.update(sort: @sort.to_hash) if @sort
           hash.update(size: @size) if @size
           hash.update(stored_fields: @stored_fields) if @stored_fields
           hash.update(from: @from) if @from
-          hash.update(suggest: @suggest.reduce({}) { |sum,item| sum.update item.last.to_hash }) if @suggest
+          hash.update(suggest: @suggest.reduce({}) { |sum, item| sum.update item.last.to_hash }) if @suggest
           hash.update(highlight: @highlight.to_hash) if @highlight
           hash.update(@options) unless @options.empty?
           hash

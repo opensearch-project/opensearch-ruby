@@ -27,13 +27,11 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Nested do
-
   let(:search) do
     described_class.new
   end
 
-  context '#initialize' do
-
+  describe '#initialize' do
     let(:search) do
       described_class.new(path: 'bar')
     end
@@ -44,13 +42,11 @@ describe OpenSearch::DSL::Search::Aggregations::Nested do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#path' do
-
       before do
         search.path('bar')
       end
@@ -62,9 +58,7 @@ describe OpenSearch::DSL::Search::Aggregations::Nested do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           path 'bar'
@@ -77,7 +71,6 @@ describe OpenSearch::DSL::Search::Aggregations::Nested do
     end
 
     context 'when another aggregation is nested' do
-
       let(:search) do
         described_class.new do
           path 'bar'

@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.snapshot#verify_repository' do
-
   let(:expected_args) do
     [
-        'POST',
-        '_snapshot/foo/_verify',
-        {},
-        nil,
-        {}
+      'POST',
+      '_snapshot/foo/_verify',
+      {},
+      nil,
+      {}
     ]
   end
 

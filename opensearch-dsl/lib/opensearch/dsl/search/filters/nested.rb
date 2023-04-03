@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which executes another filter in the context of a nested document
         #
         # @example
@@ -77,16 +76,15 @@ module OpenSearch
             hash = super
             if @filter
               _filter = @filter.respond_to?(:to_hash) ? @filter.to_hash : @filter
-              hash[self.name].update(filter: _filter)
+              hash[name].update(filter: _filter)
             end
             if @query
               _query = @query.respond_to?(:to_hash) ? @query.to_hash : @query
-              hash[self.name].update(query: _query)
+              hash[name].update(query: _query)
             end
             hash
           end
         end
-
       end
     end
   end

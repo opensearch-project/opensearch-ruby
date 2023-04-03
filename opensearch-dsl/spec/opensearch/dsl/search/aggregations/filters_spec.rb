@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Filters do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(filters: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#filters' do
-
       before do
         search.filters(foo: 'bar')
       end
@@ -57,8 +53,7 @@ describe OpenSearch::DSL::Search::Aggregations::Filters do
     end
   end
 
-  context '#initialize' do
-
+  describe '#initialize' do
     let(:search) do
       described_class.new(foo: 'bar')
     end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Aggregations::Filters do
     end
 
     context 'when filters are passed' do
-
       let(:search) do
         described_class.new(filters: { foo: 'bar' })
       end
@@ -80,7 +74,6 @@ describe OpenSearch::DSL::Search::Aggregations::Filters do
   end
 
   context 'when another aggregation is nested' do
-
     let(:search) do
       described_class.new do
         filters foo: { terms: { foo: 'bar' } }

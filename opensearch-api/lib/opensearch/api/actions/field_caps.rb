@@ -55,7 +55,7 @@ module OpenSearch
         path = if _index
                  "#{Utils.__listify(_index)}/_field_caps"
                else
-                 "_field_caps"
+                 '_field_caps'
                end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -66,12 +66,12 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:field_caps, [
-        :fields,
-        :ignore_unavailable,
-        :allow_no_indices,
-        :expand_wildcards,
-        :include_unmapped
+      ParamsRegistry.register(:field_caps, %i[
+        fields
+        ignore_unavailable
+        allow_no_indices
+        expand_wildcards
+        include_unmapped
       ].freeze)
     end
   end

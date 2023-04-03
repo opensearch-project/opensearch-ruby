@@ -72,7 +72,7 @@ module OpenSearch
       #
       def benchmark(arguments = {})
         method = HTTP_PUT
-        path   = "_bench"
+        path   = '_bench'
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
         body   = arguments[:body]
 

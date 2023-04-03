@@ -23,7 +23,6 @@ module OpenSearch
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
 
-
           method = OpenSearch::API::HTTP_GET
           path   = '_cat/pit_segments/_all'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
@@ -33,12 +32,12 @@ module OpenSearch
           perform_request(method, path, params, body, headers).body
         end
 
-        ParamsRegistry.register(:all_pit_segments, [
-          :format,
-          :h,
-          :help,
-          :s,
-          :v
+        ParamsRegistry.register(:all_pit_segments, %i[
+          format
+          h
+          help
+          s
+          v
         ].freeze)
       end
     end

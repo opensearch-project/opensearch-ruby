@@ -27,7 +27,6 @@
 module OpenSearch
   module DSL
     module Search
-
       # Wraps the `highlight` part of a search definition
       #
       #
@@ -52,12 +51,13 @@ module OpenSearch
         #
         def fields(value_or_name)
           value = case value_or_name
-            when Hash
-              value_or_name
-            when Array
-              value_or_name.reduce({}) { |sum, item| sum.update item.to_sym => {}; sum }
-            else
-          end
+                  when Hash
+                    value_or_name
+                  when Array
+                    value_or_name.each_with_object({}) do |item, sum|
+                      sum.update item.to_sym => {}
+                    end
+                  end
 
           (@value[:fields] ||= {}).update value
           self
@@ -74,7 +74,7 @@ module OpenSearch
         #       end
         #     end
         #
-        def field(name, options={})
+        def field(name, options = {})
           (@value[:fields] ||= {}).update name.to_sym => options
         end
 
@@ -82,25 +82,25 @@ module OpenSearch
         #
         def pre_tags(*value)
           @value[:pre_tags] = value.flatten
-        end; alias_method :pre_tags=, :pre_tags
+        end; alias pre_tags= pre_tags
 
         # Specify the closing tags for the highlighted snippets
         #
         def post_tags(*value)
           @value[:post_tags] = value.flatten
-        end; alias_method :post_tags=, :post_tags
+        end; alias post_tags= post_tags
 
         # Specify the `encoder` option for highlighting
         #
         def encoder(value)
           @value[:encoder] = value
-        end; alias_method :encoder=, :encoder
+        end; alias encoder= encoder
 
         # Specify the `tags_schema` option for highlighting
         #
         def tags_schema(value)
           @value[:tags_schema] = value
-        end; alias_method :tags_schema=, :tags_schema
+        end; alias tags_schema= tags_schema
 
         # Convert the definition to a Hash
         #

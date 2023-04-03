@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#state' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cluster/state',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cluster/state',
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -43,19 +42,18 @@ describe 'client.cluster#state' do
   end
 
   context 'when a metric is specified' do
-
     let(:expected_args) do
       [
-          'GET',
-          '_cluster/state/foo,bar',
-          {},
-          nil,
-          {}
+        'GET',
+        '_cluster/state/foo,bar',
+        {},
+        nil,
+        {}
       ]
     end
 
     it 'performs the request' do
-      expect(client_double.cluster.state(metric: ['foo', 'bar'])).to eq({})
+      expect(client_double.cluster.state(metric: %w[foo bar])).to eq({})
     end
   end
 end

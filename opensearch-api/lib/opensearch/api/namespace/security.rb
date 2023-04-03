@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "security" namespace (includes the {Security::Actions} methods)
       #
       class SecurityClient
-        include Common::Client, Common::Client::Base, Security::Actions
+        include Security::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {SecurityClient}, available in the receiving object

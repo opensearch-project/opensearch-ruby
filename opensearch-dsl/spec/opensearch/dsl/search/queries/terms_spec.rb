@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Terms do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,15 +38,13 @@ describe OpenSearch::DSL::Search::Queries::Terms do
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
-        described_class.new(foo: ['abc', 'xyz'])
+        described_class.new(foo: %w[abc xyz])
       end
 
       it 'sets the value' do
-        expect(search.to_hash[:terms]).to eq(foo: ['abc', 'xyz'])
+        expect(search.to_hash[:terms]).to eq(foo: %w[abc xyz])
       end
     end
   end

@@ -56,17 +56,17 @@ describe 'client#explain' do
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       client.explain(id: '1')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :id argument' do
-    expect {
+    expect do
       client.explain(index: 'foo')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
-  
+
   it 'performs the request' do
     expect(client_double.explain(index: 'foo', id: 1, body: {})).to eq({})
   end
@@ -102,7 +102,7 @@ describe 'client#explain' do
     end
 
     it 'URL-escapes the parts' do
-      expect(client_double.explain(index: 'foo^bar', id: '1', body: { })).to eq({})
+      expect(client_double.explain(index: 'foo^bar', id: '1', body: {})).to eq({})
     end
   end
 end

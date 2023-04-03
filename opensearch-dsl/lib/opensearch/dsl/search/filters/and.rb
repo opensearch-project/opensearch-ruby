@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A compound filter which matches documents by an intersection of individual filters.
         #
         # @note Since `and` is a keyword in Ruby, use the `_and` method in DSL definitions

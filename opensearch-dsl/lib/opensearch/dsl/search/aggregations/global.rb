@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # Defines a single bucket of all the documents matching a query
         #
         # @example
@@ -47,7 +46,6 @@ module OpenSearch
         class Global
           include BaseAggregationComponent
         end
-
       end
     end
   end

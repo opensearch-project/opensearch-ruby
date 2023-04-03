@@ -24,9 +24,9 @@ describe 'client#delete_all_pits' do
   end
 
   it 'does not accept unregistered params' do
-    expect {
+    expect do
       client.delete_all_pits(something: :else)
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request with all optional params' do

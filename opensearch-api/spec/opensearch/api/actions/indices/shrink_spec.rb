@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#shrink' do
-
   let(:expected_args) do
     [
-        'PUT',
-        'foo/_shrink/bar',
-        {},
-        nil,
-        {}
+      'PUT',
+      'foo/_shrink/bar',
+      {},
+      nil,
+      {}
     ]
   end
 

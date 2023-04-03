@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-bucket aggregation which returns the collection of terms and their document counts
         #
         # @example Passing the options as a Hash
@@ -61,7 +60,6 @@ module OpenSearch
           option_method :include
           option_method :exclude
         end
-
       end
     end
   end

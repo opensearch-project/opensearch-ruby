@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A single-bucket aggregation which allows to aggregate from buckets on parent documents
         # to buckets on the children documents
         #
@@ -58,7 +57,6 @@ module OpenSearch
 
           option_method :type
         end
-
       end
     end
   end

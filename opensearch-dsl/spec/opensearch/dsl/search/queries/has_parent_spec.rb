@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::HasParent do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::HasParent do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#parent_type' do
-
       before do
         search.parent_type('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::HasParent do
     end
 
     describe '#query' do
-
       before do
         search.query('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::HasParent do
     end
 
     describe '#score_mode' do
-
       before do
         search.score_mode('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Queries::HasParent do
     end
 
     describe '#inner_hits' do
-
       before do
         search.inner_hits(size: 1)
       end
@@ -91,9 +84,7 @@ describe OpenSearch::DSL::Search::Queries::HasParent do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           parent_type 'bar'

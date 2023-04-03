@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Filters::HasParent do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Filters::HasParent do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#parent_type' do
-
       before do
         search.parent_type('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Filters::HasParent do
     end
 
     describe '#query' do
-
       before do
         search.query('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Filters::HasParent do
     end
 
     describe '#filter' do
-
       before do
         search.filter('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Filters::HasParent do
     end
 
     describe '#score_mode' do
-
       before do
         search.score_mode('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Filters::HasParent do
     end
 
     describe '#inner_hits' do
-
       before do
         search.inner_hits(size: 1)
       end
@@ -102,9 +94,7 @@ describe OpenSearch::DSL::Search::Filters::HasParent do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new(:foo) do
           parent_type 'bar'
@@ -117,7 +107,6 @@ describe OpenSearch::DSL::Search::Filters::HasParent do
     end
 
     context 'when a block is provided to an option method' do
-
       let(:search) do
         described_class.new do
           parent_type 'bar'
@@ -130,7 +119,7 @@ describe OpenSearch::DSL::Search::Filters::HasParent do
       end
 
       it 'executes the block' do
-        expect(search.to_hash).to eq(has_parent: { parent_type: 'bar', query: { match: { foo: { query: 'bar'} } } })
+        expect(search.to_hash).to eq(has_parent: { parent_type: 'bar', query: { match: { foo: { query: 'bar' } } } })
       end
     end
   end

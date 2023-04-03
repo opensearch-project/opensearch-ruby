@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching a specified prefix
         #
         # @example
@@ -49,7 +48,6 @@ module OpenSearch
           option_method :value
           option_method :boost
         end
-
       end
     end
   end

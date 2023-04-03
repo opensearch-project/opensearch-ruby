@@ -27,19 +27,18 @@
 require 'spec_helper'
 
 describe 'client#get_source' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        params,
-        nil,
-        {}
+      'GET',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
   let(:params) do
-    { }
+    {}
   end
 
   let(:url) do
@@ -51,19 +50,18 @@ describe 'client#get_source' do
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       client.get_source(id: '1')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :id argument' do
-    expect {
+    expect do
       client.get_source(index: 'foo')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   context 'when the type parameter is not provided' do
-
     let(:url) do
       'foo/_source/1'
     end
@@ -74,7 +72,6 @@ describe 'client#get_source' do
   end
 
   context 'when URL parameters are provided' do
-
     let(:params) do
       { routing: 'abc123' }
     end
@@ -85,7 +82,6 @@ describe 'client#get_source' do
   end
 
   context 'when the request needs to be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_source/1'
     end
@@ -96,15 +92,14 @@ describe 'client#get_source' do
   end
 
   context 'when the request raises a NotFound error' do
-
     before do
       expect(client).to receive(:perform_request).and_raise(NotFound)
     end
 
     it 'raises the error' do
-      expect {
+      expect do
         client.get_source(index: 'foo', id: '1')
-      }.to raise_exception(NotFound)
+      end.to raise_exception(NotFound)
     end
   end
 end

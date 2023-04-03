@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # Defines a single bucket with documents matching the provided filter,
         # usually to define scope for a nested aggregation
         #
@@ -49,7 +48,6 @@ module OpenSearch
         class Filter
           include BaseAggregationComponent
         end
-
       end
     end
   end

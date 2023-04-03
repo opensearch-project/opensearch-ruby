@@ -42,7 +42,7 @@ module OpenSearch
         arguments = arguments.clone
 
         method = OpenSearch::API::HTTP_GET
-        path   = "_script_language"
+        path   = '_script_language'
         params = {}
 
         body = nil

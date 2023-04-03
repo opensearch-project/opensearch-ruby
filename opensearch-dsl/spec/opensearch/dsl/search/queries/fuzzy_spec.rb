@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Fuzzy do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::Fuzzy do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#value' do
-
       before do
         search.value('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::Fuzzy do
     end
 
     describe '#boost' do
-
       before do
         search.boost('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::Fuzzy do
     end
 
     describe '#fuzziness' do
-
       before do
         search.fuzziness('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Queries::Fuzzy do
     end
 
     describe '#prefix_length' do
-
       before do
         search.prefix_length('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Queries::Fuzzy do
     end
 
     describe '#max_expansions' do
-
       before do
         search.max_expansions('bar')
       end
@@ -102,9 +94,7 @@ describe OpenSearch::DSL::Search::Queries::Fuzzy do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           value 'bar'

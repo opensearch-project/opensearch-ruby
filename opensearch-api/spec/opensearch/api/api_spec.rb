@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::API do
-
   describe '#settings' do
-
     it 'allows access to settings' do
       expect(described_class.settings).not_to be_nil
     end
@@ -39,7 +37,6 @@ describe OpenSearch::API do
     end
 
     context 'when settings are changed' do
-
       before do
         OpenSearch::API.settings[:foo] = 'bar'
       end

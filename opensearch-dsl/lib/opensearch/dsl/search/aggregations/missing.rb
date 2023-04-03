@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A single bucket aggregation that creates a bucket of all documents
         # which are missing a value for the field
         #
@@ -54,7 +53,6 @@ module OpenSearch
 
           option_method :field
         end
-
       end
     end
   end

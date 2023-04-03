@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching spans near each other
         #
         # @example
@@ -51,7 +50,6 @@ module OpenSearch
           option_method :in_order
           option_method :collect_payloads
         end
-
       end
     end
   end

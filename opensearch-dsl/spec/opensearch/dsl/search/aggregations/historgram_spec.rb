@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Histogram do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(histogram: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#field' do
-
       before do
         search.field('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Aggregations::Histogram do
     end
 
     describe '#interval' do
-
       before do
         search.interval('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Aggregations::Histogram do
     end
 
     describe '#min_doc_count' do
-
       before do
         search.min_doc_count('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Aggregations::Histogram do
     end
 
     describe '#extended_bounds' do
-
       before do
         search.extended_bounds('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Aggregations::Histogram do
     end
 
     describe '#order' do
-
       before do
         search.order('bar')
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Aggregations::Histogram do
     end
 
     describe '#keyed' do
-
       before do
         search.keyed('bar')
       end
@@ -113,9 +104,7 @@ describe OpenSearch::DSL::Search::Aggregations::Histogram do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           field 'bar'

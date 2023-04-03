@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cat#fielddata' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cat/fielddata',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cat/fielddata',
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -43,19 +42,18 @@ describe 'client.cat#fielddata' do
   end
 
   context 'when field are specified' do
-
     let(:expected_args) do
       [
-          'GET',
-          '_cat/fielddata/foo,bar',
-          {},
-          nil,
-          {}
+        'GET',
+        '_cat/fielddata/foo,bar',
+        {},
+        nil,
+        {}
       ]
     end
 
     it 'performs the request' do
-      expect(client_double.cat.fielddata(fields: ['foo', 'bar'])).to eq({})
+      expect(client_double.cat.fielddata(fields: %w[foo bar])).to eq({})
     end
   end
 end

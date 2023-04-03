@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which matches documents matching a regular expression
         #
         # @example
@@ -50,7 +49,6 @@ module OpenSearch
           option_method :boost
           option_method :flags
         end
-
       end
     end
   end

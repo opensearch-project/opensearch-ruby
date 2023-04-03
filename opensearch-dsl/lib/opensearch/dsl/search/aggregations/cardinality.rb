@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A single-value metric aggregation which returns the approximate count of distinct values
         #
         # @example
@@ -51,7 +50,6 @@ module OpenSearch
           option_method :script
           option_method :params
         end
-
       end
     end
   end

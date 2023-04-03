@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Terms do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(terms: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#field' do
-
       before do
         search.field('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     describe '#size' do
-
       before do
         search.size('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     describe '#shard_size' do
-
       before do
         search.shard_size('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     describe '#order' do
-
       before do
         search.shard_size('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     describe '#min_doc_count' do
-
       before do
         search.min_doc_count('bar')
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     describe '#shard_min_doc_count' do
-
       before do
         search.shard_min_doc_count('bar')
       end
@@ -112,7 +103,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     describe '#include' do
-
       before do
         search.include('bar')
       end
@@ -123,7 +113,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     describe '#exclude' do
-
       before do
         search.exclude('bar')
       end
@@ -134,7 +123,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     describe '#script' do
-
       before do
         search.script('bar')
       end
@@ -146,9 +134,7 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
         described_class.new(field: 'test')
       end
@@ -159,7 +145,6 @@ describe OpenSearch::DSL::Search::Aggregations::Terms do
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           field 'bar'

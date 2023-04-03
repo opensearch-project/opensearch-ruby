@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which will decrease the score of documents matching the `negative` query
         #
         # @example
@@ -52,7 +51,6 @@ module OpenSearch
           option_method :negative
           option_method :negative_boost
         end
-
       end
     end
   end

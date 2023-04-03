@@ -27,18 +27,18 @@
 # Admin client is used by tests and other rake tasks to communicate with a running cluster.
 def admin_client
   $admin_client ||= begin
-                      transport_options = {}
-                      if (hosts = ENV['TEST_OPENSEARCH_SERVER'] || ENV['OPENSEARCH_HOSTS'])
-                        split_hosts = hosts.split(',').map do |host|
-                          /(http\:\/\/)?\S+/.match(host)
-                        end
-                        uri = URI.parse(split_hosts.first[0])
-                      end
+    transport_options = {}
+    if (hosts = ENV.fetch('TEST_OPENSEARCH_SERVER', nil) || ENV.fetch('OPENSEARCH_HOSTS', nil))
+      split_hosts = hosts.split(',').map do |host|
+        %r{(http://)?\S+}.match(host)
+      end
+      uri = URI.parse(split_hosts.first[0])
+    end
 
-                      url = "http://#{uri&.host || 'localhost'}:#{uri&.port || 9200}"
-                      puts "OpenSearch Client url: #{url}"
-                      OpenSearch::Client.new(host: url, transport_options: transport_options)
-                    end
+    url = "http://#{uri&.host || 'localhost'}:#{uri&.port || 9200}"
+    puts "OpenSearch Client url: #{url}"
+    OpenSearch::Client.new(host: url, transport_options: transport_options)
+  end
 end
 
 import 'rake_tasks/opensearch_tasks.rake'
@@ -54,17 +54,17 @@ SUBPROJECTS = [
   'opensearch-transport',
   'opensearch-dsl',
   'opensearch-api',
-  'opensearch-aws-sigv4',
+  'opensearch-aws-sigv4'
 ].freeze
 
 RELEASE_TOGETHER = [
   'opensearch-ruby',
   'opensearch-transport',
   'opensearch-api',
-  'opensearch-aws-sigv4',
+  'opensearch-aws-sigv4'
 ].freeze
 
-CERT_DIR = ENV['CERT_DIR']
+CERT_DIR = ENV.fetch('CERT_DIR', nil)
 
 # Import build task after setting constants:
 import 'rake_tasks/unified_release_tasks.rake'
@@ -81,14 +81,14 @@ task :subprojects do
   puts '-' * 80
   SUBPROJECTS.each do |project|
     commit  = `git log --pretty=format:'%h %ar: %s' -1 #{project}`
-    version =  Gem::Specification::load(CURRENT_PATH.join(project, "#{project}.gemspec").to_s).version.to_s
-    puts "#{version}".ljust(10) +
-         "| \e[1m#{project.ljust(SUBPROJECTS.map {|s| s.length}.max)}\e[0m | #{commit[ 0..80]}..."
+    version = Gem::Specification.load(CURRENT_PATH.join(project, "#{project}.gemspec").to_s).version.to_s
+    puts version.to_s.ljust(10) +
+         "| \e[1m#{project.ljust(SUBPROJECTS.map { |s| s.length }.max)}\e[0m | #{commit[0..80]}..."
   end
 end
 
 desc "Alias for `bundle:install`"
-task :bundle => 'bundle:install'
+task bundle: 'bundle:install'
 
 namespace :bundle do
   desc "Run `bundle install` in all subprojects"
@@ -108,7 +108,6 @@ namespace :bundle do
   end
 end
 
-
 require_relative 'scripts/github_pages_generator'
 desc "Generate documentation for all subprojects to be published to gh-pages"
 task :gh_pages do
@@ -119,7 +118,7 @@ desc "Generate documentation for all subprojects"
 task :doc do
   SUBPROJECTS.each do |project|
     sh "cd #{CURRENT_PATH.join(project)} && rake doc"
-    puts '-'*80
+    puts '-' * 80
   end
 end
 

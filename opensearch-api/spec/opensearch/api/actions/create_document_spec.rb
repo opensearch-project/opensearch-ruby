@@ -27,30 +27,28 @@
 require 'spec_helper'
 
 describe 'client#create_document' do
-
   let(:expected_args) do
     [
-        'PUT',
-        'foo/_doc/123',
-        { op_type: 'create' },
-        { foo: 'bar' },
-        {}
+      'PUT',
+      'foo/_doc/123',
+      { op_type: 'create' },
+      { foo: 'bar' },
+      {}
     ]
   end
 
   it 'performs the request' do
-    expect(client_double.create(index: 'foo', id: '123', body: { foo: 'bar'})).to eq({})
+    expect(client_double.create(index: 'foo', id: '123', body: { foo: 'bar' })).to eq({})
   end
 
   context 'when the request needs to be URL-escaped' do
-
     let(:expected_args) do
       [
-          'PUT',
-          'foo%5Ebar/_doc/123',
-          { op_type: 'create' },
-          {},
-          {}
+        'PUT',
+        'foo%5Ebar/_doc/123',
+        { op_type: 'create' },
+        {},
+        {}
       ]
     end
 
@@ -60,14 +58,13 @@ describe 'client#create_document' do
   end
 
   context 'when an id is provided as an integer' do
-
     let(:expected_args) do
       [
-          'PUT',
-          'foo/_doc/1',
-          { op_type: 'create' },
-          { foo: 'bar' },
-          {}
+        'PUT',
+        'foo/_doc/1',
+        { op_type: 'create' },
+        { foo: 'bar' },
+        {}
       ]
     end
 
@@ -77,14 +74,13 @@ describe 'client#create_document' do
   end
 
   context 'when an id is not provided' do
-
     let(:expected_args) do
       [
-          'POST',
-          'foo/_doc',
-          { },
-          { foo: 'bar' },
-          {}
+        'POST',
+        'foo/_doc',
+        {},
+        { foo: 'bar' },
+        {}
       ]
     end
 

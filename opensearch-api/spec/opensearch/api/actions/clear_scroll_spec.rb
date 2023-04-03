@@ -27,7 +27,6 @@
 require 'spec_helper'
 
 describe 'client#clear_scroll' do
-
   let(:expected_args) do
     [
       'DELETE',
@@ -43,19 +42,18 @@ describe 'client#clear_scroll' do
   end
 
   context 'when a list of scroll ids is provided' do
-
     let(:expected_args) do
       [
-          'DELETE',
-          '_search/scroll/abc123,def456',
-          {},
-          nil,
-          {}
+        'DELETE',
+        '_search/scroll/abc123,def456',
+        {},
+        nil,
+        {}
       ]
     end
 
     it 'performs the request' do
-      expect(client_double.clear_scroll(scroll_id: ['abc123', 'def456'])).to eq({})
+      expect(client_double.clear_scroll(scroll_id: %w[abc123 def456])).to eq({})
     end
   end
 end

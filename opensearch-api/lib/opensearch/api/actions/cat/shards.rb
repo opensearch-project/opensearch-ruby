@@ -55,7 +55,7 @@ module OpenSearch
           path   = if _index
                      "_cat/shards/#{Utils.__listify(_index)}"
                    else
-                     "_cat/shards"
+                     '_cat/shards'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
           params[:h] = Utils.__listify(params[:h]) if params[:h]
@@ -67,17 +67,17 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:shards, [
-          :format,
-          :bytes,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :h,
-          :help,
-          :s,
-          :time,
-          :v
+        ParamsRegistry.register(:shards, %i[
+          format
+          bytes
+          local
+          master_timeout
+          cluster_manager_timeout
+          h
+          help
+          s
+          time
+          v
         ].freeze)
       end
     end

@@ -68,12 +68,12 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:rollover, [
-          :timeout,
-          :dry_run,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :wait_for_active_shards
+        ParamsRegistry.register(:rollover, %i[
+          timeout
+          dry_run
+          master_timeout
+          cluster_manager_timeout
+          wait_for_active_shards
         ].freeze)
       end
     end

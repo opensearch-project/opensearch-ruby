@@ -54,7 +54,6 @@ describe 'client#msearch_template' do
   end
 
   context 'when a body is provided as a document' do
-
     let(:body) do
       <<-PAYLOAD.gsub(/^\s+/, '')
             {"index":"foo"}
@@ -66,27 +65,25 @@ describe 'client#msearch_template' do
 
     it 'performs the request' do
       expect(client_double.msearch_template(body: [
-          { index: 'foo' },
-          { inline: { query: { match: { foo: '{{q}}' } } }, params: { q: 'foo' } },
-          { index: 'bar' },
-          { id: 'query_foo', params: { q: 'foo' } }
-      ])).to eq({})
+                                              { index: 'foo' },
+                                              { inline: { query: { match: { foo: '{{q}}' } } }, params: { q: 'foo' } },
+                                              { index: 'bar' },
+                                              { id: 'query_foo', params: { q: 'foo' } }
+                                            ])).to eq({})
     end
   end
 
   context 'when a body is provided as a string' do
-
     let(:body) do
-      %Q|{"foo":"bar"}\n{"moo":"lam"}|
+      %({"foo":"bar"}\n{"moo":"lam"})
     end
 
     it 'performs the request' do
-      expect(client_double.msearch_template(body: %Q|{"foo":"bar"}\n{"moo":"lam"}|)).to eq({})
+      expect(client_double.msearch_template(body: %({"foo":"bar"}\n{"moo":"lam"}))).to eq({})
     end
   end
 
   context 'when an index is provided' do
-
     let(:url) do
       'foo/_msearch/template'
     end

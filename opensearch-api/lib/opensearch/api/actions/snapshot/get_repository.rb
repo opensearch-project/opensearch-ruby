@@ -47,7 +47,7 @@ module OpenSearch
           path   = if _repository
                      "_snapshot/#{Utils.__listify(_repository)}"
                    else
-                     "_snapshot"
+                     '_snapshot'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -62,10 +62,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get_repository, [
-          :master_timeout,
-          :cluster_manager_timeout,
-          :local
+        ParamsRegistry.register(:get_repository, %i[
+          master_timeout
+          cluster_manager_timeout
+          local
         ].freeze)
       end
     end

@@ -53,7 +53,7 @@ module OpenSearch
                    elsif _metric
                      "_nodes/usage/#{Utils.__listify(_metric)}"
                    else
-                     "_nodes/usage"
+                     '_nodes/usage'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 

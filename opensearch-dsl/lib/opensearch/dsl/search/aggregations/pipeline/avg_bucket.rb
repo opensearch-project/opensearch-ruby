@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A sibling pipeline aggregation which calculates the (mean) average value of a specified metric in a sibling aggregation.
         #
         # @example Passing the options as a Hash

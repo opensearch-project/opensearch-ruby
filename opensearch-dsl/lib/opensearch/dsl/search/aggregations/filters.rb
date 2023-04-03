@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-bucket aggregation which defines multiple buckets matching the provided filters,
         # usually to define scope for a nested aggregation
         #
@@ -54,7 +53,6 @@ module OpenSearch
 
           option_method :filters
         end
-
       end
     end
   end

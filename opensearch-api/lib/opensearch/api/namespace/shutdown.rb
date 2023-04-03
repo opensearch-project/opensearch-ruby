@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "shutdown" namespace (includes the {Shutdown::Actions} methods)
       #
       class ShutdownClient
-        include Common::Client, Common::Client::Base, Shutdown::Actions
+        include Shutdown::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {ShutdownClient}, available in the receiving object
@@ -40,7 +42,6 @@ module OpenSearch
       def shutdown
         @shutdown ||= ShutdownClient.new(self)
       end
-
     end
   end
 end

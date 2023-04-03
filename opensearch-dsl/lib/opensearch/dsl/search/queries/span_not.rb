@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which discards matching documents which overlap with another query
         #
         # @example
@@ -52,7 +51,6 @@ module OpenSearch
           option_method :post
           option_method :dist
         end
-
       end
     end
   end

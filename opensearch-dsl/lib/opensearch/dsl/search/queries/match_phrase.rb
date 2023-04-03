@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query that analyzes the text and creates a phrase query out of the analyzed text
         #
         # @example
@@ -51,7 +50,6 @@ module OpenSearch
           option_method :boost
           option_method :slop
         end
-
       end
     end
   end

@@ -60,7 +60,7 @@ module OpenSearch
         path   = if _index
                    "#{Utils.__listify(_index)}/_mget"
                  else
-                   "_mget"
+                   '_mget'
                  end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -71,15 +71,15 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:mget, [
-        :stored_fields,
-        :preference,
-        :realtime,
-        :refresh,
-        :routing,
-        :_source,
-        :_source_excludes,
-        :_source_includes
+      ParamsRegistry.register(:mget, %i[
+        stored_fields
+        preference
+        realtime
+        refresh
+        routing
+        _source
+        _source_excludes
+        _source_includes
       ].freeze)
     end
   end

@@ -27,19 +27,18 @@
 require 'spec_helper'
 
 describe 'client#update' do
-
   let(:expected_args) do
     [
-        'POST',
-        url,
-        params,
-        body,
-        {}
+      'POST',
+      url,
+      params,
+      body,
+      {}
     ]
   end
 
   let(:body) do
-    { doc: { } }
+    { doc: {} }
   end
 
   let(:url) do
@@ -55,15 +54,15 @@ describe 'client#update' do
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       client.update(id: '1')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :id argument' do
-    expect {
+    expect do
       client.update(index: 'foo')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do
@@ -71,7 +70,6 @@ describe 'client#update' do
   end
 
   context 'when URL parameters are provided' do
-
     let(:url) do
       'foo/_update/1'
     end
@@ -86,16 +84,14 @@ describe 'client#update' do
   end
 
   context 'when invalid parameters are specified' do
-
     it 'raises an ArgumentError' do
-      expect {
+      expect do
         client.update(index: 'foo', id: '1', body: { doc: {} }, qwertypoiuy: 'asdflkjhg')
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when the request needs to be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_update/1'
     end
@@ -110,21 +106,19 @@ describe 'client#update' do
   end
 
   context 'when a NotFound exception is raised' do
-
     before do
       allow(client).to receive(:perform_request).and_raise(NotFound)
     end
 
     it 'raises it to the user' do
-      expect {
+      expect do
         client.update(index: 'foo', id: 'XXX', body: {})
-      }.to raise_exception(NotFound)
+      end.to raise_exception(NotFound)
     end
 
     context 'when the :ignore parameter is specified' do
-
       it 'does not raise the error to the user' do
-        expect(client.update(index: 'foo', id: 'XXX', body: {}, ignore: 404)).to eq(false)
+        expect(client.update(index: 'foo', id: 'XXX', body: {}, ignore: 404)).to be(false)
       end
     end
   end

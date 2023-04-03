@@ -27,7 +27,7 @@
 require 'opensearch'
 require 'rspec'
 
-OPENSEARCH_URL = ENV['TEST_OPENSEARCH_SERVER'] || "http://localhost:#{(ENV['PORT'] || 9200)}"
+OPENSEARCH_URL = ENV.fetch('TEST_OPENSEARCH_SERVER', nil) || "http://localhost:#{ENV.fetch('PORT', nil) || 9200}"
 raise URI::InvalidURIError unless OPENSEARCH_URL =~ /\A#{URI::DEFAULT_PARSER.make_regexp}\z/
 
 RSpec.configure do |config|

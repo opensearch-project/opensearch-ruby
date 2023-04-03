@@ -10,11 +10,9 @@ require 'opensearch-transport'
 require 'opensearch-api'
 
 gems_not_loaded = ['opensearch-dsl'].reject do |gem|
-  begin
-    (require gem) || true
-  rescue LoadError
-    false
-  end
+  (require gem) || true
+rescue LoadError
+  false
 end
 
 unless gems_not_loaded.empty?

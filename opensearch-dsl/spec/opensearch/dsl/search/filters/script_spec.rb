@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Filters::Script do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(script: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#script' do
-
       before do
         search.script('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Filters::Script do
     end
 
     describe '#params' do
-
       before do
         search.params(foo: 'bar')
       end
@@ -69,9 +64,7 @@ describe OpenSearch::DSL::Search::Filters::Script do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new(:foo) do
           script 'bar'

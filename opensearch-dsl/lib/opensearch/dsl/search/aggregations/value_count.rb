@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A single-value metric aggregation which returns the number of values for the aggregation scope
         #
         # @example
@@ -44,7 +43,6 @@ module OpenSearch
         class ValueCount
           include BaseComponent
         end
-
       end
     end
   end

@@ -27,20 +27,17 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Filters::And do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(and: {})
     end
   end
 
   context 'when enumerable methods are called' do
-
     before do
       search << { term: { foo: 'bar' } }
       search << { term: { moo: 'mam' } }
@@ -54,20 +51,17 @@ describe OpenSearch::DSL::Search::Filters::And do
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
-        described_class.new(filters: [ { term: { foo: 'bar' } } ])
+        described_class.new(filters: [{ term: { foo: 'bar' } }])
       end
 
       it 'applies the hash' do
-        expect(search.to_hash).to eq(and: { filters: [ { term: { foo: 'bar' } } ] })
+        expect(search.to_hash).to eq(and: { filters: [{ term: { foo: 'bar' } }] })
       end
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           term foo: 'bar'
@@ -76,7 +70,7 @@ describe OpenSearch::DSL::Search::Filters::And do
       end
 
       it 'executes the block' do
-        expect(search.to_hash).to eq(and: [ { term: { foo: 'bar' } }, { term: { moo: 'mam' } } ])
+        expect(search.to_hash).to eq(and: [{ term: { foo: 'bar' } }, { term: { moo: 'mam' } }])
       end
     end
   end

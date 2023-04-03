@@ -1,3 +1,13 @@
+- [Developer Guide](#developer-guide)
+  - [Getting Started](#getting-started)
+    - [Git Clone OpenSearch Ruby Repo](#git-clone-opensearch-ruby-repo)
+    - [Install Prerequisites](#install-prerequisites)
+      - [Docker](#docker)
+    - [Build and Test](#build-and-test)
+    - [Integration Tests](#integration-tests)
+    - [Linter](#linter)
+  - [Submitting Changes](#submitting-changes)
+
 # Developer Guide
 
 So you want to contribute code to the OpenSearch Ruby client? Excellent! We're glad you're here. Here's what you need to do.
@@ -42,6 +52,15 @@ And run:
 
 ```
 bundle exec rake test:integration
+```
+
+### Linter
+
+Use RuboCop to auto-lint Ruby code.
+
+```
+rubocop -a
+rubocop --auto-gen-config
 ```
 
 ## Submitting Changes

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-bucket aggregation which returns document counts for custom numerical ranges,
         # which define the buckets
         #
@@ -72,7 +71,6 @@ module OpenSearch
             self
           end
         end
-
       end
     end
   end

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents matching the specified regular expression
         #
         # @example
@@ -53,7 +52,6 @@ module OpenSearch
           option_method :value
           option_method :flags
         end
-
       end
     end
   end

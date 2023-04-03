@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cat#thread_pool' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cat/thread_pool',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cat/thread_pool',
+      {},
+      nil,
+      {}
     ]
   end
 

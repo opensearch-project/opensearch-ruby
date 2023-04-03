@@ -27,37 +27,36 @@
 module OpenSearch
   module DSL
     module Search
-
       # Wraps the "extra" options of a search definition
       #
       #
       class Options
-        DSL_METHODS = [
-          :_source,
-          :fields,
-          :script_fields,
-          :fielddata_fields,
-          :rescore,
-          :explain,
-          :version,
-          :indices_boost,
-          :track_scores,
-          :min_score,
-          :track_total_hits
+        DSL_METHODS = %i[
+          _source
+          fields
+          script_fields
+          fielddata_fields
+          rescore
+          explain
+          version
+          indices_boost
+          track_scores
+          min_score
+          track_total_hits
         ]
 
-        def initialize(*args, &block)
+        def initialize(*_args)
           @hash = {}
         end
 
         # Defines a method for each valid search definition option
         #
         DSL_METHODS.each do |name|
-          define_method name do |*args, &block|
+          define_method name do |*args|
             @hash[name] = args.pop
           end
 
-          define_method name.to_s.gsub(/^_(.*)/, '\1') do |*args, &block|
+          define_method name.to_s.gsub(/^_(.*)/, '\1') do |*args|
             @hash[name] = args.pop
           end
         end
@@ -72,7 +71,7 @@ module OpenSearch
         #
         # @return [Hash]
         #
-        def to_hash(options={})
+        def to_hash(_options = {})
           @hash
         end
       end

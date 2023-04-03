@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Template do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,16 +38,13 @@ describe OpenSearch::DSL::Search::Queries::Template do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
-    [ 'query',
-      'params' ].each do |option|
-
+    %w[query
+       params].each do |option|
       describe "##{option}" do
-
         before do
           search.send(option, 'bar')
         end
@@ -62,9 +57,7 @@ describe OpenSearch::DSL::Search::Queries::Template do
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
         described_class.new(query: 'bar', params: { foo: 'abc' })
       end
@@ -76,7 +69,6 @@ describe OpenSearch::DSL::Search::Queries::Template do
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           query 'bar'

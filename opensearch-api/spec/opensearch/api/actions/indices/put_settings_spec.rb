@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#put_settings' do
-
   let(:expected_args) do
     [
-        'PUT',
-        url,
-        params,
-        body,
-        {}
+      'PUT',
+      url,
+      params,
+      body,
+      {}
     ]
   end
 
@@ -55,20 +54,18 @@ describe 'client.cluster#put_settings' do
   end
 
   context 'when there is no body specified' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
 
     it 'raises an exception' do
-      expect {
+      expect do
         client.indices.put_settings
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when parameters are specified' do
-
     let(:params) do
       { flat_settings: true }
     end
@@ -83,7 +80,6 @@ describe 'client.cluster#put_settings' do
   end
 
   context 'when an index is specified' do
-
     let(:url) do
       'foo/_settings'
     end
@@ -94,18 +90,16 @@ describe 'client.cluster#put_settings' do
   end
 
   context 'when multiple indices are specified' do
-
     let(:url) do
       'foo,bar/_settings'
     end
 
     it 'performs the request' do
-      expect(client_double.indices.put_settings(index: ['foo','bar'], body: {})).to eq({})
+      expect(client_double.indices.put_settings(index: %w[foo bar], body: {})).to eq({})
     end
   end
 
   context 'when the path needs to be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_settings'
     end

@@ -48,26 +48,26 @@ namespace :test do
     t.exclude_pattern = 'spec/**{,/*/**}/rest_api_yaml_spec.rb'
   end
 
-  desc "Run Rest API Spec tests"
+  desc 'Run Rest API Spec tests'
   RSpec::Core::RakeTask.new(:rest_api) do |t|
     require 'opensearch'
     # Check if a test cluster is running
     begin
-      url = ENV['TEST_CLUSTER_URL'] || ENV['TEST_OPENSEARCH_SERVER']
-      url = "http://localhost:#{ENV['TEST_CLUSTER_PORT'] || 9200}" unless url
-      client = OpenSearch::Client.new :url => url
+      url = ENV.fetch('TEST_CLUSTER_URL', nil) || ENV.fetch('TEST_OPENSEARCH_SERVER', nil)
+      url ||= "http://localhost:#{ENV.fetch('TEST_CLUSTER_PORT', nil) || 9200}"
+      client = OpenSearch::Client.new url: url
       os_version_info = client.info['version']
       version_number = os_version_info['number']
-      build_hash      = os_version_info['build_hash']
+      build_hash = os_version_info['build_hash']
     rescue Faraday::ConnectionFailed
-      STDERR.puts "[!] Test cluster not running?"
+      warn '[!] Test cluster not running?'
       exit 1
     end
 
     t.pattern = 'spec/**{,/*/**}/rest_api_yaml_spec.rb'
   end
 
-  desc "Run integration tests"
+  desc 'Run integration tests'
   task :integration do
     Rake::Task['test:rest_api'].invoke
   end
@@ -78,9 +78,9 @@ namespace :test do
     Rake::Task['test:integration'].invoke
   end
 
-  def refresh_artifacts(build_hash, version_number)
+  def refresh_artifacts(build_hash, _version_number)
     unless build_hash
-      STDERR.puts "[!] Cannot determine checkout build hash -- server not running"
+      warn '[!] Cannot determine checkout build hash -- server not running'
       exit(1)
     end
 
@@ -89,7 +89,7 @@ namespace :test do
     `curl -s <placeholder_opensearch_artifact_url> -o #{filename}`
 
     unless File.exist?("./#{filename}")
-      STDERR.puts '[!] Couldn\'t download artifacts file'
+      warn '[!] Couldn\'t download artifacts file'
       exit 1
     end
 
@@ -99,14 +99,16 @@ namespace :test do
       a.dig('projects', 'opensearch', 'commit_hash') == build_hash
     end.first
     # Dig into the opensearch packages, search for the rest-resources-zip package and catch the URL:
-    zip_url = build_hash_artifact.dig('projects', 'opensearch', 'packages').select { |k,v| k =~ /rest-resources-zip/ }.map { | _, v| v['url'] }.first
+    zip_url = build_hash_artifact.dig('projects', 'opensearch', 'packages').select do |k, _v|
+                k =~ /rest-resources-zip/
+              end.map { |_, v| v['url'] }.first
 
     filename = zip_url.split('/').last
     puts 'Downloading zip file:'
     `curl -s #{zip_url} -o tmp/#{filename}`
 
     unless File.exist?("./tmp/#{filename}")
-      STDERR.puts '[!] Couldn\'t download artifact'
+      warn '[!] Couldn\'t download artifact'
       exit 1
     end
 
@@ -119,7 +121,7 @@ end
 
 require 'yard'
 YARD::Rake::YardocTask.new(:doc) do |t|
-  t.options = %w| --embed-mixins --markup=markdown |
+  t.options = %w[--embed-mixins --markup=markdown]
 end
 
 # ----- Code analysis tasks ---------------------------------------------------

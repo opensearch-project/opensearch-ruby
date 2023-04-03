@@ -50,7 +50,7 @@ module OpenSearch
           path   = if _name
                      "_index_template/_simulate/#{Utils.__listify(_name)}"
                    else
-                     "_index_template/_simulate"
+                     '_index_template/_simulate'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -61,11 +61,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:simulate_template, [
-          :create,
-          :cause,
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:simulate_template, %i[
+          create
+          cause
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

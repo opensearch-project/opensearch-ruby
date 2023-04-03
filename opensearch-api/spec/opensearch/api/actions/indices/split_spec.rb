@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#split' do
-
   let(:expected_args) do
     [
-        'PUT',
-        'foo/_split/bar',
-        {},
-        nil,
-        {}
+      'PUT',
+      'foo/_split/bar',
+      {},
+      nil,
+      {}
     ]
   end
 

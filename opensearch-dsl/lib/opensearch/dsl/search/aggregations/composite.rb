@@ -45,8 +45,8 @@ module OpenSearch
         #      end
         #    end
         #  end
-      #
-      #
+        #
+        #
         class Composite
           include BaseAggregationComponent
 
@@ -54,7 +54,7 @@ module OpenSearch
           option_method :sources
           option_method :after
 
-          def to_hash(_options={})
+          def to_hash(_options = {})
             super
             # remove :after if no value is given
             @hash[name.to_sym].delete(:after) if @hash[name.to_sym].is_a?(Hash) && @hash[name.to_sym][:after].nil?

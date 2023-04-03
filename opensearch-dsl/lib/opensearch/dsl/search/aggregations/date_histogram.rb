@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-bucket aggregation which returns a histogram for date fields
         #
         # @example
@@ -59,7 +58,6 @@ module OpenSearch
           option_method :extended_bounds
           option_method :order
         end
-
       end
     end
   end

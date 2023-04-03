@@ -56,7 +56,7 @@ module OpenSearch
           path   = if _node_id
                      "_cluster/nodes/#{Utils.__listify(_node_id)}/hot_threads"
                    else
-                     "_cluster/nodes/hot_threads"
+                     '_cluster/nodes/hot_threads'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -67,13 +67,13 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:hot_threads, [
-          :interval,
-          :snapshots,
-          :threads,
-          :ignore_idle_threads,
-          :type,
-          :timeout
+        ParamsRegistry.register(:hot_threads, %i[
+          interval
+          snapshots
+          threads
+          ignore_idle_threads
+          type
+          timeout
         ].freeze)
       end
     end

@@ -25,55 +25,55 @@
 # under the License.
 
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'opensearch/dsl/version'
 
-signing_key_path = File.expand_path("../gem-private_key.pem")
+signing_key_path = File.expand_path('../gem-private_key.pem')
 
 Gem::Specification.new do |s|
   s.name          = 'opensearch-dsl'
   s.version       = OpenSearch::DSL::VERSION
-  s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian' , 'Yuvraj Jaiswal']
+  s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian', 'Yuvraj Jaiswal']
   s.email         = ['jayehh@amazon.com', 'vamshin@amazon.com', 'balasvij@amazon.com', 'jaiyuvra@amazon.com']
-  s.description   = %q{A Ruby DSL builder for OpenSearch}
+  s.description   = 'A Ruby DSL builder for OpenSearch'
   s.summary       = s.description
   s.homepage      = 'https://opensearch.org/docs/latest/'
   s.license       = 'Apache-2.0'
   s.metadata = {
     'homepage_uri' => 'https://opensearch.org/docs/latest/',
     'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/main/opensearch-dsl',
-    'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues'
+    'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues',
+    'rubygems_mfa_required' => 'true'
   }
   s.files         = `git ls-files`.split($/)
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
 
-  if $PROGRAM_NAME.end_with?("gem") && ARGV == ["build", __FILE__] && File.exist?(signing_key_path)
+  if $PROGRAM_NAME.end_with?('gem') && ARGV == ['build', __FILE__] && File.exist?(signing_key_path)
     s.signing_key = signing_key_path
     s.cert_chain  = ['../certs/opensearch-rubygems.pem']
   end
 
   s.require_paths = ['lib']
 
-  s.extra_rdoc_files  = [ 'README.md', 'LICENSE' ]
-  s.rdoc_options      = [ '--charset=UTF-8' ]
+  s.extra_rdoc_files  = ['README.md', 'LICENSE']
+  s.rdoc_options      = ['--charset=UTF-8']
 
   s.required_ruby_version = '>= 2.4'
 
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'rake', '~> 13'
-  s.add_development_dependency 'opensearch-ruby', '~> 2'
   s.add_development_dependency 'cane'
   s.add_development_dependency 'minitest', '~> 5'
   s.add_development_dependency 'minitest-reporters', '~> 1'
   s.add_development_dependency 'mocha', '~> 1'
+  s.add_development_dependency 'opensearch-ruby', '~> 2'
   s.add_development_dependency 'pry'
+  s.add_development_dependency 'rake', '~> 13'
   s.add_development_dependency 'shoulda-context'
   s.add_development_dependency 'simplecov', '~> 0.17', '< 0.18'
   s.add_development_dependency 'yard'
 
-  if defined?(RUBY_VERSION) && RUBY_VERSION > '2.2'
-    s.add_development_dependency 'test-unit', '~> 2'
-  end
+  s.add_development_dependency 'test-unit', '~> 2' if defined?(RUBY_VERSION) && RUBY_VERSION > '2.2'
 end

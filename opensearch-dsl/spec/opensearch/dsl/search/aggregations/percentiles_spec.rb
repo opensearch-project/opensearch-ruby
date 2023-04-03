@@ -27,13 +27,11 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Percentiles do
-
   let(:search) do
     described_class.new
   end
 
-  context '#initialize' do
-
+  describe '#initialize' do
     let(:search) do
       described_class.new(foo: 'bar')
     end
@@ -43,7 +41,6 @@ describe OpenSearch::DSL::Search::Aggregations::Percentiles do
     end
 
     context 'when args are passed' do
-
       let(:search) do
         described_class.new(field: 'test')
       end
@@ -55,13 +52,11 @@ describe OpenSearch::DSL::Search::Aggregations::Percentiles do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#field' do
-
       before do
         search.field('bar')
       end
@@ -72,7 +67,6 @@ describe OpenSearch::DSL::Search::Aggregations::Percentiles do
     end
 
     describe '#percents' do
-
       before do
         search.percents('bar')
       end
@@ -83,7 +77,6 @@ describe OpenSearch::DSL::Search::Aggregations::Percentiles do
     end
 
     describe '#script' do
-
       before do
         search.script('bar')
       end
@@ -94,7 +87,6 @@ describe OpenSearch::DSL::Search::Aggregations::Percentiles do
     end
 
     describe '#params' do
-
       before do
         search.params('bar')
       end
@@ -105,7 +97,6 @@ describe OpenSearch::DSL::Search::Aggregations::Percentiles do
     end
 
     describe '#compression' do
-
       before do
         search.compression('bar')
       end
@@ -117,9 +108,7 @@ describe OpenSearch::DSL::Search::Aggregations::Percentiles do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           field 'bar'

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents which fall into a "box" of the specified geographical coordinates
         #
         # @example
@@ -64,7 +63,6 @@ module OpenSearch
           option_method :bottom
           option_method :right
         end
-
       end
     end
   end

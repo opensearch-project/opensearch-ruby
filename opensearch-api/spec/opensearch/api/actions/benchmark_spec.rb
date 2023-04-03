@@ -27,7 +27,6 @@
 require 'spec_helper'
 
 describe 'client#benchmark' do
-
   let(:expected_args) do
     [
       'PUT',

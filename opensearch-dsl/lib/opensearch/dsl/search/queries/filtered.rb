@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which allows to combine a query with a filter
         #
         # @note It's possible and common to define just the `filter` part of the search definition,
@@ -87,16 +86,15 @@ module OpenSearch
             hash = super
             if @query
               _query = @query.respond_to?(:to_hash) ? @query.to_hash : @query
-              hash[self.name].update(query: _query)
+              hash[name].update(query: _query)
             end
             if @filter
               _filter = @filter.respond_to?(:to_hash) ? @filter.to_hash : @filter
-              hash[self.name].update(filter: _filter)
+              hash[name].update(filter: _filter)
             end
             hash
           end
         end
-
       end
     end
   end

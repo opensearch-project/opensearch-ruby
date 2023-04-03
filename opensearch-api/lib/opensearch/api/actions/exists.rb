@@ -68,26 +68,26 @@ module OpenSearch
         body = nil
 
         Utils.__rescue_from_not_found do
-          perform_request(method, path, params, body, headers).status == 200 ? true : false
+          perform_request(method, path, params, body, headers).status == 200
         end
       end
 
-      alias_method :exists?, :exists
+      alias exists? exists
 
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:exists, [
-        :stored_fields,
-        :preference,
-        :realtime,
-        :refresh,
-        :routing,
-        :_source,
-        :_source_excludes,
-        :_source_includes,
-        :version,
-        :version_type
+      ParamsRegistry.register(:exists, %i[
+        stored_fields
+        preference
+        realtime
+        refresh
+        routing
+        _source
+        _source_excludes
+        _source_includes
+        version
+        version_type
       ].freeze)
     end
   end

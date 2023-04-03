@@ -31,14 +31,14 @@ module OpenSearch
     class AggregationsIntegrationTest < ::OpenSearch::Test::IntegrationTestCase
       include OpenSearch::DSL::Search
 
-      context "Aggregations integration" do
+      context 'Aggregations integration' do
         setup do
           @client.indices.create index: 'test', body: {
-              mappings: {
-                  properties: {
-                      tags: {type: 'keyword'}
-                  }
+            mappings: {
+              properties: {
+                tags: { type: 'keyword' }
               }
+            }
           }
           @client.index index: 'test', id: '1', body: { title: 'A', tags: %w[one], clicks: 5 }
           @client.index index: 'test', id: '2', body: { title: 'B', tags: %w[one two], clicks: 15 }
@@ -46,8 +46,8 @@ module OpenSearch
           @client.indices.refresh index: 'test'
         end
 
-        context "with a terms aggregation" do
-          should "return tag counts" do
+        context 'with a terms aggregation' do
+          should 'return tag counts' do
             response = @client.search index: 'test', body: search {
               aggregation :tags do
                 terms field: 'tags'
@@ -58,7 +58,7 @@ module OpenSearch
             assert_equal 'one', response['aggregations']['tags']['buckets'][0]['key']
           end
 
-          should "return approximate tag counts" do
+          should 'return approximate tag counts' do
             response = @client.search index: 'test', body: search {
               aggregation :tags do
                 cardinality field: 'tags'
@@ -68,7 +68,7 @@ module OpenSearch
             assert_equal 3, response['aggregations']['tags']['value']
           end
 
-          should "return tag counts per clicks range as an inner (nested) aggregation" do
+          should 'return tag counts per clicks range as an inner (nested) aggregation' do
             response = @client.search index: 'test', body: search {
               aggregation :clicks do
                 range field: 'clicks' do
@@ -87,7 +87,7 @@ module OpenSearch
             assert_equal 'one', response['aggregations']['clicks']['buckets']['low']['tags']['buckets'][0]['key']
           end
 
-          should "define multiple aggregations" do
+          should 'define multiple aggregations' do
             response = @client.search index: 'test', body: search {
               aggregation :clicks do
                 range field: 'clicks' do
@@ -127,30 +127,30 @@ module OpenSearch
             assert_equal 13, response['aggregations']['avg_clicks']['value'].to_i
           end
 
-          should "define a global aggregation" do
+          should 'define a global aggregation' do
             response = @client.search index: 'test', body: search {
-                query do
-                  bool filter: { terms: { tags: ['two'] } }
-                end
+              query do
+                bool filter: { terms: { tags: ['two'] } }
+              end
 
-                aggregation :avg_clicks do
-                  avg field: 'clicks'
-                end
+              aggregation :avg_clicks do
+                avg field: 'clicks'
+              end
 
-                aggregation :all_documents do
-                  global do
-                    aggregation :avg_clicks do
-                      avg field: 'clicks'
-                    end
+              aggregation :all_documents do
+                global do
+                  aggregation :avg_clicks do
+                    avg field: 'clicks'
                   end
                 end
+              end
             }.to_hash
 
             assert_equal 15, response['aggregations']['avg_clicks']['value'].to_i
             assert_equal 13, response['aggregations']['all_documents']['avg_clicks']['value'].to_i
           end
 
-          should "return statistics on clicks" do
+          should 'return statistics on clicks' do
             response = @client.search index: 'test', body: search {
               aggregation :stats_clicks do
                 stats field: 'clicks'
@@ -168,7 +168,7 @@ module OpenSearch
             assert_equal 3,  response['aggregations']['value_count']['value']
           end
 
-          should "return percentiles on clicks" do
+          should 'return percentiles on clicks' do
             response = @client.search index: 'test', body: search {
               aggregation :percentiles do
                 percentiles field: 'clicks'
@@ -178,7 +178,7 @@ module OpenSearch
             assert_equal 20, response['aggregations']['percentiles']['values']['99.0'].round
           end
 
-          should "return percentile ranks on clicks" do
+          should 'return percentile ranks on clicks' do
             response = @client.search index: 'test', body: search {
               aggregation :percentiles do
                 percentile_ranks field: 'clicks', values: [5]
@@ -188,7 +188,7 @@ module OpenSearch
             assert_equal 17, response['aggregations']['percentiles']['values']['5.0'].round
           end
 
-          should "return top hits per tag" do
+          should 'return top hits per tag' do
             response = @client.search index: 'test', body: search {
               aggregation :tags do
                 terms do
@@ -196,24 +196,25 @@ module OpenSearch
                   size  5
 
                   aggregation :top_hits do
-                    top_hits sort: [ clicks: { order: 'desc' } ], _source: { include: 'title' }
+                    top_hits sort: [clicks: { order: 'desc' }], _source: { include: 'title' }
                   end
                 end
               end
             }.to_hash
 
             assert_equal 3, response['aggregations']['tags']['buckets'][0]['top_hits']['hits']['hits'].size
-            assert_equal 'C', response['aggregations']['tags']['buckets'][0]['top_hits']['hits']['hits'][0]['_source']['title']
+            assert_equal 'C',
+                         response['aggregations']['tags']['buckets'][0]['top_hits']['hits']['hits'][0]['_source']['title']
           end
 
-          should "calculate clicks for a tag" do
+          should 'calculate clicks for a tag' do
             response = @client.search index: 'test', body: search {
               aggregation :clicks_for_one do
                 scripted_metric do
-                  init_script "state.transactions = []"
+                  init_script 'state.transactions = []'
                   map_script  "if (doc['tags'].value.contains('one')) { state.transactions.add(doc['clicks'].value) }"
-                  combine_script "double sum = 0; for (t in state.transactions) { sum += t } return sum"
-                  reduce_script "double sum = 0; for (a in states) { sum += a } return sum"
+                  combine_script 'double sum = 0; for (t in state.transactions) { sum += t } return sum'
+                  reduce_script 'double sum = 0; for (a in states) { sum += a } return sum'
                 end
               end
             }.to_hash
@@ -221,7 +222,7 @@ module OpenSearch
             assert_equal 40, response['aggregations']['clicks_for_one']['value']
           end
 
-          should "limit the scope with a filter" do
+          should 'limit the scope with a filter' do
             response = @client.search index: 'test', body: search {
               aggregation :clicks_for_one do
                 filter terms: { tags: ['one'] } do
@@ -236,7 +237,7 @@ module OpenSearch
           end
         end
 
-        should "return aggregations for multiple filters" do
+        should 'return aggregations for multiple filters' do
           response = @client.search index: 'test', body: search {
             aggregation :avg_clicks_per_tag do
               filters do
@@ -253,7 +254,7 @@ module OpenSearch
           assert_equal 15, response['aggregations']['avg_clicks_per_tag']['buckets']['two']['avg']['value'].to_i
         end
 
-        should "return a histogram on clicks" do
+        should 'return a histogram on clicks' do
           response = @client.search index: 'test', body: search {
             aggregation :clicks_histogram do
               histogram do
@@ -268,7 +269,7 @@ module OpenSearch
           assert_equal 1,  response['aggregations']['clicks_histogram']['buckets'][1]['doc_count']
         end
 
-        should "return a histogram with empty buckets on clicks" do
+        should 'return a histogram with empty buckets on clicks' do
           response = @client.search index: 'test', body: search {
             aggregation :clicks_histogram do
               histogram do

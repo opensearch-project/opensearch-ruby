@@ -68,13 +68,13 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get, [
-          :master_timeout,
-          :cluster_manager_timeout,
-          :ignore_unavailable,
-          :index_details,
-          :include_repository,
-          :verbose
+        ParamsRegistry.register(:get, %i[
+          master_timeout
+          cluster_manager_timeout
+          ignore_unavailable
+          index_details
+          include_repository
+          verbose
         ].freeze)
       end
     end

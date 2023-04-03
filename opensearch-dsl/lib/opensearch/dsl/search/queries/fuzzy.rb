@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which uses a Levenshtein distance on string fields and plus-minus margin on numerical
         # fields to match documents
         #
@@ -64,7 +63,6 @@ module OpenSearch
           option_method :prefix_length
           option_method :max_expansions
         end
-
       end
     end
   end

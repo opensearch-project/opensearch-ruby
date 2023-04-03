@@ -50,7 +50,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_flush"
                    else
-                     "_flush"
+                     '_flush'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -61,12 +61,12 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:flush, [
-          :force,
-          :wait_if_ongoing,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards
+        ParamsRegistry.register(:flush, %i[
+          force
+          wait_if_ongoing
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
         ].freeze)
       end
     end

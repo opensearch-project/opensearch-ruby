@@ -46,7 +46,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_cat/health"
+          path   = '_cat/health'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
           params[:h] = Utils.__listify(params[:h]) if params[:h]
 
@@ -57,14 +57,14 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:health, [
-          :format,
-          :h,
-          :help,
-          :s,
-          :time,
-          :ts,
-          :v
+        ParamsRegistry.register(:health, %i[
+          format
+          h
+          help
+          s
+          time
+          ts
+          v
         ].freeze)
       end
     end

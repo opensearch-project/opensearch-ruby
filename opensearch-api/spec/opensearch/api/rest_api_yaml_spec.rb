@@ -47,9 +47,9 @@ describe 'Rest API YAML tests' do
       next
     end
 
-    context "#{file.gsub("#{YAML_FILES_DIRECTORY}/", '')}" do
+    context file.gsub("#{YAML_FILES_DIRECTORY}/", '').to_s do
       test_file.tests.each do |test|
-        context "#{test.description}" do
+        context test.description.to_s do
           if test.skip_test?(ADMIN_CLIENT)
             skip 'Test contains feature(s) not yet supported or version is not satisfied'
           else

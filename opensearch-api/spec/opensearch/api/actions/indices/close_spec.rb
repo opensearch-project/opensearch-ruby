@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.indices#close' do
-
   let(:expected_args) do
     [
-        'POST',
-        url,
-        params,
-        nil,
-        {}
+      'POST',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
@@ -43,20 +42,18 @@ describe 'client.indices#close' do
   end
 
   context 'when there is no index specified' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
 
     it 'raises an exception' do
-      expect {
+      expect do
         client.indices.close
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when an index is specified' do
-
     let(:url) do
       'foo/_close'
     end
@@ -67,7 +64,6 @@ describe 'client.indices#close' do
   end
 
   context 'when params are specified' do
-
     let(:params) do
       { timeout: '1s' }
     end
@@ -82,7 +78,6 @@ describe 'client.indices#close' do
   end
 
   context 'when the path must be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_close'
     end

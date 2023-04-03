@@ -42,7 +42,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_POST
-          path   = "_cluster/voting_config_exclusions"
+          path   = '_cluster/voting_config_exclusions'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
@@ -52,10 +52,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:post_voting_config_exclusions, [
-          :node_ids,
-          :node_names,
-          :timeout
+        ParamsRegistry.register(:post_voting_config_exclusions, %i[
+          node_ids
+          node_names
+          timeout
         ].freeze)
       end
     end

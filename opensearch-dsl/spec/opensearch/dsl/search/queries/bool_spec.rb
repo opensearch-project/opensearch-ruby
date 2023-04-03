@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Bool do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,23 +38,20 @@ describe OpenSearch::DSL::Search::Queries::Bool do
   end
 
   describe '#initialize' do
-
     context 'when an object instance is provided' do
-
       let(:search) do
-        described_class.new.must(OpenSearch::DSL::Search::Queries::Match.new foo: 'bar')
+        described_class.new.must(OpenSearch::DSL::Search::Queries::Match.new(foo: 'bar'))
       end
 
       it 'applies the condition' do
-        expect(search.to_hash).to eq(bool: {must: [ {match: { foo: 'bar' }} ] })
+        expect(search.to_hash).to eq(bool: { must: [{ match: { foo: 'bar' } }] })
       end
 
       context 'when multiple option methods are called' do
-
         let(:search) do
           described_class.new do
-            should(OpenSearch::DSL::Search::Queries::Term.new(tag: 'wow'))
-            should(OpenSearch::DSL::Search::Queries::Term.new(tag: 'opensearch'))
+            expect(subject).to(OpenSearch::DSL::Search::Queries::Term.new(tag: 'wow'))
+            expect(subject).to(OpenSearch::DSL::Search::Queries::Term.new(tag: 'opensearch'))
 
             minimum_should_match 1
             boost 1.0
@@ -65,33 +60,31 @@ describe OpenSearch::DSL::Search::Queries::Bool do
 
         it 'defines all the options' do
           expect(search.to_hash).to eq(bool: {
-            minimum_should_match: 1,
-            boost: 1.0,
-            should:     [ {term: { tag: 'wow' }}, {term: { tag: 'opensearch' }} ]})
+                                         minimum_should_match: 1,
+                                         boost: 1.0,
+                                         should: [{ term: { tag: 'wow' } }, { term: { tag: 'opensearch' } }]
+                                       })
         end
       end
 
       context 'when multiple conditions are provided' do
-
         let(:search) do
           described_class.new do
-            must(OpenSearch::DSL::Search::Queries::Match.new foo: 'bar')
-            must(OpenSearch::DSL::Search::Queries::Match.new moo: 'bam')
+            must(OpenSearch::DSL::Search::Queries::Match.new(foo: 'bar'))
+            must(OpenSearch::DSL::Search::Queries::Match.new(moo: 'bam'))
 
-            should(OpenSearch::DSL::Search::Queries::Match.new xoo: 'bax')
-            should(OpenSearch::DSL::Search::Queries::Match.new zoo: 'baz')
+            expect(subject).to(OpenSearch::DSL::Search::Queries::Match.new(xoo: 'bax'))
+            expect(subject).to(OpenSearch::DSL::Search::Queries::Match.new(zoo: 'baz'))
           end
         end
 
         it 'applies each condition' do
           expect(search.to_hash).to eq(bool:
-                                         { must:     [ {match: { foo: 'bar' }}, {match: { moo: 'bam' }} ],
-                                           should:   [ {match: { xoo: 'bax' }}, {match: { zoo: 'baz' }} ]
-                                         })
+                                         { must: [{ match: { foo: 'bar' } }, { match: { moo: 'bam' } }],
+                                           should: [{ match: { xoo: 'bax' } }, { match: { zoo: 'baz' } }] })
         end
 
         context 'when #to_hash is called more than once' do
-
           it 'does not alter the hash' do
             expect(search.to_hash).to eq(search.to_hash)
           end
@@ -100,7 +93,6 @@ describe OpenSearch::DSL::Search::Queries::Bool do
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           must { match foo: 'bar' }
@@ -108,15 +100,14 @@ describe OpenSearch::DSL::Search::Queries::Bool do
       end
 
       it 'executes the block' do
-        expect(search.to_hash).to eq(bool: {must: [ {match: { foo: 'bar' }} ] })
+        expect(search.to_hash).to eq(bool: { must: [{ match: { foo: 'bar' } }] })
       end
 
       context 'when multiple option methods are called' do
-
         let(:search) do
           described_class.new do
-            should   { term tag: 'wow' }
-            should   { term tag: 'opensearch' }
+            expect(subject).to   { term tag: 'wow' }
+            expect(subject).to   { term tag: 'opensearch' }
 
             minimum_should_match 1
             boost 1.0
@@ -125,14 +116,14 @@ describe OpenSearch::DSL::Search::Queries::Bool do
 
         it 'defines all the options' do
           expect(search.to_hash).to eq(bool: {
-                                               minimum_should_match: 1,
-                                               boost: 1.0,
-                                               should:     [ {term: { tag: 'wow' }}, {term: { tag: 'opensearch' }} ]})
+                                         minimum_should_match: 1,
+                                         boost: 1.0,
+                                         should: [{ term: { tag: 'wow' } }, { term: { tag: 'opensearch' } }]
+                                       })
         end
       end
 
       context 'when multiple conditions are provided' do
-
         let(:search) do
           described_class.new do
             must do
@@ -143,11 +134,11 @@ describe OpenSearch::DSL::Search::Queries::Bool do
               match moo: 'bam'
             end
 
-            should do
+            expect(subject).to do
               match xoo: 'bax'
             end
 
-            should do
+            expect(subject).to do
               match zoo: 'baz'
             end
           end
@@ -155,13 +146,11 @@ describe OpenSearch::DSL::Search::Queries::Bool do
 
         it 'applies each condition' do
           expect(search.to_hash).to eq(bool:
-                                           { must:     [ {match: { foo: 'bar' }}, {match: { moo: 'bam' }} ],
-                                             should:   [ {match: { xoo: 'bax' }}, {match: { zoo: 'baz' }} ]
-                                           })
+                                           { must: [{ match: { foo: 'bar' } }, { match: { moo: 'bam' } }],
+                                             should: [{ match: { xoo: 'bax' } }, { match: { zoo: 'baz' } }] })
         end
 
         context 'when #to_hash is called more than once' do
-
           it 'does not alter the hash' do
             expect(search.to_hash).to eq(search.to_hash)
           end
@@ -171,7 +160,6 @@ describe OpenSearch::DSL::Search::Queries::Bool do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
@@ -183,13 +171,12 @@ describe OpenSearch::DSL::Search::Queries::Bool do
     end
 
     it 'applies the option' do
-      expect(search.to_hash).to eq(bool: { must:   [ {match: { foo: 'bar' }}, {match: { moo: 'bam' }} ],
-                                           should: [ {match: { xoo: 'bax' }} ] })
+      expect(search.to_hash).to eq(bool: { must: [{ match: { foo: 'bar' } }, { match: { moo: 'bam' } }],
+                                           should: [{ match: { xoo: 'bax' } }] })
     end
   end
 
   context 'when the filter method is called multiple times' do
-
     let(:search) do
       described_class.new
     end
@@ -202,14 +189,13 @@ describe OpenSearch::DSL::Search::Queries::Bool do
     it 'combines the filter clauses' do
       expect(search.to_hash).to eq(bool:
                                        { filter: [
-                                           { term: { foo: "bar"}},
-                                           { term: { zoo: "baz"}}
+                                         { term: { foo: 'bar' } },
+                                         { term: { zoo: 'baz' } }
                                        ] })
     end
   end
 
   context 'when methods are chained' do
-
     let(:search) do
       described_class.new
     end
@@ -219,15 +205,13 @@ describe OpenSearch::DSL::Search::Queries::Bool do
     end
 
     it 'applies the option' do
-      expect(search.to_hash).to eq(bool: { must:   [ {match: { foo: 'bar' }}, {match: { moo: 'bam' }} ],
-                                           should: [ {match: { xoo: 'bax' }} ] })
+      expect(search.to_hash).to eq(bool: { must: [{ match: { foo: 'bar' } }, { match: { moo: 'bam' } }],
+                                           should: [{ match: { xoo: 'bax' } }] })
     end
   end
 
   describe '#filter' do
-
     context 'when a block is used to define the filter' do
-
       let(:search) do
         described_class.new do
           filter do
@@ -242,9 +226,7 @@ describe OpenSearch::DSL::Search::Queries::Bool do
     end
 
     context 'when a filter is passed as an argument' do
-
       context 'when the filter is a hash' do
-
         let(:search) do
           described_class.new do
             filter(term: { foo: 'Foo!' })
@@ -257,7 +239,6 @@ describe OpenSearch::DSL::Search::Queries::Bool do
       end
 
       context 'when the filter is a `OpenSearch::DSL::Search::Filter` object' do
-
         let(:search) do
           filter_object = OpenSearch::DSL::Search::Filter.new do
             term bar: 'Bar!'

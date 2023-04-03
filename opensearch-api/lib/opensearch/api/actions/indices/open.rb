@@ -61,14 +61,14 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:open, [
-          :timeout,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :wait_for_active_shards
+        ParamsRegistry.register(:open, %i[
+          timeout
+          master_timeout
+          cluster_manager_timeout
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          wait_for_active_shards
         ].freeze)
       end
     end

@@ -60,7 +60,7 @@ module OpenSearch
                    elsif _name
                      "_settings/#{Utils.__listify(_name)}"
                    else
-                     "_settings"
+                     '_settings'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -71,15 +71,15 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get_settings, [
-          :master_timeout,
-          :cluster_manager_timeout,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :flat_settings,
-          :local,
-          :include_defaults
+        ParamsRegistry.register(:get_settings, %i[
+          master_timeout
+          cluster_manager_timeout
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          flat_settings
+          local
+          include_defaults
         ].freeze)
       end
     end

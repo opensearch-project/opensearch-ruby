@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Cardinality do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(cardinality: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#field' do
-
       before do
         search.field('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Aggregations::Cardinality do
     end
 
     describe '#precision_threshold' do
-
       before do
         search.precision_threshold('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Aggregations::Cardinality do
     end
 
     describe '#rehash' do
-
       before do
         search.rehash('skip')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Aggregations::Cardinality do
     end
 
     describe '#script' do
-
       before do
         search.script('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Aggregations::Cardinality do
     end
 
     describe '#params' do
-
       before do
         search.params('bar')
       end
@@ -102,9 +94,7 @@ describe OpenSearch::DSL::Search::Aggregations::Cardinality do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new(:foo) do
           field 'bar'

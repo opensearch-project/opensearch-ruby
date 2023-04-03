@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which matches on all documents
         #
         # @example
@@ -47,7 +46,6 @@ module OpenSearch
         class MatchAll
           include BaseComponent
         end
-
       end
     end
   end

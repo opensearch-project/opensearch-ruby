@@ -51,7 +51,7 @@ module OpenSearch
         arguments = arguments.clone
 
         method = OpenSearch::API::HTTP_POST
-        path   = "_reindex"
+        path   = '_reindex'
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]
@@ -61,15 +61,15 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:reindex, [
-        :refresh,
-        :timeout,
-        :wait_for_active_shards,
-        :wait_for_completion,
-        :requests_per_second,
-        :scroll,
-        :slices,
-        :max_docs
+      ParamsRegistry.register(:reindex, %i[
+        refresh
+        timeout
+        wait_for_active_shards
+        wait_for_completion
+        requests_per_second
+        scroll
+        slices
+        max_docs
       ].freeze)
     end
   end

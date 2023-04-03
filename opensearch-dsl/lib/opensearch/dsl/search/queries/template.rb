@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which allows to use Mustache templates for query definitions
         #
         # @example
@@ -50,7 +49,6 @@ module OpenSearch
           option_method :query
           option_method :params
         end
-
       end
     end
   end

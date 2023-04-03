@@ -24,17 +24,17 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require "cgi"
-require "multi_json"
+require 'cgi'
+require 'multi_json'
 
-require "opensearch/api/version"
-require "opensearch/api/namespace/common"
-require "opensearch/api/utils"
-require "opensearch/api/actions/params_registry"
+require 'opensearch/api/version'
+require 'opensearch/api/namespace/common'
+require 'opensearch/api/utils'
+require 'opensearch/api/actions/params_registry'
 
-Dir[ File.expand_path('../api/actions/**/params_registry.rb', __FILE__) ].each   { |f| require f }
-Dir[ File.expand_path('../api/actions/**/*.rb', __FILE__) ].each   { |f| require f }
-Dir[ File.expand_path('../api/namespace/**/*.rb', __FILE__) ].each { |f| require f }
+Dir[File.expand_path('api/actions/**/params_registry.rb', __dir__)].each   { |f| require f }
+Dir[File.expand_path('api/actions/**/*.rb', __dir__)].each   { |f| require f }
+Dir[File.expand_path('api/namespace/**/*.rb', __dir__)].each { |f| require f }
 
 module OpenSearch
   module API

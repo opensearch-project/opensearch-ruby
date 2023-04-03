@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Filters::GeohashCell do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Filters::GeohashCell do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#precision' do
-
       before do
         search.precision('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Filters::GeohashCell do
     end
 
     describe '#neighbors' do
-
       before do
         search.neighbors('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Filters::GeohashCell do
     end
 
     describe '#lat' do
-
       before do
         search.lat('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Filters::GeohashCell do
     end
 
     describe '#lon' do
-
       before do
         search.lon('bar')
       end
@@ -91,9 +84,7 @@ describe OpenSearch::DSL::Search::Filters::GeohashCell do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new :foo do
           lat 'bar'

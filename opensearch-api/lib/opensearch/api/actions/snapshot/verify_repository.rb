@@ -57,10 +57,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:verify_repository, [
-          :master_timeout,
-          :cluster_manager_timeout,
-          :timeout
+        ParamsRegistry.register(:verify_repository, %i[
+          master_timeout
+          cluster_manager_timeout
+          timeout
         ].freeze)
       end
     end

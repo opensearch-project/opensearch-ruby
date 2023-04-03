@@ -49,7 +49,7 @@ module OpenSearch
           path   = if _node_id
                      "_nodes/#{Utils.__listify(_node_id)}/shutdown"
                    else
-                     "_nodes/shutdown"
+                     '_nodes/shutdown'
                    end
           params = {}
 

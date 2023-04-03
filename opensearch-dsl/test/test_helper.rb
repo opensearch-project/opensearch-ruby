@@ -24,21 +24,21 @@
 # specific language governing permissions and limitations
 # under the License.
 
-OPENSEARCH_HOSTS = if hosts = ENV['TEST_OPENSEARCH_SERVER'] || ENV['OPENSEARCH_HOSTS']
-                        hosts.split(',').map do |host|
-                          /(http\:\/\/)?(\S+)/.match(host)[2]
-                        end
-                      else
-                        ['localhost:9200']
-                      end.freeze
+OPENSEARCH_HOSTS = if hosts = ENV.fetch('TEST_OPENSEARCH_SERVER', nil) || ENV.fetch('OPENSEARCH_HOSTS', nil)
+                     hosts.split(',').map do |host|
+                       %r{(http://)?(\S+)}.match(host)[2]
+                     end
+                   else
+                     ['localhost:9200']
+                   end.freeze
 
 TEST_HOST, TEST_PORT = OPENSEARCH_HOSTS.first.split(':') if OPENSEARCH_HOSTS
 
 JRUBY = defined?(JRUBY_VERSION)
 
-if ENV['COVERAGE'] || ENV['CI']
+if ENV.fetch('COVERAGE', nil) || ENV.fetch('CI', nil)
   require 'simplecov'
-  SimpleCov.start { add_filter "/test|test_" }
+  SimpleCov.start { add_filter '/test|test_' }
 end
 
 require 'minitest/autorun'
@@ -60,26 +60,26 @@ module OpenSearch
 
     class UnitTestCase < ::Minitest::Test
       include Assertions
-      alias_method :assert_not_nil, :refute_nil
-      alias_method :assert_raise, :assert_raises
+      alias assert_not_nil refute_nil
+      alias assert_raise assert_raises
     end
 
     class IntegrationTestCase < ::Minitest::Test
       include Assertions
-      alias_method :assert_not_nil, :refute_nil
-      alias_method :assert_raise, :assert_raises
+      alias assert_not_nil refute_nil
+      alias assert_raise assert_raises
 
       def setup
-        @port = (ENV['TEST_CLUSTER_PORT'] || 9250).to_i
+        @port = (ENV.fetch('TEST_CLUSTER_PORT', nil) || 9250).to_i
 
-        @logger =  Logger.new(STDERR)
-        @logger.formatter = proc do |severity, datetime, progname, msg|
+        @logger = Logger.new(STDERR)
+        @logger.formatter = proc do |severity, _datetime, _progname, msg|
           color = case severity
-            when /INFO/ then :green
-            when /ERROR|WARN|FATAL/ then :red
-            when /DEBUG/ then :cyan
-            else :white
-          end
+                  when /INFO/ then :green
+                  when /ERROR|WARN|FATAL/ then :red
+                  when /DEBUG/ then :cyan
+                  else :white
+                  end
           ANSI.ansi(severity[0] + ' ', color, :faint) + ANSI.ansi(msg, :white, :faint) + "\n"
         end
 

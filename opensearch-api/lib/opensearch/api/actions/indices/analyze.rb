@@ -51,7 +51,7 @@ module OpenSearch
           path = if _index
                    "#{Utils.__listify(_index)}/_analyze"
                  else
-                   "_analyze"
+                   '_analyze'
                  end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 

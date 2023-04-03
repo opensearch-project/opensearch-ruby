@@ -27,30 +27,26 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Range do
-
   let(:search) do
     described_class.new
   end
 
-  context '#initialize' do
-
+  describe '#initialize' do
     let(:search) do
-      described_class.new(field: 'test', ranges: [ { to: 50 } ])
+      described_class.new(field: 'test', ranges: [{ to: 50 }])
     end
 
     it 'takes a hash' do
-      expect(search.to_hash).to eq(range: { field: "test", ranges: [ {to: 50} ] })
+      expect(search.to_hash).to eq(range: { field: 'test', ranges: [{ to: 50 }] })
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#field' do
-
       before do
         search.field('foo')
       end
@@ -61,7 +57,6 @@ describe OpenSearch::DSL::Search::Aggregations::Range do
     end
 
     describe '#script' do
-
       before do
         search.script('bar*2')
       end
@@ -73,11 +68,8 @@ describe OpenSearch::DSL::Search::Aggregations::Range do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       context 'when keyed ranges are provided' do
-
         let(:search) do
           described_class.new(field: 'test') do
             key 'foo', to: 10
@@ -86,13 +78,12 @@ describe OpenSearch::DSL::Search::Aggregations::Range do
         end
 
         it 'sets the values' do
-          expect(search.to_hash).to eq(range: { field: "test", keyed: true,
-                                                ranges: [ {to: 10, key: 'foo'}, { from: 10, to: 20, key: 'bar'}]})
+          expect(search.to_hash).to eq(range: { field: 'test', keyed: true,
+                                                ranges: [{ to: 10, key: 'foo' }, { from: 10, to: 20, key: 'bar' }] })
         end
       end
 
       context 'when keyed is set to false explicitly' do
-
         let(:search) do
           described_class.new do
             keyed false
@@ -103,13 +94,12 @@ describe OpenSearch::DSL::Search::Aggregations::Range do
         end
 
         it 'sets the value' do
-          expect(search.to_hash).to eq(range: { field: "test", keyed: false,
-                                                ranges: [ {to: 10, key: 'foo'}, { from: 10, to: 20, key: 'bar'}]})
+          expect(search.to_hash).to eq(range: { field: 'test', keyed: false,
+                                                ranges: [{ to: 10, key: 'foo' }, { from: 10, to: 20, key: 'bar' }] })
         end
       end
 
       context 'when field is defined' do
-
         let(:search) do
           described_class.new do
             field 'test'
@@ -119,8 +109,8 @@ describe OpenSearch::DSL::Search::Aggregations::Range do
         end
 
         it 'sets the value' do
-          expect(search.to_hash).to eq(range: { field: "test", keyed: true,
-                                                ranges: [ {to: 10, key: 'foo'}, { from: 10, to: 20, key: 'bar'}]})
+          expect(search.to_hash).to eq(range: { field: 'test', keyed: true,
+                                                ranges: [{ to: 10, key: 'foo' }, { from: 10, to: 20, key: 'bar' }] })
         end
       end
     end

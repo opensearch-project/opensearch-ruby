@@ -27,34 +27,31 @@
 require 'spec_helper'
 
 describe 'client#ping' do
-
   let(:expected_args) do
     [
-        'HEAD',
-        '',
-        {},
-        nil,
-        {}
+      'HEAD',
+      '',
+      {},
+      nil,
+      {}
     ]
   end
 
   it 'performs the request' do
-    expect(client_double.ping).to eq(true)
+    expect(client_double.ping).to be(true)
   end
 
   context 'when the response is a 404' do
-
     let(:response_double) do
       double('response', status: 404, body: {}, headers: {})
     end
 
     it 'returns false' do
-      expect(client_double.ping).to eq(false)
+      expect(client_double.ping).to be(false)
     end
   end
 
   context 'when a 404 \'not found\' exception is raised' do
-
     before do
       allow(client).to receive(:perform_request).and_raise(StandardError.new('404 NotFound'))
     end
@@ -64,12 +61,11 @@ describe 'client#ping' do
     end
 
     it 'returns false' do
-      expect(client.ping).to eq(false)
+      expect(client.ping).to be(false)
     end
   end
 
   context 'when \'connection failed\' exception is raised' do
-
     before do
       allow(client).to receive(:perform_request).and_raise(StandardError.new('ConnectionFailed'))
     end
@@ -79,7 +75,7 @@ describe 'client#ping' do
     end
 
     it 'returns false' do
-      expect(client.ping).to eq(false)
+      expect(client.ping).to be(false)
     end
   end
 end

@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "features" namespace (includes the {Features::Actions} methods)
       #
       class FeaturesClient
-        include Common::Client, Common::Client::Base, Features::Actions
+        include Features::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {FeaturesClient}, available in the receiving object

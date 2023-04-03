@@ -46,7 +46,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_PUT
-          path   = "_cluster/settings"
+          path   = '_cluster/settings'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = arguments[:body] || {}
@@ -56,11 +56,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:put_settings, [
-          :flat_settings,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :timeout
+        ParamsRegistry.register(:put_settings, %i[
+          flat_settings
+          master_timeout
+          cluster_manager_timeout
+          timeout
         ].freeze)
       end
     end

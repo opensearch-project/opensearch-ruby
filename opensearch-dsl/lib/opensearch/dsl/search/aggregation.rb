@@ -27,14 +27,13 @@
 module OpenSearch
   module DSL
     module Search
-
       # Contains the classes for OpenSearch aggregations
       #
-      module Aggregations;end
+      module Aggregations; end
 
       class AggregationsCollection < Hash
         def to_hash
-          @hash ||= Hash[map { |k,v| [k, v.to_hash] }]
+          @hash ||= map { |k, v| [k, v.to_hash] }.to_h
         end
       end
 
@@ -42,7 +41,7 @@ module OpenSearch
       #
       #
       class Aggregation
-        def initialize(*args, &block)
+        def initialize(*_args, &block)
           @block = block
         end
 
@@ -53,7 +52,7 @@ module OpenSearch
         def method_missing(name, *args, &block)
           klass = Utils.__camelize(name)
           if Aggregations.const_defined? klass
-            @value = Aggregations.const_get(klass).new *args, &block
+            @value = Aggregations.const_get(klass).new(*args, &block)
           else
             raise NoMethodError, "undefined method '#{name}' for #{self}"
           end
@@ -80,7 +79,9 @@ module OpenSearch
         # @api private
         #
         def call
-          @block.arity < 1 ? self.instance_eval(&@block) : @block.call(self) if @block && ! @_block_called
+          if @block && !@_block_called
+            @block.arity < 1 ? instance_eval(&@block) : @block.call(self)
+          end
           @_block_called = true
           self
         end
@@ -89,22 +90,20 @@ module OpenSearch
         #
         # @return [Hash]
         #
-        def to_hash(options={})
+        def to_hash(_options = {})
           call
 
           if @value
-            case
-              when @value.respond_to?(:to_hash)
-                @value.to_hash
-              else
-                @value
+            if @value.respond_to?(:to_hash)
+              @value.to_hash
+            else
+              @value
             end
           else
             {}
           end
         end
       end
-
     end
   end
 end

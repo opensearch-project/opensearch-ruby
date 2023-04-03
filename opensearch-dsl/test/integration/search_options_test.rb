@@ -31,7 +31,7 @@ module OpenSearch
     class SearchOptionsIntegrationTest < ::OpenSearch::Test::IntegrationTestCase
       include OpenSearch::DSL::Search
 
-      context "Search options" do
+      context 'Search options' do
         setup do
           @client.indices.create index: 'test'
           @client.index index: 'test', id: '1', body: { title: 'Test' }
@@ -39,7 +39,7 @@ module OpenSearch
           @client.indices.refresh index: 'test'
         end
 
-        should "explain the match" do
+        should 'explain the match' do
           response = @client.search index: 'test', body: search {
             query   { match title: 'test' }
             explain true

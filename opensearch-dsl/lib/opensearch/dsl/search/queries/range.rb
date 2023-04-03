@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching the specified range
         #
         # @example Find documents within a numeric range
@@ -66,7 +65,6 @@ module OpenSearch
           option_method :time_zone
           option_method :format
         end
-
       end
     end
   end

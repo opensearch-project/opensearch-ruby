@@ -68,7 +68,7 @@ module OpenSearch
           path = if _index
                    "#{Utils.__listify(_index)}/_validate/query"
                  else
-                   "_validate/query"
+                   '_validate/query'
                  end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -79,19 +79,19 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:validate_query, [
-          :explain,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :q,
-          :analyzer,
-          :analyze_wildcard,
-          :default_operator,
-          :df,
-          :lenient,
-          :rewrite,
-          :all_shards
+        ParamsRegistry.register(:validate_query, %i[
+          explain
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          q
+          analyzer
+          analyze_wildcard
+          default_operator
+          df
+          lenient
+          rewrite
+          all_shards
         ].freeze)
       end
     end

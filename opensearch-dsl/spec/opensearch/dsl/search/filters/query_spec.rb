@@ -27,22 +27,18 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Filters::Query do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(query: {})
     end
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
         described_class.new(query_string: { query: 'foo' })
       end
@@ -53,7 +49,6 @@ describe OpenSearch::DSL::Search::Filters::Query do
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           match foo: 'bar'

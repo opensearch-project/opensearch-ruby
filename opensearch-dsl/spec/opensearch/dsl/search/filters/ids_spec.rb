@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Filters::Ids do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Filters::Ids do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#type' do
-
       before do
         search.type('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Filters::Ids do
     end
 
     describe '#values' do
-
       before do
         search.values('bar')
       end
@@ -69,18 +64,16 @@ describe OpenSearch::DSL::Search::Filters::Ids do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           type 'bar'
-          values ['1', '2', '3']
+          values %w[1 2 3]
         end
       end
 
       it 'executes the block' do
-        expect(search.to_hash).to eq(ids: { type: 'bar', values: ['1', '2', '3'] })
+        expect(search.to_hash).to eq(ids: { type: 'bar', values: %w[1 2 3] })
       end
     end
   end

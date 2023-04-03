@@ -55,9 +55,9 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.1.1
-        ParamsRegistry.register(:shutdown, [
-          :delay,
-          :exit
+        ParamsRegistry.register(:shutdown, %i[
+          delay
+          exit
         ].freeze)
       end
     end

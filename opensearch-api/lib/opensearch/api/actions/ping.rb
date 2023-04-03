@@ -38,12 +38,12 @@ module OpenSearch
         arguments = arguments.clone
 
         method = OpenSearch::API::HTTP_HEAD
-        path   = ""
+        path   = ''
         params = {}
 
         body = nil
         begin
-          perform_request(method, path, params, body, headers).status == 200 ? true : false
+          perform_request(method, path, params, body, headers).status == 200
         rescue Exception => e
           if e.class.to_s =~ /NotFound|ConnectionFailed/ || e.message =~ /Not *Found|404|ConnectionFailed/i
             false

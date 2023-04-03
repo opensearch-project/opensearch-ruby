@@ -29,16 +29,16 @@ require 'test_helper'
 module OpenSearch
   module Test
     class UtilsTest < ::OpenSearch::Test::UnitTestCase
-      context "Utils" do
-        should "convert a string to camelcase" do
+      context 'Utils' do
+        should 'convert a string to camelcase' do
           assert_equal 'Foo', OpenSearch::DSL::Utils.__camelize('foo')
         end
 
-        should "convert an underscored string to camelcase" do
+        should 'convert an underscored string to camelcase' do
           assert_equal 'FooBar', OpenSearch::DSL::Utils.__camelize('foo_bar')
         end
 
-        should "convert a symbol" do
+        should 'convert a symbol' do
           assert_equal 'FooBar', OpenSearch::DSL::Utils.__camelize(:foo_bar)
         end
       end

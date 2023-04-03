@@ -27,20 +27,17 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Filter do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(filter: {})
     end
   end
 
   context 'when another aggregation is nested' do
-
     let(:search) do
       described_class.new(terms: { foo: 'bar' }) do
         aggregation :sum_clicks do

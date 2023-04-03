@@ -65,18 +65,18 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:repository_analyze, [
-          :blob_count,
-          :concurrency,
-          :read_node_count,
-          :early_read_node_count,
-          :seed,
-          :rare_action_probability,
-          :max_blob_size,
-          :max_total_data_size,
-          :timeout,
-          :detailed,
-          :rarely_abort_writes
+        ParamsRegistry.register(:repository_analyze, %i[
+          blob_count
+          concurrency
+          read_node_count
+          early_read_node_count
+          seed
+          rare_action_probability
+          max_blob_size
+          max_total_data_size
+          timeout
+          detailed
+          rarely_abort_writes
         ].freeze)
       end
     end

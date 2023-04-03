@@ -27,7 +27,6 @@
 module OpenSearch
   module Transport
     module Transport
-
       # @abstract Module with common functionality for transport implementations.
       #
       module Base
@@ -39,7 +38,7 @@ module OpenSearch
         DEFAULT_RESURRECT_AFTER  = 60     # Seconds
         DEFAULT_MAX_RETRIES      = 3      # Requests
         DEFAULT_SERIALIZER_CLASS = Serializer::MultiJson
-        SANITIZED_PASSWORD       = '*' * (rand(14)+1)
+        SANITIZED_PASSWORD       = '*' * rand(1..14)
 
         attr_reader   :hosts, :options, :connections, :counter, :last_request_at, :protocol
         attr_accessor :serializer, :sniffer, :logger, :tracer,
@@ -68,7 +67,7 @@ module OpenSearch
           @compression = !!@options[:compression]
           @connections = __build_connections
 
-          @serializer  = options[:serializer] || ( options[:serializer_class] ? options[:serializer_class].new(self) : DEFAULT_SERIALIZER_CLASS.new(self) )
+          @serializer  = options[:serializer] || (options[:serializer_class] ? options[:serializer_class].new(self) : DEFAULT_SERIALIZER_CLASS.new(self))
           @protocol    = options[:protocol] || DEFAULT_PROTOCOL
 
           @logger      = options[:logger]
@@ -92,11 +91,11 @@ module OpenSearch
         # @return [Connections::Connection]
         # @see    Connections::Collection#get_connection
         #
-        def get_connection(options={})
+        def get_connection(options = {})
           resurrect_dead_connections! if Time.now > @last_request_at + @resurrect_after
 
           @counter_mtx.synchronize { @counter += 1 }
-          reload_connections!         if reload_connections && counter % reload_after == 0
+          reload_connections! if reload_connections && counter % reload_after == 0
           connections.get_connection(options)
         end
 
@@ -106,10 +105,10 @@ module OpenSearch
         #
         def reload_connections!
           hosts = sniffer.hosts
-          __rebuild_connections :hosts => hosts, :options => options
+          __rebuild_connections hosts: hosts, options: options
           self
         rescue SnifferTimeoutError
-          log_error "[SnifferTimeoutError] Timeout when reloading connections."
+          log_error '[SnifferTimeoutError] Timeout when reloading connections.'
           self
         end
 
@@ -129,7 +128,7 @@ module OpenSearch
         # @return [Connections::Collection]
         # @api private
         #
-        def __rebuild_connections(arguments={})
+        def __rebuild_connections(arguments = {})
           @state_mutex.synchronize do
             @hosts       = arguments[:hosts]    || []
             @options     = arguments[:options]  || {}
@@ -137,7 +136,7 @@ module OpenSearch
             __close_connections
 
             new_connections = __build_connections
-            stale_connections = @connections.all.select  { |c| ! new_connections.include?(c) }
+            stale_connections = @connections.all.select { |c| !new_connections.include?(c) }
             new_connections = new_connections.reject { |c| @connections.all.include?(c) }
 
             @connections.remove(stale_connections)
@@ -155,18 +154,19 @@ module OpenSearch
         #
         def __build_connections
           Connections::Collection.new \
-            :connections => hosts.map { |host|
-            host[:protocol] = host[:scheme] || options[:scheme] || options[:http][:scheme] || DEFAULT_PROTOCOL
-            host[:port] ||= options[:port] || options[:http][:port] || DEFAULT_PORT
-            if (options[:user] || options[:http][:user]) && !host[:user]
-              host[:user] ||= options[:user] || options[:http][:user]
-              host[:password] ||= options[:password] || options[:http][:password]
-            end
+            connections: hosts.map { |host|
+                           host[:protocol] =
+                             host[:scheme] || options[:scheme] || options[:http][:scheme] || DEFAULT_PROTOCOL
+                           host[:port] ||= options[:port] || options[:http][:port] || DEFAULT_PORT
+                           if (options[:user] || options[:http][:user]) && !host[:user]
+                             host[:user] ||= options[:user] || options[:http][:user]
+                             host[:password] ||= options[:password] || options[:http][:password]
+                           end
 
-            __build_connection(host, (options[:transport_options] || {}), @block)
-          },
-            :selector_class => options[:selector_class],
-            :selector => options[:selector]
+                           __build_connection(host, (options[:transport_options] || {}), @block)
+                         },
+            selector_class: options[:selector_class],
+            selector: options[:selector]
         end
 
         # @abstract Build and return a connection.
@@ -176,8 +176,8 @@ module OpenSearch
         # @return [Connections::Connection]
         # @api    private
         #
-        def __build_connection(host, options={}, block=nil)
-          raise NoMethodError, "Implement this method in your class"
+        def __build_connection(_host, _options = {}, _block = nil)
+          raise NoMethodError, 'Implement this method in your class'
         end
 
         # Closes the connections collection
@@ -192,11 +192,11 @@ module OpenSearch
         #
         # @api private
         #
-        def __log_response(method, path, params, body, url, response, json, took, duration)
+        def __log_response(method, _path, _params, body, url, response, _json, took, duration)
           if logger
-            sanitized_url = url.to_s.gsub(/\/\/(.+):(.+)@/, '//' + '\1:' + SANITIZED_PASSWORD + '@')
+            sanitized_url = url.to_s.gsub(%r{//(.+):(.+)@}, '//' + '\1:' + SANITIZED_PASSWORD + '@')
             log_info "#{method.to_s.upcase} #{sanitized_url} " +
-                         "[status:#{response.status}, request:#{sprintf('%.3fs', duration)}, query:#{took}]"
+                     "[status:#{response.status}, request:#{format('%.3fs', duration)}, query:#{took}]"
             log_debug "> #{__convert_to_json(body)}" if body
             log_debug "< #{response.body}"
           end
@@ -206,16 +206,17 @@ module OpenSearch
         #
         # @api private
         #
-        def __trace(method, path, params, headers, body, url, response, json, took, duration)
+        def __trace(method, path, params, headers, body, _url, response, json, _took, duration)
           trace_url  = "http://localhost:9200/#{path}?pretty" +
-              ( params.empty? ? '' : "&#{::Faraday::Utils::ParamsHash[params].to_query}" )
-          trace_body = body ? " -d '#{__convert_to_json(body, :pretty => true)}'" : ''
+                       (params.empty? ? '' : "&#{::Faraday::Utils::ParamsHash[params].to_query}")
+          trace_body = body ? " -d '#{__convert_to_json(body, pretty: true)}'" : ''
           trace_command = "curl -X #{method.to_s.upcase}"
-          trace_command += " -H '#{headers.collect { |k,v| "#{k}: #{v}" }.join(", ")}'" if headers && !headers.empty?
+          trace_command += " -H '#{headers.collect { |k, v| "#{k}: #{v}" }.join(', ')}'" if headers && !headers.empty?
           trace_command += " '#{trace_url}'#{trace_body}\n"
           tracer.info trace_command
           tracer.debug "# #{Time.now.iso8601} [#{response.status}] (#{format('%.3f', duration)}s)\n#"
-          tracer.debug json ? serializer.dump(json, :pretty => true).gsub(/^/, '# ').sub(/\}$/, "\n# }")+"\n" : "# #{response.body}\n"
+          tracer.debug json ? serializer.dump(json, pretty: true).gsub(/^/, '# ').sub(/\}$/,
+                                                                                      "\n# }") + "\n" : "# #{response.body}\n"
         end
 
         # Raise error specific for the HTTP response status or a generic server error
@@ -224,14 +225,14 @@ module OpenSearch
         #
         def __raise_transport_error(response)
           error = ERRORS[response.status] || ServerError
-          raise error.new "[#{response.status}] #{response.body}"
+          raise error, "[#{response.status}] #{response.body}"
         end
 
         # Converts any non-String object to JSON
         #
         # @api private
         #
-        def __convert_to_json(o=nil, options={})
+        def __convert_to_json(o = nil, options = {})
           o = o.is_a?(String) ? o : serializer.dump(o, options)
         end
 
@@ -267,7 +268,7 @@ module OpenSearch
         # @raise  [ServerError]   If request failed on server
         # @raise  [Error]         If no connection is available
         #
-        def perform_request(method, path, params = {}, body = nil, headers = nil, opts = {}, &block)
+        def perform_request(method, path, params = {}, body = nil, _headers = nil, opts = {}, &block)
           raise NoMethodError, 'Implement this method in your transport class' unless block_given?
 
           start = Time.now
@@ -275,10 +276,10 @@ module OpenSearch
           reload_on_failure = opts.fetch(:reload_on_failure, @options[:reload_on_failure])
 
           max_retries = if opts.key?(:retry_on_failure)
-            opts[:retry_on_failure] === true ? DEFAULT_MAX_RETRIES : opts[:retry_on_failure]
-          elsif options.key?(:retry_on_failure)
-            options[:retry_on_failure] === true ? DEFAULT_MAX_RETRIES : options[:retry_on_failure]
-          end
+                          opts[:retry_on_failure] === true ? DEFAULT_MAX_RETRIES : opts[:retry_on_failure]
+                        elsif options.key?(:retry_on_failure)
+                          options[:retry_on_failure] === true ? DEFAULT_MAX_RETRIES : options[:retry_on_failure]
+                        end
 
           params = params.clone
 
@@ -286,7 +287,7 @@ module OpenSearch
 
           begin
             tries     += 1
-            connection = get_connection or raise Error.new('Cannot get new connection from pool.')
+            connection = get_connection or raise(Error, 'Cannot get new connection from pool.')
 
             if connection.connection.respond_to?(:params) && connection.connection.params.respond_to?(:to_hash)
               params = connection.connection.params.merge(params.to_hash)
@@ -299,8 +300,9 @@ module OpenSearch
             connection.healthy! if connection.failures > 0
 
             # Raise an exception so we can catch it for `retry_on_status`
-            __raise_transport_error(response) if response.status.to_i >= 300 && @retry_on_status.include?(response.status.to_i)
-
+            if response.status.to_i >= 300 && @retry_on_status.include?(response.status.to_i)
+              __raise_transport_error(response)
+            end
           rescue OpenSearch::Transport::Transport::ServerError => e
             if response && @retry_on_status.include?(response.status)
               log_warn "[#{e.class}] Attempt #{tries} to get response from #{url}"
@@ -313,7 +315,6 @@ module OpenSearch
             else
               raise e
             end
-
           rescue *host_unreachable_exceptions => e
             log_error "[#{e.class}] #{e.message} #{connection.host.inspect}"
 
@@ -335,35 +336,43 @@ module OpenSearch
             else
               raise e
             end
-
           rescue Exception => e
             log_fatal "[#{e.class}] #{e.message} (#{connection.host.inspect if connection})"
             raise e
-
-          end #/begin
+          end # /begin
 
           duration = Time.now - start
 
           if response.status.to_i >= 300
-            __log_response    method, path, params, body, url, response, nil, 'N/A', duration
-            __trace  method, path, params, connection.connection.headers, body, url, response, nil, 'N/A', duration if tracer
+            __log_response method, path, params, body, url, response, nil, 'N/A', duration
+            if tracer
+              __trace method, path, params, connection.connection.headers, body, url, response, nil, 'N/A',
+                      duration
+            end
 
             # Log the failure only when `ignore` doesn't match the response status
-            unless ignore.include?(response.status.to_i)
-              log_fatal "[#{response.status}] #{response.body}"
-            end
+            log_fatal "[#{response.status}] #{response.body}" unless ignore.include?(response.status.to_i)
 
             __raise_transport_error response unless ignore.include?(response.status.to_i)
           end
 
-          json     = serializer.load(response.body) if response.body && !response.body.empty? && response.headers && response.headers["content-type"] =~ /json/
-          took     = (json['took'] ? sprintf('%.3fs', json['took']/1000.0) : 'n/a') rescue 'n/a'
-
-          unless ignore.include?(response.status.to_i)
-            __log_response   method, path, params, body, url, response, json, took, duration
+          if response.body && !response.body.empty? && response.headers && response.headers['content-type'] =~ /json/
+            json = serializer.load(response.body)
+          end
+          took = begin
+            (json['took'] ? format('%.3fs', json['took'] / 1000.0) : 'n/a')
+          rescue StandardError
+            'n/a'
           end
 
-          __trace  method, path, params, connection.connection.headers, body, url, response, nil, 'N/A', duration if tracer
+          unless ignore.include?(response.status.to_i)
+            __log_response method, path, params, body, url, response, json, took, duration
+          end
+
+          if tracer
+            __trace method, path, params, connection.connection.headers, body, url, response, nil, 'N/A',
+                    duration
+          end
 
           warnings(response.headers['warning']) if response.headers&.[]('warning')
 
@@ -384,9 +393,9 @@ module OpenSearch
         private
 
         USER_AGENT_STR = 'User-Agent'.freeze
-        USER_AGENT_REGEX = /user\-?\_?agent/
+        USER_AGENT_REGEX = /user-?_?agent/
         CONTENT_TYPE_STR = 'Content-Type'.freeze
-        CONTENT_TYPE_REGEX = /content\-?\_?type/
+        CONTENT_TYPE_REGEX = /content-?_?type/
         DEFAULT_CONTENT_TYPE = 'application/json'.freeze
         GZIP = 'gzip'.freeze
         ACCEPT_ENCODING = 'Accept-Encoding'.freeze
@@ -400,7 +409,7 @@ module OpenSearch
 
           io = StringIO.new(body)
           gzip_reader = if RUBY_ENCODING
-                          Zlib::GzipReader.new(io, :encoding => 'ASCII-8BIT')
+                          Zlib::GzipReader.new(io, encoding: 'ASCII-8BIT')
                         else
                           Zlib::GzipReader.new(io)
                         end
@@ -408,7 +417,7 @@ module OpenSearch
         end
 
         def gzipped?(body)
-          body[0..1].unpack(HEX_STRING_DIRECTIVE)[0] == GZIP_FIRST_TWO_BYTES
+          body[0..1].unpack1(HEX_STRING_DIRECTIVE) == GZIP_FIRST_TWO_BYTES
         end
 
         def use_compression?
@@ -424,14 +433,14 @@ module OpenSearch
         end
 
         def find_value(hash, regex)
-          key_value = hash.find { |k,v| k.to_s.downcase =~ regex }
+          key_value = hash.find { |k, _v| k.to_s.downcase =~ regex }
           if key_value
             hash.delete(key_value[0])
             key_value[1]
           end
         end
 
-        def user_agent_header(client)
+        def user_agent_header(_client)
           @user_agent ||= begin
             meta = ["RUBY_VERSION: #{RUBY_VERSION}"]
             if RbConfig::CONFIG && RbConfig::CONFIG['host_os']

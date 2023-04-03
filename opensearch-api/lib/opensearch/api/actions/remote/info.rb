@@ -31,9 +31,9 @@ module OpenSearch
         # Returns all of the configured remote cluster information
         #
         #
-        def info(arguments = {})
+        def info(_arguments = {})
           method = HTTP_GET
-          path   = "_remote/info"
+          path   = '_remote/info'
           params = {}
           body   = nil
 

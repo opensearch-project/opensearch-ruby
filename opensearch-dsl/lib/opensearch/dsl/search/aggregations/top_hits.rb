@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A metric aggregator which returns the most relevant documents per bucket
         #
         # @example
@@ -54,7 +53,6 @@ module OpenSearch
           option_method :size
           option_method :sort
         end
-
       end
     end
   end

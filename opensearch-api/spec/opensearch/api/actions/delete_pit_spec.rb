@@ -24,15 +24,15 @@ describe 'client#delete_pit' do
   end
 
   it 'requires the :body argument' do
-    expect {
+    expect do
       client.delete_pit
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'does not accept unregistered params' do
-    expect {
+    expect do
       client.delete_pit(body: {}, something: :else)
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request with all optional params' do

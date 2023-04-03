@@ -52,8 +52,8 @@ module OpenSearch
           parts  = Utils.__extract_parts arguments, ParamsRegistry.get(:stats_parts)
           path   = Utils.__pathify Utils.__listify(arguments[:index]), '_stats', Utils.__listify(parts)
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(:stats_params)
-          params[:fields] = Utils.__listify(params[:fields], :escape => false) if params[:fields]
-          params[:groups] = Utils.__listify(params[:groups], :escape => false) if params[:groups]
+          params[:fields] = Utils.__listify(params[:fields], escape: false) if params[:fields]
+          params[:groups] = Utils.__listify(params[:groups], escape: false) if params[:groups]
 
           body = nil
           perform_request(method, path, params, body, headers).body
@@ -62,37 +62,37 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:stats_params, [
-          :completion_fields,
-          :fielddata_fields,
-          :fields,
-          :groups,
-          :level,
-          :types,
-          :include_segment_file_sizes,
-          :include_unloaded_segments,
-          :expand_wildcards,
-          :forbid_closed_indices
+        ParamsRegistry.register(:stats_params, %i[
+          completion_fields
+          fielddata_fields
+          fields
+          groups
+          level
+          types
+          include_segment_file_sizes
+          include_unloaded_segments
+          expand_wildcards
+          forbid_closed_indices
         ].freeze)
 
-        ParamsRegistry.register(:stats_parts, [
-          :_all,
-          :completion,
-          :docs,
-          :fielddata,
-          :query_cache,
-          :flush,
-          :get,
-          :indexing,
-          :merge,
-          :request_cache,
-          :refresh,
-          :search,
-          :segments,
-          :store,
-          :warmer,
-          :suggest,
-          :metric
+        ParamsRegistry.register(:stats_parts, %i[
+          _all
+          completion
+          docs
+          fielddata
+          query_cache
+          flush
+          get
+          indexing
+          merge
+          request_cache
+          refresh
+          search
+          segments
+          store
+          warmer
+          suggest
+          metric
         ].freeze)
       end
     end

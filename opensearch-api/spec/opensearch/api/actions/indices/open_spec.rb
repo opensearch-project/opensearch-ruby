@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.indices#open' do
-
   let(:expected_args) do
     [
-        'POST',
-        url,
-        params,
-        nil,
-        {}
+      'POST',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
@@ -51,7 +50,6 @@ describe 'client.indices#open' do
   end
 
   context 'when parameters are specified' do
-
     let(:params) do
       { timeout: '1s' }
     end
@@ -62,7 +60,6 @@ describe 'client.indices#open' do
   end
 
   context 'when the path must be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_open'
     end

@@ -124,6 +124,7 @@ describe 'OpenSearch: Validation' do
 
     context 'When the distribution is not present' do
       let(:body) { { 'version' => { 'number' => '2.0.0' } }.to_json }
+
       it 'Fails validation' do
         verify_request_stub
 
@@ -134,7 +135,6 @@ describe 'OpenSearch: Validation' do
       end
     end
   end
-
 
   context 'When the Elasticsearch version is >= 6.0' do
     context 'With a valid Elasticsearch response' do
@@ -152,7 +152,6 @@ describe 'OpenSearch: Validation' do
         valid_requests_and_expectations
       end
     end
-
   end
 
   context 'When the Elasticsearch version is >= 8.0.0' do
@@ -175,6 +174,7 @@ describe 'OpenSearch: Validation' do
 
   context 'When there is no version data' do
     let(:body) { {}.to_json }
+
     it 'Raises an exception and client doesnae work' do
       verify_request_stub
       error_requests_and_expectations
@@ -183,10 +183,11 @@ describe 'OpenSearch: Validation' do
 
   context 'When doing a yaml content-type request' do
     let(:client) do
-      OpenSearch::Client.new(transport_options: {headers: { accept: 'application/yaml', content_type: 'application/yaml' }})
+      OpenSearch::Client.new(transport_options: { headers: { accept: 'application/yaml',
+                                                             content_type: 'application/yaml' } })
     end
 
-    let(:headers) { { 'content-type' => 'application/yaml'} }
+    let(:headers) { { 'content-type' => 'application/yaml' } }
     let(:body) { "---\nversion:\n  number: \"2.0.0\"\n  distribution: \"opensearch\"\n" }
 
     it 'validates' do

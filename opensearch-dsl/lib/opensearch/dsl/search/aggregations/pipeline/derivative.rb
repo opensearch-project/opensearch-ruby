@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A parent pipeline aggregation which calculates the derivative of a specified metric in a parent histogram (or date_histogram) aggregation.
         #
         # @example Passing the options as a Hash

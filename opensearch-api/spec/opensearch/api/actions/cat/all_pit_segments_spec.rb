@@ -10,7 +10,6 @@
 require 'spec_helper'
 
 describe 'client.cat#all_pit_segments' do
-
   let(:expected_args) do
     [
       'GET',
@@ -25,9 +24,9 @@ describe 'client.cat#all_pit_segments' do
   end
 
   it 'does not accept unregistered params' do
-    expect {
+    expect do
       client.cat.all_pit_segments(something: :else)
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do

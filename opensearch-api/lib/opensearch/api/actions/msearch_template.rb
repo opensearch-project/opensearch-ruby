@@ -57,34 +57,32 @@ module OpenSearch
         path   = if _index
                    "#{Utils.__listify(_index)}/_msearch/template"
                  else
-                   "_msearch/template"
+                   '_msearch/template'
                  end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]
-        case
-        when body.is_a?(Array)
+        if body.is_a?(Array)
           payload = body.map { |d| d.is_a?(String) ? d : OpenSearch::API.serializer.dump(d) }
-          payload << "" unless payload.empty?
-          payload = payload.join("
-")
+          payload << '' unless payload.empty?
+          payload = payload.join("\n")
         else
           payload = body
         end
 
-        headers.merge!("Content-Type" => "application/x-ndjson")
+        headers.merge!('Content-Type' => 'application/x-ndjson')
         perform_request(method, path, params, payload, headers).body
       end
 
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:msearch_template, [
-        :search_type,
-        :typed_keys,
-        :max_concurrent_searches,
-        :rest_total_hits_as_int,
-        :ccs_minimize_roundtrips
+      ParamsRegistry.register(:msearch_template, %i[
+        search_type
+        typed_keys
+        max_concurrent_searches
+        rest_total_hits_as_int
+        ccs_minimize_roundtrips
       ].freeze)
     end
   end

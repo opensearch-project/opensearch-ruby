@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which takes out documents matching a filter from the results
         #
         # @note Since `not` is a keyword in Ruby, use the `_not` method in DSL definitions
@@ -82,11 +81,10 @@ module OpenSearch
           #
           # @return [Hash]
           #
-          def to_hash(options={})
-            case
-            when (! @value || @value.empty?) && ! @block
+          def to_hash(options = {})
+            if (!@value || @value.empty?) && !@block
               @hash = super
-            when @block
+            elsif @block
               call
               @hash = { name.to_sym => @value.to_hash }
             end

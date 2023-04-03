@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#recovery' do
-
   let(:expected_args) do
     [
-        'GET',
-        'foo/_recovery',
-        {},
-        nil,
-        {}
+      'GET',
+      'foo/_recovery',
+      {},
+      nil,
+      {}
     ]
   end
 

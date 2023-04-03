@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#like_text' do
-
       before do
         search.like_text('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
     end
 
     describe '#fuzziness' do
-
       before do
         search.fuzziness('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
     end
 
     describe '#analyzer' do
-
       before do
         search.analyzer('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
     end
 
     describe '#max_query_terms' do
-
       before do
         search.max_query_terms('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
     end
 
     describe '#prefix_length' do
-
       before do
         search.prefix_length('bar')
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
     end
 
     describe '#boost' do
-
       before do
         search.boost('bar')
       end
@@ -112,7 +103,6 @@ describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
     end
 
     describe '#ignore_tf' do
-
       before do
         search.ignore_tf('bar')
       end
@@ -124,9 +114,7 @@ describe OpenSearch::DSL::Search::Queries::FuzzyLikeThisField do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           like_text 'bar'

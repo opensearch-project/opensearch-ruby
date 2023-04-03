@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client#delete' do
-
   let(:expected_args) do
     [
-        'DELETE',
-        'foo/_doc/1',
-        params,
-        nil,
-        {}
+      'DELETE',
+      'foo/_doc/1',
+      params,
+      nil,
+      {}
     ]
   end
 
@@ -47,15 +46,15 @@ describe 'client#delete' do
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       client.delete(id: '1')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :id argument' do
-    expect {
+    expect do
       client.delete(index: 'foo')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do
@@ -63,7 +62,6 @@ describe 'client#delete' do
   end
 
   context 'when url params are provided' do
-
     let(:params) do
       { routing: 'abc123' }
     end
@@ -74,23 +72,21 @@ describe 'client#delete' do
   end
 
   context 'when invalid url params are provided' do
-
     it 'raises an ArgumentError' do
-      expect {
+      expect do
         client.delete(index: 'foo', id: '1', qwertypoiuy: 'asdflkjhg')
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when the url params need to be escaped' do
-
     let(:expected_args) do
       [
-          'DELETE',
-          'foo%5Ebar/_doc/1',
-          params,
-          nil,
-          {}
+        'DELETE',
+        'foo%5Ebar/_doc/1',
+        params,
+        nil,
+        {}
       ]
     end
 
@@ -100,21 +96,19 @@ describe 'client#delete' do
   end
 
   context 'when the index is not found' do
-
     before do
       expect(client).to receive(:perform_request).and_raise(NotFound)
     end
 
     it 'raises the exception' do
-      expect {
+      expect do
         client.delete(index: 'foo', id: 'XXX')
-      }.to raise_exception(NotFound)
+      end.to raise_exception(NotFound)
     end
 
     context 'when the :ignore option is provided' do
-
       it 'does not raise the NotFound exception' do
-        expect(client.delete(index: 'foo', id: 1, ignore: 404)).to eq(false)
+        expect(client.delete(index: 'foo', id: 1, ignore: 404)).to be(false)
       end
     end
   end

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A compound filter which matches documents based on combinations of filters
         #
         # @example Defining a bool filter with multiple conditions
@@ -98,7 +97,6 @@ module OpenSearch
             @hash
           end
         end
-
       end
     end
   end

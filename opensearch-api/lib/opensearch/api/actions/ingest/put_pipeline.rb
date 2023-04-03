@@ -59,10 +59,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:put_pipeline, [
-          :master_timeout,
-          :cluster_manager_timeout,
-          :timeout
+        ParamsRegistry.register(:put_pipeline, %i[
+          master_timeout
+          cluster_manager_timeout
+          timeout
         ].freeze)
       end
     end

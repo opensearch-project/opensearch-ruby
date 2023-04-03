@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which allows to modify the score of documents matching the query,
         # either via built-in functions or a custom script
         #
@@ -85,7 +84,7 @@ module OpenSearch
           #
           # @return [Array]
           #
-          def functions(value=nil)
+          def functions(value = nil)
             if value
               @functions = value
             else
@@ -97,9 +96,7 @@ module OpenSearch
           #
           # @return [Array]
           #
-          def functions=(value)
-            @functions = value
-          end
+          attr_writer :functions
 
           # Converts the query definition to a Hash
           #
@@ -109,19 +106,16 @@ module OpenSearch
             hash = super
             if @query
               _query = @query.respond_to?(:to_hash) ? @query.to_hash : @query
-              hash[self.name].update(query: _query)
+              hash[name].update(query: _query)
             end
             if @filter
               _filter = @filter.respond_to?(:to_hash) ? @filter.to_hash : @filter
-              hash[self.name].update(filter: _filter)
+              hash[name].update(filter: _filter)
             end
-            unless @functions.empty?
-              hash[self.name].update(functions: @functions)
-            end
+            hash[name].update(functions: @functions) unless @functions.empty?
             hash
           end
         end
-
       end
     end
   end

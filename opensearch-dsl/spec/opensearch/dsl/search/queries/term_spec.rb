@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Term do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,9 +38,7 @@ describe OpenSearch::DSL::Search::Queries::Term do
   end
 
   describe '#initialize' do
-
     context 'when a String is provided' do
-
       let(:search) do
         described_class.new(message: 'test')
       end
@@ -53,7 +49,6 @@ describe OpenSearch::DSL::Search::Queries::Term do
     end
 
     context 'when a hash is provided' do
-
       let(:search) do
         described_class.new(message: { query: 'test', boost: 2 })
       end

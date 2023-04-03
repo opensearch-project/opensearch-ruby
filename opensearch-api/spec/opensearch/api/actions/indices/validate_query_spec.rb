@@ -70,7 +70,7 @@ describe 'client.cluster#validate_query' do
     end
 
     it 'performs the request' do
-      expect(client_double.indices.validate_query(index: ['foo', 'bar'])).to eq({})
+      expect(client_double.indices.validate_query(index: %w[foo bar])).to eq({})
     end
   end
 

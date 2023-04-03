@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.snapshot#restore' do
-
   let(:expected_args) do
     [
-        'POST',
-        '_snapshot/foo/bar/_restore',
-        {},
-        nil,
-        {}
+      'POST',
+      '_snapshot/foo/bar/_restore',
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -43,15 +42,15 @@ describe 'client.snapshot#restore' do
   end
 
   it 'requires the :snapshot argument' do
-    expect {
+    expect do
       client.snapshot.restore(repository: 'foo')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :repository argument' do
-    expect {
+    expect do
       client.snapshot.restore(snapshot: 'bar')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do

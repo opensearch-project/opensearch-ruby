@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents which have a non-`null` value in the specified field
         # (ie. the reverse of the `missing` filter)
         #
@@ -51,7 +50,6 @@ module OpenSearch
 
           option_method :field
         end
-
       end
     end
   end

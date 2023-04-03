@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.ingest#delete_pipeline' do
-
   let(:expected_args) do
     [
-        'DELETE',
-        url,
-        {},
-        nil,
-        {}
+      'DELETE',
+      url,
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -47,9 +46,9 @@ describe 'client.ingest#delete_pipeline' do
   end
 
   it 'requires the :id argument' do
-    expect {
+    expect do
       client.ingest.delete_pipeline
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do
@@ -57,7 +56,6 @@ describe 'client.ingest#delete_pipeline' do
   end
 
   context 'when the path must be URL-escaped' do
-
     let(:url) do
       '_ingest/pipeline/foo%5Ebar'
     end

@@ -71,16 +71,16 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:get_source, [
-        :preference,
-        :realtime,
-        :refresh,
-        :routing,
-        :_source,
-        :_source_excludes,
-        :_source_includes,
-        :version,
-        :version_type
+      ParamsRegistry.register(:get_source, %i[
+        preference
+        realtime
+        refresh
+        routing
+        _source
+        _source_excludes
+        _source_includes
+        version
+        version_type
       ].freeze)
     end
   end

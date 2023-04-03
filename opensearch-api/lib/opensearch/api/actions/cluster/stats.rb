@@ -47,7 +47,7 @@ module OpenSearch
           path   = if _node_id
                      "_cluster/stats/nodes/#{Utils.__listify(_node_id)}"
                    else
-                     "_cluster/stats"
+                     '_cluster/stats'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -58,9 +58,9 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:stats, [
-          :flat_settings,
-          :timeout
+        ParamsRegistry.register(:stats, %i[
+          flat_settings
+          timeout
         ].freeze)
       end
     end

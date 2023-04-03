@@ -39,7 +39,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_dangling"
+          path   = '_dangling'
           params = {}
 
           body = nil

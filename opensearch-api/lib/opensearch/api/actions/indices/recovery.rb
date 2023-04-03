@@ -47,7 +47,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_recovery"
                    else
-                     "_recovery"
+                     '_recovery'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -58,9 +58,9 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:recovery, [
-          :detailed,
-          :active_only
+        ParamsRegistry.register(:recovery, %i[
+          detailed
+          active_only
         ].freeze)
       end
     end

@@ -49,7 +49,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_cat/tasks"
+          path   = '_cat/tasks'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
@@ -59,17 +59,17 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:tasks, [
-          :format,
-          :nodes,
-          :actions,
-          :detailed,
-          :parent_task_id,
-          :h,
-          :help,
-          :s,
-          :time,
-          :v
+        ParamsRegistry.register(:tasks, %i[
+          format
+          nodes
+          actions
+          detailed
+          parent_task_id
+          h
+          help
+          s
+          time
+          v
         ].freeze)
       end
     end

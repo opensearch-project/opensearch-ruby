@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::BucketSort do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(bucket_sort: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#sort' do
-
       before do
         search.sort do
           by :category, order: 'desc'
@@ -59,7 +55,6 @@ describe OpenSearch::DSL::Search::Aggregations::BucketSort do
     end
 
     describe '#from' do
-
       before do
         search.from(5)
       end
@@ -70,7 +65,6 @@ describe OpenSearch::DSL::Search::Aggregations::BucketSort do
     end
 
     describe '#size' do
-
       before do
         search.size(10)
       end
@@ -81,7 +75,6 @@ describe OpenSearch::DSL::Search::Aggregations::BucketSort do
     end
 
     describe '#gap_policy' do
-
       before do
         search.gap_policy('insert_zero')
       end
@@ -93,9 +86,7 @@ describe OpenSearch::DSL::Search::Aggregations::BucketSort do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           sort do

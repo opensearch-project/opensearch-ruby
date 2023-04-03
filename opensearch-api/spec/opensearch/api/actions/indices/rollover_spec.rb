@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#rollover' do
-
   let(:expected_args) do
     [
-        'POST',
-        url,
-        params,
-        body,
-        {}
+      'POST',
+      url,
+      params,
+      body,
+      {}
     ]
   end
 
@@ -55,7 +54,6 @@ describe 'client.cluster#rollover' do
   end
 
   context 'when an index is specified' do
-
     let(:url) do
       'foo/_rollover/bar'
     end

@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#pending_tasks' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cluster/pending_tasks',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cluster/pending_tasks',
+      {},
+      nil,
+      {}
     ]
   end
 

@@ -39,7 +39,7 @@ module OpenSearch
         end
 
         def tags
-          %w[ one two ]
+          %w[one two]
         end
 
         def search_definition
@@ -58,23 +58,22 @@ module OpenSearch
         end
       end
 
-      context "The Search class" do
+      context 'The Search class' do
         setup do
           @client.indices.create index: 'test'
           @client.index index: 'test', id: '1', body: { title: 'Test', tags: ['one'] }
-          @client.index index: 'test', id: '2', body: { title: 'Test', tags: ['one', 'two'] }
+          @client.index index: 'test', id: '2', body: { title: 'Test', tags: %w[one two] }
           @client.index index: 'test', id: '3', body: { title: 'Test', tags: ['three'] }
           @client.indices.refresh index: 'test'
         end
 
-
-        should "have access to the calling context" do
+        should 'have access to the calling context' do
           s = MySearch.new('test')
           response = @client.search index: 'test', body: s.search_definition.to_hash
 
           assert_equal 2, response['hits']['total']['value']
           assert_equal 'Test', response['hits']['hits'][0]['_source']['title']
-          assert_same_elements ['1', '2'], response['hits']['hits'].map { |d| d['_id'] }
+          assert_same_elements %w[1 2], response['hits']['hits'].map { |d| d['_id'] }
         end
       end
     end

@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Nested do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,18 +38,15 @@ describe OpenSearch::DSL::Search::Queries::Nested do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
-    [ 'path',
-      'score_mode',
-      'score_mode',
-      'query' ].each do |option|
-
+    %w[path
+       score_mode
+       score_mode
+       query].each do |option|
       describe "##{option}" do
-
         before do
           search.send(option, 'bar')
         end
@@ -62,7 +57,6 @@ describe OpenSearch::DSL::Search::Queries::Nested do
       end
 
       describe '#inner_hits' do
-
         before do
           search.inner_hits(size: 1)
         end
@@ -73,7 +67,6 @@ describe OpenSearch::DSL::Search::Queries::Nested do
       end
 
       describe '#query' do
-
         before do
           search.query(match: { foo: 'bar' })
         end
@@ -86,9 +79,7 @@ describe OpenSearch::DSL::Search::Queries::Nested do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           path 'bar'

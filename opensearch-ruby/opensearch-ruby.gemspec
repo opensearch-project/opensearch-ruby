@@ -24,16 +24,16 @@
 # specific language governing permissions and limitations
 # under the License.
 
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'opensearch/version'
 
-signing_key_path = File.expand_path("../gem-private_key.pem")
+signing_key_path = File.expand_path('../gem-private_key.pem')
 
 Gem::Specification.new do |s|
   s.name          = 'opensearch-ruby'
   s.version       = OpenSearch::VERSION
-  s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian' , 'Yuvraj Jaiswal']
+  s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian', 'Yuvraj Jaiswal']
   s.email         = ['jayehh@amazon.com', 'vamshin@amazon.com', 'balasvij@amazon.com', 'jaiyuvra@amazon.com']
   s.summary       = 'Ruby integrations for OpenSearch'
   s.homepage      = 'https://opensearch.org/docs/latest'
@@ -41,14 +41,15 @@ Gem::Specification.new do |s|
   s.metadata = {
     'homepage_uri' => 'https://opensearch.org/docs/latest/',
     'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/main',
-    'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues'
+    'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues',
+    'rubygems_mfa_required' => 'true'
   }
   s.files         = `git ls-files`.split($/)
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.executables   << 'opensearch_ruby_console'
-  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+  s.executables << 'opensearch_ruby_console'
+  s.test_files = s.files.grep(%r{^(test|spec|features)/})
 
-  if $PROGRAM_NAME.end_with?("gem") && ARGV == ["build", __FILE__] && File.exist?(signing_key_path)
+  if $PROGRAM_NAME.end_with?('gem') && ARGV == ['build', __FILE__] && File.exist?(signing_key_path)
     s.signing_key = signing_key_path
     s.cert_chain  = ['../certs/opensearch-rubygems.pem']
   end
@@ -56,13 +57,13 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.bindir = 'bin'
 
-  s.extra_rdoc_files  = [ 'README.md', 'LICENSE' ]
-  s.rdoc_options      = [ '--charset=UTF-8' ]
+  s.extra_rdoc_files  = ['README.md', 'LICENSE']
+  s.rdoc_options      = ['--charset=UTF-8']
 
   s.required_ruby_version = '>= 2.4'
 
-  s.add_dependency 'opensearch-transport', '~> 2.0'
   s.add_dependency 'opensearch-api',       '~> 2.1'
+  s.add_dependency 'opensearch-transport', '~> 2.0'
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'byebug' unless defined?(JRUBY_VERSION) || defined?(Rubinius)

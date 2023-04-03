@@ -50,7 +50,7 @@ module OpenSearch
           path   = if _index
                      "_cat/count/#{Utils.__listify(_index)}"
                    else
-                     "_cat/count"
+                     '_cat/count'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
           params[:h] = Utils.__listify(params[:h]) if params[:h]
@@ -62,12 +62,12 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:count, [
-          :format,
-          :h,
-          :help,
-          :s,
-          :v
+        ParamsRegistry.register(:count, %i[
+          format
+          h
+          help
+          s
+          v
         ].freeze)
       end
     end

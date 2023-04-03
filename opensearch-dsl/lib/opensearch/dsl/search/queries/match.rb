@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A simple to use, yet sophisticated query which returns documents matching the specified terms,
         # taking into account field types, analyzers, etc. and allowing to search in phrase, prefix, fuzzy modes
         #
@@ -62,7 +61,6 @@ module OpenSearch
           option_method :cutoff_frequency
           option_method :max_expansions
         end
-
       end
     end
   end

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents which fall into a specified geographical shape
         #
         # @example
@@ -54,7 +53,6 @@ module OpenSearch
           option_method :shape
           option_method :indexed_shape
         end
-
       end
     end
   end

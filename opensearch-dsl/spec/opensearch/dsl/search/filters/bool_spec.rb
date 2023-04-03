@@ -52,7 +52,7 @@ describe OpenSearch::DSL::Search::Filters::Bool do
           described_class.new do
             must(OpenSearch::DSL::Search::Filters::Term.new(foo: 'bar'))
             must_not(OpenSearch::DSL::Search::Filters::Term.new(moo: 'bam'))
-            expect(subject).to(OpenSearch::DSL::Search::Filters::Term.new(xoo: 'bax'))
+            should(OpenSearch::DSL::Search::Filters::Term.new(xoo: 'bax'))
           end
         end
 
@@ -70,8 +70,8 @@ describe OpenSearch::DSL::Search::Filters::Bool do
             must(OpenSearch::DSL::Search::Filters::Term.new(foo: 'bar'))
             must(OpenSearch::DSL::Search::Filters::Term.new(moo: 'bam'))
 
-            expect(subject).to(OpenSearch::DSL::Search::Filters::Term.new(xoo: 'bax'))
-            expect(subject).to(OpenSearch::DSL::Search::Filters::Term.new(zoo: 'baz'))
+            should(OpenSearch::DSL::Search::Filters::Term.new(xoo: 'bax'))
+            should(OpenSearch::DSL::Search::Filters::Term.new(zoo: 'baz'))
           end
         end
 
@@ -109,7 +109,7 @@ describe OpenSearch::DSL::Search::Filters::Bool do
           described_class.new do
             must     { term foo: 'bar' }
             must_not { term moo: 'bam' }
-            expect(subject).to   { term xoo: 'bax' }
+            should   { term xoo: 'bax' }
           end
         end
 
@@ -127,8 +127,8 @@ describe OpenSearch::DSL::Search::Filters::Bool do
             must { term foo: 'bar' }
             must { term moo: 'bam' }
 
-            expect(subject).to { term xoo: 'bax' }
-            expect(subject).to { term zoo: 'baz' }
+            should { term xoo: 'bax' }
+            should { term zoo: 'baz' }
           end
         end
 

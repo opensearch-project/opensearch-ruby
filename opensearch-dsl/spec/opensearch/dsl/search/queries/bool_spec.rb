@@ -50,8 +50,8 @@ describe OpenSearch::DSL::Search::Queries::Bool do
       context 'when multiple option methods are called' do
         let(:search) do
           described_class.new do
-            expect(subject).to(OpenSearch::DSL::Search::Queries::Term.new(tag: 'wow'))
-            expect(subject).to(OpenSearch::DSL::Search::Queries::Term.new(tag: 'opensearch'))
+            should(OpenSearch::DSL::Search::Queries::Term.new(tag: 'wow'))
+            should(OpenSearch::DSL::Search::Queries::Term.new(tag: 'opensearch'))
 
             minimum_should_match 1
             boost 1.0
@@ -73,8 +73,8 @@ describe OpenSearch::DSL::Search::Queries::Bool do
             must(OpenSearch::DSL::Search::Queries::Match.new(foo: 'bar'))
             must(OpenSearch::DSL::Search::Queries::Match.new(moo: 'bam'))
 
-            expect(subject).to(OpenSearch::DSL::Search::Queries::Match.new(xoo: 'bax'))
-            expect(subject).to(OpenSearch::DSL::Search::Queries::Match.new(zoo: 'baz'))
+            should(OpenSearch::DSL::Search::Queries::Match.new(xoo: 'bax'))
+            should(OpenSearch::DSL::Search::Queries::Match.new(zoo: 'baz'))
           end
         end
 
@@ -106,8 +106,8 @@ describe OpenSearch::DSL::Search::Queries::Bool do
       context 'when multiple option methods are called' do
         let(:search) do
           described_class.new do
-            expect(subject).to   { term tag: 'wow' }
-            expect(subject).to   { term tag: 'opensearch' }
+            should   { term tag: 'wow' }
+            should   { term tag: 'opensearch' }
 
             minimum_should_match 1
             boost 1.0
@@ -134,11 +134,11 @@ describe OpenSearch::DSL::Search::Queries::Bool do
               match moo: 'bam'
             end
 
-            expect(subject).to do
+            should do
               match xoo: 'bax'
             end
 
-            expect(subject).to do
+            should do
               match zoo: 'baz'
             end
           end

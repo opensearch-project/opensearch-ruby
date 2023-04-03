@@ -8,5 +8,11 @@ AllCops:
   TargetRubyVersion: 2.5
   NewCops: enable
 
+RSpec/ImplicitExpect:
+  Enabled: false
+
+RSpec/ImplicitSubject:
+  Enabled: false
+
 Metrics:
   Enabled: false

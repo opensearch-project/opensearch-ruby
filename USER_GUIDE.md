@@ -1,8 +1,7 @@
 - [User Guide](#user-guide)
   - [Setup](#setup)
-  - [Sample code](#sample-code)
-    - [Basic Usage](#basic-usage)
-    - [Point in Time](#point-in-time)
+  - [Basic Usage](#basic-usage)
+  - [Guides by Topics](#guides-by-topics)
   - [Amazon OpenSearch Service](#amazon-opensearch-service)
 
 # User Guide
@@ -25,16 +24,12 @@ Import the client:
 
 `require 'opensearch'`
 
-## Sample code
-<a name="basic-usage" /></a>
-### Basic Usage
+## Basic Usage
 ```ruby
 require 'opensearch'
 
 client = OpenSearch::Client.new(
-  host: 'https://localhost:9200',
-  user: 'admin',
-  password: 'admin'
+  host: 'https://admin:admin@localhost:9200',
   transport_options: { ssl: { verify: false } }  # For testing only. Use certificate for validation.
 )
 
@@ -109,36 +104,13 @@ response = client.indices.delete(
 puts response   
 ```
 
-### Point in Time
-Refer to OpenSearch [documentation](https://opensearch.org/docs/latest/point-in-time-api/) for more information on point in time.
-```ruby
-require 'opensearch-ruby'
-client = OpenSearch::Client.new({ host: 'localhost' })
-index = :movies
-client.indices.create(index: index)
-
-# Create 3 Pits
-client.create_pit index: index, keep_alive: '3m'
-client.create_pit index: index, keep_alive: '3m'
-client.create_pit index: index, keep_alive: '3m'
-
-# Get all PITs
-pits = client.get_all_pits
-puts pits
-
-# Delete first PIT
-client.delete_pit body: { pit_id: [pits.dig('pits', 0, 'pit_id')] }
-
-# All PIT segments
-puts client.cat.all_pit_segments
-
-# Segments of a specific PIT
-puts client.cat.pit_segments body: { pit_id: [pits.dig('pits', 1, 'pit_id')] }
-
-
-# Delete all PITs
-puts client.delete_all_pits
-```
+## Guides by Topics
+- [Index Lifecycle](guides/index_lifecycle.md)
+- [Document Lifecycle](guides/document_lifecycle.md)
+- [Search](guides/search.md)
+- [Bulk](guides/bulk.md)
+- [Advanced Index Actions](guides/advanced_index_actions.md)
+- [Index Templates](guides/index_template.md)
 
 ## Amazon OpenSearch Service
 

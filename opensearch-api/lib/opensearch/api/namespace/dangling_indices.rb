@@ -28,10 +28,13 @@ module OpenSearch
   module API
     module DanglingIndices
       module Actions; end
+
       # Client for the "dangling_indices" namespace (includes the {DanglingIndices::Actions} methods)
       #
       class DanglingIndicesClient
-        include Common::Client, Common::Client::Base, DanglingIndices::Actions
+        include DanglingIndices::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {DanglingIndicesClient}, available in the receiving object

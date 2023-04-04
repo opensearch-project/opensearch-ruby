@@ -29,23 +29,22 @@ require 'test_helper'
 module OpenSearch
   module Test
     class SearchSizeTest < ::OpenSearch::Test::UnitTestCase
-      context "Search pagination" do
-
-        should "encode the size parameter" do
+      context 'Search pagination' do
+        should 'encode the size parameter' do
           subject = OpenSearch::DSL::Search::Search.new do
             size 5
           end
-          assert_equal( { size: 5 }, subject.to_hash )
+          assert_equal({ size: 5 }, subject.to_hash)
         end
 
-        should "encode the from parameter" do
+        should 'encode the from parameter' do
           subject = OpenSearch::DSL::Search::Search.new do
             from 5
           end
-          assert_equal( { from: 5 }, subject.to_hash )
+          assert_equal({ from: 5 }, subject.to_hash)
         end
 
-        should "have getter methods" do
+        should 'have getter methods' do
           subject = OpenSearch::DSL::Search::Search.new
           assert_nil subject.size
           assert_nil subject.from
@@ -55,13 +54,13 @@ module OpenSearch
           assert_equal 5, subject.from
         end
 
-        should "have setter methods" do
+        should 'have setter methods' do
           subject = OpenSearch::DSL::Search::Search.new
           subject.size = 5
           subject.from = 5
           assert_equal 5, subject.size
           assert_equal 5, subject.from
-          assert_equal( { size: 5, from: 5 }, subject.to_hash )
+          assert_equal({ size: 5, from: 5 }, subject.to_hash)
         end
       end
     end

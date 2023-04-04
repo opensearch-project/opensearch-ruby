@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::DisMax do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::DisMax do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#tie_breaker' do
-
       before do
         search.tie_breaker('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::DisMax do
     end
 
     describe '#boost' do
-
       before do
         search.boost('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::DisMax do
     end
 
     describe '#queries' do
-
       before do
         search.queries('bar')
       end
@@ -80,9 +74,7 @@ describe OpenSearch::DSL::Search::Queries::DisMax do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           tie_breaker 'bar'

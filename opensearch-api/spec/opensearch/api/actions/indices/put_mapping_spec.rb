@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#put_mapping' do
-
   let(:expected_args) do
     [
-        'PUT',
-        url,
-        {},
-        body,
-        {}
+      'PUT',
+      url,
+      {},
+      body,
+      {}
     ]
   end
 
@@ -51,20 +50,18 @@ describe 'client.cluster#put_mapping' do
   end
 
   context 'when there is no body specified' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
 
     it 'raises an exception' do
-      expect {
+      expect do
         client.indices.put_mapping(index: 'foo')
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when a body is specified' do
-
     let(:body) do
       { filter: 'foo' }
     end
@@ -75,18 +72,16 @@ describe 'client.cluster#put_mapping' do
   end
 
   context 'when multiple indices are specified' do
-
     let(:url) do
       'foo,bar/_mappings'
     end
 
     it 'performs the request' do
-      expect(client_double.indices.put_mapping(index: ['foo','bar'], body: {})).to eq({})
+      expect(client_double.indices.put_mapping(index: %w[foo bar], body: {})).to eq({})
     end
   end
 
   context 'when the path needs to be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_mappings'
     end

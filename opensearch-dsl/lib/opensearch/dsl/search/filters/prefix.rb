@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents where the field value a specified prefix
         #
         # @example
@@ -48,7 +47,6 @@ module OpenSearch
         class Prefix
           include BaseComponent
         end
-
       end
     end
   end

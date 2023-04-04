@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # The same as match_phrase, except that it allows for prefix matches on the last term in the text
         #
         # @example
@@ -50,7 +49,6 @@ module OpenSearch
           option_method :boost
           option_method :max_expansions
         end
-
       end
     end
   end

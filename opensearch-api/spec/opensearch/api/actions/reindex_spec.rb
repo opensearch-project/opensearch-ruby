@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client#reindex' do
-
   let(:expected_args) do
     [
-        'POST',
-        '_reindex',
-        {},
-        {},
-        {}
+      'POST',
+      '_reindex',
+      {},
+      {},
+      {}
     ]
   end
 

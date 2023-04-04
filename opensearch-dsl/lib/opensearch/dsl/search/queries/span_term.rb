@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents having a span containing a term
         #
         # @example
@@ -45,7 +44,6 @@ module OpenSearch
         class SpanTerm
           include BaseComponent
         end
-
       end
     end
   end

@@ -80,19 +80,19 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:explain, [
-        :analyze_wildcard,
-        :analyzer,
-        :default_operator,
-        :df,
-        :stored_fields,
-        :lenient,
-        :preference,
-        :q,
-        :routing,
-        :_source,
-        :_source_excludes,
-        :_source_includes
+      ParamsRegistry.register(:explain, %i[
+        analyze_wildcard
+        analyzer
+        default_operator
+        df
+        stored_fields
+        lenient
+        preference
+        q
+        routing
+        _source
+        _source_excludes
+        _source_includes
       ].freeze)
     end
   end

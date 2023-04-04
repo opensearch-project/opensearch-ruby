@@ -55,7 +55,7 @@ module OpenSearch
           path   = if _thread_pool_patterns
                      "_cat/thread_pool/#{Utils.__listify(_thread_pool_patterns)}"
                    else
-                     "_cat/thread_pool"
+                     '_cat/thread_pool'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
           params[:h] = Utils.__listify(params[:h]) if params[:h]
@@ -67,16 +67,16 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:thread_pool, [
-          :format,
-          :size,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :h,
-          :help,
-          :s,
-          :v
+        ParamsRegistry.register(:thread_pool, %i[
+          format
+          size
+          local
+          master_timeout
+          cluster_manager_timeout
+          h
+          help
+          s
+          v
         ].freeze)
       end
     end

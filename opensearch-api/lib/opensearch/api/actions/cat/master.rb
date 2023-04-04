@@ -23,7 +23,7 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-        
+
 # @deprecated Please use cluster_manager instead.
 module OpenSearch
   module API
@@ -47,7 +47,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_cat/master"
+          path   = '_cat/master'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
@@ -57,15 +57,15 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:master, [
-          :format,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :h,
-          :help,
-          :s,
-          :v
+        ParamsRegistry.register(:master, %i[
+          format
+          local
+          master_timeout
+          cluster_manager_timeout
+          h
+          help
+          s
+          v
         ].freeze)
       end
     end

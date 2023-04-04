@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(date_histogram: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#field' do
-
       before do
         search.field('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#interval' do
-
       before do
         search.interval('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#pre_zone' do
-
       before do
         search.pre_zone('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#post_zone' do
-
       before do
         search.post_zone('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#time_zone' do
-
       before do
         search.time_zone('bar')
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#pre_zone_adjust_large_interval' do
-
       before do
         search.pre_zone_adjust_large_interval('bar')
       end
@@ -112,7 +103,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#pre_offest' do
-
       before do
         search.pre_offset('bar')
       end
@@ -123,7 +113,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#post_offset' do
-
       before do
         search.post_offset('bar')
       end
@@ -134,7 +123,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#format' do
-
       before do
         search.format('bar')
       end
@@ -145,7 +133,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#min_doc_count' do
-
       before do
         search.min_doc_count('bar')
       end
@@ -156,7 +143,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#extended_bounds' do
-
       before do
         search.extended_bounds('bar')
       end
@@ -167,7 +153,6 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
     end
 
     describe '#order' do
-
       before do
         search.order('bar')
       end
@@ -179,9 +164,7 @@ describe OpenSearch::DSL::Search::Aggregations::DateHistogram do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           field    'bar'

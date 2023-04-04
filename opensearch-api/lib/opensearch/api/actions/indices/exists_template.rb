@@ -54,20 +54,20 @@ module OpenSearch
           body = nil
 
           Utils.__rescue_from_not_found do
-            perform_request(method, path, params, body, headers).status == 200 ? true : false
+            perform_request(method, path, params, body, headers).status == 200
           end
         end
 
-        alias_method :exists_template?, :exists_template
+        alias exists_template? exists_template
 
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:exists_template, [
-          :flat_settings,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :local
+        ParamsRegistry.register(:exists_template, %i[
+          flat_settings
+          master_timeout
+          cluster_manager_timeout
+          local
         ].freeze)
       end
     end

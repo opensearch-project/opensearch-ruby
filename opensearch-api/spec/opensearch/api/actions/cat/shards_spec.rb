@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cat#shards' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cat/shards',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cat/shards',
+      {},
+      nil,
+      {}
     ]
   end
 

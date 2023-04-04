@@ -81,7 +81,7 @@ module OpenSearch
       if distribution == 'opensearch'
         @verified = true
       elsif Gem::Version.new(version) >= Gem::Version.new('6.0.0') &&
-        Gem::Version.new(version) < Gem::Version.new('8.0.0')
+            Gem::Version.new(version) < Gem::Version.new('8.0.0')
         @verified = true
       else
         raise OpenSearch::UnsupportedProductError

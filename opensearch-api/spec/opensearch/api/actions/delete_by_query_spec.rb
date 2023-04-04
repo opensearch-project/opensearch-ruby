@@ -27,7 +27,6 @@
 require 'spec_helper'
 
 describe 'client#delete_by_query' do
-
   let(:expected_args) do
     [
       'POST',
@@ -39,9 +38,9 @@ describe 'client#delete_by_query' do
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       Class.new { include OpenSearch::API }.new.delete_by_query(body: {})
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do

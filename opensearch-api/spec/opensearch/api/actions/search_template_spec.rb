@@ -31,7 +31,7 @@ describe 'client#search_template' do
     [
       'POST',
       'foo/_search/template',
-      { },
+      {},
       { foo: 'bar' },
       {}
     ]

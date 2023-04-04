@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::SpanTerm do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,9 +38,7 @@ describe OpenSearch::DSL::Search::Queries::SpanTerm do
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
         described_class.new(foo: 'bar')
       end

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A compound query which matches documents based on combinations of queries
         #
         # @example Defining a bool query with multiple conditions

@@ -39,7 +39,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_ingest/processor/grok"
+          path   = '_ingest/processor/grok'
           params = {}
 
           body = nil

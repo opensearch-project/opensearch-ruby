@@ -84,24 +84,24 @@ module OpenSearch
       # Deprecated: Use the plural version, {#termvectors}
       #
       def termvector(arguments = {})
-        termvectors(arguments.merge endpoint: '_termvector')
+        termvectors(arguments.merge(endpoint: '_termvector'))
       end
 
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:termvectors, [
-        :term_statistics,
-        :field_statistics,
-        :fields,
-        :offsets,
-        :positions,
-        :payloads,
-        :preference,
-        :routing,
-        :realtime,
-        :version,
-        :version_type
+      ParamsRegistry.register(:termvectors, %i[
+        term_statistics
+        field_statistics
+        fields
+        offsets
+        positions
+        payloads
+        preference
+        routing
+        realtime
+        version
+        version_type
       ].freeze)
     end
   end

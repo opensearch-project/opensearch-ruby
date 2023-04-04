@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#update_aliases' do
-
   let(:expected_args) do
     [
-        'POST',
-        '_aliases',
-        params,
-        body,
-        {}
+      'POST',
+      '_aliases',
+      params,
+      body,
+      {}
     ]
   end
 
@@ -51,20 +50,18 @@ describe 'client.cluster#update_aliases' do
   end
 
   context 'when a body is not specified' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
 
     it 'raises an exception' do
-      expect {
+      expect do
         client.indices.update_aliases
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when parameters are specified' do
-
     let(:params) do
       { timeout: '1s' }
     end

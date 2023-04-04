@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.ingest#get_pipeline' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        {},
-        nil,
-        {}
+      'GET',
+      url,
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -47,7 +46,6 @@ describe 'client.ingest#get_pipeline' do
   end
 
   context 'when the path must be URL-escaped' do
-
     let(:url) do
       '_ingest/pipeline/foo%5Ebar'
     end

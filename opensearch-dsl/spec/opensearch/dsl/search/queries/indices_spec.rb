@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Indices do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::Indices do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#indices' do
-
       before do
         search.indices('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::Indices do
     end
 
     describe '#query' do
-
       before do
         search.query('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::Indices do
     end
 
     describe '#no_match_query' do
-
       before do
         search.no_match_query('bar')
       end
@@ -80,9 +74,7 @@ describe OpenSearch::DSL::Search::Queries::Indices do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           indices 'bar'
@@ -91,7 +83,7 @@ describe OpenSearch::DSL::Search::Queries::Indices do
       end
 
       it 'executes the block' do
-        expect(search.to_hash).to eq(indices: { indices: 'bar', query: { term: { foo: 'bar' } } } )
+        expect(search.to_hash).to eq(indices: { indices: 'bar', query: { term: { foo: 'bar' } } })
       end
     end
   end

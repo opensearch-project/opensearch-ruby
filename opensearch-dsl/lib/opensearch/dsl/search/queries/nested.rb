@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns the root documents for nested documents matching the specified query
         #
         # @example Return articles where John has commented
@@ -70,12 +69,11 @@ module OpenSearch
             hash = super
             if @query
               _query = @query.respond_to?(:to_hash) ? @query.to_hash : @query
-              hash[self.name].update(query: _query)
+              hash[name].update(query: _query)
             end
             hash
           end
         end
-
       end
     end
   end

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which allows to use the `match` query on multiple fields
         #
         # @example
@@ -64,7 +63,6 @@ module OpenSearch
           option_method :use_dis_max
           option_method :zero_terms_query
         end
-
       end
     end
   end

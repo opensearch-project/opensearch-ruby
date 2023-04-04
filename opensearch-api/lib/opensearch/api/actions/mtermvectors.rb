@@ -68,34 +68,34 @@ module OpenSearch
         path = if _index
                  "#{Utils.__listify(_index)}/_mtermvectors"
                else
-                 "_mtermvectors"
+                 '_mtermvectors'
                end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
-        if ids
-          body = { :ids => ids }
-        else
-          body = arguments[:body]
-        end
+        body = if ids
+                 { ids: ids }
+               else
+                 arguments[:body]
+               end
         perform_request(method, path, params, body, headers).body
       end
 
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:mtermvectors, [
-        :ids,
-        :term_statistics,
-        :field_statistics,
-        :fields,
-        :offsets,
-        :positions,
-        :payloads,
-        :preference,
-        :routing,
-        :realtime,
-        :version,
-        :version_type
+      ParamsRegistry.register(:mtermvectors, %i[
+        ids
+        term_statistics
+        field_statistics
+        fields
+        offsets
+        positions
+        payloads
+        preference
+        routing
+        realtime
+        version
+        version_type
       ].freeze)
     end
   end

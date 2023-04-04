@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client#bulk' do
-
   let(:expected_args) do
     [
-        'POST',
-        url,
-        params,
-        body,
-        headers
+      'POST',
+      url,
+      params,
+      body,
+      headers
     ]
   end
 
@@ -44,7 +43,6 @@ describe 'client#bulk' do
   let(:body) { '' }
 
   context 'when a list of operations is provided' do
-
     let(:body) do
       <<-PAYLOAD.gsub(/^\s+/, '')
         {"index":{"_index":"myindexA","_id":"1"}}
@@ -58,17 +56,16 @@ describe 'client#bulk' do
     end
 
     it 'performs the request' do
-      expect(client_double.bulk(:body => [
-          { :index =>  { :_index => 'myindexA', :_id => '1', :data => { :title => 'Test' } } },
-          { :update => { :_index => 'myindexB', :_id => '2', :data => { :doc => { :title => 'Update' } } } },
-          { :delete => { :_index => 'myindexC', :_id => '3' } },
-          { :index =>  { :_index => 'myindexD', :_id => '1', :data => { :data => 'MYDATA' } } },
-      ])).to eq({})
+      expect(client_double.bulk(body: [
+                                  { index: { _index: 'myindexA', _id: '1', data: { title: 'Test' } } },
+                                  { update: { _index: 'myindexB', _id: '2', data: { doc: { title: 'Update' } } } },
+                                  { delete: { _index: 'myindexC', _id: '3' } },
+                                  { index: { _index: 'myindexD', _id: '1', data: { data: 'MYDATA' } } }
+                                ])).to eq({})
     end
   end
 
   context 'when an index is specified' do
-
     let(:url) { 'myindex/_bulk' }
 
     it 'performs the request' do
@@ -77,7 +74,6 @@ describe 'client#bulk' do
   end
 
   context 'when there are data keys in the head/data payloads' do
-
     let(:body) do
       <<-PAYLOAD.gsub(/^\s+/, '')
         {"update":{"_index":"myindex","_id":"1"}}
@@ -86,13 +82,12 @@ describe 'client#bulk' do
     end
 
     it 'performs the request' do
-      expect(client_double.bulk(body:[ { :update => { :_index => 'myindex', :_id => '1' } },
-                                       { :doc => { :data => { :title => 'Update' } } } ])).to eq({})
+      expect(client_double.bulk(body: [{ update: { _index: 'myindex', _id: '1' } },
+                                       { doc: { data: { title: 'Update' } } }])).to eq({})
     end
   end
 
   context 'when the payload is a string' do
-
     let(:body) do
       'foo\nbar'
     end
@@ -103,18 +98,16 @@ describe 'client#bulk' do
   end
 
   context 'when the payload is an array of Strings' do
-
     let(:body) do
       "foo\nbar\n"
     end
 
     it 'performs the request' do
-      expect(client_double.bulk(body: ['foo', 'bar'])).to eq({})
+      expect(client_double.bulk(body: %w[foo bar])).to eq({})
     end
   end
 
   context 'when there are parameters' do
-
     let(:params) do
       { refresh: true }
     end
@@ -125,7 +118,6 @@ describe 'client#bulk' do
   end
 
   context 'when url characters need to be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_bulk'
     end

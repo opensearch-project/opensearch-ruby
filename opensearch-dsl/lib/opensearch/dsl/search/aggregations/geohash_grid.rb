@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-bucket aggregation which will return document counts for geohash grid cells
         #
         # @example
@@ -54,7 +53,6 @@ module OpenSearch
           option_method :size
           option_method :shard_size
         end
-
       end
     end
   end

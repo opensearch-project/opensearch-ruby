@@ -36,22 +36,25 @@ describe 'client.snapshot#repository_analyze' do
       {}
     ]
   end
+  let(:client) do
+    Class.new { include OpenSearch::API }.new
+  end
 
   let(:url) do
     '_snapshot/foo/_analyze'
-  end
-
-  it 'performs the request' do
-    expect(client_double.snapshot.repository_analyze(repository: 'foo')).to eq({})
   end
 
   let(:client) do
     Class.new { include OpenSearch::API }.new
   end
 
+  it 'performs the request' do
+    expect(client_double.snapshot.repository_analyze(repository: 'foo')).to eq({})
+  end
+
   it 'requires the :repository argument' do
-    expect {
+    expect do
       client.snapshot.repository_analyze
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 end

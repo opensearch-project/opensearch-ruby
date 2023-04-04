@@ -27,7 +27,6 @@
 module OpenSearch
   module DSL
     module Search
-
       # Wraps the `sort` part of a search definition
       #
       #
@@ -50,8 +49,8 @@ module OpenSearch
         #       end
         #     end
         #
-        def by(name, direction=nil)
-          @value << ( direction ? { name => direction } : name )
+        def by(name, direction = nil)
+          @value << (direction ? { name => direction } : name)
           self
         end
 
@@ -63,8 +62,8 @@ module OpenSearch
           if @block
             call unless @block_called
             @block_called = true
-          else
-            @value << @args if @args && !@args.empty? && ! @value.include?(@args)
+          elsif @args && !@args.empty? && !@value.include?(@args)
+            @value << @args
           end
 
           @hash = @value.flatten

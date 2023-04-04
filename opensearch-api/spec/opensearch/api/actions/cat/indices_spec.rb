@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cat#indices' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cat/indices',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cat/indices',
+      {},
+      nil,
+      {}
     ]
   end
 

@@ -57,7 +57,7 @@ module OpenSearch
         path = if _scroll_id
                  "_search/scroll/#{Utils.__listify(_scroll_id)}"
                else
-                 "_search/scroll"
+                 '_search/scroll'
                end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -68,10 +68,10 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:scroll, [
-        :scroll,
-        :scroll_id,
-        :rest_total_hits_as_int
+      ParamsRegistry.register(:scroll, %i[
+        scroll
+        scroll_id
+        rest_total_hits_as_int
       ].freeze)
     end
   end

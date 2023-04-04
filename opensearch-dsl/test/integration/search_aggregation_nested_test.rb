@@ -31,41 +31,40 @@ module OpenSearch
     class NestedAggregationIntegrationTest < ::OpenSearch::Test::IntegrationTestCase
       include OpenSearch::DSL::Search
 
-      context "A nested aggregation" do
-
+      context 'A nested aggregation' do
         setup do
           @client.indices.create index: 'products-test', body: {
-              mappings: {
+            mappings: {
+              properties: {
+                title: { type: 'text' },
+                category: { type: 'keyword' },
+                offers: {
+                  type: 'nested',
                   properties: {
-                      title: {type: 'text'},
-                      category: {type: 'keyword'},
-                      offers: {
-                          type: 'nested',
-                          properties: {
-                              name: {type: 'text'},
-                              price: {type: 'double'}
-                          }
-                      }
+                    name: { type: 'text' },
+                    price: { type: 'double' }
                   }
+                }
               }
+            }
           }
 
           @client.index index: 'products-test',
                         body: { title: 'A',
                                 category: 'audio',
-                                offers: [ { name: 'A1', price: 100 }, { name: 'A2', price: 120 } ] }
+                                offers: [{ name: 'A1', price: 100 }, { name: 'A2', price: 120 }] }
           @client.index index: 'products-test',
                         body: { title: 'B',
                                 category: 'audio',
-                                offers: [ { name: 'B1', price: 200 }, { name: 'B2', price: 180 } ] }
+                                offers: [{ name: 'B1', price: 200 }, { name: 'B2', price: 180 }] }
           @client.index index: 'products-test',
                         body: { title: 'C',
                                 category: 'video',
-                                offers: [ { name: 'C1', price: 300 }, { name: 'C2', price: 350 } ] }
+                                offers: [{ name: 'C1', price: 300 }, { name: 'C2', price: 350 }] }
           @client.indices.refresh index: 'products-test'
         end
 
-        should "return the minimal price from offers" do
+        should 'return the minimal price from offers' do
           response = @client.search index: 'products-test', body: search {
             query { match title: 'A' }
 
@@ -82,7 +81,7 @@ module OpenSearch
           assert_equal 100, response['aggregations']['offers']['min_price']['value'].to_i
         end
 
-        should "return the top categories for offer price range" do
+        should 'return the top categories for offer price range' do
           response = @client.search index: 'products-test', body: search {
             query do
               bool do
@@ -119,8 +118,10 @@ module OpenSearch
           }.to_hash
 
           assert_equal 2, response['aggregations']['offers']['top_categories']['top_category_per_offer']['buckets'].size
-          assert_equal 'audio', response['aggregations']['offers']['top_categories']['top_category_per_offer']['buckets'][0]['key']
-          assert_equal 'video', response['aggregations']['offers']['top_categories']['top_category_per_offer']['buckets'][1]['key']
+          assert_equal 'audio',
+                       response['aggregations']['offers']['top_categories']['top_category_per_offer']['buckets'][0]['key']
+          assert_equal 'video',
+                       response['aggregations']['offers']['top_categories']['top_category_per_offer']['buckets'][1]['key']
         end
       end
     end

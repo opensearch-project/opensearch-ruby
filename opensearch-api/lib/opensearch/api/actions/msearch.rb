@@ -59,48 +59,46 @@ module OpenSearch
         path   = if _index
                    "#{Utils.__listify(_index)}/_msearch"
                  else
-                   "_msearch"
+                   '_msearch'
                  end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]
-        case
-        when body.is_a?(Array) && body.any? { |d| d.has_key? :search }
+        if body.is_a?(Array) && body.any? { |d| d.has_key? :search }
           payload = body
-                    .inject([]) do |sum, item|
+                    .each_with_object([]) do |item, sum|
                       meta = item
                       data = meta.delete(:search)
 
                       sum << meta
                       sum << data
-                      sum
                     end
                     .map { |item| OpenSearch::API.serializer.dump(item) }
-          payload << "" unless payload.empty?
+          payload << '' unless payload.empty?
           payload = payload.join("\n")
-        when body.is_a?(Array)
+        elsif body.is_a?(Array)
           payload = body.map { |d| d.is_a?(String) ? d : OpenSearch::API.serializer.dump(d) }
-          payload << "" unless payload.empty?
+          payload << '' unless payload.empty?
           payload = payload.join("\n")
         else
           payload = body
         end
 
-        headers.merge!("Content-Type" => "application/x-ndjson")
+        headers.merge!('Content-Type' => 'application/x-ndjson')
         perform_request(method, path, params, payload, headers).body
       end
 
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:msearch, [
-        :search_type,
-        :max_concurrent_searches,
-        :typed_keys,
-        :pre_filter_shard_size,
-        :max_concurrent_shard_requests,
-        :rest_total_hits_as_int,
-        :ccs_minimize_roundtrips
+      ParamsRegistry.register(:msearch, %i[
+        search_type
+        max_concurrent_searches
+        typed_keys
+        pre_filter_shard_size
+        max_concurrent_shard_requests
+        rest_total_hits_as_int
+        ccs_minimize_roundtrips
       ].freeze)
     end
   end

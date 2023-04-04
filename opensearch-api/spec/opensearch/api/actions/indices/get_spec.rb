@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.indices#get' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        params,
-        nil,
-        {}
+      'GET',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
@@ -51,7 +50,6 @@ describe 'client.indices#get' do
   end
 
   context 'when parameters are specified' do
-
     let(:params) do
       { ignore_unavailable: 1 }
     end

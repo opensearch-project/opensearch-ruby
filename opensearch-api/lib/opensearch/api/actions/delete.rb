@@ -74,15 +74,15 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:delete, [
-        :wait_for_active_shards,
-        :refresh,
-        :routing,
-        :timeout,
-        :if_seq_no,
-        :if_primary_term,
-        :version,
-        :version_type
+      ParamsRegistry.register(:delete, %i[
+        wait_for_active_shards
+        refresh
+        routing
+        timeout
+        if_seq_no
+        if_primary_term
+        version
+        version_type
       ].freeze)
     end
   end

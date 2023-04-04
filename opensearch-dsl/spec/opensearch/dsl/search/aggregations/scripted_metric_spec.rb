@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::ScriptedMetric do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(scripted_metric: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#init_script' do
-
       before do
         search.init_script('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Aggregations::ScriptedMetric do
     end
 
     describe '#map_script' do
-
       before do
         search.map_script('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Aggregations::ScriptedMetric do
     end
 
     describe '#combine_script' do
-
       before do
         search.combine_script('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Aggregations::ScriptedMetric do
     end
 
     describe '#reduce_script' do
-
       before do
         search.reduce_script('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Aggregations::ScriptedMetric do
     end
 
     describe '#params' do
-
       before do
         search.params('bar')
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Aggregations::ScriptedMetric do
     end
 
     describe '#lang' do
-
       before do
         search.lang('bar')
       end
@@ -113,9 +104,7 @@ describe OpenSearch::DSL::Search::Aggregations::ScriptedMetric do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           init_script 'bar'

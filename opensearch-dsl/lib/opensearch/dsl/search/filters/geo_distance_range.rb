@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents which fall into a specified geographical distance range
         #
         # @example Define the filter with a hash
@@ -51,7 +50,6 @@ module OpenSearch
           option_method :lat
           option_method :lon
         end
-
       end
     end
   end

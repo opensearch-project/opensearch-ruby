@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.tasks#cancel' do
-
   let(:expected_args) do
     [
-        'POST',
-        url,
-        {},
-        nil,
-        {}
+      'POST',
+      url,
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -47,7 +46,6 @@ describe 'client.tasks#cancel' do
   end
 
   context 'when a task id is specified' do
-
     let(:url) do
       '_tasks/foo/_cancel'
     end

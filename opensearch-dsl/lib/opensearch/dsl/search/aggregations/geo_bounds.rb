@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # An aggregation which will calculate the smallest bounding box required to encapsulate
         # all of the documents matching the query
         #
@@ -63,7 +62,6 @@ module OpenSearch
           option_method :field
           option_method :wrap_longitude
         end
-
       end
     end
   end

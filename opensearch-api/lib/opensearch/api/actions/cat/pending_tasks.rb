@@ -48,7 +48,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_cat/pending_tasks"
+          path   = '_cat/pending_tasks'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
           params[:h] = Utils.__listify(params[:h]) if params[:h]
 
@@ -59,16 +59,16 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:pending_tasks, [
-          :format,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :h,
-          :help,
-          :s,
-          :time,
-          :v
+        ParamsRegistry.register(:pending_tasks, %i[
+          format
+          local
+          master_timeout
+          cluster_manager_timeout
+          h
+          help
+          s
+          time
+          v
         ].freeze)
       end
     end

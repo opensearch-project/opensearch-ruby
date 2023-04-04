@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A compound filter which matches documents by a union of individual filters.
         #
         # @note Since `or` is a keyword in Ruby, use the `_or` method in DSL definitions

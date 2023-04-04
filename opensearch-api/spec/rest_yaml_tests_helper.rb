@@ -33,13 +33,14 @@ PROJECT_PATH = File.join(File.dirname(__FILE__), '..')
 
 if (hosts = OPENSEARCH_URL)
   split_hosts = hosts.split(',').map do |host|
-    /(http\:\/\/)?\S+/.match(host)
+    %r{(http://)?\S+}.match(host)
   end
   uri = URI.parse(split_hosts.first[0])
   TEST_HOST = uri.host
   TEST_PORT = uri.port
 else
-  TEST_HOST, TEST_PORT = 'localhost', '9200'
+  TEST_HOST = 'localhost'
+  TEST_PORT = '9200'
 end
 
 if defined?(TEST_HOST) && defined?(TEST_PORT)
@@ -47,19 +48,19 @@ if defined?(TEST_HOST) && defined?(TEST_PORT)
 
   ADMIN_CLIENT = OpenSearch::Client.new(host: URL, transport_options: TRANSPORT_OPTIONS)
 
-  if ENV['QUIET'] == 'true'
-    DEFAULT_CLIENT = OpenSearch::Client.new(host: URL, transport_options: TRANSPORT_OPTIONS)
-  else
-    DEFAULT_CLIENT = OpenSearch::Client.new(host: URL,
-                                               transport_options: TRANSPORT_OPTIONS,
-                                               tracer: Logger.new($stdout))
-  end
+  DEFAULT_CLIENT = if ENV.fetch('QUIET', nil) == 'true'
+                     OpenSearch::Client.new(host: URL, transport_options: TRANSPORT_OPTIONS)
+                   else
+                     OpenSearch::Client.new(host: URL,
+                                            transport_options: TRANSPORT_OPTIONS,
+                                            tracer: Logger.new($stdout))
+                   end
 end
 
 YAML_FILES_DIRECTORY = "#{PROJECT_PATH}/../tmp/rest-api-spec/test/free"
 
-SINGLE_TEST = if ENV['SINGLE_TEST'] && !ENV['SINGLE_TEST'].empty?
-                test_target = ENV['SINGLE_TEST']
+SINGLE_TEST = if ENV.fetch('SINGLE_TEST', nil) && !ENV['SINGLE_TEST'].empty?
+                test_target = ENV.fetch('SINGLE_TEST', nil)
 
                 if test_target.match?(/\.yml$/)
                   ["#{PROJECT_PATH}/../tmp/rest-api-spec/test/free/#{test_target}"]
@@ -86,4 +87,4 @@ REST_API_YAML_FILES = if ENV['RUN_SKIPPED_TESTS'] # only run the skipped tests i
                       end
 
 # The features to skip
-REST_API_YAML_SKIP_FEATURES = ['warnings', 'node_selector'].freeze
+REST_API_YAML_SKIP_FEATURES = %w[warnings node_selector].freeze

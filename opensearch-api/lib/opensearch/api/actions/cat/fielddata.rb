@@ -51,7 +51,7 @@ module OpenSearch
           path   = if _fields
                      "_cat/fielddata/#{Utils.__listify(_fields)}"
                    else
-                     "_cat/fielddata"
+                     '_cat/fielddata'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -62,14 +62,14 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:fielddata, [
-          :format,
-          :bytes,
-          :h,
-          :help,
-          :s,
-          :v,
-          :fields
+        ParamsRegistry.register(:fielddata, %i[
+          format
+          bytes
+          h
+          help
+          s
+          v
+          fields
         ].freeze)
       end
     end

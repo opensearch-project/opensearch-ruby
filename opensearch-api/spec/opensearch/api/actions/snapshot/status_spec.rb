@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.snapshot#status' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        {},
-        nil,
-        {}
+      'GET',
+      url,
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -47,7 +46,6 @@ describe 'client.snapshot#status' do
   end
 
   context 'when a repository and snapshot are specified' do
-
     let(:url) do
       '_snapshot/foo/bar/_status'
     end

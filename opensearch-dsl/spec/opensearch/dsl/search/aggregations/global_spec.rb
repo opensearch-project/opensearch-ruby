@@ -27,22 +27,18 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Global do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(global: {})
     end
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
         end
@@ -54,17 +50,16 @@ describe OpenSearch::DSL::Search::Aggregations::Global do
     end
 
     context 'when another aggregation is nested' do
-
       let(:search) do
         described_class.new do
           aggregation :foo do
-            terms field: "bar"
+            terms field: 'bar'
           end
         end
       end
 
       it 'nests the aggregation in the hash' do
-        expect(search.to_hash).to eq(aggregations: { foo: { terms: { field: "bar" } } }, global: {})
+        expect(search.to_hash).to eq(aggregations: { foo: { terms: { field: 'bar' } } }, global: {})
       end
     end
   end

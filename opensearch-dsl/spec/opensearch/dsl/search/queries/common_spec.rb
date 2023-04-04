@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Common do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::Common do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#query' do
-
       before do
         search.query('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::Common do
     end
 
     describe '#cutoff_frequency' do
-
       before do
         search.cutoff_frequency('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::Common do
     end
 
     describe '#low_freq_operator' do
-
       before do
         search.low_freq_operator('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Queries::Common do
     end
 
     describe '#minimum_should_match' do
-
       before do
         search.minimum_should_match('bar')
       end
@@ -90,7 +83,6 @@ describe OpenSearch::DSL::Search::Queries::Common do
     end
 
     describe '#boost' do
-
       before do
         search.boost('bar')
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Queries::Common do
     end
 
     describe '#analyzer' do
-
       before do
         search.analyzer('bar')
       end
@@ -112,7 +103,6 @@ describe OpenSearch::DSL::Search::Queries::Common do
     end
 
     describe '#disable_coord' do
-
       before do
         search.disable_coord('bar')
       end
@@ -124,9 +114,7 @@ describe OpenSearch::DSL::Search::Queries::Common do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           query 'bar'

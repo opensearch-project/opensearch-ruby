@@ -26,10 +26,10 @@
 
 source 'https://rubygems.org'
 
-gem 'opensearch-api',        path: File.expand_path('../opensearch-api', __FILE__),        require: false
-gem 'opensearch-transport',  path: File.expand_path('../opensearch-transport', __FILE__),  require: false
-gem 'opensearch-ruby',       path: File.expand_path('../opensearch-ruby', __FILE__),       require: false
-gem 'opensearch-aws-sigv4',  path: File.expand_path('../opensearch-aws-sigv4', __FILE__),  require: false
+gem 'opensearch-api',        path: File.expand_path('opensearch-api', __dir__),        require: false
+gem 'opensearch-aws-sigv4',  path: File.expand_path('opensearch-aws-sigv4', __dir__),  require: false
+gem 'opensearch-ruby',       path: File.expand_path('opensearch-ruby', __dir__),       require: false
+gem 'opensearch-transport',  path: File.expand_path('opensearch-transport', __dir__),  require: false
 
 gem 'ansi'
 gem 'cane'
@@ -37,7 +37,10 @@ gem 'mocha'
 gem 'pry'
 gem 'rake'
 gem 'require-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
-gem 'ruby-prof'    unless defined?(JRUBY_VERSION) || defined?(Rubinius)
+gem 'rubocop', '~> 1.28.0'
+gem 'rubocop-rake'
+gem 'rubocop-rspec'
+gem 'ruby-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
 gem 'shoulda-context'
 gem 'simplecov'
 gem 'test-unit', '~> 2'

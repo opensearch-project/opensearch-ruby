@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "tasks" namespace (includes the {Tasks::Actions} methods)
       #
       class TasksClient
-        include Common::Client, Common::Client::Base, Tasks::Actions
+        include Tasks::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {TasksClient}, available in the receiving object
@@ -40,7 +42,6 @@ module OpenSearch
       def tasks
         @tasks ||= TasksClient.new(self)
       end
-
     end
   end
 end

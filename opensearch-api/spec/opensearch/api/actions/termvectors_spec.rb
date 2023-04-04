@@ -54,9 +54,9 @@ describe 'client#termvectors' do
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       client.termvectors(id: '1')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do

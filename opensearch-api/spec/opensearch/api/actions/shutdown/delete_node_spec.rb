@@ -36,18 +36,21 @@ describe 'client.shutdown#delete_node' do
       {}
     ]
   end
-
-  it 'performs the request' do
-    expect(client_double.shutdown.delete_node(node_id: 'id')).to eq({})
+  let(:client) do
+    Class.new { include OpenSearch::API }.new
   end
 
   let(:client) do
     Class.new { include OpenSearch::API }.new
   end
 
+  it 'performs the request' do
+    expect(client_double.shutdown.delete_node(node_id: 'id')).to eq({})
+  end
+
   it 'raises an error if no node_id is provided' do
-    expect {
+    expect do
       client.shutdown.delete_node
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 end

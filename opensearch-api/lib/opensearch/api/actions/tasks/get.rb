@@ -58,9 +58,9 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get, [
-          :wait_for_completion,
-          :timeout
+        ParamsRegistry.register(:get, %i[
+          wait_for_completion
+          timeout
         ].freeze)
       end
     end

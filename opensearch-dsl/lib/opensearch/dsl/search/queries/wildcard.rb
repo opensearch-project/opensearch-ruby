@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching a wildcard expression
         #
         # @note The expression is *not analyzed* (lowercased, stemmed, etc)
@@ -49,7 +48,6 @@ module OpenSearch
           option_method :value
           option_method :boost
         end
-
       end
     end
   end

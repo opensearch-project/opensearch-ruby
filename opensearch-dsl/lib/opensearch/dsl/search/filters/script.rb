@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents matching the criteria defined with a script
         #
         # @example
@@ -51,7 +50,6 @@ module OpenSearch
           option_method :script
           option_method :params
         end
-
       end
     end
   end

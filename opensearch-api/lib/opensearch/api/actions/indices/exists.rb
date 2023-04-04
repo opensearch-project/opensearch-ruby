@@ -50,28 +50,28 @@ module OpenSearch
           _index = arguments.delete(:index)
 
           method = OpenSearch::API::HTTP_HEAD
-          path   = "#{Utils.__listify(_index)}"
+          path   = Utils.__listify(_index).to_s
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
 
           Utils.__rescue_from_not_found do
-            perform_request(method, path, params, body, headers).status == 200 ? true : false
+            perform_request(method, path, params, body, headers).status == 200
           end
         end
 
-        alias_method :exists?, :exists
+        alias exists? exists
 
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:exists, [
-          :local,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :flat_settings,
-          :include_defaults
+        ParamsRegistry.register(:exists, %i[
+          local
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          flat_settings
+          include_defaults
         ].freeze)
       end
     end

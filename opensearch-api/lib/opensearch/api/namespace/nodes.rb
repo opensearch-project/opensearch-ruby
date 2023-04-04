@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "nodes" namespace (includes the {Nodes::Actions} methods)
       #
       class NodesClient
-        include Common::Client, Common::Client::Base, Nodes::Actions
+        include Nodes::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {NodesClient}, available in the receiving object
@@ -40,7 +42,6 @@ module OpenSearch
       def nodes
         @nodes ||= NodesClient.new(self)
       end
-
     end
   end
 end

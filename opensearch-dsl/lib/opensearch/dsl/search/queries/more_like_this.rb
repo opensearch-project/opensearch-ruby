@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents which are similar to the specified text or documents
         #
         # @example Find documents similar to the provided text
@@ -83,7 +82,6 @@ module OpenSearch
           option_method :boost
           option_method :analyzer
         end
-
       end
     end
   end

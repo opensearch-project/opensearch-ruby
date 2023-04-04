@@ -50,7 +50,7 @@ module OpenSearch
           _index = arguments.delete(:index)
 
           method = OpenSearch::API::HTTP_DELETE
-          path   = "#{Utils.__listify(_index)}"
+          path   = Utils.__listify(_index).to_s
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
@@ -64,13 +64,13 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:delete, [
-          :timeout,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards
+        ParamsRegistry.register(:delete, %i[
+          timeout
+          master_timeout
+          cluster_manager_timeout
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
         ].freeze)
       end
     end

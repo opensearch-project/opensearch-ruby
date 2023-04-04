@@ -53,7 +53,7 @@ module OpenSearch
           path   = if _task_id
                      "_tasks/#{Utils.__listify(_task_id)}/_cancel"
                    else
-                     "_tasks/_cancel"
+                     '_tasks/_cancel'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -64,11 +64,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:cancel, [
-          :nodes,
-          :actions,
-          :parent_task_id,
-          :wait_for_completion
+        ParamsRegistry.register(:cancel, %i[
+          nodes
+          actions
+          parent_task_id
+          wait_for_completion
         ].freeze)
       end
     end

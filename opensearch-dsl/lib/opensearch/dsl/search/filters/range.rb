@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents that have terms in a specified range
         #
         # @example
@@ -58,7 +57,6 @@ module OpenSearch
           option_method :time_zone
           option_method :format
         end
-
       end
     end
   end

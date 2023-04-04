@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which returns documents matching the specified terms
         #
         # @example
@@ -50,7 +49,6 @@ module OpenSearch
         class Term
           include BaseComponent
         end
-
       end
     end
   end

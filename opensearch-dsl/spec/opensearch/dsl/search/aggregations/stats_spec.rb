@@ -27,20 +27,17 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Stats do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(stats: {})
     end
   end
 
-  context '#initialize' do
-
+  describe '#initialize' do
     let(:search) do
       described_class.new(foo: 'bar')
     end
@@ -50,7 +47,6 @@ describe OpenSearch::DSL::Search::Aggregations::Stats do
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           field 'bar'

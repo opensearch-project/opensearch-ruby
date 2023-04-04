@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which executes a custom filter only for documents in specified indices,
         # and optionally another filter for documents in other indices
         #
@@ -87,16 +86,15 @@ module OpenSearch
             hash = super
             if @filter
               _filter = @filter.respond_to?(:to_hash) ? @filter.to_hash : @filter
-              hash[self.name].update(filter: _filter)
+              hash[name].update(filter: _filter)
             end
             if @no_match_filter
               _no_match_filter = @no_match_filter.respond_to?(:to_hash) ? @no_match_filter.to_hash : @no_match_filter
-              hash[self.name].update(no_match_filter: _no_match_filter)
+              hash[name].update(no_match_filter: _no_match_filter)
             end
             hash
           end
         end
-
       end
     end
   end

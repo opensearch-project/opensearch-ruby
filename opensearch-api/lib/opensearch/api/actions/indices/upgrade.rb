@@ -55,7 +55,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_upgrade"
                    else
-                     "_upgrade"
+                     '_upgrade'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -66,12 +66,12 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:upgrade, [
-          :allow_no_indices,
-          :expand_wildcards,
-          :ignore_unavailable,
-          :wait_for_completion,
-          :only_ancient_segments
+        ParamsRegistry.register(:upgrade, %i[
+          allow_no_indices
+          expand_wildcards
+          ignore_unavailable
+          wait_for_completion
+          only_ancient_segments
         ].freeze)
       end
     end

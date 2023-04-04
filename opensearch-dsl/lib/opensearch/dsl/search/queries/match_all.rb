@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which matches all documents
         #
         # @example
@@ -45,7 +44,6 @@ module OpenSearch
 
           option_method :boost
         end
-
       end
     end
   end

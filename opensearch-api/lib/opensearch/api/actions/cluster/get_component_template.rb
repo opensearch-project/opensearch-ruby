@@ -48,7 +48,7 @@ module OpenSearch
           path   = if _name
                      "_component_template/#{Utils.__listify(_name)}"
                    else
-                     "_component_template"
+                     '_component_template'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -59,10 +59,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get_component_template, [
-          :master_timeout,
-          :cluster_manager_timeout,
-          :local
+        ParamsRegistry.register(:get_component_template, %i[
+          master_timeout
+          cluster_manager_timeout
+          local
         ].freeze)
       end
     end

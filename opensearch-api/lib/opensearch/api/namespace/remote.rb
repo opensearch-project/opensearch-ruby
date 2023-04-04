@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "remote" namespace (includes the {Remote::Actions} methods)
       #
       class RemoteClient
-        include Common::Client, Common::Client::Base, Remote::Actions
+        include Remote::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {RemoteClient}, available in the receiving object
@@ -40,7 +42,6 @@ module OpenSearch
       def remote
         @remote ||= RemoteClient.new(self)
       end
-
     end
   end
 end

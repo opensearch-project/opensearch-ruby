@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Filters
-
         # A filter which translates lat/lon values into a geohash with the specified precision
         # and returns all documents which fall into it
         #
@@ -56,14 +55,14 @@ module OpenSearch
         class GeohashCell
           include BaseComponent
 
-          option_method :precision, lambda { |*args| @hash[self.name.to_sym].update precision: args.pop }
-          option_method :lat,       lambda { |*args| @hash[self.name.to_sym][@args].update lat: args.pop }
-          option_method :lon,       lambda { |*args| @hash[self.name.to_sym][@args].update lon: args.pop }
-          option_method :neighbors, lambda { |*args| @hash[self.name.to_sym].update neighbors: args.pop }
+          option_method :precision, ->(*args) { @hash[name.to_sym].update precision: args.pop }
+          option_method :lat,       ->(*args) { @hash[name.to_sym][@args].update lat: args.pop }
+          option_method :lon,       ->(*args) { @hash[name.to_sym][@args].update lon: args.pop }
+          option_method :neighbors, ->(*args) { @hash[name.to_sym].update neighbors: args.pop }
 
           def initialize(*args, &block)
             super
-            @hash[self.name.to_sym] = { @args => {} } unless @args.empty?
+            @hash[name.to_sym] = { @args => {} } unless @args.empty?
           end
         end
       end

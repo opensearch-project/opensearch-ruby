@@ -31,41 +31,40 @@ module OpenSearch
     class SearchFilterTest < ::OpenSearch::Test::UnitTestCase
       subject { OpenSearch::DSL::Search::Filter.new }
 
-      context "Search Filter" do
-
-        should "be serializable to a Hash" do
-          assert_equal( {}, subject.to_hash )
+      context 'Search Filter' do
+        should 'be serializable to a Hash' do
+          assert_equal({}, subject.to_hash)
 
           subject = OpenSearch::DSL::Search::Filter.new
           subject.instance_variable_set(:@value, { foo: 'bar' })
-          assert_equal( { foo: 'bar' }, subject.to_hash )
+          assert_equal({ foo: 'bar' }, subject.to_hash)
         end
 
-        should "evaluate the block and return itself" do
-          block   = Proc.new { 1+1 }
-          subject = OpenSearch::DSL::Search::Filter.new &block
+        should 'evaluate the block and return itself' do
+          block   = proc { 1 + 1 }
+          subject = OpenSearch::DSL::Search::Filter.new(&block)
 
           subject.expects(:instance_eval)
           assert_instance_of OpenSearch::DSL::Search::Filter, subject.call
         end
 
-        should "call the block and return itself" do
-          block   = Proc.new { |s| 1+1 }
-          subject = OpenSearch::DSL::Search::Filter.new &block
+        should 'call the block and return itself' do
+          block   = proc { |_s| 1 + 1 }
+          subject = OpenSearch::DSL::Search::Filter.new(&block)
 
           block.expects(:call)
           assert_instance_of OpenSearch::DSL::Search::Filter, subject.call
         end
 
-        should "define the value with filter methods" do
+        should 'define the value with filter methods' do
           assert_nothing_raised do
             subject.term foo: 'bar'
             assert_instance_of Hash, subject.to_hash
-            assert_equal( { term: { foo: 'bar' } }, subject.to_hash )
+            assert_equal({ term: { foo: 'bar' } }, subject.to_hash)
           end
         end
 
-        should "redefine the value with filter methods" do
+        should 'redefine the value with filter methods' do
           assert_nothing_raised do
             subject.term foo: 'bar'
             subject.term foo: 'bam'
@@ -76,12 +75,10 @@ module OpenSearch
           end
         end
 
-        should "raise an exception for unknown filter" do
+        should 'raise an exception for unknown filter' do
           assert_raise(NoMethodError) { subject.foofoo }
         end
-
       end
-
     end
   end
 end

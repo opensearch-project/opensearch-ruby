@@ -45,7 +45,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_POST
-          path   = "_aliases"
+          path   = '_aliases'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = arguments[:body]
@@ -55,10 +55,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:update_aliases, [
-          :timeout,
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:update_aliases, %i[
+          timeout
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

@@ -24,7 +24,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.entry.ruby_version }}
-
       - name: Checkout OpenSearch
         uses: actions/checkout@v3
         with:

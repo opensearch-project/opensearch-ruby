@@ -49,7 +49,7 @@ module OpenSearch
           path   = if _id
                      "_ingest/pipeline/#{Utils.__listify(_id)}/_simulate"
                    else
-                     "_ingest/pipeline/_simulate"
+                     '_ingest/pipeline/_simulate'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 

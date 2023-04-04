@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching the specified term
         #
         # @note The specified term is *not analyzed* (lowercased, stemmed, etc)
@@ -45,7 +44,6 @@ module OpenSearch
         class Term
           include BaseComponent
         end
-
       end
     end
   end

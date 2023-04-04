@@ -36,24 +36,27 @@ describe 'client.shutdown#put_node' do
       {}
     ]
   end
-
-  it 'performs the request' do
-    expect(client_double.shutdown.put_node(body: {}, node_id: 'id')).to eq({})
+  let(:client) do
+    Class.new { include OpenSearch::API }.new
   end
 
   let(:client) do
     Class.new { include OpenSearch::API }.new
   end
 
+  it 'performs the request' do
+    expect(client_double.shutdown.put_node(body: {}, node_id: 'id')).to eq({})
+  end
+
   it 'raises an error if no node_id is provided' do
-    expect {
+    expect do
       client.shutdown.put_node(body: {})
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'raises an error if no body is provided' do
-    expect {
+    expect do
       client.shutdown.put_node(node_id: 'id')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 end

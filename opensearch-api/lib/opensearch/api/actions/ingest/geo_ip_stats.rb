@@ -39,7 +39,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_ingest/geoip/stats"
+          path   = '_ingest/geoip/stats'
           params = {}
 
           body = nil

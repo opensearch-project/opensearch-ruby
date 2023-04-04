@@ -29,11 +29,11 @@ require 'spec_helper'
 describe 'client.snapshot#clone' do
   let(:expected_args) do
     [
-        'PUT',
-        '_snapshot/foo/bar/_clone/snapshot',
-        {},
-        {},
-        {}
+      'PUT',
+      '_snapshot/foo/bar/_clone/snapshot',
+      {},
+      {},
+      {}
     ]
   end
 
@@ -42,27 +42,27 @@ describe 'client.snapshot#clone' do
   end
 
   it 'requires the :body argument' do
-    expect {
+    expect do
       client.snapshot.clone(snapshot: 'bar')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :repository argument' do
-    expect {
+    expect do
       client.snapshot.clone(snapshot: 'foo', body: {})
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :snapshot argument' do
-    expect {
+    expect do
       client.snapshot.clone(repository: 'foo', body: {})
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :target_snapshot argument' do
-    expect {
+    expect do
       client.snapshot.clone(repository: 'foo', body: {}, snapshot: 'bar')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request' do

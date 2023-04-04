@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which will score the documents based on the highest score of any individual specified query,
         # not by summing the scores (as eg. a `bool` query would)
         #
@@ -54,7 +53,6 @@ module OpenSearch
           option_method :boost
           option_method :tie_breaker
         end
-
       end
     end
   end

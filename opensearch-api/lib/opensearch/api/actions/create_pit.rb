@@ -33,12 +33,12 @@ module OpenSearch
         perform_request(method, path, params, body).body
       end
 
-      ParamsRegistry.register(:create_pit, [
-        :keep_alive,
-        :preference,
-        :routing,
-        :expand_wildcards,
-        :allow_partial_pit_creation
+      ParamsRegistry.register(:create_pit, %i[
+        keep_alive
+        preference
+        routing
+        expand_wildcards
+        allow_partial_pit_creation
       ].freeze)
     end
   end

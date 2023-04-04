@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#segments' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        params,
-        body,
-        {}
+      'GET',
+      url,
+      params,
+      body,
+      {}
     ]
   end
 
@@ -55,7 +54,6 @@ describe 'client.cluster#segments' do
   end
 
   context 'when an index is specified' do
-
     let(:url) do
       'foo/_segments'
     end
@@ -66,18 +64,16 @@ describe 'client.cluster#segments' do
   end
 
   context 'when multiple indicies are specified as a list' do
-
     let(:url) do
       'foo,bar/_segments'
     end
 
     it 'performs the request' do
-      expect(client_double.indices.segments(index: ['foo', 'bar'])).to eq({})
+      expect(client_double.indices.segments(index: %w[foo bar])).to eq({})
     end
   end
 
   context 'when multiple indicies are specified as a string' do
-
     let(:url) do
       'foo,bar/_segments'
     end
@@ -88,7 +84,6 @@ describe 'client.cluster#segments' do
   end
 
   context 'when the path needs to be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_segments'
     end

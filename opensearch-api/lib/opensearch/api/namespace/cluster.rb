@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "cluster" namespace (includes the {Cluster::Actions} methods)
       #
       class ClusterClient
-        include Common::Client, Common::Client::Base, Cluster::Actions
+        include Cluster::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {ClusterClient}, available in the receiving object
@@ -40,7 +42,6 @@ module OpenSearch
       def cluster
         @cluster ||= ClusterClient.new(self)
       end
-
     end
   end
 end

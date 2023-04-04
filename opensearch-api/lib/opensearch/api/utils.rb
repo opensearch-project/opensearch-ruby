@@ -26,11 +26,9 @@
 
 module OpenSearch
   module API
-
     # Generic utility methods
     #
     module Utils
-
       # URL-escape a string
       #
       # @example
@@ -40,6 +38,7 @@ module OpenSearch
       # @api private
       def __escape(string)
         return string if string == '*'
+
         CGI.escape(string.to_s)
       end
 
@@ -62,12 +61,12 @@ module OpenSearch
         options = list.last.is_a?(Hash) ? list.pop : {}
 
         escape = options[:escape]
-        Array(list).
-          flat_map { |e| e.respond_to?(:split) ? e.split(',') : e }.
-          flatten.
-          compact.
-          map { |e| escape == false ? e : __escape(e) }.
-          join(',')
+        Array(list)
+          .flat_map { |e| e.respond_to?(:split) ? e.split(',') : e }
+          .flatten
+          .compact
+          .map { |e| escape == false ? e : __escape(e) }
+          .join(',')
       end
 
       # Create a path (URL part) from arguments, ignoring nil values and empty strings.
@@ -83,11 +82,11 @@ module OpenSearch
       #
       # @api private
       def __pathify(*segments)
-        Array(segments).flatten.
-          compact.
-          reject { |s| s.to_s.strip.empty? }.
-          join('/').
-          squeeze('/')
+        Array(segments).flatten
+                       .compact
+                       .reject { |s| s.to_s.strip.empty? }
+                       .join('/')
+                       .squeeze('/')
       end
 
       # Convert an array of payloads into OpenSearch `header\ndata` format
@@ -109,25 +108,24 @@ module OpenSearch
       def __bulkify(payload)
         operations = %w[index create delete update]
 
-        case
-
         # Hashes with `:data`
-        when payload.any? { |d| d.is_a?(Hash) && d.values.first.is_a?(Hash) && operations.include?(d.keys.first.to_s) && (d.values.first[:data] || d.values.first['data']) }
-          payload = payload.
-            inject([]) do |sum, item|
-              operation, meta = item.to_a.first
-              meta            = meta.clone
-              data            = meta.delete(:data) || meta.delete('data')
+        if payload.any? do |d|
+             d.is_a?(Hash) && d.values.first.is_a?(Hash) && operations.include?(d.keys.first.to_s) && (d.values.first[:data] || d.values.first['data'])
+           end
+          payload = payload
+                    .each_with_object([]) do |item, sum|
+                      operation, meta = item.to_a.first
+                      meta            = meta.clone
+                      data            = meta.delete(:data) || meta.delete('data')
 
-              sum << { operation => meta }
-              sum << data if data
-              sum
-            end.
-            map { |item| OpenSearch::API.serializer.dump(item) }
+                      sum << { operation => meta }
+                      sum << data if data
+                    end
+                    .map { |item| OpenSearch::API.serializer.dump(item) }
           payload << '' unless payload.empty?
 
         # Array of strings
-        when payload.all? { |d| d.is_a? String }
+        elsif payload.all? { |d| d.is_a? String }
           payload << ''
 
         # Header/Data pairs
@@ -166,27 +164,26 @@ module OpenSearch
       #
       # @api private
       #
-      def __validate_and_extract_params(arguments, params=[], options={})
+      def __validate_and_extract_params(arguments, params = [], options = {})
         if options[:skip_parameter_validation] || OpenSearch::API.settings[:skip_parameter_validation]
           arguments
         else
           __validate_params(arguments, params)
-          __extract_params(arguments, params, options.merge(:escape => false))
+          __extract_params(arguments, params, options.merge(escape: false))
         end
       end
 
-      def __validate_params(arguments, valid_params=[])
-        arguments.each do |k,v|
+      def __validate_params(arguments, valid_params = [])
+        arguments.each do |k, _v|
           raise ArgumentError, "URL parameter '#{k}' is not supported" \
             unless COMMON_PARAMS.include?(k) || COMMON_QUERY_PARAMS.include?(k) || valid_params.include?(k)
         end
       end
 
-      def __extract_params(arguments, params=[], options={})
-        result = arguments.select { |k,v| COMMON_QUERY_PARAMS.include?(k) || params.include?(k) }
-        result = Hash[result] unless result.is_a?(Hash) # Normalize Ruby 1.8 and Ruby 1.9 Hash#select behaviour
-        result = Hash[result.map { |k,v| v.is_a?(Array) ? [k, __listify(v, options)] : [k,v]  }] # Listify Arrays
-        result
+      def __extract_params(arguments, params = [], options = {})
+        result = arguments.select { |k, _v| COMMON_QUERY_PARAMS.include?(k) || params.include?(k) }
+        result = result.to_h unless result.is_a?(Hash) # Normalize Ruby 1.8 and Ruby 1.9 Hash#select behaviour
+        result.map { |k, v| v.is_a?(Array) ? [k, __listify(v, options)] : [k, v] }.to_h # Listify Arrays
       end
 
       # Extracts the valid parts of the URL from the arguments
@@ -205,12 +202,15 @@ module OpenSearch
       #
       # @api private
       #
-      def __extract_parts(arguments, valid_parts=[])
-        parts = Hash[arguments.select { |k,v| valid_parts.include?(k) }]
-        parts = parts.reduce([]) { |sum, item| k, v = item; v.is_a?(TrueClass) ? sum << k.to_s : sum << v  }
+      def __extract_parts(arguments, valid_parts = [])
+        parts = arguments.select { |k, _v| valid_parts.include?(k) }.to_h
+        parts = parts.reduce([]) do |sum, item|
+          k, v = item
+          sum << (v.is_a?(TrueClass) ? k.to_s : v)
+        end
 
-        arguments.delete_if { |k,v| valid_parts.include? k }
-        return parts
+        arguments.delete_if { |k, _v| valid_parts.include? k }
+        parts
       end
 
       # Calls the given block, rescuing from `StandardError`.
@@ -224,7 +224,7 @@ module OpenSearch
       #
       # @api private
       #
-      def __rescue_from_not_found(&block)
+      def __rescue_from_not_found
         yield
       rescue StandardError => e
         if e.class.to_s =~ /NotFound/ || e.message =~ /Not\s*Found/i
@@ -234,25 +234,27 @@ module OpenSearch
         end
       end
 
-      def __report_unsupported_parameters(arguments, params=[])
+      def __report_unsupported_parameters(arguments, params = [])
         messages = []
-        unsupported_params = params.select {|d| d.is_a?(Hash) ? arguments.include?(d.keys.first) : arguments.include?(d) }
+        unsupported_params = params.select do |d|
+          d.is_a?(Hash) ? arguments.include?(d.keys.first) : arguments.include?(d)
+        end
 
         unsupported_params.each do |param|
           name = case param
-          when Symbol
-            param
-          when Hash
-            param.keys.first
-          else
-            raise ArgumentError, "The param must be a Symbol or a Hash"
-          end
+                 when Symbol
+                   param
+                 when Hash
+                   param.keys.first
+                 else
+                   raise ArgumentError, 'The param must be a Symbol or a Hash'
+                 end
 
           explanation = if param.is_a?(Hash)
-            ". #{param.values.first[:explanation]}."
-          else
-            ". This parameter is not supported in the version you're using: #{OpenSearch::API::VERSION}, and will be removed in the next release."
-          end
+                          ". #{param.values.first[:explanation]}."
+                        else
+                          ". This parameter is not supported in the version you're using: #{OpenSearch::API::VERSION}, and will be removed in the next release."
+                        end
 
           message = "[!] You are using unsupported parameter [:#{name}]"
 
@@ -266,7 +268,7 @@ module OpenSearch
         end
 
         unless messages.empty?
-          messages << "Suppress this warning by the `-WO` command line flag."
+          messages << 'Suppress this warning by the `-WO` command line flag.'
 
           if STDERR.tty?
             Kernel.warn messages.map { |m| "\e[31;1m#{m}\e[0m" }.join("\n")

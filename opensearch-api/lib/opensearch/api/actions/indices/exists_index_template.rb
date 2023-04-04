@@ -55,16 +55,16 @@ module OpenSearch
           perform_request(method, path, params, body, headers).body
         end
 
-        alias_method :exists_index_template?, :exists_index_template
+        alias exists_index_template? exists_index_template
 
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:exists_index_template, [
-          :flat_settings,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :local
+        ParamsRegistry.register(:exists_index_template, %i[
+          flat_settings
+          master_timeout
+          cluster_manager_timeout
+          local
         ].freeze)
       end
     end

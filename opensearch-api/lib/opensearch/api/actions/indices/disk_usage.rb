@@ -63,12 +63,12 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:disk_usage, [
-          :run_expensive_tasks,
-          :flush,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards
+        ParamsRegistry.register(:disk_usage, %i[
+          run_expensive_tasks
+          flush
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
         ].freeze)
       end
     end

@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#put_template' do
-
   let(:expected_args) do
     [
-        'PUT',
-        url,
-        params,
-        body,
-        {}
+      'PUT',
+      url,
+      params,
+      body,
+      {}
     ]
   end
 
@@ -55,33 +54,30 @@ describe 'client.cluster#put_template' do
   end
 
   context 'when there is no name specified' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
 
     it 'raises an exception' do
-      expect {
+      expect do
         client.indices.put_template(body: {})
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when there is no body specified' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
 
     it 'raises an exception' do
-      expect {
+      expect do
         client.indices.put_template(name: 'foo')
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when parameters are specified' do
-
     let(:params) do
       { order: 3 }
     end
@@ -100,7 +96,6 @@ describe 'client.cluster#put_template' do
   end
 
   context 'when the path needs to be URL-escaped' do
-
     let(:url) do
       '_template/foo%5Ebar'
     end

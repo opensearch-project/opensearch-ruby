@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#health' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cluster/health',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cluster/health',
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -43,14 +42,13 @@ describe 'client.cluster#health' do
   end
 
   context 'when a level is specified' do
-
     let(:expected_args) do
       [
-          'GET',
-          '_cluster/health',
-          { level: 'indices' },
-          nil,
-          {}
+        'GET',
+        '_cluster/health',
+        { level: 'indices' },
+        nil,
+        {}
       ]
     end
 
@@ -60,14 +58,13 @@ describe 'client.cluster#health' do
   end
 
   context 'when an index is specified' do
-
     let(:expected_args) do
       [
-          'GET',
-          '_cluster/health/foo',
-          {},
-          nil,
-          {}
+        'GET',
+        '_cluster/health/foo',
+        {},
+        nil,
+        {}
       ]
     end
 

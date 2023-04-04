@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A single-value metric aggregation which returns the sum of numeric values
         #
         # @example
@@ -44,7 +43,6 @@ module OpenSearch
         class Sum
           include BaseComponent
         end
-
       end
     end
   end

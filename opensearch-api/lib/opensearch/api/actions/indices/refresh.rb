@@ -48,7 +48,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_refresh"
                    else
-                     "_refresh"
+                     '_refresh'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -59,10 +59,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:refresh, [
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards
+        ParamsRegistry.register(:refresh, %i[
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
         ].freeze)
       end
     end

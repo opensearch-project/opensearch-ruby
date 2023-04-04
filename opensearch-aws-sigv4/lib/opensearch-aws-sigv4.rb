@@ -59,7 +59,8 @@ module OpenSearch
           http_method: method,
           url: signature_url(path, params),
           headers: headers,
-          body: signature_body)
+          body: signature_body
+        )
         headers = (headers || {}).merge(signature.headers)
 
         log_signature_info(signature)
@@ -75,7 +76,7 @@ module OpenSearch
       def signature_url(path, params)
         host = @transport.transport.hosts.dig(0, :host)
         path = '/' + path unless path.start_with?('/')
-        query_string = params.empty? ? '' : "#{Faraday::Utils::ParamsHash[params].to_query}"
+        query_string = params.empty? ? '' : Faraday::Utils::ParamsHash[params].to_query.to_s
         URI::HTTP.build(host: host, path: path, query: query_string)
       end
 
@@ -99,7 +100,8 @@ module OpenSearch
         @logger = Logger.new(
           STDOUT,
           progname: 'Sigv4',
-          formatter: proc { |_severity, datetime, progname, msg| "\e[34m(#{datetime})  #{progname} - #{msg}\e[0m\n\n" })
+          formatter: proc { |_severity, datetime, progname, msg| "\e[34m(#{datetime})  #{progname} - #{msg}\e[0m\n\n" }
+        )
       end
     end
   end

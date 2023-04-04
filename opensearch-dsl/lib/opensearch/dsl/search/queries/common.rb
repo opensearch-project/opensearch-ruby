@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which executes the search for low frequency terms first, and high frequency ("common")
         # terms second
         #
@@ -57,7 +56,6 @@ module OpenSearch
           option_method :analyzer
           option_method :disable_coord
         end
-
       end
     end
   end

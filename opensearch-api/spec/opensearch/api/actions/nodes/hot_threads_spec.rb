@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.nodes#hot_threads' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        {},
-        nil,
-        {}
+      'GET',
+      url,
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -47,7 +46,6 @@ describe 'client.nodes#hot_threads' do
   end
 
   context 'when the node id is specified' do
-
     let(:url) do
       '_cluster/nodes/foo/hot_threads'
     end
@@ -58,7 +56,6 @@ describe 'client.nodes#hot_threads' do
   end
 
   context 'when the path must be URL-escaped' do
-
     let(:url) do
       '_cluster/nodes/foo%5Ebar/hot_threads'
     end

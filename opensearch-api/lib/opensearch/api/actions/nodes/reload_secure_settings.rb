@@ -47,7 +47,7 @@ module OpenSearch
           path   = if _node_id
                      "_nodes/#{Utils.__listify(_node_id)}/reload_secure_settings"
                    else
-                     "_nodes/reload_secure_settings"
+                     '_nodes/reload_secure_settings'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 

@@ -24,7 +24,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-if ENV['COVERAGE'] && ENV['CI'].nil?
+if ENV.fetch('COVERAGE', nil) && ENV['CI'].nil?
   require 'simplecov'
   SimpleCov.start { add_filter %r{^/test|spec/} }
 end
@@ -43,16 +43,16 @@ require 'jsonify'
 require 'yaml'
 
 tracer = ::Logger.new(STDERR)
-tracer.formatter = lambda { |s, d, p, m| "#{m.gsub(/^.*$/) { |n| '   ' + n }.ansi(:faint)}\n" }
+tracer.formatter = ->(_s, _d, _p, m) { "#{m.gsub(/^.*$/) { |n| '   ' + n }.ansi(:faint)}\n" }
 
 unless defined?(OPENSEARCH_URL)
-  OPENSEARCH_URL = ENV['OPENSEARCH_URL'] ||
-                        ENV['TEST_OPENSEARCH_SERVER'] ||
-                        "http://localhost:#{(ENV['TEST_CLUSTER_PORT'] || 9200)}"
+  OPENSEARCH_URL = ENV.fetch('OPENSEARCH_URL', nil) ||
+                   ENV.fetch('TEST_OPENSEARCH_SERVER', nil) ||
+                   "http://localhost:#{ENV.fetch('TEST_CLUSTER_PORT', nil) || 9200}"
 end
 
 DEFAULT_CLIENT = OpenSearch::Client.new(host: OPENSEARCH_URL,
-                                           tracer: (tracer unless ENV['QUIET']))
+                                        tracer: (tracer unless ENV['QUIET']))
 
 module HelperModule
   def self.included(context)

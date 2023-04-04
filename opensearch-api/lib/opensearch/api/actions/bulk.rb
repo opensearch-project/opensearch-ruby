@@ -57,34 +57,34 @@ module OpenSearch
         path   = if _index
                    "#{Utils.__listify(_index)}/_bulk"
                  else
-                   "_bulk"
+                   '_bulk'
                  end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]
-        if body.is_a? Array
-          payload = OpenSearch::API::Utils.__bulkify(body)
-        else
-          payload = body
-        end
+        payload = if body.is_a? Array
+                    OpenSearch::API::Utils.__bulkify(body)
+                  else
+                    body
+                  end
 
-        headers.merge!("Content-Type" => "application/x-ndjson")
+        headers.merge!('Content-Type' => 'application/x-ndjson')
         perform_request(method, path, params, payload, headers).body
       end
 
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:bulk, [
-        :wait_for_active_shards,
-        :refresh,
-        :routing,
-        :timeout,
-        :_source,
-        :_source_excludes,
-        :_source_includes,
-        :pipeline,
-        :require_alias
+      ParamsRegistry.register(:bulk, %i[
+        wait_for_active_shards
+        refresh
+        routing
+        timeout
+        _source
+        _source_excludes
+        _source_includes
+        pipeline
+        require_alias
       ].freeze)
     end
   end

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A single-bucket aggregation which allows to aggregate on nested fields
         #
         # @example
@@ -52,7 +51,6 @@ module OpenSearch
 
           option_method :path
         end
-
       end
     end
   end

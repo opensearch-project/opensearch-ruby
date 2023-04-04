@@ -50,7 +50,7 @@ module OpenSearch
         path   = if _scroll_id
                    "_search/scroll/#{Utils.__listify(_scroll_id)}"
                  else
-                   "_search/scroll"
+                   '_search/scroll'
                  end
         params = {}
 

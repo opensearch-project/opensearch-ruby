@@ -24,7 +24,6 @@
 # specific language governing permissions and limitations
 # under the License.
 
-
 module OpenSearch
   module API
     module Cat
@@ -48,7 +47,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_cat/repositories"
+          path   = '_cat/repositories'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
@@ -58,15 +57,15 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:repositories, [
-          :format,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :h,
-          :help,
-          :s,
-          :v
+        ParamsRegistry.register(:repositories, %i[
+          format
+          local
+          master_timeout
+          cluster_manager_timeout
+          h
+          help
+          s
+          v
         ].freeze)
       end
     end

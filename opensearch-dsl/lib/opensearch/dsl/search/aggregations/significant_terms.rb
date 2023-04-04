@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-bucket aggregation that returns interesting or unusual occurrences of terms in a set
         #
         # @example
@@ -64,7 +63,6 @@ module OpenSearch
           option_method :chi_square
           option_method :gnd
         end
-
       end
     end
   end

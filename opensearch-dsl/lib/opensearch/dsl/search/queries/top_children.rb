@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A filter which returns parent documents for children documents matching a query
         #
         # @example Return articles with comments mentioning 'twitter', summing the score
@@ -72,12 +71,11 @@ module OpenSearch
             hash = super
             if @query
               _query = @query.respond_to?(:to_hash) ? @query.to_hash : @query
-              hash[self.name].update(query: _query)
+              hash[name].update(query: _query)
             end
             hash
           end
         end
-
       end
     end
   end

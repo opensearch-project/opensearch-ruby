@@ -56,7 +56,7 @@ module OpenSearch
                    elsif _name
                      "_alias/#{Utils.__listify(_name)}"
                    else
-                     "_alias"
+                     '_alias'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -67,11 +67,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get_alias, [
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :local
+        ParamsRegistry.register(:get_alias, %i[
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          local
         ].freeze)
       end
     end

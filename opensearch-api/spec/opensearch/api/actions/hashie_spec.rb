@@ -28,7 +28,6 @@ require 'spec_helper'
 require 'hashie'
 
 describe 'Hashie' do
-
   let(:json) do
     <<-JSON
             {

@@ -39,7 +39,7 @@ module OpenSearch
         require 'logger'
         logger = Logger.new(STDERR)
         logger.progname = 'opensearch'
-        logger.formatter = proc { |severity, datetime, progname, msg| "#{datetime}: #{msg}\n" }
+        logger.formatter = proc { |_severity, datetime, _progname, msg| "#{datetime}: #{msg}\n" }
         logger
       end
 
@@ -47,7 +47,7 @@ module OpenSearch
         require 'logger'
         logger = Logger.new(STDERR)
         logger.progname = 'opensearch.tracer'
-        logger.formatter = proc { |severity, datetime, progname, msg| "#{msg}\n" }
+        logger.formatter = proc { |_severity, _datetime, _progname, msg| "#{msg}\n" }
         logger
       end
 
@@ -134,11 +134,11 @@ module OpenSearch
       #
       # @yield [faraday] Access and configure the `Faraday::Connection` instance directly with a block
       #
-      def initialize(arguments={}, &block)
-        @options = arguments.each_with_object({}){ |(k,v), args| args[k.to_sym] = v }
+      def initialize(arguments = {}, &block)
+        @options = arguments.each_with_object({}) { |(k, v), args| args[k.to_sym] = v }
         @arguments = @options
-        @arguments[:logger] ||= @arguments[:log]   ? DEFAULT_LOGGER.call() : nil
-        @arguments[:tracer] ||= @arguments[:trace] ? DEFAULT_TRACER.call() : nil
+        @arguments[:logger] ||= @arguments[:log]   ? DEFAULT_LOGGER.call : nil
+        @arguments[:tracer] ||= @arguments[:trace] ? DEFAULT_TRACER.call : nil
         @arguments[:reload_connections] ||= false
         @arguments[:retry_on_failure]   ||= false
         @arguments[:reload_on_failure]  ||= false
@@ -155,7 +155,7 @@ module OpenSearch
                                    @arguments[:host] ||
                                    @arguments[:url] ||
                                    @arguments[:urls] ||
-                                   ENV['OPENSEARCH_URL'] ||
+                                   ENV.fetch('OPENSEARCH_URL', nil) ||
                                    DEFAULT_HOST)
 
         @send_get_body_as = @arguments[:send_get_body_as] || 'GET'
@@ -203,7 +203,7 @@ module OpenSearch
       end
 
       def set_compatibility_header
-        return unless ['1', 'true'].include?(ENV['ELASTIC_CLIENT_APIVERSIONING'])
+        return unless %w[1 true].include?(ENV.fetch('ELASTIC_CLIENT_APIVERSIONING', nil))
 
         add_header(
           {
@@ -259,15 +259,15 @@ module OpenSearch
       #
       def __extract_hosts(hosts_config)
         hosts = case hosts_config
-        when String
-          hosts_config.split(',').map { |h| h.strip! || h }
-        when Array
-          hosts_config
-        when Hash, URI
-          [ hosts_config ]
-        else
-          Array(hosts_config)
-        end
+                when String
+                  hosts_config.split(',').map { |h| h.strip! || h }
+                when Array
+                  hosts_config
+                when Hash, URI
+                  [hosts_config]
+                else
+                  Array(hosts_config)
+                end
 
         host_list = hosts.map { |host| __parse_host(host) }
         @options[:randomize_hosts] ? host_list.shuffle! : host_list
@@ -276,7 +276,7 @@ module OpenSearch
       def __parse_host(host)
         host_parts = case host
                      when String
-                       if host =~ /^[a-z]+\:\/\//
+                       if host =~ %r{^[a-z]+://}
                          # Construct a new `URI::Generic` directly from the array returned by URI::split.
                          # This avoids `URI::HTTP` and `URI::HTTPS`, which supply default ports.
                          uri = URI::Generic.new(*URI.split(host))
@@ -331,22 +331,21 @@ module OpenSearch
       #
       def __auto_detect_adapter
         # Get the Faraday adapter list without initializing it.
-        if Faraday::Adapter.respond_to?(:registered_middleware) # Faraday 2.x
-          adapter = ->(name) { Faraday::Adapter.registered_middleware[name] }
-        elsif Faraday::Adapter.respond_to?(:fetch_middleware) # Faraday 1.x
-          adapter = ->(name) { Faraday::Adapter.fetch_middleware(name) }
-        else
-          adapter = {} # fallback behavior that should never happen
-        end
+        adapter = if Faraday::Adapter.respond_to?(:registered_middleware) # Faraday 2.x
+                    ->(name) { Faraday::Adapter.registered_middleware[name] }
+                  elsif Faraday::Adapter.respond_to?(:fetch_middleware) # Faraday 1.x
+                    ->(name) { Faraday::Adapter.fetch_middleware(name) }
+                  else
+                    {} # fallback behavior that should never happen
+                  end
         # Pick an adapter that has both the client and adapter defined.
-        case
-        when defined?(::Patron) && adapter[:patron]
+        if defined?(::Patron) && adapter[:patron]
           :patron
-        when defined?(::Typhoeus) && adapter[:typhoeus]
+        elsif defined?(::Typhoeus) && adapter[:typhoeus]
           :typhoeus
-        when defined?(::HTTPClient) && adapter[:httpclient]
+        elsif defined?(::HTTPClient) && adapter[:httpclient]
           :httpclient
-        when defined?(::Net::HTTP::Persistent) && adapter[:net_http_persistent]
+        elsif defined?(::Net::HTTP::Persistent) && adapter[:net_http_persistent]
           :net_http_persistent
         else
           ::Faraday.default_adapter

@@ -24,10 +24,10 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require "bundler/gem_tasks"
+require 'bundler/gem_tasks'
 
-task(:default) { system "rake --tasks" }
-task  :test    => 'test:unit'
+task(:default) { system 'rake --tasks' }
+task test: 'test:unit'
 
 # ----- Test tasks ------------------------------------------------------------
 
@@ -35,8 +35,7 @@ require 'rake/testtask'
 require 'rspec/core/rake_task'
 
 namespace :test do
-
-  desc "Wait for OpenSearch to be in a green state"
+  desc 'Wait for OpenSearch to be in a green state'
   task :wait_for_green do
     sh '../scripts/wait-cluster.sh'
   end
@@ -45,33 +44,32 @@ namespace :test do
 
   Rake::TestTask.new(:unit) do |test|
     test.libs << 'lib' << 'test'
-    test.test_files = FileList["test/unit/**/*_test.rb"]
-    test.deps = [ :spec ]
+    test.test_files = FileList['test/unit/**/*_test.rb']
+    test.deps = [:spec]
     test.verbose = false
     test.warning = false
   end
 
   Rake::TestTask.new(:integration) do |test|
-    test.deps = [ :wait_for_green ]
+    test.deps = [:wait_for_green]
     test.libs << 'lib' << 'test'
-    test.test_files = FileList["test/integration/**/*_test.rb"]
+    test.test_files = FileList['test/integration/**/*_test.rb']
     test.verbose = false
     test.warning = false
   end
 
-  desc "Run unit and integration tests"
+  desc 'Run unit and integration tests'
   task :all do
     Rake::Task['test:unit'].invoke
     Rake::Task['test:integration'].invoke
   end
-
 end
 
 # ----- Documentation tasks ---------------------------------------------------
 
 require 'yard'
 YARD::Rake::YardocTask.new(:doc) do |t|
-  t.options = %w| --embed-mixins --markup=markdown |
+  t.options = %w[--embed-mixins --markup=markdown]
 end
 
 # ----- Code analysis tasks ---------------------------------------------------
@@ -109,33 +107,35 @@ namespace :generate do
         ...
 
   DESC
-  task :source, [:type, :name, :option_methods] do |task, options|
-    begin
-      query    = URI.escape("#{options[:name]} #{options[:type]}")
-      response = Net::HTTP.get('search.opensearch.org', "/search/?q=#{query}")
-      hits     = JSON.load(response)['hits']['hits']
+  task :source, [:type, :name, :option_methods] do |_task, options|
+    unless ENV['NOCRAWL']
+      begin
+        query    = URI.escape("#{options[:name]} #{options[:type]}")
+        response = Net::HTTP.get('search.opensearch.org', "/search/?q=#{query}")
+        hits     = JSON.load(response)['hits']['hits']
 
-      if hit = hits.first
-        doc_url = ("http://opensearch.org" + hit['fields']['url']).gsub(/#.+$/, '') if hit['_score'] > 0.2
+        if (hit = hits.first) && (hit['_score'] > 0.2)
+          doc_url = ('http://opensearch.org' + hit['fields']['url']).gsub(/#.+$/, '')
+        end
+      rescue Exception => e
+        puts "[!] ERROR: #{e.inspect}"
       end
-    rescue Exception => e
-      puts "[!] ERROR: #{e.inspect}"
-    end unless ENV['NOCRAWL']
+    end
 
     case options[:type]
-      when /query/
-        module_name = 'Queries'
-        path_name   = 'queries'
-        include_module = 'BaseComponent'
-      when /filter/
-        module_name = 'Filters'
-        path_name   = 'filters'
-        include_module = 'BaseComponent'
-      when /agg/
-        module_name = 'Aggregations'
-        path_name   = 'aggregations'
-        include_module = 'BaseAggregationComponent'
-      else raise ArgumentError, "Unknown DSL type [#{options[:type]}]"
+    when /query/
+      module_name = 'Queries'
+      path_name = 'queries'
+      include_module = 'BaseComponent'
+    when /filter/
+      module_name = 'Filters'
+      path_name = 'filters'
+      include_module = 'BaseComponent'
+    when /agg/
+      module_name = 'Aggregations'
+      path_name = 'aggregations'
+      include_module = 'BaseAggregationComponent'
+    else raise ArgumentError, "Unknown DSL type [#{options[:type]}]"
     end
 
     name = options[:name].downcase
@@ -143,7 +143,7 @@ namespace :generate do
     class_name = options[:name].split('_').map(&:capitalize).join
 
     option_methods = options[:option_methods].to_s.split('/').reduce('') do |sum, item|
-      sum << "                "
+      sum << '                '
       sum << "option_method :#{item}"
       sum << "\n" unless item == options[:option_methods].to_s.split('/').last
       sum
@@ -176,13 +176,14 @@ namespace :generate do
     if options[:option_methods].to_s.empty?
       test_option_methods = ''
     else
-      setup = "\n" + options[:option_methods].to_s.split('/').reduce('') do |sum,item|
-        sum << "          subject.#{item} 'bar'\n"; sum
+      setup = "\n" + options[:option_methods].to_s.split('/').reduce('') do |sum, item|
+        sum << "          subject.#{item} 'bar'\n"
+        sum
       end
       asserts = "\n          assert_equal %w[ #{options[:option_methods].to_s.split('/').sort.join(' ')} ],\n                       subject.to_hash[:#{name}][:foo].keys.map(&:to_s).sort"
       asserts << "\n          assert_equal 'bar', subject.to_hash[:#{name}][:foo][:#{options[:option_methods].to_s.split('/').first}]"
 
-      test_option_methods =  <<-RUBY.gsub(/^        /, '')
+      test_option_methods = <<-RUBY.gsub(/^        /, '')
 
         should "have option methods" do
           subject = #{class_name}.new :foo
@@ -224,8 +225,8 @@ namespace :generate do
     source_full_path = File.expand_path("../lib/opensearch/dsl/search/#{path_name}/#{name}.rb", __FILE__)
     test_full_path   = File.expand_path("../test/unit/#{path_name}/#{name}_test.rb", __FILE__)
 
-    puts '-'*80, "Source: #{source_full_path}", '-'*80, "\n", CodeRay.scan(source, :ruby).terminal, "\n\n"
-    puts '-'*80, "Test: #{test_full_path}",     '-'*80, "\n", CodeRay.scan(test,   :ruby).terminal, "\n"
+    puts '-' * 80, "Source: #{source_full_path}", '-' * 80, "\n", CodeRay.scan(source, :ruby).terminal, "\n\n"
+    puts '-' * 80, "Test: #{test_full_path}",     '-' * 80, "\n", CodeRay.scan(test,   :ruby).terminal, "\n"
 
     File.open(source_full_path, 'w') { |file| file << source }
 

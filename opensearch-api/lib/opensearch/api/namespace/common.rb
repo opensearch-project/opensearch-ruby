@@ -30,7 +30,6 @@ module OpenSearch
       module Actions; end
 
       module Client
-
         # Base client wrapper
         #
         module Base
@@ -43,11 +42,10 @@ module OpenSearch
 
         # Delegates the `perform_request` method to the wrapped client
         #
-        def perform_request(method, path, params={}, body=nil, headers=nil)
+        def perform_request(method, path, params = {}, body = nil, headers = nil)
           client.perform_request method, path, params, body, headers
         end
       end
-
     end
   end
 end

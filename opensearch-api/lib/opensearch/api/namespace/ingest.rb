@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "ingest" namespace (includes the {Ingest::Actions} methods)
       #
       class IngestClient
-        include Common::Client, Common::Client::Base, Ingest::Actions
+        include Ingest::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {IngestClient}, available in the receiving object
@@ -40,7 +42,6 @@ module OpenSearch
       def ingest
         @ingest ||= IngestClient.new(self)
       end
-
     end
   end
 end

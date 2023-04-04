@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching a multi-term query as a span query
         #
         # @example
@@ -47,7 +46,6 @@ module OpenSearch
 
           option_method :match
         end
-
       end
     end
   end

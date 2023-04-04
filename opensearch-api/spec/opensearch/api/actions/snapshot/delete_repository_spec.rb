@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.snapshot#delete_repository' do
-
   let(:expected_args) do
     [
-        'DELETE',
-        url,
-        {},
-        nil,
-        {}
+      'DELETE',
+      url,
+      {},
+      nil,
+      {}
     ]
   end
 
@@ -47,13 +46,12 @@ describe 'client.snapshot#delete_repository' do
   end
 
   context 'when multiple indices are specified' do
-
     let(:url) do
       '_snapshot/foo,bar'
     end
 
     it 'performs the request' do
-      expect(client_double.snapshot.delete_repository(repository: ['foo','bar'])).to eq({})
+      expect(client_double.snapshot.delete_repository(repository: %w[foo bar])).to eq({})
     end
   end
 end

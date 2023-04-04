@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::GeoShape do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::GeoShape do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#shape' do
-
       before do
         search.shape('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::GeoShape do
     end
 
     describe '#indexed_shape' do
-
       before do
         search.indexed_shape('bar')
       end
@@ -69,9 +64,7 @@ describe OpenSearch::DSL::Search::Queries::GeoShape do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new(:foo) do
           shape 'bar'

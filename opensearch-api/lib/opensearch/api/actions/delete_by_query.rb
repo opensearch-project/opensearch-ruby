@@ -93,40 +93,40 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:delete_by_query, [
-        :analyzer,
-        :analyze_wildcard,
-        :default_operator,
-        :df,
-        :from,
-        :ignore_unavailable,
-        :allow_no_indices,
-        :conflicts,
-        :expand_wildcards,
-        :lenient,
-        :preference,
-        :q,
-        :routing,
-        :scroll,
-        :search_type,
-        :search_timeout,
-        :size,
-        :max_docs,
-        :sort,
-        :_source,
-        :_source_excludes,
-        :_source_includes,
-        :terminate_after,
-        :stats,
-        :version,
-        :request_cache,
-        :refresh,
-        :timeout,
-        :wait_for_active_shards,
-        :scroll_size,
-        :wait_for_completion,
-        :requests_per_second,
-        :slices
+      ParamsRegistry.register(:delete_by_query, %i[
+        analyzer
+        analyze_wildcard
+        default_operator
+        df
+        from
+        ignore_unavailable
+        allow_no_indices
+        conflicts
+        expand_wildcards
+        lenient
+        preference
+        q
+        routing
+        scroll
+        search_type
+        search_timeout
+        size
+        max_docs
+        sort
+        _source
+        _source_excludes
+        _source_includes
+        terminate_after
+        stats
+        version
+        request_cache
+        refresh
+        timeout
+        wait_for_active_shards
+        scroll_size
+        wait_for_completion
+        requests_per_second
+        slices
       ].freeze)
     end
   end

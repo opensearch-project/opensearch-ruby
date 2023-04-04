@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
         #
         # @example Passing the options as a Hash
@@ -96,9 +95,7 @@ module OpenSearch
           def to_hash
             call
 
-            if @aggregations
-              @hash[:aggregations] = @aggregations.to_hash
-            end
+            @hash[:aggregations] = @aggregations.to_hash if @aggregations
 
             @hash[name].merge!(sort: @sort.to_hash) if @sort
             @hash

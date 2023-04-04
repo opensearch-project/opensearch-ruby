@@ -26,11 +26,9 @@
 
 module OpenSearch
   module DSL
-
     # Generic utility methods
     #
     module Utils
-
       # Camelize an underscored string
       #
       # A lightweight version of ActiveSupport's `camelize`

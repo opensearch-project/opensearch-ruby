@@ -39,7 +39,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_remote/info"
+          path   = '_remote/info'
           params = {}
 
           body = nil

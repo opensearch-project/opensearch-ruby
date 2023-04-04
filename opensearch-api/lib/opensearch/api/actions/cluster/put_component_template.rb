@@ -60,11 +60,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:put_component_template, [
-          :create,
-          :timeout,
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:put_component_template, %i[
+          create
+          timeout
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

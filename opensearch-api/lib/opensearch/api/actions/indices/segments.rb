@@ -49,7 +49,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_segments"
                    else
-                     "_segments"
+                     '_segments'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -60,11 +60,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:segments, [
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :verbose
+        ParamsRegistry.register(:segments, %i[
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          verbose
         ].freeze)
       end
     end

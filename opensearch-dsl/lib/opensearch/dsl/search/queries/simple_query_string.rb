@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching a simplified query string syntax
         #
         # @example
@@ -59,7 +58,6 @@ module OpenSearch
           option_method :quote_field_suffix
           option_method :all_fields
         end
-
       end
     end
   end

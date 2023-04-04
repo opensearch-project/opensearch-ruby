@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#put_settings' do
-
   let(:expected_args) do
     [
-        'PUT',
-        '_cluster/settings',
-        {},
-        {},
-        {}
+      'PUT',
+      '_cluster/settings',
+      {},
+      {},
+      {}
     ]
   end
 

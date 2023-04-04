@@ -28,31 +28,31 @@ describe 'client#create_pit' do
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       client.create_pit(keep_alive: '1m')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       client.create_pit(index: 'movies')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'does not accept unregistered params' do
-    expect {
+    expect do
       client.create_pit(index: 'movies', keep_alive: '1m', something: 42)
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'performs the request with all optional params' do
     expect(client_double.create_pit(
-      index: %w[movies books],
-      keep_alive: '1m',
-      preference: :random,
-      routing: :route,
-      expand_wildcards: :open,
-      allow_partial_pit_creation: false
-    )).to eq({})
+             index: %w[movies books],
+             keep_alive: '1m',
+             preference: :random,
+             routing: :route,
+             expand_wildcards: :open,
+             allow_partial_pit_creation: false
+           )).to eq({})
   end
 end

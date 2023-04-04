@@ -27,16 +27,15 @@
 module OpenSearch
   module DSL
     module Search
-
       # Contains the classes for OpenSearch filters
       #
-      module Filters;end
+      module Filters; end
 
       # Wraps the `filter` part of a search definition, aggregation, etc
       #
       #
       class Filter
-        def initialize(*args, &block)
+        def initialize(*_args, &block)
           @block = block
         end
 
@@ -47,7 +46,7 @@ module OpenSearch
         def method_missing(name, *args, &block)
           klass = Utils.__camelize(name)
           if Filters.const_defined? klass
-            @value = Filters.const_get(klass).new *args, &block
+            @value = Filters.const_get(klass).new(*args, &block)
           else
             raise NoMethodError, "undefined method '#{name}' for #{self}"
           end
@@ -58,7 +57,9 @@ module OpenSearch
         # @return [self]
         #
         def call
-          @block.arity < 1 ? self.instance_eval(&@block) : @block.call(self) if @block
+          if @block
+            @block.arity < 1 ? instance_eval(&@block) : @block.call(self)
+          end
           self
         end
 
@@ -66,7 +67,7 @@ module OpenSearch
         #
         # @return [Hash]
         #
-        def to_hash(options={})
+        def to_hash(_options = {})
           call
           if @value
             @value.to_hash
@@ -75,7 +76,6 @@ module OpenSearch
           end
         end
       end
-
     end
   end
 end

@@ -33,7 +33,7 @@ module OpenSearch
     class FiltersIntegrationTest < ::OpenSearch::Test::IntegrationTestCase
       include OpenSearch::DSL::Search
 
-      context "Filters integration" do
+      context 'Filters integration' do
         setup do
           @client.indices.create index: 'test'
           @client.index index: 'test', id: 1,
@@ -88,8 +88,8 @@ module OpenSearch
           @client.indices.refresh index: 'test'
         end
 
-        context "term filter" do
-          should "return matching documents" do
+        context 'term filter' do
+          should 'return matching documents' do
             response = @client.search index: 'test', body: search {
               query do
                 bool do
@@ -101,17 +101,17 @@ module OpenSearch
             }.to_hash
 
             assert_equal 4, response['hits']['total']['value']
-            assert response['hits']['hits'].all? { |h| h['_source']['color'] == 'red'  }, response.inspect
+            assert response['hits']['hits'].all? { |h| h['_source']['color'] == 'red' }, response.inspect
           end
         end
 
-        context "terms filter" do
-          should "return matching documents" do
+        context 'terms filter' do
+          should 'return matching documents' do
             response = @client.search index: 'test', body: search {
               query do
                 bool do
                   filter do
-                    terms color: ['red', 'grey', 'gold']
+                    terms color: %w[red grey gold]
                   end
                 end
               end
@@ -121,8 +121,8 @@ module OpenSearch
           end
         end
 
-        context "bool filter" do
-          should "return correct documents" do
+        context 'bool filter' do
+          should 'return correct documents' do
             response = @client.search index: 'test', body: search {
               query do
                 bool do
@@ -154,36 +154,36 @@ module OpenSearch
           end
         end
 
-        context "geographical filters" do
+        context 'geographical filters' do
           setup do
             @client.indices.create index: 'places', body: {
-                mappings: {
-                    properties: {
-                        location: {
-                            type: 'geo_point'
-                        }
-                    }
+              mappings: {
+                properties: {
+                  location: {
+                    type: 'geo_point'
+                  }
                 }
+              }
             }
             @client.index index: 'places', id: 1,
                           body: { name: 'Vyšehrad',
-                                  location: '50.064399, 14.420018'}
+                                  location: '50.064399, 14.420018' }
 
             @client.index index: 'places', id: 2,
                           body: { name: 'Karlštejn',
-                                  location: '49.939518, 14.188046'}
+                                  location: '49.939518, 14.188046' }
 
             @client.indices.refresh index: 'places'
           end
 
-          should "find documents within the bounding box" do
+          should 'find documents within the bounding box' do
             response = @client.search index: 'places', body: search {
               query do
                 bool do
                   filter do
                     geo_bounding_box :location do
-                      top_right   "50.1815123678,14.7149200439"
-                      bottom_left "49.9415476869,14.2162566185"
+                      top_right   '50.1815123678,14.7149200439'
+                      bottom_left '49.9415476869,14.2162566185'
                     end
                   end
                 end
@@ -194,7 +194,7 @@ module OpenSearch
             assert_equal 'Vyšehrad', response['hits']['hits'][0]['_source']['name']
           end
 
-          should "find documents within the distance specified with a hash" do
+          should 'find documents within the distance specified with a hash' do
             response = @client.search index: 'places', body: search {
               query do
                 bool do
@@ -209,7 +209,7 @@ module OpenSearch
             assert_equal 'Vyšehrad', response['hits']['hits'][0]['_source']['name']
           end
 
-          should "find documents within the distance specified with a block" do
+          should 'find documents within the distance specified with a block' do
             response = @client.search index: 'places', body: search {
               query do
                 bool do
@@ -228,13 +228,13 @@ module OpenSearch
             assert_equal 'Vyšehrad', response['hits']['hits'][0]['_source']['name']
           end
 
-          should "find documents within the geographical distance range" do
+          should 'find documents within the geographical distance range' do
             response = @client.search index: 'places', body: search {
               query do
                 bool do
                   filter do
                     geo_distance location: { lat: '50.090223', lon: '14.399590' },
-                                       distance: '50km'
+                                 distance: '50km'
                   end
                 end
               end
@@ -243,7 +243,7 @@ module OpenSearch
                   field  :location
                   origin '50.090223,14.399590'
                   unit   'km'
-                  ranges [ { from: 10, to: 50 } ]
+                  ranges [{ from: 10, to: 50 }]
 
                   aggregation :results do
                     top_hits _source: { include: 'name' }
@@ -261,18 +261,18 @@ module OpenSearch
             assert_equal 'Karlštejn', bucket['results']['hits']['hits'][0]['_source']['name']
           end
 
-          should "find documents within the polygon" do
+          should 'find documents within the polygon' do
             response = @client.search index: 'places', body: search {
               query do
                 bool do
                   filter do
                     geo_polygon :location do
                       points [
-                       [14.2244355,49.9419006],
-                       [14.2244355,50.1774301],
-                       [14.7067869,50.1774301],
-                       [14.7067869,49.9419006],
-                       [14.2244355,49.9419006]
+                        [14.2244355, 49.9419006],
+                        [14.2244355, 50.1774301],
+                        [14.7067869, 50.1774301],
+                        [14.7067869, 49.9419006],
+                        [14.2244355, 49.9419006]
                       ]
                     end
                   end

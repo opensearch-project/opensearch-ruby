@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents matching the specified IDs
         #
         # @example
@@ -47,7 +46,6 @@ module OpenSearch
           option_method :type
           option_method :values
         end
-
       end
     end
   end

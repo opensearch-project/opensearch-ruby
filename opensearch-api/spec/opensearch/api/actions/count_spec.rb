@@ -27,7 +27,6 @@
 require 'spec_helper'
 
 describe 'client#count' do
-
   let(:expected_args) do
     [
       'POST',
@@ -43,7 +42,6 @@ describe 'client#count' do
   end
 
   context 'when an index is specified' do
-
     let(:expected_args) do
       [
         'POST',
@@ -55,12 +53,11 @@ describe 'client#count' do
     end
 
     it 'performs the request' do
-      expect(client_double.count(index: ['foo','bar'])).to eq({})
+      expect(client_double.count(index: %w[foo bar])).to eq({})
     end
   end
 
   context 'when there is a query provided' do
-
     let(:expected_args) do
       [
         'POST',

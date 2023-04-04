@@ -47,7 +47,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_cat/nodeattrs"
+          path   = '_cat/nodeattrs'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
@@ -57,15 +57,15 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:nodeattrs, [
-          :format,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :h,
-          :help,
-          :s,
-          :v
+        ParamsRegistry.register(:nodeattrs, %i[
+          format
+          local
+          master_timeout
+          cluster_manager_timeout
+          h
+          help
+          s
+          v
         ].freeze)
       end
     end

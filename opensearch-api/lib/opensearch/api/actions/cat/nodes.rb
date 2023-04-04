@@ -51,7 +51,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_cat/nodes"
+          path   = '_cat/nodes'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
           params[:h] = Utils.__listify(params[:h], escape: false) if params[:h]
 
@@ -62,19 +62,19 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:nodes, [
-          :bytes,
-          :format,
-          :full_id,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :h,
-          :help,
-          :s,
-          :time,
-          :v,
-          :include_unloaded_segments
+        ParamsRegistry.register(:nodes, %i[
+          bytes
+          format
+          full_id
+          local
+          master_timeout
+          cluster_manager_timeout
+          h
+          help
+          s
+          time
+          v
+          include_unloaded_segments
         ].freeze)
       end
     end

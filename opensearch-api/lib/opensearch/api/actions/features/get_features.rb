@@ -41,7 +41,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_GET
-          path   = "_features"
+          path   = '_features'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = nil
@@ -51,9 +51,9 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get_features, [
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:get_features, %i[
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

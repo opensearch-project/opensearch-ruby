@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::MatchPhrasePrefix do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrasePrefix do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#query' do
-
       before do
         search.query('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrasePrefix do
     end
 
     describe '#boost' do
-
       before do
         search.boost(10)
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrasePrefix do
     end
 
     describe '#max_expansions' do
-
       before do
         search.max_expansions(2)
       end
@@ -80,9 +74,7 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrasePrefix do
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
         described_class.new(message: 'test')
       end
@@ -93,7 +85,6 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrasePrefix do
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           query          'test'

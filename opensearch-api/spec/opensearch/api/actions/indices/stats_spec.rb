@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cluster#stats' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        params,
-        body,
-        {}
+      'GET',
+      url,
+      params,
+      body,
+      {}
     ]
   end
 
@@ -55,7 +54,6 @@ describe 'client.cluster#stats' do
   end
 
   context 'when an index is specified' do
-
     let(:url) do
       'foo/_stats'
     end
@@ -66,18 +64,16 @@ describe 'client.cluster#stats' do
   end
 
   context 'when multiple indicies are specified as a list' do
-
     let(:url) do
       'foo,bar/_stats'
     end
 
     it 'performs the request' do
-      expect(client_double.indices.stats(index: ['foo', 'bar'])).to eq({})
+      expect(client_double.indices.stats(index: %w[foo bar])).to eq({})
     end
   end
 
   context 'when multiple indicies are specified as a string' do
-
     let(:url) do
       'foo,bar/_stats'
     end
@@ -102,7 +98,6 @@ describe 'client.cluster#stats' do
   end
 
   context 'when the fields parameter is specified as a list' do
-
     let(:params) do
       { fields: 'foo,bar' }
     end
@@ -112,12 +107,11 @@ describe 'client.cluster#stats' do
     end
 
     it 'performs the request' do
-      expect(client_double.indices.stats(index: 'foo', fielddata: true, fields: [ 'foo', 'bar'])).to eq({})
+      expect(client_double.indices.stats(index: 'foo', fielddata: true, fields: %w[foo bar])).to eq({})
     end
   end
 
   context 'when the groups parameter is specified as a list' do
-
     let(:params) do
       { groups: 'groupA,groupB' }
     end
@@ -127,7 +121,7 @@ describe 'client.cluster#stats' do
     end
 
     it 'performs the request' do
-      expect(client_double.indices.stats(search: true, groups: [ 'groupA', 'groupB'])).to eq({})
+      expect(client_double.indices.stats(search: true, groups: %w[groupA groupB])).to eq({})
     end
   end
 end

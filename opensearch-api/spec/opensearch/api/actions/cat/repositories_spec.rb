@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cat#repositories' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cat/repositories',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cat/repositories',
+      {},
+      nil,
+      {}
     ]
   end
 

@@ -27,7 +27,6 @@
 module OpenSearch
   module DSL
     module Search
-
       # Module containing common functionality for DSL classes
       #
       module BaseComponent
@@ -68,12 +67,12 @@ module OpenSearch
             #         q.to_hash
             #       # => {:mycustomquery=>{:foo=>{:custom=>"TEST"}}}
             #
-            def option_method(name, block=nil)
+            def option_method(name, block = nil)
               option_methods << name
               if block
-                self.__send__ :define_method, name, &block
+                __send__ :define_method, name, &block
               else
-                self.__send__ :define_method, name do |*args|
+                __send__ :define_method, name do |*args|
                   # 1. Component has empty @args (ie. no user supplied name or @hash value)
                   if @args && @args.respond_to?(:to_hash) && @args.empty?
                     @hash[self.name.to_sym].update name.to_sym => args.first
@@ -96,7 +95,6 @@ module OpenSearch
         end
 
         module ClassMethods
-
           # Get or set the name for the DSL class
           #
           # @example Set the index name for the `Article` model and re-evaluate it on each call
@@ -109,15 +107,15 @@ module OpenSearch
           #     MyQuery.name
           #     # => :my_special_query
           #
-          def name(value=nil)
+          def name(value = nil)
             if value
               @name = value.to_sym
             else
               @name ||= begin
-                value = self.to_s.split('::').last
-                value.gsub!(/([A-Z\d]+)([A-Z][a-z])/,'\1_\2')
-                value.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
-                value.tr!("-", "_")
+                value = to_s.split('::').last
+                value.gsub!(/([A-Z\d]+)([A-Z][a-z])/, '\1_\2')
+                value.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
+                value.tr!('-', '_')
                 value.downcase!
                 value.to_sym
               end
@@ -136,7 +134,6 @@ module OpenSearch
         end
 
         module InstanceMethods
-
           # Return the name for instance of the DSL class
           #
           # @return [String]
@@ -150,7 +147,9 @@ module OpenSearch
           # @return [self]
           #
           def call
-            @block.arity < 1 ? self.instance_eval(&@block) : @block.call(self) if @block
+            if @block
+              @block.arity < 1 ? instance_eval(&@block) : @block.call(self)
+            end
             self
           end
 
@@ -166,24 +165,23 @@ module OpenSearch
           #
           # @return [Hash]
           #
-          def to_hash(options={})
-            case
-              # 1. Create hash from the block
-              when @block
-                @hash = (@args && ! @args.empty?) ? { name => { @args => {} } } : { name => {} }
-                call
-                @hash[self.name.to_sym].update @options unless @options.empty?
-                @hash
+          def to_hash(_options = {})
+            # 1. Create hash from the block
+            if @block
+              @hash = @args && !@args.empty? ? { name => { @args => {} } } : { name => {} }
+              call
+              @hash[name.to_sym].update @options unless @options.empty?
+              @hash
               # 2. Hash created with option methods
-              when @hash[self.name.to_sym] && ! @args.is_a?(Hash) && @hash[self.name.to_sym][@args]
-                @hash[self.name.to_sym].update @options unless @options.empty?
-                @hash
+            elsif @hash[name.to_sym] && !@args.is_a?(Hash) && @hash[name.to_sym][@args]
+              @hash[name.to_sym].update @options unless @options.empty?
+              @hash
               # 3. Hash passsed as @args
-              when @hash[self.name.to_sym] && @args.respond_to?(:to_hash) && ! @args.empty?
-                { name => @args.to_hash }
+            elsif @hash[name.to_sym] && @args.respond_to?(:to_hash) && !@args.empty?
+              { name => @args.to_hash }
               # 4. Hash already built
-              else
-                @hash
+            else
+              @hash
             end
           end
         end

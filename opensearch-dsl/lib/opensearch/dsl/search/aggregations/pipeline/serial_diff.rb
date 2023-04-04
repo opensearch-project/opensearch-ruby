@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # Serial differencing is a technique where values in a time series are subtracted from itself at different time lags or periods.
         #
         # @example Passing the options as a Hash

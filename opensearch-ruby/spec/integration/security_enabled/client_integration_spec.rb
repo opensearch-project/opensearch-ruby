@@ -21,7 +21,7 @@ context 'OpenSearch client with security plugin enabled' do
   end
 
   context 'Integrates with opensearch API' do
-    it 'should perform the API methods' do
+    it 'performs the API methods' do
       expect do
         # Index a document
         client.index(index: 'test-index', id: '1', body: { title: 'Test' })

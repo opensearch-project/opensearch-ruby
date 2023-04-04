@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which returns documents which are similar to the specified text,
         # executed on a single field
         #
@@ -55,7 +54,6 @@ module OpenSearch
           option_method :boost
           option_method :ignore_tf
         end
-
       end
     end
   end

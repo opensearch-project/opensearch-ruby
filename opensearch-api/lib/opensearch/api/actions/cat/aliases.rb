@@ -52,7 +52,7 @@ module OpenSearch
           path   = if _name
                      "_cat/aliases/#{Utils.__listify(_name)}"
                    else
-                     "_cat/aliases"
+                     '_cat/aliases'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
           params[:h] = Utils.__listify(params[:h]) if params[:h]
@@ -64,14 +64,14 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:aliases, [
-          :format,
-          :local,
-          :h,
-          :help,
-          :s,
-          :v,
-          :expand_wildcards
+        ParamsRegistry.register(:aliases, %i[
+          format
+          local
+          h
+          help
+          s
+          v
+          expand_wildcards
         ].freeze)
       end
     end

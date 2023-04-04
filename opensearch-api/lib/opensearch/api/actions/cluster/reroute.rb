@@ -47,7 +47,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_POST
-          path   = "_cluster/reroute"
+          path   = '_cluster/reroute'
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
           body = arguments[:body] || {}
@@ -57,14 +57,14 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:reroute, [
-          :dry_run,
-          :explain,
-          :retry_failed,
-          :metric,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :timeout
+        ParamsRegistry.register(:reroute, %i[
+          dry_run
+          explain
+          retry_failed
+          metric
+          master_timeout
+          cluster_manager_timeout
+          timeout
         ].freeze)
       end
     end

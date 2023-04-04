@@ -28,8 +28,7 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
-        # A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation. 
+        # A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation.
         #
         # @example Passing the options as a Hash
         #

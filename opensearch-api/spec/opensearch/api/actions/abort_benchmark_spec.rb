@@ -27,7 +27,6 @@
 require 'spec_helper'
 
 describe 'client#abort_benchmark' do
-
   let(:expected_args) do
     [
       'POST',

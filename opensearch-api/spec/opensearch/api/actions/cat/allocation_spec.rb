@@ -31,7 +31,7 @@ describe 'client.cat#allocation' do
     [
       'GET',
       '_cat/allocation',
-      {cluster_manager_timeout: 2},
+      { cluster_manager_timeout: 2 },
       nil,
       {}
     ]

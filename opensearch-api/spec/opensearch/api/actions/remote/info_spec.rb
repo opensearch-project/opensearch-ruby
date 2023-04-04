@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.remote#info' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_remote/info',
-        {},
-        nil,
-        nil
+      'GET',
+      '_remote/info',
+      {},
+      nil,
+      nil
     ]
   end
 

@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client#info' do
-
   let(:expected_args) do
     [
-        'GET',
-        '',
-        { },
-        nil,
-        {}
+      'GET',
+      '',
+      {},
+      nil,
+      {}
     ]
   end
 

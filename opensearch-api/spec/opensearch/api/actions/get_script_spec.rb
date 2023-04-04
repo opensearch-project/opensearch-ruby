@@ -27,19 +27,18 @@
 require 'spec_helper'
 
 describe 'client#get_script' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        params,
-        nil,
-        {}
+      'GET',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
   let(:params) do
-    { }
+    {}
   end
 
   let(:url) do
@@ -47,7 +46,6 @@ describe 'client#get_script' do
   end
 
   context 'when the `lang` parameter is specificed' do
-
     let(:params) do
       { cluster_manager_timeout: '1s' }
     end

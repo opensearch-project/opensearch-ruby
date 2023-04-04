@@ -80,19 +80,19 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:update, [
-        :wait_for_active_shards,
-        :_source,
-        :_source_excludes,
-        :_source_includes,
-        :lang,
-        :refresh,
-        :retry_on_conflict,
-        :routing,
-        :timeout,
-        :if_seq_no,
-        :if_primary_term,
-        :require_alias
+      ParamsRegistry.register(:update, %i[
+        wait_for_active_shards
+        _source
+        _source_excludes
+        _source_includes
+        lang
+        refresh
+        retry_on_conflict
+        routing
+        timeout
+        if_seq_no
+        if_primary_term
+        require_alias
       ].freeze)
     end
   end

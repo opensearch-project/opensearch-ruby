@@ -31,24 +31,23 @@ module OpenSearch
     class SearchSortTest < ::OpenSearch::Test::UnitTestCase
       subject { OpenSearch::DSL::Search::Sort.new }
 
-      context "Search sort" do
-
-        should "add a single field" do
+      context 'Search sort' do
+        should 'add a single field' do
           subject = OpenSearch::DSL::Search::Sort.new :foo
-          assert_equal( [:foo], subject.to_hash )
+          assert_equal([:foo], subject.to_hash)
         end
 
-        should "add multiple fields" do
-          subject = OpenSearch::DSL::Search::Sort.new [:foo, :bar]
-          assert_equal( [:foo, :bar], subject.to_hash )
+        should 'add multiple fields' do
+          subject = OpenSearch::DSL::Search::Sort.new %i[foo bar]
+          assert_equal(%i[foo bar], subject.to_hash)
         end
 
-        should "add a field with options" do
+        should 'add a field with options' do
           subject = OpenSearch::DSL::Search::Sort.new foo: { order: 'desc', mode: 'avg' }
-          assert_equal( [ { foo: { order: 'desc', mode: 'avg' } } ], subject.to_hash )
+          assert_equal([{ foo: { order: 'desc', mode: 'avg' } }], subject.to_hash)
         end
 
-        should "add fields with the DSL method" do
+        should 'add fields with the DSL method' do
           subject = OpenSearch::DSL::Search::Sort.new do
             by :foo
             by :bar, order: 'desc'
@@ -57,27 +56,28 @@ module OpenSearch
           assert_equal(
             [
               :foo,
-              { bar: { order: 'desc' } },
-            ], subject.to_hash )
+              { bar: { order: 'desc' } }
+            ], subject.to_hash
+          )
         end
 
-        should "be empty" do
+        should 'be empty' do
           subject = OpenSearch::DSL::Search::Sort.new
           assert_equal subject.empty?, true
         end
 
-        should "not be empty" do
+        should 'not be empty' do
           subject = OpenSearch::DSL::Search::Sort.new foo: { order: 'desc' }
           assert_equal subject.empty?, false
         end
 
-        context "#to_hash" do
-          should "not duplicate values when defined by arguments" do
+        context '#to_hash' do
+          should 'not duplicate values when defined by arguments' do
             subject = OpenSearch::DSL::Search::Sort.new foo: { order: 'desc' }
             assert_equal(subject.to_hash, subject.to_hash)
           end
 
-          should "not duplicate values when defined by a block" do
+          should 'not duplicate values when defined by a block' do
             subject = OpenSearch::DSL::Search::Sort.new do
               by :foo
             end

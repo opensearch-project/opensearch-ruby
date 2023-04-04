@@ -59,11 +59,11 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:simulate_index_template, [
-          :create,
-          :cause,
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:simulate_index_template, %i[
+          create
+          cause
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

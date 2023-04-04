@@ -27,19 +27,18 @@
 require 'spec_helper'
 
 describe 'client#get' do
-
   let(:expected_args) do
     [
-        'GET',
-        url,
-        params,
-        nil,
-        {}
+      'GET',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
   let(:params) do
-    { }
+    {}
   end
 
   let(:url) do
@@ -51,19 +50,18 @@ describe 'client#get' do
   end
 
   it 'requires the :index argument' do
-    expect {
+    expect do
       client.get(id: '1')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   it 'requires the :id argument' do
-    expect {
+    expect do
       client.get(index: 'foo')
-    }.to raise_exception(ArgumentError)
+    end.to raise_exception(ArgumentError)
   end
 
   context 'when the type parameter is not provided' do
-
     let(:url) do
       'foo/_doc/1'
     end
@@ -74,7 +72,6 @@ describe 'client#get' do
   end
 
   context 'when URL parameters are provided' do
-
     let(:params) do
       { routing: 'abc123' }
     end
@@ -85,16 +82,14 @@ describe 'client#get' do
   end
 
   context 'when invalid URL parameters are provided' do
-
     it 'Passes the URL params' do
-      expect {
+      expect do
         client.get(index: 'foo', id: '1', qwert: 'abc123')
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 
   context 'when the request needs to be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar/_doc/1'
     end
@@ -105,27 +100,24 @@ describe 'client#get' do
   end
 
   context 'when the request raises a NotFound error' do
-
     before do
       expect(client).to receive(:perform_request).and_raise(NotFound)
     end
 
     it 'raises an exception' do
-      expect {
+      expect do
         client.get(index: 'foo', id: '1')
-      }.to raise_exception(NotFound)
+      end.to raise_exception(NotFound)
     end
 
     context 'when the ignore option is provided' do
-
       context 'when the response is 404' do
-
         let(:params) do
           { ignore: 404 }
         end
 
         it 'returns false' do
-          expect(client.get(index: 'foo', id: '1', ignore: 404)).to eq(false)
+          expect(client.get(index: 'foo', id: '1', ignore: 404)).to be(false)
         end
       end
     end

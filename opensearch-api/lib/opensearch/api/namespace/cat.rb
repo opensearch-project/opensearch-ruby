@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "cat" namespace (includes the {Cat::Actions} methods)
       #
       class CatClient
-        include Common::Client, Common::Client::Base, Cat::Actions
+        include Cat::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {CatClient}, available in the receiving object

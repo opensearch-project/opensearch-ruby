@@ -48,6 +48,7 @@ describe 'client#mtermvectors' do
 
   context 'when a list of ids is passed instead of a body' do
     let(:method) { 'GET' }
+
     it 'performs the request' do
       expect(client_double.mtermvectors(index: 'my-index', ids: [1, 2, 3])).to eq({})
     end

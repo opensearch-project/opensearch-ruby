@@ -50,7 +50,7 @@ module OpenSearch
         path = if _id
                  "_render/template/#{Utils.__listify(_id)}"
                else
-                 "_render/template"
+                 '_render/template'
                end
         params = {}
 

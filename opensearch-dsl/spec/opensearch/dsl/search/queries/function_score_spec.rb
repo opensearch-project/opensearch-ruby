@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::FunctionScore do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#query' do
-
       before do
         search.query('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
     end
 
     describe '#filter' do
-
       before do
         search.filter('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
     end
 
     describe '#functions' do
-
       before do
         search.functions('bar')
       end
@@ -78,19 +72,17 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
       end
 
       context 'when the option is called as a setter' do
-
         before do
-          search.functions = [ {foo: { abc: '123' }} ]
+          search.functions = [{ foo: { abc: '123' } }]
         end
 
         it 'applies the option' do
-          expect(search.to_hash).to eq(function_score: { functions: [ {foo: { abc: '123' }} ] })
+          expect(search.to_hash).to eq(function_score: { functions: [{ foo: { abc: '123' } }] })
         end
       end
     end
 
     describe '#script_score' do
-
       before do
         search.script_score('bar')
       end
@@ -101,7 +93,6 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
     end
 
     describe '#boost' do
-
       before do
         search.boost('bar')
       end
@@ -112,7 +103,6 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
     end
 
     describe '#max_boost' do
-
       before do
         search.max_boost('bar')
       end
@@ -123,7 +113,6 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
     end
 
     describe '#score_mode' do
-
       before do
         search.score_mode('bar')
       end
@@ -134,7 +123,6 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
     end
 
     describe '#boost_mode' do
-
       before do
         search.boost_mode('bar')
       end
@@ -146,9 +134,7 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           query do
@@ -164,9 +150,10 @@ describe OpenSearch::DSL::Search::Queries::FunctionScore do
 
       it 'executes the block' do
         expect(search.to_hash).to eq(function_score: {
-            query: { match: { foo: 'BLAM' } },
-            filter: { term: { bar: 'slam' } },
-            functions: [ { foo: { abc: '123' } }, { foo: { xyz: '456' } } ] })
+                                       query: { match: { foo: 'BLAM' } },
+                                       filter: { term: { bar: 'slam' } },
+                                       functions: [{ foo: { abc: '123' } }, { foo: { xyz: '456' } }]
+                                     })
       end
     end
   end

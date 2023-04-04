@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::Regexp do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,17 +38,14 @@ describe OpenSearch::DSL::Search::Queries::Regexp do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
-    [ 'value',
-      'boost',
-      'flags'].each do |option|
-
+    %w[value
+       boost
+       flags].each do |option|
       describe "##{option}" do
-
         before do
           search.send(option, 'bar')
         end
@@ -63,9 +58,7 @@ describe OpenSearch::DSL::Search::Queries::Regexp do
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
         described_class.new(foo: 'b.*r')
       end
@@ -76,7 +69,6 @@ describe OpenSearch::DSL::Search::Queries::Regexp do
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new(:foo) do
           value 'bar'

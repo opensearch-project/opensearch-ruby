@@ -61,10 +61,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:delete_template, [
-          :timeout,
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:delete_template, %i[
+          timeout
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

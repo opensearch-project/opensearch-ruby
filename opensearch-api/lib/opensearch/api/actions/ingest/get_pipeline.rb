@@ -48,7 +48,7 @@ module OpenSearch
           path   = if _id
                      "_ingest/pipeline/#{Utils.__listify(_id)}"
                    else
-                     "_ingest/pipeline"
+                     '_ingest/pipeline'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -59,10 +59,10 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get_pipeline, [
-          :summary,
-          :master_timeout,
-          :cluster_manager_timeout
+        ParamsRegistry.register(:get_pipeline, %i[
+          summary
+          master_timeout
+          cluster_manager_timeout
         ].freeze)
       end
     end

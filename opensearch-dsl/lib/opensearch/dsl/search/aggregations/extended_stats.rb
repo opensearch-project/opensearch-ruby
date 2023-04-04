@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-value metrics aggregation which returns the extended statistical information on numeric values
         #
         # @example
@@ -43,7 +42,6 @@ module OpenSearch
         class ExtendedStats
           include BaseComponent
         end
-
       end
     end
   end

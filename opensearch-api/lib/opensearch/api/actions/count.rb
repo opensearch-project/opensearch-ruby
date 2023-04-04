@@ -64,7 +64,7 @@ module OpenSearch
         path   = if _index
                    "#{Utils.__listify(_index)}/_count"
                  else
-                   "_count"
+                   '_count'
                  end
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -75,21 +75,21 @@ module OpenSearch
       # Register this action with its valid params when the module is loaded.
       #
       # @since 6.2.0
-      ParamsRegistry.register(:count, [
-        :ignore_unavailable,
-        :ignore_throttled,
-        :allow_no_indices,
-        :expand_wildcards,
-        :min_score,
-        :preference,
-        :routing,
-        :q,
-        :analyzer,
-        :analyze_wildcard,
-        :default_operator,
-        :df,
-        :lenient,
-        :terminate_after
+      ParamsRegistry.register(:count, %i[
+        ignore_unavailable
+        ignore_throttled
+        allow_no_indices
+        expand_wildcards
+        min_score
+        preference
+        routing
+        q
+        analyzer
+        analyze_wildcard
+        default_operator
+        df
+        lenient
+        terminate_after
       ].freeze)
     end
   end

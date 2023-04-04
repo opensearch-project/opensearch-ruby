@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.indices#delete_template' do
-
   let(:expected_args) do
     [
-        'DELETE',
-        url,
-        params,
-        nil,
-        {}
+      'DELETE',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
@@ -51,7 +50,6 @@ describe 'client.indices#delete_template' do
   end
 
   context 'when the path needs to be URL-escaped' do
-
     let(:url) do
       '_template/foo%5Ebar'
     end
@@ -62,7 +60,6 @@ describe 'client.indices#delete_template' do
   end
 
   context 'when a NotFound exception is raised by the request' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
@@ -72,14 +69,13 @@ describe 'client.indices#delete_template' do
     end
 
     it 'raises the exception' do
-      expect {
+      expect do
         client.indices.delete_template(name: 'foo')
-      }.to raise_exception(NotFound)
+      end.to raise_exception(NotFound)
     end
   end
 
   context 'when the ignore parameter is specified' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
@@ -89,7 +85,7 @@ describe 'client.indices#delete_template' do
     end
 
     it 'ignores the code' do
-      expect(client.indices.delete_template(name: 'foo', ignore: 404)).to eq(false)
+      expect(client.indices.delete_template(name: 'foo', ignore: 404)).to be(false)
     end
   end
 end

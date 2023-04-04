@@ -79,7 +79,7 @@ describe 'client#msearch' do
       expect(
         client_double.msearch(
           body: [
-            { index: 'foo', search: { query: { match_all: {}  } } },
+            { index: 'foo', search: { query: { match_all: {} } } },
             { index: 'bar', search: { query: { match: { foo: 'bar' } } } },
             { search_type: 'count', search: { facets: { tags: {} } } }
           ]
@@ -90,11 +90,11 @@ describe 'client#msearch' do
 
   context 'when the body is a string' do
     let(:body) do
-      %Q|{"foo":"bar"}\n{"moo":"lam"}|
+      %({"foo":"bar"}\n{"moo":"lam"})
     end
 
     it 'performs the request' do
-      expect(client_double.msearch(body: %Q|{"foo":"bar"}\n{"moo":"lam"}|)).to eq({})
+      expect(client_double.msearch(body: %({"foo":"bar"}\n{"moo":"lam"}))).to eq({})
     end
   end
 
@@ -122,7 +122,7 @@ describe 'client#msearch' do
     end
 
     it 'performs the request' do
-      expect(client_double.msearch(index: ['foo', 'bar'], body: []))
+      expect(client_double.msearch(index: %w[foo bar], body: []))
     end
   end
 

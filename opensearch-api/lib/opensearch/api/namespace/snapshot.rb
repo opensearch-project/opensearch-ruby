@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "snapshot" namespace (includes the {Snapshot::Actions} methods)
       #
       class SnapshotClient
-        include Common::Client, Common::Client::Base, Snapshot::Actions
+        include Snapshot::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {SnapshotClient}, available in the receiving object
@@ -40,7 +42,6 @@ module OpenSearch
       def snapshot
         @snapshot ||= SnapshotClient.new(self)
       end
-
     end
   end
 end

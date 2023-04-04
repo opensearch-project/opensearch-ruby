@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # Returns documents that have at least one non-null value in the field.
         #
         # @example Find documents with non-empty "name" property

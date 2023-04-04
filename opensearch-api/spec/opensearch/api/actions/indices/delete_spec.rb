@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.indices#delete' do
-
   let(:expected_args) do
     [
-        'DELETE',
-        url,
-        params,
-        nil,
-        {}
+      'DELETE',
+      url,
+      params,
+      nil,
+      {}
     ]
   end
 
@@ -51,18 +50,16 @@ describe 'client.indices#delete' do
   end
 
   context 'when more than one index is specified' do
-
     let(:url) do
       'foo,bar'
     end
 
     it 'performs the request' do
-      expect(client_double.indices.delete(index: ['foo', 'bar'])).to eq({})
+      expect(client_double.indices.delete(index: %w[foo bar])).to eq({})
     end
   end
 
   context 'when params are specified' do
-
     let(:params) do
       { timeout: '1s' }
     end
@@ -73,7 +70,6 @@ describe 'client.indices#delete' do
   end
 
   context 'when the path must be URL-escaped' do
-
     let(:url) do
       'foo%5Ebar'
     end
@@ -84,7 +80,6 @@ describe 'client.indices#delete' do
   end
 
   context 'when a NotFound exception is raised by the request' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
@@ -94,14 +89,13 @@ describe 'client.indices#delete' do
     end
 
     it 'raises the exception' do
-      expect {
+      expect do
         client.indices.delete(index: 'foo')
-      }.to raise_exception(NotFound)
+      end.to raise_exception(NotFound)
     end
   end
 
   context 'when the ignore parameter is specified' do
-
     let(:client) do
       Class.new { include OpenSearch::API }.new
     end
@@ -111,7 +105,7 @@ describe 'client.indices#delete' do
     end
 
     it 'ignores the code' do
-      expect(client.indices.delete(index: 'foo', ignore: 404)).to eq(false)
+      expect(client.indices.delete(index: 'foo', ignore: 404)).to be(false)
     end
   end
 end

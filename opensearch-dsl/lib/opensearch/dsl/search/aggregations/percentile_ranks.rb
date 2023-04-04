@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-value metrics aggregation which calculates percentile ranks on numeric values
         #
         # @example
@@ -53,7 +52,6 @@ module OpenSearch
           option_method :params
           option_method :compression
         end
-
       end
     end
   end

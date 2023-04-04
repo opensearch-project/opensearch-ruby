@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-
         # A query which executes a custom query only for documents in specified indices,
         # and optionally another query for documents in other indices
         #
@@ -53,7 +52,6 @@ module OpenSearch
           option_method :query
           option_method :no_match_query
         end
-
       end
     end
   end

@@ -17,7 +17,7 @@ module OpenSearch
         raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
         method = OpenSearch::API::HTTP_DELETE
-        path = "_search/point_in_time"
+        path = '_search/point_in_time'
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
         body = arguments[:body]
 

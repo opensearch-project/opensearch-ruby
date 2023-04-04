@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A single-bucket aggregation which allows to aggregate on "parent" documents
         # from the nested documents
         #
@@ -56,7 +55,6 @@ module OpenSearch
         class ReverseNested
           include BaseAggregationComponent
         end
-
       end
     end
   end

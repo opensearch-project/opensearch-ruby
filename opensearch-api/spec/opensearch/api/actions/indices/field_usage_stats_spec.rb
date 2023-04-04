@@ -47,9 +47,9 @@ describe 'client.indices#field_usage_stats' do
     end
 
     it 'raises an exception' do
-      expect {
+      expect do
         client.indices.field_usage_stats
-      }.to raise_exception(ArgumentError)
+      end.to raise_exception(ArgumentError)
     end
   end
 end

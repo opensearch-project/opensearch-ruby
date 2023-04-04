@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.snapshot#get_repository' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_snapshot/foo',
-        {},
-        nil,
-        {}
+      'GET',
+      '_snapshot/foo',
+      {},
+      nil,
+      {}
     ]
   end
 

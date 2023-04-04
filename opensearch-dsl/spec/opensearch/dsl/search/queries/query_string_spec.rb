@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::QueryString do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,35 +38,32 @@ describe OpenSearch::DSL::Search::Queries::QueryString do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
-    [ 'query',
-      'fields',
-      'type',
-      'default_field',
-      'default_operator',
-      'allow_leading_wildcard',
-      'lowercase_expanded_terms',
-      'enable_position_increments',
-      'fuzzy_max_expansions',
-      'fuzziness',
-      'fuzzy_prefix_length',
-      'phrase_slop',
-      'boost',
-      'analyze_wildcard',
-      'auto_generate_phrase_queries',
-      'minimum_should_match',
-      'lenient',
-      'locale',
-      'use_dis_max',
-      'tie_breaker',
-      'time_zone'].each do |option|
-
+    %w[query
+       fields
+       type
+       default_field
+       default_operator
+       allow_leading_wildcard
+       lowercase_expanded_terms
+       enable_position_increments
+       fuzzy_max_expansions
+       fuzziness
+       fuzzy_prefix_length
+       phrase_slop
+       boost
+       analyze_wildcard
+       auto_generate_phrase_queries
+       minimum_should_match
+       lenient
+       locale
+       use_dis_max
+       tie_breaker
+       time_zone].each do |option|
       describe "##{option}" do
-
         before do
           search.send(option, 'bar')
         end
@@ -81,9 +76,7 @@ describe OpenSearch::DSL::Search::Queries::QueryString do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           query 'foo AND bar'

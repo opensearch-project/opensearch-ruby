@@ -70,12 +70,12 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:get_field_mapping, [
-          :include_defaults,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :local
+        ParamsRegistry.register(:get_field_mapping, %i[
+          include_defaults
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          local
         ].freeze)
       end
     end

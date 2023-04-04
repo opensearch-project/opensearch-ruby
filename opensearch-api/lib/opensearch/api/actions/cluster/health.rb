@@ -57,7 +57,7 @@ module OpenSearch
           path   = if _index
                      "_cluster/health/#{Utils.__listify(_index)}"
                    else
-                     "_cluster/health"
+                     '_cluster/health'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -68,19 +68,19 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:health, [
-          :expand_wildcards,
-          :level,
-          :local,
-          :master_timeout,
-          :cluster_manager_timeout,
-          :timeout,
-          :wait_for_active_shards,
-          :wait_for_nodes,
-          :wait_for_events,
-          :wait_for_no_relocating_shards,
-          :wait_for_no_initializing_shards,
-          :wait_for_status
+        ParamsRegistry.register(:health, %i[
+          expand_wildcards
+          level
+          local
+          master_timeout
+          cluster_manager_timeout
+          timeout
+          wait_for_active_shards
+          wait_for_nodes
+          wait_for_events
+          wait_for_no_relocating_shards
+          wait_for_no_initializing_shards
+          wait_for_status
         ].freeze)
       end
     end

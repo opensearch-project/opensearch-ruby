@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client.cat#nodeattrs' do
-
   let(:expected_args) do
     [
-        'GET',
-        '_cat/nodeattrs',
-        {},
-        nil,
-        {}
+      'GET',
+      '_cat/nodeattrs',
+      {},
+      nil,
+      {}
     ]
   end
 

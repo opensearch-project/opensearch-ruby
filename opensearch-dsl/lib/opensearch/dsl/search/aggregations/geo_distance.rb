@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-bucket aggregation which will return document counts for distance perimeters,
         # defined as ranges
         #
@@ -58,7 +57,6 @@ module OpenSearch
           option_method :unit
           option_method :distance_type
         end
-
       end
     end
   end

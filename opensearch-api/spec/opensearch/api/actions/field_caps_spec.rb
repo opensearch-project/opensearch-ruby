@@ -27,14 +27,13 @@
 require 'spec_helper'
 
 describe 'client#field_caps' do
-
   let(:expected_args) do
     [
-        'GET',
-        'foo/_field_caps',
-        { fields: 'bar' },
-        nil,
-        {}
+      'GET',
+      'foo/_field_caps',
+      { fields: 'bar' },
+      nil,
+      {}
     ]
   end
 

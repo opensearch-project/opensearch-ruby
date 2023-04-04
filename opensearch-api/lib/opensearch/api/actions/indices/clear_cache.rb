@@ -52,7 +52,7 @@ module OpenSearch
           path   = if _index
                      "#{Utils.__listify(_index)}/_cache/clear"
                    else
-                     "_cache/clear"
+                     '_cache/clear'
                    end
           params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
@@ -63,15 +63,15 @@ module OpenSearch
         # Register this action with its valid params when the module is loaded.
         #
         # @since 6.2.0
-        ParamsRegistry.register(:clear_cache, [
-          :fielddata,
-          :fields,
-          :query,
-          :ignore_unavailable,
-          :allow_no_indices,
-          :expand_wildcards,
-          :index,
-          :request
+        ParamsRegistry.register(:clear_cache, %i[
+          fielddata
+          fields
+          query
+          ignore_unavailable
+          allow_no_indices
+          expand_wildcards
+          index
+          request
         ].freeze)
       end
     end

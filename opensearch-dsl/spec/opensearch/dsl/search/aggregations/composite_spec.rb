@@ -27,26 +27,22 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Aggregations::Composite do
-
   let(:search) do
     described_class.new
   end
 
   describe '#to_hash' do
-
     it 'can be converted to a hash' do
       expect(search.to_hash).to eq(composite: {})
     end
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#size' do
-
       before do
         search.size(2_000)
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Aggregations::Composite do
     end
 
     describe '#sources' do
-
       before do
         search.sources('bar')
       end
@@ -91,9 +86,7 @@ describe OpenSearch::DSL::Search::Aggregations::Composite do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new(:foo) do
           size 2_000

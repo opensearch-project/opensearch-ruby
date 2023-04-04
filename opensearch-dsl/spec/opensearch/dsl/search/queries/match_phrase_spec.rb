@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Queries::MatchPhrase do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrase do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new
     end
 
     describe '#query' do
-
       before do
         search.query('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrase do
     end
 
     describe '#analyzer' do
-
       before do
         search.analyzer('standard')
       end
@@ -66,9 +61,8 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrase do
         expect(search.to_hash[:match_phrase][:analyzer]).to eq('standard')
       end
     end
-    
-    describe '#boost' do
 
+    describe '#boost' do
       before do
         search.boost(10)
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrase do
     end
 
     describe '#slop' do
-
       before do
         search.slop(1)
       end
@@ -91,9 +84,7 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrase do
   end
 
   describe '#initialize' do
-
     context 'when a hash is provided' do
-
       let(:search) do
         described_class.new(message: { query: 'test' })
       end
@@ -104,7 +95,6 @@ describe OpenSearch::DSL::Search::Queries::MatchPhrase do
     end
 
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new do
           query 'test'

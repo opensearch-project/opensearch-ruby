@@ -27,9 +27,7 @@
 require 'spec_helper'
 
 describe OpenSearch::DSL::Search::Filters::GeoDistance do
-
   describe '#to_hash' do
-
     let(:search) do
       described_class.new
     end
@@ -40,13 +38,11 @@ describe OpenSearch::DSL::Search::Filters::GeoDistance do
   end
 
   context 'when options methods are called' do
-
     let(:search) do
       described_class.new(:foo)
     end
 
     describe '#distance' do
-
       before do
         search.distance('bar')
       end
@@ -57,7 +53,6 @@ describe OpenSearch::DSL::Search::Filters::GeoDistance do
     end
 
     describe '#distance_type' do
-
       before do
         search.distance_type('bar')
       end
@@ -68,7 +63,6 @@ describe OpenSearch::DSL::Search::Filters::GeoDistance do
     end
 
     describe '#lat' do
-
       before do
         search.lat('bar')
       end
@@ -79,7 +73,6 @@ describe OpenSearch::DSL::Search::Filters::GeoDistance do
     end
 
     describe '#lon' do
-
       before do
         search.lon('bar')
       end
@@ -91,14 +84,12 @@ describe OpenSearch::DSL::Search::Filters::GeoDistance do
   end
 
   describe '#initialize' do
-
     context 'when a block is provided' do
-
       let(:search) do
         described_class.new :foo do
           distance '1km'
           lat 40
-          lon -70
+          lon(-70)
         end
       end
 
@@ -107,11 +98,10 @@ describe OpenSearch::DSL::Search::Filters::GeoDistance do
       end
 
       context 'when options are also provided' do
-
         let(:search) do
           described_class.new(:foo, distance: '10km') do
             lat 40
-            lon -70
+            lon(-70)
           end
         end
 
@@ -122,7 +112,6 @@ describe OpenSearch::DSL::Search::Filters::GeoDistance do
     end
 
     context 'when options are provided' do
-
       let(:search) do
         described_class.new(distance: '10km', foo: { lat: 40, lon: -70 })
       end

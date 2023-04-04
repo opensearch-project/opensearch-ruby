@@ -32,7 +32,9 @@ module OpenSearch
       # Client for the "indices" namespace (includes the {Indices::Actions} methods)
       #
       class IndicesClient
-        include Common::Client, Common::Client::Base, Indices::Actions
+        include Indices::Actions
+        include Common::Client::Base
+        include Common::Client
       end
 
       # Proxy method for {IndicesClient}, available in the receiving object
@@ -40,7 +42,6 @@ module OpenSearch
       def indices
         @indices ||= IndicesClient.new(self)
       end
-
     end
   end
 end

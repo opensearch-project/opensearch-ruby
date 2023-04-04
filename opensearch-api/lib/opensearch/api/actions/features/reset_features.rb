@@ -43,7 +43,7 @@ module OpenSearch
           arguments = arguments.clone
 
           method = OpenSearch::API::HTTP_POST
-          path   = "_features/_reset"
+          path   = '_features/_reset'
           params = {}
 
           body = nil

@@ -28,7 +28,6 @@ module OpenSearch
   module DSL
     module Search
       module Aggregations
-
         # A multi-value metrics aggregation which returns statistical information on numeric values
         #
         # @example Passing the options as a Hash
@@ -56,7 +55,6 @@ module OpenSearch
           option_method :field
           option_method :script
         end
-
       end
     end
   end

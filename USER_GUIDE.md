@@ -115,28 +115,28 @@ Refer to OpenSearch [documentation](https://opensearch.org/docs/latest/point-in-
 require 'opensearch-ruby'
 client = OpenSearch::Client.new({ host: 'localhost' })
 index = :movies
-client.indices.create(index: 'movies')
+client.indices.create(index: index)
 
-# CREATE 3 PITS
-client.create_pit index: index, keep_alive: '1m'
-client.create_pit index: index, keep_alive: '1m'
-client.create_pit index: index, keep_alive: '1m'
+# Create 3 Pits
+client.create_pit index: index, keep_alive: '3m'
+client.create_pit index: index, keep_alive: '3m'
+client.create_pit index: index, keep_alive: '3m'
 
-# GET ALL PITS
+# Get all PITs
 pits = client.get_all_pits
 puts pits
 
-# DELETE FIRST PIT
+# Delete first PIT
 client.delete_pit body: { pit_id: [pits.dig('pits', 0, 'pit_id')] }
 
-# ALL PITS SEGMENTS
+# All PIT segments
 puts client.cat.all_pit_segments
 
-# SEGMENTS FOR A SPECIFIC PIT
+# Segments of a specific PIT
 puts client.cat.pit_segments body: { pit_id: [pits.dig('pits', 1, 'pit_id')] }
 
 
-# DELETE ALL PITS
+# Delete all PITs
 puts client.delete_all_pits
 ```
 

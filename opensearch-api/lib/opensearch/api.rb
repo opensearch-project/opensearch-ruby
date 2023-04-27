@@ -62,6 +62,7 @@ module OpenSearch
     HTTP_HEAD         = 'HEAD'.freeze
     HTTP_POST         = 'POST'.freeze
     HTTP_PUT          = 'PUT'.freeze
+    HTTP_PATCH        = 'PATCH'.freeze
     HTTP_DELETE       = 'DELETE'.freeze
     UNDERSCORE_SEARCH = '_search'.freeze
     UNDERSCORE_ALL    = '_all'.freeze
@@ -83,7 +84,8 @@ module OpenSearch
                 OpenSearch::API::Remote,
                 OpenSearch::API::DanglingIndices,
                 OpenSearch::API::Features,
-                OpenSearch::API::Shutdown
+                OpenSearch::API::Shutdown,
+                OpenSearch::API::Security
     end
 
     # The serializer class

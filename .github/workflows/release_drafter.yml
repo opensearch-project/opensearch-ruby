@@ -3,7 +3,7 @@ name: Draft Release
 on:
   push:
     tags:
-      - "*/*"
+      - "*"
 
 jobs:
   draft_release:
@@ -36,10 +36,10 @@ jobs:
           role-to-assume: ${{ secrets.GET_SECRET_IAM_ROLE }}
           aws-region: us-east-1
       - name: Download signing key
-        run: | 
+        run: |
           aws secretsmanager get-secret-value --secret-id jenkins-opensearchproject-rubygems-private-key --query SecretString --output text > gem-private_key.pem
       - name: Build and package gem artifact
-        run: . release/build.sh $(echo ${{ github.ref_name }} | awk -F/ '{print $1}')
+        run: source .github/build_gem.sh
       - name: Draft a release
         uses: softprops/action-gh-release@v1
         with:

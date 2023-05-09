@@ -1,6 +1,7 @@
 - [User Guide](#user-guide)
   - [Setup](#setup)
   - [Basic Usage](#basic-usage)
+  - [OpenSearch DSL](#opensearch-dsl)
   - [Guides by Topics](#guides-by-topics)
   - [Amazon OpenSearch Service](#amazon-opensearch-service)
 
@@ -106,6 +107,29 @@ response = client.indices.delete(
 puts response   
 ```
 
+## OpenSearch DSL
+
+The `opensearch-dsl` library is designed as a group of standalone Ruby modules, classes and DSL methods, which provide an idiomatic way to build complex search definitions
+
+```ruby
+require 'opensearch'
+require 'opensearch/dsl'
+include OpenSearch::DSL
+
+response = client.search index: index_name, body: search {
+      query do
+            bool do
+                  filter do
+                        term category: "search"
+                  end
+                  must do
+                        match title: "ruby"
+                  end
+            end
+      end
+}.to_hash
+```
+
 ## Guides by Topics
 - [Index Lifecycle](guides/index_lifecycle.md)
 - [Document Lifecycle](guides/document_lifecycle.md)
@@ -113,9 +137,10 @@ puts response
 - [Bulk](guides/bulk.md)
 - [Advanced Index Actions](guides/advanced_index_actions.md)
 - [Index Templates](guides/index_template.md)
+- [Transport Options](guides/transport_options.md)
 
 ## Amazon OpenSearch Service
 
 Requests to [OpenSearch Service and OpenSearch Serverless](https://docs.aws.amazon.com/opensearch-service/index.html) must be signed using the AWS signing protocol. Use `opensearch-aws-sigv4` gem in place of `opensearch-ruby` gem.
 
-For more information, checkout the [USER_GUIDE](opensearch-aws-sigv4/USER_GUIDE.md) of [opensearch-aws-sigv4](opensearch-aws-sigv4).
+For more information, checkout the [USER_GUIDE](https://github.com/opensearch-project/opensearch-ruby-aws-sigv4/blob/main/USER_GUIDE.md) of [opensearch-aws-sigv4 gem](https://github.com/opensearch-project/opensearch-ruby-aws-sigv4).

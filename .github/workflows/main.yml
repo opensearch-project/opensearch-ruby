@@ -4,12 +4,12 @@ on:
     branches:
       - "*"
     paths-ignore:
-      - 'README.md'
+      - '*.md'
   pull_request:
     branches:
       - "*"
     paths-ignore:
-      - 'README.md'
+      - '*.md'
 jobs:
   test-opensearch:
     env:
@@ -40,18 +40,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install libcurl4-openssl-dev
           ruby -v
-          rake bundle:clean
-          rake bundle:install
-      - name: opensearch-ruby
-        run: cd opensearch-ruby && bundle exec rake test:all
-      - name: opensearch-transport
-        run: cd opensearch-transport && bundle exec rake test:all
-      - name: opensearch-api
-        run: cd opensearch-api && bundle exec rake test:spec
-      - name: opensearch-dsl
-        run: cd opensearch-dsl && bundle exec rake test:all
-      - name: opensearch-aws-sigv4
-        run: cd opensearch-aws-sigv4 && bundle exec rake test:all
+          bundle install
+      - name: Run All Tests
+        run: bundle exec rake test:all
 
   test-opensearch-faraday-1:
     env:
@@ -83,10 +74,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install libcurl4-openssl-dev
           ruby -v
-          rake bundle:clean
-          rake bundle:install
-      - name: opensearch-transport
-        run: cd opensearch-transport && bundle exec rake test:all
+          bundle install
+      - name: Test Faraday on Transport Layer
+        run: bundle exec rake test:transport:all
 
   test-opensearch-security:
     env:
@@ -118,7 +108,6 @@ jobs:
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install ca-certificates
           ruby -v
-          rake bundle:clean
-          rake bundle:install
-      - name: opensearch-ruby
-        run: cd opensearch-ruby && bundle exec rake test_security:all
+          bundle install
+      - name: Test Client Security
+        run: bundle exec rake test:client:security

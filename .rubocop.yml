@@ -16,3 +16,12 @@ RSpec/ImplicitSubject:
 
 Metrics:
   Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false

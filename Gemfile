@@ -26,22 +26,43 @@
 
 source 'https://rubygems.org'
 
-gem 'opensearch-api',        path: File.expand_path('opensearch-api', __dir__),        require: false
-gem 'opensearch-aws-sigv4',  path: File.expand_path('opensearch-aws-sigv4', __dir__),  require: false
-gem 'opensearch-ruby',       path: File.expand_path('opensearch-ruby', __dir__),       require: false
-gem 'opensearch-transport',  path: File.expand_path('opensearch-transport', __dir__),  require: false
+gem 'opensearch-ruby', path: __dir__, require: false
 
 gem 'ansi'
+gem 'bundler'
 gem 'cane'
-gem 'mocha'
+gem 'faraday-httpclient'
+gem 'faraday-net_http_persistent'
+gem 'hashie'
+gem 'httpclient'
+gem 'jbuilder'
+gem 'jsonify'
+gem 'minitest', '~> 5'
+gem 'minitest-reporters', '~> 1'
+gem 'mocha', '~> 1'
+gem 'net-http-persistent'
 gem 'pry'
-gem 'rake'
-gem 'require-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
+gem 'rake', '~> 13'
+gem 'rspec', '~> 3'
 gem 'rubocop', '~> 1.28.0'
 gem 'rubocop-rake'
 gem 'rubocop-rspec'
-gem 'ruby-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
 gem 'shoulda-context'
-gem 'simplecov'
+gem 'simplecov', '~> 0.17', '< 0.18'
 gem 'test-unit', '~> 2'
+gem 'typhoeus', '~> 1.4'
+gem 'webmock', '~> 2.0'
 gem 'yard'
+
+gem 'curb' unless defined? JRUBY_VERSION
+gem 'faraday-patron' unless defined? JRUBY_VERSION
+gem 'patron' unless defined? JRUBY_VERSION
+
+gem 'require-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
+gem 'ruby-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
+
+gem 'manticore' if defined? JRUBY_VERSION
+gem 'pry-nav' if defined? JRUBY_VERSION
+
+gem 'faraday', ENV.fetch('FARADAY_VERSION', nil), require: false if ENV.key?('FARADAY_VERSION')
+gem 'faraday-typhoeus' if !ENV.key?('FARADAY_VERSION') && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.6')

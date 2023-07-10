@@ -25,3 +25,9 @@ Layout/EmptyLineAfterGuardClause:
 
 Naming/FileName:
   Enabled: false
+
+Layout/FirstArgumentIndentation:
+  Enabled: false
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false

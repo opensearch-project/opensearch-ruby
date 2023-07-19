@@ -389,7 +389,7 @@ The serialization component is pluggable, though, so you can write your own by i
 
 ### Exception Handling
 
-The library defines a [number of exception classes](https://github.com/opensearch-project/opensearch-ruby/blob/main/opensearch-transport/lib/opensearch/transport/transport/errors.rb) for various client and server errors, as well as unsuccessful HTTP responses, making it possible to `rescue` specific exceptions with desired granularity.
+The library defines a [number of exception classes](../lib/opensearch/transport/transport/errors.rb) for various client and server errors, as well as unsuccessful HTTP responses, making it possible to `rescue` specific exceptions with desired granularity.
 
 The highest-level exception is {OpenSearch::Transport::Transport::Error} and will be raised for any generic client *or* server errors.
 

@@ -24,8 +24,10 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require 'cgi'
-require 'multi_json'
+# This code was generated from OpenSearch API Spec.
+# Update the code generation logic instead of modifying this file directly.
+
+# frozen_string_literal: true
 
 require 'opensearch/api/namespace/common'
 require 'opensearch/api/utils'
@@ -57,42 +59,42 @@ module OpenSearch
       :opaque_id                      # Use X-Opaque-Id
     ]
 
-    HTTP_GET          = 'GET'.freeze
-    HTTP_HEAD         = 'HEAD'.freeze
-    HTTP_POST         = 'POST'.freeze
-    HTTP_PUT          = 'PUT'.freeze
-    HTTP_DELETE       = 'DELETE'.freeze
-    UNDERSCORE_SEARCH = '_search'.freeze
-    UNDERSCORE_ALL    = '_all'.freeze
-    DEFAULT_DOC       = '_doc'.freeze
+    HTTP_GET          = 'GET'
+    HTTP_HEAD         = 'HEAD'
+    HTTP_PATCH        = 'PATCH'
+    HTTP_POST         = 'POST'
+    HTTP_PUT          = 'PUT'
+    HTTP_DELETE       = 'DELETE'
+
+    UNDERSCORE_SEARCH = '_search'
+    UNDERSCORE_ALL    = '_all'
+    DEFAULT_DOC       = '_doc'
 
     # Auto-include all namespaces in the receiver
-    #
     def self.included(base)
       base.send :include,
                 OpenSearch::API::Common,
                 OpenSearch::API::Actions,
-                OpenSearch::API::Cluster,
-                OpenSearch::API::Nodes,
-                OpenSearch::API::Indices,
-                OpenSearch::API::Ingest,
-                OpenSearch::API::Snapshot,
-                OpenSearch::API::Tasks,
                 OpenSearch::API::Cat,
-                OpenSearch::API::Remote,
+                OpenSearch::API::Cluster,
                 OpenSearch::API::DanglingIndices,
                 OpenSearch::API::Features,
-                OpenSearch::API::Shutdown
+                OpenSearch::API::Indices,
+                OpenSearch::API::Ingest,
+                OpenSearch::API::Nodes,
+                OpenSearch::API::Remote,
+                OpenSearch::API::RemoteStore,
+                OpenSearch::API::Shutdown,
+                OpenSearch::API::Snapshot,
+                OpenSearch::API::Tasks
     end
 
     # The serializer class
-    #
     def self.serializer
       settings[:serializer] || DEFAULT_SERIALIZER
     end
 
     # Access the module settings
-    #
     def self.settings
       @settings ||= {}
     end

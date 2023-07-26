@@ -1,0 +1,50 @@
+module Actions
+  {{valid_params_constant_name}} = Set.new(%i[
+    {{#query_params}}
+    {{name}}
+    {{/query_params}}
+  ]).freeze
+
+  # {{{method_description}}}
+  #
+  {{#argument_descriptions}}
+  # @option arguments [{{data_type}}] :{{name}} {{#required}}*Required* {{/required}}{{#deprecated}}DEPRECATED {{/deprecated}}{{#default}}(default: {{default}}) {{/default}}{{description}}
+  {{/argument_descriptions}}
+  {{#external_docs}}
+  #
+  # {API Reference}[{{{external_docs}}}]
+  {{/external_docs}}
+  def {{method_name}}(arguments = {})
+    {{#required_args}}
+    raise ArgumentError, "Required argument '{{arg}}' missing" unless arguments[:{{arg}}]
+    {{#_blank_line}}
+
+    {{/_blank_line}}
+    {{/required_args}}
+    arguments = arguments.clone
+    {{#path_params}}
+    {{#listify}}
+    _{{name}} = Utils.__listify(arguments.delete(:{{name}}))
+    {{/listify}}
+    {{^listify}}
+    _{{name}} = arguments.delete(:{{name}})
+    {{/listify}}
+    {{#_blank_line}}
+
+    {{/_blank_line}}
+    {{/path_params}}
+    headers = arguments.delete(:headers) || {}
+    body    = arguments.delete(:body)
+    url     = Utils.__pathify {{{url_components}}}
+    method  = {{{http_verb}}}
+    params  = Utils.__validate_and_extract_params arguments, {{valid_params_constant_name}}
+    {{#listify_query_params}}
+    {{#_blank_line}}
+
+    {{/_blank_line}}
+    params[:{{name}}] = Utils.__listify(params[:{{name}}]) if params[:{{name}}]
+    {{/listify_query_params}}
+
+    {{{perform_request}}}
+  end
+end

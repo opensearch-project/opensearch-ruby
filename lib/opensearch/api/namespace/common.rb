@@ -45,6 +45,27 @@ module OpenSearch
         def perform_request(method, path, params = {}, body = nil, headers = nil)
           client.perform_request method, path, params, body, headers
         end
+
+        def perform_request_simple_ignore404(method, path, params, body, headers)
+          Utils.__rescue_from_not_found do
+            perform_request(method, path, params, body, headers).status == 200
+          end
+        end
+
+        def perform_request_complex_ignore404(method, path, params, body, headers, arguments)
+          if Array(arguments[:ignore]).include?(404)
+            Utils.__rescue_from_not_found { perform_request(method, path, params, body, headers).body }
+          else
+            perform_request(method, path, params, body, headers).body
+          end
+        end
+
+        def perform_request_ping(method, path, params, body, headers)
+          perform_request(method, path, params, body, headers).status == 200
+        rescue StandardError => e
+          raise e unless e.class.to_s =~ /NotFound|ConnectionFailed/ || e.message =~ /Not\s*Found|404|ConnectionFailed/i
+          false
+        end
       end
     end
   end

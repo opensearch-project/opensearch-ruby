@@ -16,3 +16,4 @@ profile/**/data/*.json
 .byebug_history
 dist/
 gem-private_key.pem
+.ruby-version

@@ -43,7 +43,7 @@ end
 
 require 'minitest/autorun'
 require 'shoulda-context'
-require 'mocha/setup'
+require 'mocha/minitest'
 
 require 'opensearch'
 require 'opensearch/dsl'

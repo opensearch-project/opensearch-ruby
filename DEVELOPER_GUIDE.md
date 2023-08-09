@@ -6,6 +6,7 @@
     - [Build and Test](#build-and-test)
     - [Integration Tests](#integration-tests)
     - [Linter](#linter)
+    - [Generate API Actions](#generate-api-actions)
   - [Submitting Changes](#submitting-changes)
 
 # Developer Guide
@@ -84,6 +85,10 @@ Use RuboCop to auto-lint Ruby code.
 rubocop -a
 rubocop --auto-gen-config
 ```
+
+### Generate API Actions
+
+All changes to the API actions should be done via the `api_generator`. For more information, see the [API Generator's USER_GUIDE](./api_generator/USER_GUIDE.md).
 
 ## Submitting Changes
 

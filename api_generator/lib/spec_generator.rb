@@ -54,8 +54,6 @@ class SpecGenerator < BaseGenerator
     action.required_components.map do |component|
       { arg: component,
         others: other_required_components(component) }
-    end.tap do |components|
-      components.last&.update(blank_line: true)
     end
   end
 

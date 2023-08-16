@@ -13,6 +13,9 @@ describe 'client{{#namespace}}.{{namespace}}{{/namespace}}#{{name}}' do
       {{#expected_query_params}}
       {{pre}}{{key}}: {{{value}}}{{post}}
       {{/expected_query_params}}
+      {{^expected_query_params}}
+      {},
+      {{/expected_query_params}}
       {{body}},
       {}
     ]
@@ -21,16 +24,14 @@ describe 'client{{#namespace}}.{{namespace}}{{/namespace}}#{{name}}' do
   let(:client) do
     Class.new { include OpenSearch::API }.new
   end
-  {{#required_components}}
 
+  {{#required_components}}
   it 'requires the :{{arg}} argument' do
     expect do
       client{{#namespace}}.{{namespace}}{{/namespace}}.{{name}}{{{others}}}
     end.to raise_exception(ArgumentError)
   end
-  {{#blank_line}}
 
-  {{/blank_line}}
   {{/required_components}}
   it 'performs the request with all optional params' do
     expect(client_double{{#namespace}}.{{namespace}}{{/namespace}}.{{name}}(

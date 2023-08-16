@@ -84,6 +84,7 @@ module OpenSearch
                 OpenSearch::API::Nodes,
                 OpenSearch::API::Remote,
                 OpenSearch::API::RemoteStore,
+                OpenSearch::API::Security,
                 OpenSearch::API::Shutdown,
                 OpenSearch::API::Snapshot,
                 OpenSearch::API::Tasks

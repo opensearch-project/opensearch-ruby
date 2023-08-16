@@ -15,14 +15,14 @@ class ActionGenerator < BaseGenerator
   attr_reader :module_name, :method_name, :valid_params_constant_name,
               :method_description, :argument_descriptions, :external_docs
 
-  # Actions that use perform_request_simple_ignore_404
+  # Actions that use perform_request_simple_ignore404
   SIMPLE_IGNORE_404 = %w[exists
                          indices.exists
                          indices.exists_alias
                          indices.exists_template
                          indices.exists_type].to_set.freeze
 
-  # Actions that use perform_request_complex_ignore_404
+  # Actions that use perform_request_complex_ignore404
   COMPLEX_IGNORE_404 = %w[delete
                           get
                           indices.flush_synced
@@ -94,8 +94,8 @@ class ActionGenerator < BaseGenerator
 
   def perform_request
     args = 'method, url, params, body, headers'
-    return "perform_request_simple_ignore_404(#{args})" if SIMPLE_IGNORE_404.include?(@action.group)
-    return "perform_request_complex_ignore_404(#{args}, arguments)" if COMPLEX_IGNORE_404.include?(@action.group)
+    return "perform_request_simple_ignore404(#{args})" if SIMPLE_IGNORE_404.include?(@action.group)
+    return "perform_request_complex_ignore404(#{args}, arguments)" if COMPLEX_IGNORE_404.include?(@action.group)
     return "perform_request_ping(#{args})" if PING.include?(@action.group)
     "perform_request(#{args}).body"
   end

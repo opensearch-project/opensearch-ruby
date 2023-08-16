@@ -16,6 +16,7 @@ describe 'client.security#get_role' do
     [
       'GET',
       '_plugins/_security/api/roles/songs',
+      {},
       nil,
       {}
     ]

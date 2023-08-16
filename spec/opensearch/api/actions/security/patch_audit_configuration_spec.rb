@@ -17,6 +17,7 @@ describe 'client.security#patch_audit_configuration' do
       'PATCH',
       '_plugins/_security/api/audit',
       {},
+      {},
       {}
     ]
   end

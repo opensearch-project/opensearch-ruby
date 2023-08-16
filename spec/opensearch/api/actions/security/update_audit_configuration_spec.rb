@@ -17,6 +17,7 @@ describe 'client.security#update_audit_configuration' do
       'PUT',
       '_plugins/_security/api/audit/config',
       {},
+      {},
       {}
     ]
   end

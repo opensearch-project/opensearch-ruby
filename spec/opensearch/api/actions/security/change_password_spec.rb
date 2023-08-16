@@ -17,6 +17,7 @@ describe 'client.security#change_password' do
       'PUT',
       '_plugins/_security/api/account',
       {},
+      {},
       {}
     ]
   end

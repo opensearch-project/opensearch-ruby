@@ -16,6 +16,7 @@ describe 'client.security#get_distinguished_names' do
     [
       'GET',
       '_plugins/_security/api/nodesdn/songs',
+      {},
       nil,
       {}
     ]

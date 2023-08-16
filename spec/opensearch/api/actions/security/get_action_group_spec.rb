@@ -16,6 +16,7 @@ describe 'client.security#get_action_group' do
     [
       'GET',
       '_plugins/_security/api/actiongroups/songs',
+      {},
       nil,
       {}
     ]

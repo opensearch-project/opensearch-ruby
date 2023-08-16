@@ -16,6 +16,7 @@ describe 'client.security#health' do
     [
       'GET',
       '_plugins/_security/health',
+      {},
       nil,
       {}
     ]

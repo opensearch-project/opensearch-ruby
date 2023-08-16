@@ -16,6 +16,7 @@ describe 'client.security#get_tenants' do
     [
       'GET',
       '_plugins/_security/api/tenants',
+      {},
       nil,
       {}
     ]

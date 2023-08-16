@@ -16,6 +16,7 @@ describe 'client.security#delete_user' do
     [
       'DELETE',
       '_plugins/_security/api/internalusers/songs',
+      {},
       nil,
       {}
     ]

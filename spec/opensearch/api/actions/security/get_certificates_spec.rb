@@ -16,6 +16,7 @@ describe 'client.security#get_certificates' do
     [
       'GET',
       '_plugins/_security/api/ssl/certs',
+      {},
       nil,
       {}
     ]

@@ -16,6 +16,7 @@ describe 'client.security#delete_action_group' do
     [
       'DELETE',
       '_plugins/_security/api/actiongroups/songs',
+      {},
       nil,
       {}
     ]

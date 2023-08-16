@@ -17,6 +17,7 @@ describe 'client.security#patch_distinguished_names' do
       'PATCH',
       '_plugins/_security/api/nodesdn',
       {},
+      {},
       {}
     ]
   end

@@ -17,6 +17,7 @@ describe 'client.security#create_action_group' do
       'PUT',
       '_plugins/_security/api/actiongroups/songs',
       {},
+      {},
       {}
     ]
   end

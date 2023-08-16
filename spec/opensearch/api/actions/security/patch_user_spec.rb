@@ -17,6 +17,7 @@ describe 'client.security#patch_user' do
       'PATCH',
       '_plugins/_security/api/internalusers/songs',
       {},
+      {},
       {}
     ]
   end

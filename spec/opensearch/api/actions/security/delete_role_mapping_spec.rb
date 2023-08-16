@@ -16,6 +16,7 @@ describe 'client.security#delete_role_mapping' do
     [
       'DELETE',
       '_plugins/_security/api/rolesmapping/songs',
+      {},
       nil,
       {}
     ]

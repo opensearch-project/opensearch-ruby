@@ -16,6 +16,7 @@ describe 'client.security#delete_distinguished_names' do
     [
       'DELETE',
       '_plugins/_security/api/nodesdn/songs',
+      {},
       nil,
       {}
     ]

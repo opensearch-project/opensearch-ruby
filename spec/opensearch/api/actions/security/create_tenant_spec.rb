@@ -17,6 +17,7 @@ describe 'client.security#create_tenant' do
       'PUT',
       '_plugins/_security/api/tenants/songs',
       {},
+      {},
       {}
     ]
   end

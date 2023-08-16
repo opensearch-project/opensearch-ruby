@@ -16,6 +16,7 @@ describe 'client.security#get_account_details' do
     [
       'GET',
       '_plugins/_security/api/account',
+      {},
       nil,
       {}
     ]

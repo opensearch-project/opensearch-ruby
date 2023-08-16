@@ -17,6 +17,7 @@ describe 'client.security#patch_roles' do
       'PATCH',
       '_plugins/_security/api/roles',
       {},
+      {},
       {}
     ]
   end

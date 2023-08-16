@@ -17,6 +17,7 @@ describe 'client.security#patch_action_group' do
       'PATCH',
       '_plugins/_security/api/actiongroups/songs',
       {},
+      {},
       {}
     ]
   end

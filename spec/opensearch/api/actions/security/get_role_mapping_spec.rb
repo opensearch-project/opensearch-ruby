@@ -16,6 +16,7 @@ describe 'client.security#get_role_mapping' do
     [
       'GET',
       '_plugins/_security/api/rolesmapping/songs',
+      {},
       nil,
       {}
     ]

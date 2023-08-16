@@ -17,6 +17,7 @@ describe 'client.security#patch_tenants' do
       'PATCH',
       '_plugins/_security/api/tenants',
       {},
+      {},
       {}
     ]
   end

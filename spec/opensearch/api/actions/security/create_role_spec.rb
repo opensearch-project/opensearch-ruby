@@ -17,6 +17,7 @@ describe 'client.security#create_role' do
       'PUT',
       '_plugins/_security/api/roles/songs',
       {},
+      {},
       {}
     ]
   end

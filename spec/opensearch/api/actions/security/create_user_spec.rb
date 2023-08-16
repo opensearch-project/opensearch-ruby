@@ -17,6 +17,7 @@ describe 'client.security#create_user' do
       'PUT',
       '_plugins/_security/api/internalusers/songs',
       {},
+      {},
       {}
     ]
   end

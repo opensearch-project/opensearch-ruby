@@ -16,6 +16,7 @@ describe 'client.security#reload_http_certificates' do
     [
       'PUT',
       '_plugins/_security/api/ssl/http/reloadcerts',
+      {},
       nil,
       {}
     ]

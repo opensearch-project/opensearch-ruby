@@ -16,6 +16,7 @@ describe 'client.security#flush_cache' do
     [
       'DELETE',
       '_plugins/_security/api/cache',
+      {},
       nil,
       {}
     ]

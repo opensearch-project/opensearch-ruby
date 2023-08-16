@@ -16,6 +16,7 @@ describe 'client.security#delete_tenant' do
     [
       'DELETE',
       '_plugins/_security/api/tenants/songs',
+      {},
       nil,
       {}
     ]

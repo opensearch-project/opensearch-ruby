@@ -17,6 +17,7 @@ describe 'client.security#update_distinguished_names' do
       'PUT',
       '_plugins/_security/api/nodesdn/songs',
       {},
+      {},
       {}
     ]
   end

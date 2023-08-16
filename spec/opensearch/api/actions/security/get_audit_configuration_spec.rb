@@ -16,6 +16,7 @@ describe 'client.security#get_audit_configuration' do
     [
       'GET',
       '_plugins/_security/api/audit',
+      {},
       nil,
       {}
     ]

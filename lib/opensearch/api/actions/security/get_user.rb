@@ -33,7 +33,7 @@ module OpenSearch
           method  = OpenSearch::API::HTTP_GET
           params  = Utils.__validate_and_extract_params arguments, GET_USER_QUERY_PARAMS
 
-          perform_request_complex_ignore_404(method, url, params, body, headers, arguments)
+          perform_request_complex_ignore404(method, url, params, body, headers, arguments)
         end
       end
     end

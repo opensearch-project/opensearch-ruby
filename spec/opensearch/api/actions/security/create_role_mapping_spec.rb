@@ -17,6 +17,7 @@ describe 'client.security#create_role_mapping' do
       'PUT',
       '_plugins/_security/api/rolesmapping/songs',
       {},
+      {},
       {}
     ]
   end

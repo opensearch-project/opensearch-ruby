@@ -16,6 +16,7 @@ describe 'client.security#get_user' do
     [
       'GET',
       '_plugins/_security/api/internalusers/songs',
+      {},
       nil,
       {}
     ]

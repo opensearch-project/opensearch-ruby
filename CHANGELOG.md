@@ -1,7 +1,14 @@
 # CHANGELOG
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-
 ## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [3.0.0]
 ### Added
 - Added `remote_store.restore` action ([#176](https://github.com/opensearch-project/opensearch-ruby/pull/176))
 - Added API Generator ([#139](https://github.com/opensearch-project/opensearch-ruby/issues/139))

@@ -94,6 +94,10 @@ See [USER_GUIDE](USER_GUIDE.md).
 
 See [Compatibility](COMPATIBILITY.md).
 
+## Upgrading
+
+See [UPGRADING](UPGRADING.md).
+
 ## Developer Guide
 
 See [DEVELOPER_GUIDE](DEVELOPER_GUIDE.md).

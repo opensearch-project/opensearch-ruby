@@ -8,7 +8,7 @@
 # Modifications Copyright OpenSearch Contributors. See
 # GitHub history for details.
 
-#set -e
+set -e
 GIT_ROOT=$(git rev-parse --show-toplevel)
 
 rm -rf dist && mkdir dist

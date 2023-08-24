@@ -28,7 +28,7 @@ require 'rspec/core/rake_task'
 require 'rake/testtask'
 require 'mkmf'
 
-desc 'Generate documentation to be published to gh-pages'
+desc 'Generate documentation for preview'
 task :gh_pages do
   yard_cmd = 'yard doc --embed-mixins --markup=rdoc --output-dir docs ./docs lib/**/*.rb'
   Kernel.system yard_cmd

@@ -8,5 +8,8 @@ standardReleasePipelineWithGenericTrigger(
     causeString: 'A tag was cut on opensearch-project/opensearch-ruby repository causing this workflow to run',
     downloadReleaseAsset: true,
     publishRelease: true) {
-        publishToRubyGems(apiKeyCredentialId: 'jenkins-opensearch-ruby-api-key')
+        publishToRubyGems(
+            publicCertPath: "${WORKSPACE}/.github/opensearch-rubygems.pem",
+            apiKeyCredentialId: 'jenkins-opensearch-ruby-api-key'
+            )
     }

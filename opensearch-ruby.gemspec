@@ -58,7 +58,7 @@ Gem::Specification.new do |s|
   s.rdoc_options      = ['--charset=UTF-8']
 
   signing_key = File.expand_path('gem-private_key.pem')
-  if $PROGRAM_NAME.end_with?('gem') && ARGV == ['build', __FILE__] && File.exist?(signing_key)
+  if $PROGRAM_NAME.end_with?('gem') && ARGV.first == 'build' && File.exist?(signing_key)
     s.signing_key = signing_key
     s.cert_chain  = ['.github/opensearch-rubygems.pem']
   end

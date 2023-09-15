@@ -10,6 +10,9 @@ AllCops:
   Exclude:
     - 'api_generator/**/*'
 
+Gemspec/RequireMFA:
+  Enabled: false
+
 RSpec/ImplicitExpect:
   Enabled: false
 

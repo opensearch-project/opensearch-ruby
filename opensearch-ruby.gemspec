@@ -29,8 +29,8 @@ require_relative './lib/opensearch/version'
 Gem::Specification.new do |s|
   s.name          = 'opensearch-ruby'
   s.version       = OpenSearch::VERSION
-  s.authors       = ['Jayesh Hathila', 'Vamshi Vijay Nakkirtha', 'Vijayan Balasubramanian', 'Yuvraj Jaiswal', 'Theo Truong']
-  s.email         = %w[jayehh@amazon.com vamshin@amazon.com balasvij@amazon.com jaiyuvra@amazon.com theo.nam.truong@gmail.com]
+  s.authors       = ['Elastic', 'OpenSearch Contributors']
+  s.email         = 'opensearch@amazon.com'
   s.summary       = 'Ruby Client for OpenSearch'
   s.homepage      = 'https://github.com/opensearch-project/opensearch-ruby'
   s.license       = 'Apache-2.0'
@@ -44,11 +44,10 @@ Gem::Specification.new do |s|
     'documentation_uri' => 'https://rubydoc.info/gems/opensearch-ruby',
     'source_code_uri' => 'https://github.com/opensearch-project/opensearch-ruby/tree/main',
     'bug_tracker_uri' => 'https://github.com/opensearch-project/opensearch-ruby/issues',
-    'changelog_uri' => 'https://github.com/opensearch-project/opensearch-ruby/blob/main/CHANGELOG.md',
-    'rubygems_mfa_required' => 'true'
+    'changelog_uri' => 'https://github.com/opensearch-project/opensearch-ruby/blob/main/CHANGELOG.md'
   }
 
-  s.files         = Dir['lib/**/*']
+  s.files         = Dir['lib/**/*', '*.gemspec']
   s.test_files    = Dir['spec**/*', 'test/**/*', 'features/**/*']
   s.require_paths = ['lib']
   s.bindir        = 'bin'
@@ -66,5 +65,5 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.5'
 
   s.add_dependency 'faraday', '>= 1.0', '< 3'
-  s.add_dependency 'multi_json'
+  s.add_dependency 'multi_json', '>= 1.0'
 end

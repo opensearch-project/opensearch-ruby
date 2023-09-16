@@ -6,6 +6,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Fixed missing version require [#205](https://github.com/opensearch-project/opensearch-ruby/issues/205) ([#206](https://github.com/opensearch-project/opensearch-ruby/pull/206))
 ### Security
 
 ## [3.0.0]

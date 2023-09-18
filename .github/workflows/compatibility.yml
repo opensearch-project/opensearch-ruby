@@ -43,7 +43,7 @@ jobs:
           ruby -v
           bundle install
       - name: Run All Tests
-        run: bundle exec rake test:all
+        run: rake test:all
 
   test-opensearch-security:
     env:
@@ -77,4 +77,4 @@ jobs:
           ruby -v
           bundle install
       - name: opensearch-ruby
-        run: bundle exec rake test:client:security
+        run: rake test:client:security

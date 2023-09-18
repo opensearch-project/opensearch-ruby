@@ -24,6 +24,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
+require 'opensearch/version'
 require 'opensearch/transport'
 require 'opensearch/api'
 

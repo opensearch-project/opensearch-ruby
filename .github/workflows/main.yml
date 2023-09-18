@@ -43,7 +43,7 @@ jobs:
           ruby -v
           bundle install
       - name: Run All Tests
-        run: bundle exec rake test:all
+        run: rake test:all
 
   test-opensearch-faraday-1:
     env:
@@ -78,7 +78,7 @@ jobs:
           ruby -v
           bundle install
       - name: Test Faraday on Transport Layer
-        run: bundle exec rake test:transport:all
+        run: rake test:transport:all
 
   test-opensearch-security:
     env:
@@ -112,4 +112,4 @@ jobs:
           ruby -v
           bundle install
       - name: Test Client Security
-        run: bundle exec rake test:client:security
+        run: rake test:client:security

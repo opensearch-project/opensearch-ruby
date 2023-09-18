@@ -93,7 +93,7 @@ jobs:
 
       - name: opensearch-ruby
         working-directory: ruby-client
-        run: bundle exec rake test:integration
+        run: rake test:integration
 
       - name: Save server logs
         if: failure()

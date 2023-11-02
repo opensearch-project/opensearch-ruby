@@ -1,0 +1,22 @@
+{{{license_header}}}
+{{{generated_code_warning}}}
+
+# frozen_string_literal: true
+
+module OpenSearch
+  module API
+    module {{namespace_module}}
+      module Actions
+        # Make a customized {{upper_cased}} request.
+        #
+        # @option arguments [String] :url Relative path to the endpoint (e.g. 'cat/indices/books,movies') (*Required*)
+        # @option arguments [Hash] :params Querystring parameters to be appended to the path
+        # @option arguments [Hash] :headers Custom HTTP headers
+        # @option arguments [String | Hash | Array<Hash>] :body The body of the request
+        def {{lower_cased}}(url, headers: {}, body: nil, params: {})
+          request('{{upper_cased}}', url, headers: headers, body: body, params: params)
+        end
+      end
+    end
+  end
+end

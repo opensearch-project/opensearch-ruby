@@ -3,10 +3,10 @@ This API Generator generates API actions for the OpenSearch Ruby client based of
 ---
 
 ### Usage
-This generator should be run everytime the OpenSearch API Specification is updated to propagate the changes to the Ruby client. For now, this must be done manually:
+This generator should be run everytime the OpenSearch API specification is updated to propagate the changes to the Ruby client. For now, this must be done manually:
 - Create a new branch from `main`
 - Download the latest OpenSearch API Specification from [The API Spec Repo](https://github.com/opensearch-project/opensearch-api-specification/blob/main/OpenSearch.openapi.json)
-- Run the generator with the API Spec downloaded previously (see below)
+- Run the generator with the API spec downloaded previously (see below)
 - Run Rubocop with `-a` flag to remove redundant spacing from the generated code `rubocop -a`
 - Commit and create a PR to merge the updated API actions into `main`.
 
@@ -22,27 +22,39 @@ require './lib/api_generator'
 generator = ApiGenerator.new('./OpenSearch.openapi.json')
 ```
 
-The `generate` method accepts the path to the root directory of the `opensearch-ruby` gem as a parameter. By default, it points to the parent directory of the folder containing the generator script. For example to generate all actions into the `tmp` directory:
+### Generate Spec Methods:
+
+The `generate_spec_methods` method accepts the path to the root directory of the `opensearch-ruby` gem as a parameter. By default, it points to the parent directory of the folder containing the generator script. For example to generate all actions into the `tmp` directory:
 ```ruby
-generator.generate('./tmp')
+generator.generate_spec_methods('./tmp')
 ```
 
 You can also target a specific API version by passing in the version number as a parameter. For example to generate all actions for version `1.0` into the `tmp` directory:
 ```ruby
-generator.generate(version: '1.0')
+generator.generate_spec_methods(version: '1.0')
 ```
 
 The generator also support incremental generation. For example, to generate all actions of the `cat` namespace:
 ```ruby
-generator.generate(namespace: 'cat')
+generator.generate_spec_methods(namespace: 'cat')
 ```
 
 To limit it to specific actions of a namespace:
 ```ruby
-generator.generate(namespace: 'cat', actions: %w[aliases allocation])
+generator.generate_spec_methods(namespace: 'cat', actions: %w[aliases allocation])
 ```
 
 Note that the root namespace is presented by an empty string `''`. For example, to generate all actions of the root namespace for OS version 2.3:
 ```ruby
-generator.generate(version: '2.3', namespace: '')
+generator.generate_spec_methods(version: '2.3', namespace: '')
 ```
+
+### Generate Static Methods:
+
+To generate static methods:
+
+```ruby
+generator.generate_static_methods
+```
+
+The static methods are independent of the spec. A change in the OpenSearch API spec will not affect these methods.

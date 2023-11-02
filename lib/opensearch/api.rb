@@ -79,6 +79,7 @@ module OpenSearch
                 OpenSearch::API::Cluster,
                 OpenSearch::API::DanglingIndices,
                 OpenSearch::API::Features,
+                OpenSearch::API::Http,
                 OpenSearch::API::Indices,
                 OpenSearch::API::Ingest,
                 OpenSearch::API::Nodes,

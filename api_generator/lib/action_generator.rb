@@ -74,7 +74,7 @@ class ActionGenerator < BaseGenerator
   end
 
   def required_args
-    @action.required_components.map { |arg| { arg: } }
+    @action.required_components.map { |arg| { arg: arg } }
            .tap { |args| args.last&.[]=('_blank_line', true) }
   end
 

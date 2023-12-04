@@ -7,6 +7,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Fixed the response body being force-encoded when it was already in UTF-8 ([#212](https://github.com/opensearch-project/opensearch-ruby/issues/212))
 ### Security
 
 ## [3.0.1]

@@ -28,8 +28,7 @@ require_relative '../test_helper'
 
 class OpenSearch::Transport::Transport::ResponseTest < Minitest::Test
   context "Response" do
-
-    should "force-encode the body into UTF" do
+    should "force-encode the body into UTF-8" do
       body = "Hello Encoding!".encode(Encoding::ISO_8859_1)
       assert_equal 'ISO-8859-1', body.encoding.name
 
@@ -37,5 +36,11 @@ class OpenSearch::Transport::Transport::ResponseTest < Minitest::Test
       assert_equal 'UTF-8', response.body.encoding.name
     end
 
+    should "not force-encode the body if it is already encoded as UTF-8" do
+      body = "Hello Frozen!".freeze
+      response = OpenSearch::Transport::Transport::Response.new 200, body
+
+      assert_equal body, response.body
+    end
   end
 end

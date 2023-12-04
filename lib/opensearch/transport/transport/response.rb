@@ -39,7 +39,7 @@ module OpenSearch
           @status = status
           @body = body
           @headers = headers
-          @body = body.force_encoding('UTF-8') if body.respond_to?(:force_encoding)
+          @body = body.force_encoding('UTF-8') if body.respond_to?(:force_encoding) && body.encoding != Encoding::UTF_8
         end
       end
     end

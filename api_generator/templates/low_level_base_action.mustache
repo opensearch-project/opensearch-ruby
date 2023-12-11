@@ -1,0 +1,21 @@
+{{{license_header}}}
+{{{generated_code_warning}}}
+
+# frozen_string_literal: true
+
+module OpenSearch
+  module API
+    module {{namespace_module}}
+      module Actions
+        private
+
+        def request(method, url, headers: {}, body: nil, params: {})
+          body = OpenSearch::API::Utils.__bulkify(body) if body.is_a?(Array)
+          headers.merge!('Content-Type' => 'application/x-ndjson') if body.is_a?(Array)
+
+          perform_request(method, url, params, body, headers).body
+        end
+      end
+    end
+  end
+end

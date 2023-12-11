@@ -138,6 +138,7 @@ response = client.search index: index_name, body: search {
 - [Advanced Index Actions](guides/advanced_index_actions.md)
 - [Index Templates](guides/index_template.md)
 - [Transport Options](guides/transport_options.md)
+- [Custom HTTP Requests](guides/json.md)
 
 ## Amazon OpenSearch Service
 

@@ -12,6 +12,7 @@ require_relative 'action_generator'
 require_relative 'spec_generator'
 require_relative 'namespace_generator'
 require_relative 'index_generator'
+require_relative 'low_level_action_generator'
 
 # Generate API endpoints for OpenSearch Ruby client
 class ApiGenerator
@@ -22,11 +23,12 @@ class ApiGenerator
     @spec = Openapi3Parser.load_file(openapi_spec)
   end
 
+  # Generate API methods from the OpenSearch Specs.
   # @param [String] gem_folder location of the API Gem folder (default to the parent folder of the generator)
   # @param [String] version target OpenSearch version to generate like "2.5" or "3.0"
   # @param [String] namespace namespace to generate (Default to all namespaces. Use '' for root)
   # @param [Array<String>] actions list of actions in the specified namespace to generate (Default to all actions)
-  def generate(gem_folder = '../', version: nil, namespace: nil, actions: nil)
+  def generate_spec_methods(gem_folder = '../', version: nil, namespace: nil, actions: nil)
     gem_folder = Pathname gem_folder
     namespaces = existing_namespaces(gem_folder)
     target_actions(version, namespace, actions).each do |action|
@@ -35,6 +37,22 @@ class ApiGenerator
       NamespaceGenerator.new(gem_folder.join('lib/opensearch/api/namespace'), action.namespace).generate(namespaces)
     end
     IndexGenerator.new(gem_folder.join('lib/opensearch'), namespaces).generate
+  end
+
+  # Generate basic HTTP methods that are independent of the OpenSearch Specs.
+  # @param [String] gem_folder location of the API Gem folder (default to the parent folder of the generator)
+  def generate_static_methods(gem_folder = '../')
+    gem_folder = Pathname gem_folder
+    namespaces = existing_namespaces(gem_folder)
+    low_level_namespace = 'http'
+
+    NamespaceGenerator.new(gem_folder.join('lib/opensearch/api/namespace'), low_level_namespace).generate(namespaces)
+    LowLevelBaseActionGenerator.new(gem_folder.join('lib/opensearch/api/actions'), low_level_namespace).generate
+    IndexGenerator.new(gem_folder.join('lib/opensearch'), namespaces).generate
+
+    %w[head get post put patch delete options trace connect].each do |action|
+      LowLevelActionGenerator.new(gem_folder.join('lib/opensearch/api/actions'), low_level_namespace, action).generate
+    end
   end
 
   private

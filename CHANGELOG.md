@@ -3,6 +3,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+- Added `http.get`, `http.post`, `http.patch`, `http.put`, `http.trace`, `http.head`, `http.options`, `http.connect`, and `http.delete`  ([#211](https://github.com/opensearch-project/opensearch-ruby/pull/211))
+- Added a guide and a sample for `http` namespace ([#211](https://github.com/opensearch-project/opensearch-ruby/pull/211))
 ### Changed
 ### Deprecated
 ### Removed

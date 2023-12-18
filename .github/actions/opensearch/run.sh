@@ -32,6 +32,7 @@ do
     --env "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
     --env "http.port=${port}" \
     --env "action.destructive_requires_name=false" \
+    --env "OPENSEARCH_INITIAL_ADMIN_PASSWORD=myStrongPassword123!" \
     --env "plugins.security.disabled=${DISABLE_SECURITY}" \
     --ulimit nofile=65536:65536 \
     --ulimit memlock=-1:-1 \
@@ -66,7 +67,7 @@ else
     --show-error \
     --silent \
     --insecure \
-    https://admin:admin@os1:$PORT
+    https://admin:myStrongPassword123!@os1:$PORT
 fi
 
 sleep 10

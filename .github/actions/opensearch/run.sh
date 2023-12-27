@@ -84,6 +84,7 @@ else
       --silent \
       --insecure \
       https://admin:admin!@os1:$PORT
+  fi
 fi
 
 sleep 10

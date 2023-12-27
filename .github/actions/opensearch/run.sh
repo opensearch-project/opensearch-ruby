@@ -56,18 +56,34 @@ if [[ $DISABLE_SECURITY = true ]]; then
     --silent \
     http://os1:$PORT
 else
-  docker run \
-    --network cluster \
-    --rm \
-    appropriate/curl \
-    --max-time 120 \
-    --retry 120 \
-    --retry-delay 1 \
-    --retry-connrefused \
-    --show-error \
-    --silent \
-    --insecure \
-    https://admin:myStrongPassword123!@os1:$PORT
+  if [[ $CLUSTER_VERSION = 'latest' ]]; then
+    # Since 2.12.0, security demo configuration requires an initial admin password, which is set to 
+    # myStrongPassword123!
+    docker run \
+      --network cluster \
+      --rm \
+      appropriate/curl \
+      --max-time 120 \
+      --retry 120 \
+      --retry-delay 1 \
+      --retry-connrefused \
+      --show-error \
+      --silent \
+      --insecure \
+      https://admin:myStrongPassword123!@os1:$PORT
+  else
+    docker run \
+      --network cluster \
+      --rm \
+      appropriate/curl \
+      --max-time 120 \
+      --retry 120 \
+      --retry-delay 1 \
+      --retry-connrefused \
+      --show-error \
+      --silent \
+      --insecure \
+      https://admin:admin!@os1:$PORT
 fi
 
 sleep 10

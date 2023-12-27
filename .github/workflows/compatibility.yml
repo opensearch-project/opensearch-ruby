@@ -47,7 +47,7 @@ jobs:
 
   test-opensearch-security:
     env:
-      TEST_OPENSEARCH_SERVER: https://admin:myStrongPassword123!@localhost:9200
+      TEST_OPENSEARCH_SERVER: https://admin:admin@localhost:9200
       PORT: 9200
     strategy:
       fail-fast: false

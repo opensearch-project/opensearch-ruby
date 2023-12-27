@@ -3,6 +3,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+- Pass in an initial admin password, required by security after 2.12.0 release ([#217](https://github.com/opensearch-project/opensearch-ruby/issues/217))
 ### Changed
 ### Deprecated
 ### Removed

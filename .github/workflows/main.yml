@@ -30,8 +30,7 @@ jobs:
           sudo sysctl -w vm.max_map_count=262144
       - uses: ./.github/actions/opensearch
         with:
-          # TODO: change cluster-version back to `latest` after OS 2.9.1 or later is released
-          cluster-version: "2.8.0"
+          cluster-version: latest
           disable-security: true
       - uses: ruby/setup-ruby@v1
         with:
@@ -65,8 +64,7 @@ jobs:
           sudo sysctl -w vm.max_map_count=262144
       - uses: ./.github/actions/opensearch
         with:
-          # TODO: change cluster-version back to `latest` after OS 2.9.1 or later is released
-          cluster-version: "2.8.0"
+          cluster-version: latest
           disable-security: true
       - uses: ruby/setup-ruby@v1
         with:

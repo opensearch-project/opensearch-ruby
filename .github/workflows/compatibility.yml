@@ -35,7 +35,7 @@ jobs:
           disable-security: true
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2
+          ruby-version: 3.3
       - name: Build and test with Rake
         run: |
           sudo apt-get update
@@ -68,7 +68,7 @@ jobs:
           disable-security: false
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2
+          ruby-version: 3.3
       - name: Build and test with Rake
         run: |
           sudo apt-get update

@@ -19,10 +19,10 @@ jobs:
       fail-fast: false
       matrix:
         entry:
-          - { ruby_version: '3.2', opensearch_ref: '1.x' }
-          - { ruby_version: '3.2', opensearch_ref: '2.x' }
-          - { ruby_version: '3.2', opensearch_ref: '2.0' }
-          - { ruby_version: '3.2', opensearch_ref: 'main' }
+          - { ruby_version: '3.3', opensearch_ref: '1.x' }
+          - { ruby_version: '3.3', opensearch_ref: '2.x' }
+          - { ruby_version: '3.3', opensearch_ref: '2.0' }
+          - { ruby_version: '3.3', opensearch_ref: 'main' }
 
     steps:
       - uses: ruby/setup-ruby@v1

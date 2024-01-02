@@ -24,8 +24,6 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require 'base64'
-
 module OpenSearch
   module Transport
     # Handles communication with an OpenSearch cluster.
@@ -225,7 +223,8 @@ module OpenSearch
         return unless arguments[:cloud_id] && !arguments[:cloud_id].empty?
 
         name = arguments[:cloud_id].split(':')[0]
-        cloud_url, opensearch_instance = Base64.decode64(arguments[:cloud_id].gsub("#{name}:", '')).split('$')
+        base64_decoded = arguments[:cloud_id].gsub("#{name}:", '').unpack1('m')
+        cloud_url, opensearch_instance = base64_decoded.split('$')
 
         if cloud_url.include?(':')
           url, port = cloud_url.split(':')
@@ -355,7 +354,8 @@ module OpenSearch
       # Encode credentials for the Authorization Header
       # Credentials is the base64 encoding of id and api_key joined by a colon
       def __encode(api_key)
-        Base64.strict_encode64([api_key[:id], api_key[:api_key]].join(':'))
+        joined = [api_key[:id], api_key[:api_key]].join(':')
+        [joined].pack('m0')
       end
     end
   end

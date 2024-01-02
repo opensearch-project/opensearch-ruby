@@ -3,11 +3,11 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
-- Added base64 gem to gemspec (#218)[https://github.com/opensearch-project/opensearch-ruby/pull/218]
 - Added support for Ruby 3.3 ([#220](https://github.com/opensearch-project/opensearch-ruby/pull/220))
 ### Changed
 ### Deprecated
 ### Removed
+- Removed dependency on the base64 gem ([#221](https://github.com/opensearch-project/opensearch-ruby/pull/221))
 ### Fixed
 - Switch back to the latest OpenSearch version when testing in CI ([#219](https://github.com/opensearch-project/opensearch-ruby/pull/219))
 ### Security

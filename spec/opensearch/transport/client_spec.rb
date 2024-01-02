@@ -98,7 +98,8 @@ describe OpenSearch::Transport::Client do
     end
 
     it 'Adds the ApiKey header to the connection' do
-      expect(authorization_header).to eq("ApiKey #{Base64.strict_encode64('my_id:my_api_key')}")
+      strict_base64_encoded = ["my_id:my_api_key"].pack("m0")
+      expect(authorization_header).to eq("ApiKey #{strict_base64_encoded}")
     end
   end
 

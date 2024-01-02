@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Switch back to the latest OpenSearch version when testing in CI ([#219](https://github.com/opensearch-project/opensearch-ruby/pull/219))
 ### Security
 
 ## [3.1.0]

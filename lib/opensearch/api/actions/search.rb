@@ -153,6 +153,7 @@ module OpenSearch
         pre_filter_shard_size
         rest_total_hits_as_int
         min_compatible_shard_node
+        search_pipeline
       ].freeze)
     end
   end

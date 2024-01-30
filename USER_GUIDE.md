@@ -13,8 +13,8 @@ To add the client to your project, install it using [RubyGems](https://rubygems.
 `gem install opensearch-ruby`
 
 or add it to your Gemfile:
-```
-gem opensearch-ruby
+```ruby
+gem 'opensearch-ruby'
 ```
 and run:
 ```
@@ -23,7 +23,9 @@ bundle install
 
 Import the client:
 
-`require 'opensearch'`
+```ruby
+require 'opensearch'
+```
 
 ## Basic Usage
 ```ruby

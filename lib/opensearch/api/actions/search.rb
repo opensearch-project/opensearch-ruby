@@ -48,6 +48,7 @@ module OpenSearch
       # @option arguments [String] :q Query in the Lucene query string syntax
       # @option arguments [List] :routing A comma-separated list of specific routing values
       # @option arguments [Time] :scroll Specify how long a consistent view of the index should be maintained for scrolled search
+      # @option arguments [String] :search_pipeline Customizable sequence of processing stages applied to search queries.
       # @option arguments [String] :search_type Search operation type (options: query_then_fetch, dfs_query_then_fetch)
       # @option arguments [Number] :size Number of hits to return (default: 10)
       # @option arguments [List] :sort A comma-separated list of <field>:<direction> pairs
@@ -128,6 +129,7 @@ module OpenSearch
         q
         routing
         scroll
+        search_pipeline
         search_type
         size
         sort

@@ -3,6 +3,14 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [3.2.0]
+### Added
 - Added support for Ruby 3.3 ([#220](https://github.com/opensearch-project/opensearch-ruby/pull/220))
 - Added `search_pipeline` parameter to `search` API ([#227](https://github.com/opensearch-project/opensearch-ruby/pull/227))
 ### Changed

@@ -56,35 +56,27 @@ if [[ $DISABLE_SECURITY = true ]]; then
     --silent \
     http://os1:$PORT
 else
-  if [[ $CLUSTER_VERSION = 'latest' ]]; then
-    # Since 2.12.0, security demo configuration requires an initial admin password, which is set to 
-    # myStrongPassword123!
-    docker run \
-      --network cluster \
-      --rm \
-      appropriate/curl \
-      --max-time 120 \
-      --retry 120 \
-      --retry-delay 1 \
-      --retry-connrefused \
-      --show-error \
-      --silent \
-      --insecure \
-      https://admin:myStrongPassword123!@os1:$PORT
+  # Starting in 2.12.0, security demo configuration script requires an initial admin password which is set to 
+  # myStrongPassword123!
+  OPENSEARCH_REQUIRED_VERSION="2.12.0"
+  COMPARE_VERSION=`echo $OPENSEARCH_REQUIRED_VERSION $OPENSEARCH_VERSION | tr ' ' '\n' | sort -V | uniq | head -n 1`
+  if [ "$COMPARE_VERSION" != "$OPENSEARCH_REQUIRED_VERSION" ]; then
+    CREDENTIAL="admin:admin"
   else
-    docker run \
-      --network cluster \
-      --rm \
-      appropriate/curl \
-      --max-time 120 \
-      --retry 120 \
-      --retry-delay 1 \
-      --retry-connrefused \
-      --show-error \
-      --silent \
-      --insecure \
-      https://admin:admin!@os1:$PORT
+    CREDENTIAL="admin:myStrongPassword123!"
   fi
+  docker run \
+    --network cluster \
+    --rm \
+    appropriate/curl \
+    --max-time 120 \
+    --retry 120 \
+    --retry-delay 1 \
+    --retry-connrefused \
+    --show-error \
+    --silent \
+    --insecure \
+    https://$CREDENTIAL@os1:$PORT
 fi
 
 sleep 10

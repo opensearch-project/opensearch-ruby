@@ -10,6 +10,19 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 ### Security
 
+## [3.2.0]
+### Added
+- Added support for Ruby 3.3 ([#220](https://github.com/opensearch-project/opensearch-ruby/pull/220))
+- Added `search_pipeline` parameter to `search` API ([#227](https://github.com/opensearch-project/opensearch-ruby/pull/227))
+### Changed
+### Deprecated
+### Removed
+- Removed dependency on the base64 gem ([#221](https://github.com/opensearch-project/opensearch-ruby/pull/221))
+- Removed logging of hosts in `transport` base ([#227](https://github.com/opensearch-project/opensearch-ruby/pull/227))
+### Fixed
+- Switch back to the latest OpenSearch version when testing in CI ([#219](https://github.com/opensearch-project/opensearch-ruby/pull/219))
+### Security
+
 ## [3.1.0]
 ### Added
 - Added `http.get`, `http.post`, `http.patch`, `http.put`, `http.trace`, `http.head`, `http.options`, `http.connect`, and `http.delete`  ([#211](https://github.com/opensearch-project/opensearch-ruby/pull/211))

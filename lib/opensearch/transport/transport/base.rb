@@ -104,9 +104,7 @@ module OpenSearch
         # @see Sniffer#hosts
         #
         def reload_connections!
-          puts hosts
           hosts = sniffer.hosts
-          puts hosts
           __rebuild_connections hosts: hosts, options: options
           self
         rescue SnifferTimeoutError

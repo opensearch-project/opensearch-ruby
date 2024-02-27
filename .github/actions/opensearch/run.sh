@@ -59,11 +59,15 @@ else
   # Starting in 2.12.0, security demo configuration script requires an initial admin password which is set to 
   # myStrongPassword123!
   OPENSEARCH_REQUIRED_VERSION="2.12.0"
-  COMPARE_VERSION=`echo $OPENSEARCH_REQUIRED_VERSION $CLUSTER_VERSION | tr ' ' '\n' | sort -V | uniq | head -n 1`
-  if [ "$COMPARE_VERSION" != "$OPENSEARCH_REQUIRED_VERSION" ]; then
-    CREDENTIAL="admin:admin"
-  else
+  if [ "$CLUSTER_VERSION" == "latest" ]; then
     CREDENTIAL="admin:myStrongPassword123!"
+  else
+    COMPARE_VERSION=`echo $OPENSEARCH_REQUIRED_VERSION $CLUSTER_VERSION | tr ' ' '\n' | sort -V | uniq | head -n 1`
+    if [ "$COMPARE_VERSION" != "$OPENSEARCH_REQUIRED_VERSION" ]; then
+      CREDENTIAL="admin:admin"
+    else
+      CREDENTIAL="admin:myStrongPassword123!"
+    fi
   fi
   docker run \
     --network cluster \

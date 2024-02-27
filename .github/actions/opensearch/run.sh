@@ -32,6 +32,7 @@ do
     --env "ES_JAVA_OPTS=-Xms1g -Xmx1g" \
     --env "http.port=${port}" \
     --env "action.destructive_requires_name=false" \
+    --env "OPENSEARCH_INITIAL_ADMIN_PASSWORD=myStrongPassword123!" \
     --env "plugins.security.disabled=${DISABLE_SECURITY}" \
     --ulimit nofile=65536:65536 \
     --ulimit memlock=-1:-1 \
@@ -55,6 +56,19 @@ if [[ $DISABLE_SECURITY = true ]]; then
     --silent \
     http://os1:$PORT
 else
+  # Starting in 2.12.0, security demo configuration script requires an initial admin password which is set to 
+  # myStrongPassword123!
+  OPENSEARCH_REQUIRED_VERSION="2.12.0"
+  if [ "$CLUSTER_VERSION" == "latest" ]; then
+    CREDENTIAL="admin:myStrongPassword123!"
+  else
+    COMPARE_VERSION=`echo $OPENSEARCH_REQUIRED_VERSION $CLUSTER_VERSION | tr ' ' '\n' | sort -V | uniq | head -n 1`
+    if [ "$COMPARE_VERSION" != "$OPENSEARCH_REQUIRED_VERSION" ]; then
+      CREDENTIAL="admin:admin"
+    else
+      CREDENTIAL="admin:myStrongPassword123!"
+    fi
+  fi
   docker run \
     --network cluster \
     --rm \
@@ -66,7 +80,7 @@ else
     --show-error \
     --silent \
     --insecure \
-    https://admin:admin@os1:$PORT
+    https://$CREDENTIAL@os1:$PORT
 fi
 
 sleep 10

@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Don't emit Ruby warnings when requiring `opensearch-dsl` ([#231](https://github.com/opensearch-project/opensearch-ruby/issues/231))
 ### Security
 
 ## [3.2.0]

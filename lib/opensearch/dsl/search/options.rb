@@ -55,10 +55,10 @@ module OpenSearch
           define_method name do |*args|
             @hash[name] = args.pop
           end
+        end
 
-          define_method name.to_s.gsub(/^_(.*)/, '\1') do |*args|
-            @hash[name] = args.pop
-          end
+        def source(*args)
+          @hash[:_source] = args.pop
         end
 
         # Returns true when there are no search options defined

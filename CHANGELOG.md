@@ -10,6 +10,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 - Don't emit Ruby warnings when requiring `opensearch-dsl` ([#231](https://github.com/opensearch-project/opensearch-ruby/issues/231))
 - Fix release workflow ([#232](https://github.com/opensearch-project/opensearch-ruby/issues/232))
+- Remove duplicated `delete_by_query_rethrottle` to prevent a Ruby warning ([#230](https://github.com/opensearch-project/opensearch-ruby/issues/230))
 ### Security
 
 ## [3.2.0]

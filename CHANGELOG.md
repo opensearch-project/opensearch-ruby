@@ -3,14 +3,10 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
-- Pass in an initial admin password, required by security after 2.12.0 release ([#217](https://github.com/opensearch-project/opensearch-ruby/issues/217))
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
-- Don't emit Ruby warnings when requiring `opensearch-dsl` ([#231](https://github.com/opensearch-project/opensearch-ruby/issues/231))
-- Fix release workflow ([#232](https://github.com/opensearch-project/opensearch-ruby/issues/232))
-- Remove duplicated `delete_by_query_rethrottle` to prevent a Ruby warning ([#230](https://github.com/opensearch-project/opensearch-ruby/issues/230))
 ### Security
 
 ## [3.2.0]
@@ -18,12 +14,17 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added support for Ruby 3.3 ([#220](https://github.com/opensearch-project/opensearch-ruby/pull/220))
 - Added `search_pipeline` parameter to `search` API ([#227](https://github.com/opensearch-project/opensearch-ruby/pull/227))
 ### Changed
+- Pass in an initial admin password, required by security after 2.12.0 release ([#217](https://github.com/opensearch-project/opensearch-ruby/issues/217))
 ### Deprecated
 ### Removed
 - Removed dependency on the base64 gem ([#221](https://github.com/opensearch-project/opensearch-ruby/pull/221))
 - Removed logging of hosts in `transport` base ([#227](https://github.com/opensearch-project/opensearch-ruby/pull/227))
+- Remove duplicated `delete_by_query_rethrottle` to prevent a Ruby warning ([#230](https://github.com/opensearch-project/opensearch-ruby/issues/230))
+
 ### Fixed
 - Switch back to the latest OpenSearch version when testing in CI ([#219](https://github.com/opensearch-project/opensearch-ruby/pull/219))
+- Don't emit Ruby warnings when requiring `opensearch-dsl` ([#231](https://github.com/opensearch-project/opensearch-ruby/issues/231))
+- Fix release workflow ([#232](https://github.com/opensearch-project/opensearch-ruby/issues/232))
 ### Security
 
 ## [3.1.0]

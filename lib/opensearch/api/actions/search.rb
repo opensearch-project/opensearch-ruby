@@ -101,6 +101,9 @@ module OpenSearch
                else
                  '_search'
                end
+
+        path = "#{path}?search_pipeline=#{arguments[:body].delete(:search_pipeline)}" unless arguments.dig(:body, :search_pipeline).nil?
+
         params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
 
         body = arguments[:body]

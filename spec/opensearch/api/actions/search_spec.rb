@@ -124,4 +124,21 @@ describe 'client#search' do
       end.to raise_exception(ArgumentError)
     end
   end
+
+  context 'when a search pipeline is specified' do
+    let(:body) do
+      {
+        query: { match: {} },
+        search_pipeline: 'my_pipeline'
+      }
+    end
+    let(:method) { 'POST' }
+    let(:url) do
+      '_search?search_pipeline=my_pipeline'
+    end
+
+    it 'performs the request' do
+      expect(client_double.search(body: body))
+    end
+  end
 end

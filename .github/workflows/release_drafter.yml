@@ -14,7 +14,7 @@ jobs:
       issues: write
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - id: get_approvers
         run: |
           echo "approvers=$(cat .github/CODEOWNERS | grep @ | tr -d '* ' | sed 's/@/,/g' | sed 's/,//1')" >> $GITHUB_OUTPUT
@@ -31,7 +31,7 @@ jobs:
         with:
           ruby-version: 3.1
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.GET_SECRET_IAM_ROLE }}
           aws-region: us-east-1
@@ -44,7 +44,7 @@ jobs:
           mkdir dist && mv opensearch-ruby-*.gem dist/
           tar -cvf artifacts.tar.gz dist
       - name: Draft a release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           draft: true
           generate_release_notes: true

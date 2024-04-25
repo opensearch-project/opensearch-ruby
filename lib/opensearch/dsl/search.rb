@@ -250,7 +250,7 @@ module OpenSearch
         end
 
         def respond_to_missing?(method_name, include_private = false)
-          @options.respond_to?(name) || super
+          @options.respond_to?(method_name) || super
         end
 
         # Converts the search definition to a Hash

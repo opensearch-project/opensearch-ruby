@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Fixed variable name in `OpenSearch::Client#respond_to_missing?` ([#247](https://github.com/opensearch-project/opensearch-ruby/pull/247))
 ### Security
 
 ## [3.2.0]

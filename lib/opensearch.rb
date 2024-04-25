@@ -49,7 +49,7 @@ module OpenSearch
     end
 
     def respond_to_missing?(method_name, include_private = false)
-      name == :perform_request || super
+      method_name == :perform_request || super
     end
 
     private

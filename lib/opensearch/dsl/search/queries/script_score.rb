@@ -38,9 +38,9 @@ module OpenSearch
         #           query do
         #             match content: 'Twitter'
         #           end
-        #           script {
-        #             source: "_score * doc['multiplier'].value"
-        #           }
+        #
+        #           script source: "_score * params['multiplier']"
+        #                  params: { multiplier: 2.0 }
         #         end
         #       end
         #     end

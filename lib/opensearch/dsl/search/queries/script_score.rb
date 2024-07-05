@@ -28,7 +28,7 @@ module OpenSearch
   module DSL
     module Search
       module Queries
-        # A query which wraps another query and returns a customize score for matching documents
+        # A query which wraps another query and returns a customized score for matching documents
         #
         # @example
         #
@@ -39,7 +39,7 @@ module OpenSearch
         #             match content: 'Twitter'
         #           end
         #
-        #           script source: "_score * params['multiplier']"
+        #           script source: "_score * params['multiplier']",
         #                  params: { multiplier: 2.0 }
         #         end
         #       end

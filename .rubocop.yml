@@ -5,7 +5,7 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 3.0
   NewCops: enable
   Exclude:
     - 'api_generator/**/*'
@@ -35,4 +35,7 @@ Layout/FirstArgumentIndentation:
   Enabled: false
 
 Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+Layout/LineLength:
   Enabled: false

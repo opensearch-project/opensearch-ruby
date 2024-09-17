@@ -36,9 +36,9 @@ require 'opensearch/dsl/search/sort'
 require 'opensearch/dsl/search/options'
 require 'opensearch/dsl/search/suggest'
 
-Dir[File.expand_path('dsl/search/queries/**/*.rb', __dir__)].sort.each        { |f| require f }
-Dir[File.expand_path('dsl/search/filters/**/*.rb', __dir__)].sort.each        { |f| require f }
-Dir[File.expand_path('dsl/search/aggregations/**/*.rb', __dir__)].sort.each   { |f| require f }
+Dir[File.expand_path('dsl/search/queries/**/*.rb', __dir__)].each        { |f| require f }
+Dir[File.expand_path('dsl/search/filters/**/*.rb', __dir__)].each        { |f| require f }
+Dir[File.expand_path('dsl/search/aggregations/**/*.rb', __dir__)].each   { |f| require f }
 
 require 'opensearch/dsl/search'
 

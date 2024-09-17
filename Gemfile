@@ -28,6 +28,7 @@ source 'https://rubygems.org'
 
 gem 'opensearch-ruby', path: __dir__, require: false
 
+gem 'activesupport'
 gem 'ansi'
 gem 'bundler'
 gem 'cane'

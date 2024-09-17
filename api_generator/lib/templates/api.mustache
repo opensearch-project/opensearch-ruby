@@ -1,0 +1,24 @@
+{{{license_header}}}
+{{{generated_code_warning}}}
+
+# frozen_string_literal: true
+
+module OpenSearch
+  module API
+    GLOBAL_QUERY_PARAMS = Set.new([
+    {{#global_query_params}}
+      '{{name}}'{{comma}}{{space}}# {{{description}}}
+    {{/global_query_params}}
+    ]).freeze
+
+    DEFAULT_SERIALIZER = MultiJson
+
+    def self.serializer
+      settings[:serializer] || DEFAULT_SERIALIZER
+    end
+
+    def self.settings
+      @settings ||= {}
+    end
+  end
+end

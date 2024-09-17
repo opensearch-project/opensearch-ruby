@@ -8,7 +8,7 @@ coverage
 docs/
 rdoc/
 tmp
-Gemfile.lock
+/Gemfile.lock
 .DS_Store
 *.log
 .idea/*
@@ -16,5 +16,5 @@ profile/**/data/*.json
 .byebug_history
 dist/
 gem-private_key.pem
-.ruby-version
+/.ruby-version
 */.idea/**

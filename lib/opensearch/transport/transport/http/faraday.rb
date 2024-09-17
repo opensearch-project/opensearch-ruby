@@ -24,6 +24,8 @@
 # specific language governing permissions and limitations
 # under the License.
 
+require 'opensearch/version'
+
 module OpenSearch
   module Transport
     module Transport
@@ -91,7 +93,7 @@ module OpenSearch
                 meta << "#{RbConfig::CONFIG['host_os'].split('_').first[/[a-z]+/i].downcase} #{RbConfig::CONFIG['target_cpu']}"
               end
               meta << client.headers[USER_AGENT_STR].to_s
-              "opensearch-ruby/#{VERSION} (#{meta.join('; ')})"
+              "opensearch-ruby/#{OpenSearch::VERSION} (#{meta.join('; ')})"
             end
           end
         end

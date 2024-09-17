@@ -4,8 +4,8 @@
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
 
-# This code was generated from OpenSearch API Spec.
-# Update the code generation logic instead of modifying this file directly.
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
 
 # frozen_string_literal: true
 
@@ -13,28 +13,24 @@ module OpenSearch
   module API
     module Security
       module Actions
-        CREATE_TENANT_QUERY_PARAMS = Set.new(%i[
-        ]).freeze
-
         # Creates or replaces the specified tenant.
         #
-        # @option arguments [String] :tenant *Required*
-        # @option arguments [Hash] :body
-        #
-        # {API Reference}[https://opensearch.org/docs/2.7/security/access-control/api/#create-tenant]
-        def create_tenant(arguments = {})
-          raise ArgumentError, "Required argument 'tenant' missing" unless arguments[:tenant]
+        # @option args [String] :tenant *Required* The name of the tenant to be created.
+        # @option args [Hash] :body *Required*
+        def create_tenant(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'tenant' missing" if args['tenant'].nil?
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
 
-          arguments = arguments.clone
-          _tenant = arguments.delete(:tenant)
+          _tenant = args.delete('tenant')
 
-          headers = arguments.delete(:headers) || {}
-          body    = arguments.delete(:body)
-          url     = Utils.__pathify '_plugins', '_security', 'api', 'tenants', _tenant
-          method  = OpenSearch::API::HTTP_PUT
-          params  = Utils.__validate_and_extract_params arguments, CREATE_TENANT_QUERY_PARAMS
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'PUT'
+          url     = Utils.build_url('_plugins/_security/api/tenants', _tenant)
 
-          perform_request(method, url, params, body, headers).body
+          Utils.validate_query_params! args
+          transport.perform_request(method, url, args, body, headers).body
         end
       end
     end

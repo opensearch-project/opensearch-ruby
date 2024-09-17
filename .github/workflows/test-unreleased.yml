@@ -14,6 +14,9 @@ on:
 
 jobs:
   test:
+    env:
+      TEST_OPENSEARCH_SERVER: http://localhost:9200
+      PORT: 9200
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -98,7 +101,7 @@ jobs:
           bundle install
         working-directory: ruby-client
 
-      - name: opensearch-ruby
+      - name: Perform Integration Tests
         working-directory: ruby-client
         run: rake test:integration
 

@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,33 +15,25 @@ module OpenSearch
       module Actions
         # Updates the cluster voting config exclusions by node ids or node names.
         #
-        # @option arguments [String] :node_ids A comma-separated list of the persistent ids of the nodes to exclude from the voting configuration. If specified, you may not also specify ?node_names.
-        # @option arguments [String] :node_names A comma-separated list of the names of the nodes to exclude from the voting configuration. If specified, you may not also specify ?node_ids.
-        # @option arguments [Time] :timeout Explicit operation timeout
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def post_voting_config_exclusions(arguments = {})
-          headers = arguments.delete(:headers) || {}
+        # @option args [Enumerable<String>, String] :node_ids A comma-separated list of the persistent ids of the nodes to exclude from the voting configuration. If specified, you may not also specify `node_names`.
+        # @option args [Enumerable<String>, String] :node_names A comma-separated list of the names of the nodes to exclude from the voting configuration. If specified, you may not also specify `node_ids`.
+        # @option args [String] :timeout When adding a voting configuration exclusion, the API waits for the specified nodes to be excluded from the voting configuration before returning. If the timeout expires before the appropriate condition is satisfied, the request fails and returns an error.
+        def post_voting_config_exclusions(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'POST'
+          url     = '_cluster/voting_config_exclusions'
 
-          arguments = arguments.clone
-
-          method = OpenSearch::API::HTTP_POST
-          path   = '_cluster/voting_config_exclusions'
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, POST_VOTING_CONFIG_EXCLUSIONS_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:post_voting_config_exclusions, %i[
+        POST_VOTING_CONFIG_EXCLUSIONS_QUERY_PARAMS = Set.new(%w[
           node_ids
           node_names
           timeout
-        ].freeze)
+        ]).freeze
       end
     end
   end

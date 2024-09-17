@@ -3,28 +3,32 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Deletes one or several PITs.
-      #
-      # @option arguments [Hash] body: Must include `pit_id`, which is an array of PIT IDs to be deleted. (required)
-      def delete_pit(arguments = {})
-        raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
+    module Root
+      module Actions
+        # Deletes one or more point in time searches based on the IDs passed.
+        #
+        # @option args [Hash] :body The point-in-time ids to be deleted
+        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
+        def delete_pit(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          ignore  = args.delete('ignore') || []
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'DELETE'
+          url     = '_search/point_in_time'
 
-        method = OpenSearch::API::HTTP_DELETE
-        path = '_search/point_in_time'
-        params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-        body = arguments[:body]
-
-        perform_request(method, path, params, body).body
+          Utils.validate_query_params! args
+          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
+        end
       end
-
-      ParamsRegistry.register(:delete_pit, [].freeze)
     end
   end
 end

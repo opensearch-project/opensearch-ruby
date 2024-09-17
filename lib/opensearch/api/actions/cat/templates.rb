@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,50 +15,38 @@ module OpenSearch
       module Actions
         # Returns information about existing templates.
         #
-        # @option arguments [String] :name A pattern that returned template names must match
-        # @option arguments [String] :format a short version of the Accept header, e.g. json, yaml
-        # @option arguments [Boolean] :local Return local information, do not retrieve the state from cluster_manager node (default: false)
-        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
-        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
-        # @option arguments [List] :h Comma-separated list of column names to display
-        # @option arguments [Boolean] :help Return help information
-        # @option arguments [List] :s Comma-separated list of column names or column aliases to sort by
-        # @option arguments [Boolean] :v Verbose mode. Display column headers
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def templates(arguments = {})
-          headers = arguments.delete(:headers) || {}
+        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
+        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
+        # @option args [Boolean] :help Return help information.
+        # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.
+        # @option args [String] :master_timeout DEPRECATED Operation timeout for connection to cluster-manager node.
+        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
+        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [String] :name The name of the template to return. Accepts wildcard expressions. If omitted, all templates are returned.
+        def templates(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          _name = args.delete('name')
 
-          arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'GET'
+          url     = Utils.build_url('_cat/templates', _name)
 
-          _name = arguments.delete(:name)
-
-          method = OpenSearch::API::HTTP_GET
-          path   = if _name
-                     "_cat/templates/#{Utils.__listify(_name)}"
-                   else
-                     '_cat/templates'
-                   end
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, TEMPLATES_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:templates, %i[
-          format
-          local
-          master_timeout
+        TEMPLATES_QUERY_PARAMS = Set.new(%w[
           cluster_manager_timeout
+          format
           h
           help
+          local
+          master_timeout
           s
           v
-        ].freeze)
+        ]).freeze
       end
     end
   end

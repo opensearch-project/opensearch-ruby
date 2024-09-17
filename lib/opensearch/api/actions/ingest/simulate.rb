@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,39 +15,27 @@ module OpenSearch
       module Actions
         # Allows to simulate a pipeline with example documents.
         #
-        # @option arguments [String] :id Pipeline ID
-        # @option arguments [Boolean] :verbose Verbose mode. Display data output for each processor in executed pipeline
-        # @option arguments [Hash] :headers Custom HTTP headers
-        # @option arguments [Hash] :body The simulate definition (*Required*)
-        #
-        #
-        def simulate(arguments = {})
-          raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
+        # @option args [Boolean] :verbose If `true`, the response includes output data for each processor in the executed pipeline.
+        # @option args [String] :id Pipeline to test. If you don't specify a `pipeline` in the request body, this parameter is required.
+        # @option args [Hash] :body *Required* The simulate definition
+        def simulate(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
 
-          headers = arguments.delete(:headers) || {}
+          _id = args.delete('id')
 
-          arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = body ? 'POST' : 'GET'
+          url     = Utils.build_url('_ingest/pipeline', _id, '_simulate')
 
-          _id = arguments.delete(:id)
-
-          method = OpenSearch::API::HTTP_POST
-          path   = if _id
-                     "_ingest/pipeline/#{Utils.__listify(_id)}/_simulate"
-                   else
-                     '_ingest/pipeline/_simulate'
-                   end
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = arguments[:body]
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, SIMULATE_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:simulate, [
-          :verbose
-        ].freeze)
+        SIMULATE_QUERY_PARAMS = Set.new(%w[
+          verbose
+        ]).freeze
       end
     end
   end

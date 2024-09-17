@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,52 +15,41 @@ module OpenSearch
       module Actions
         # Returns basic statistics about performance of cluster nodes.
         #
-        # @option arguments [String] :bytes The unit in which to display byte values (options: b, k, kb, m, mb, g, gb, t, tb, p, pb)
-        # @option arguments [String] :format a short version of the Accept header, e.g. json, yaml
-        # @option arguments [Boolean] :full_id Return the full node ID instead of the shortened version (default: false)
-        # @option arguments [Boolean] :local Calculate the selected nodes using the local cluster state rather than the state from cluster_manager node (default: false) *Deprecated*
-        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
-        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
-        # @option arguments [List] :h Comma-separated list of column names to display
-        # @option arguments [Boolean] :help Return help information
-        # @option arguments [List] :s Comma-separated list of column names or column aliases to sort by
-        # @option arguments [String] :time The unit in which to display time values (options: d, h, m, s, ms, micros, nanos)
-        # @option arguments [Boolean] :v Verbose mode. Display column headers
-        # @option arguments [Boolean] :include_unloaded_segments If set to true segment stats will include stats for segments that are not currently loaded into memory
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def nodes(arguments = {})
-          headers = arguments.delete(:headers) || {}
+        # @option args [String] :bytes The unit used to display byte values.
+        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
+        # @option args [Boolean, String] :full_id If `true`, return the full node ID. If `false`, return the shortened node ID.
+        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
+        # @option args [Boolean] :help Return help information.
+        # @option args [Boolean] :local DEPRECATED Return local information, do not retrieve the state from cluster-manager node.
+        # @option args [String] :master_timeout DEPRECATED Operation timeout for connection to cluster-manager node.
+        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
+        # @option args [String] :time The unit in which to display time values.
+        # @option args [Boolean] :v Verbose mode. Display column headers.
+        def nodes(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'GET'
+          url     = '_cat/nodes'
 
-          arguments = arguments.clone
-
-          method = OpenSearch::API::HTTP_GET
-          path   = '_cat/nodes'
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-          params[:h] = Utils.__listify(params[:h], escape: false) if params[:h]
-
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, NODES_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:nodes, %i[
+        NODES_QUERY_PARAMS = Set.new(%w[
           bytes
+          cluster_manager_timeout
           format
           full_id
-          local
-          master_timeout
-          cluster_manager_timeout
           h
           help
+          local
+          master_timeout
           s
           time
           v
-          include_unloaded_segments
-        ].freeze)
+        ]).freeze
       end
     end
   end

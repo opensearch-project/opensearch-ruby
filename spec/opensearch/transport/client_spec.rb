@@ -26,6 +26,7 @@
 
 require_relative '../../spec_helper'
 require 'opensearch'
+require 'ostruct'
 
 describe OpenSearch::Transport::Client do
   let(:client) do

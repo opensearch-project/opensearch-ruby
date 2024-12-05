@@ -21,7 +21,6 @@ jobs:
         entry:
           - { ruby_version: '3.3', opensearch_ref: '1.x' }
           - { ruby_version: '3.3', opensearch_ref: '2.x' }
-          - { ruby_version: '3.3', opensearch_ref: '2.0' }
           - { ruby_version: '3.3', opensearch_ref: 'main' }
 
     steps:
@@ -50,7 +49,10 @@ jobs:
       - name: Assemble OpenSearch
         if: steps.cache-restore.outputs.cache-hit != 'true'
         working-directory: opensearch
-        run: ./gradlew :distribution:archives:linux-tar:assemble
+        run: |
+          export GRADLE_VERSION=8.11.1
+          ./gradlew :distribution:archives:linux-tar:assemble
+        
 
       - name: Save cached build
         if: steps.cache-restore.outputs.cache-hit != 'true'

@@ -29,6 +29,7 @@ if ENV.fetch('COVERAGE', nil) && ENV['CI'].nil?
   SimpleCov.start { add_filter %r{^/test|spec/} }
 end
 
+require 'active_support'
 require 'ansi'
 require 'opensearch'
 require 'opensearch-dsl'
@@ -58,7 +59,7 @@ tracer.formatter = ->(_s, _d, _p, m) { "#{m.gsub(/^.*$/) { |n| '   ' + n }.ansi(
 unless defined?(OPENSEARCH_URL)
   OPENSEARCH_URL = ENV.fetch('OPENSEARCH_URL', nil) ||
                    ENV.fetch('TEST_OPENSEARCH_SERVER', nil) ||
-                   "http://localhost:#{ENV.fetch('TEST_CLUSTER_PORT', nil) || 9200}"
+                   "https://admin:myStrongPassword123!@localhost:#{ENV.fetch('TEST_CLUSTER_PORT', nil) || 9200}"
 end
 
 DEFAULT_CLIENT = OpenSearch::Client.new(host: OPENSEARCH_URL,
@@ -83,7 +84,7 @@ end
 # The names of the connected nodes.
 # @return [ Array<String> ] The node names.
 def node_names
-  node_stats = default_client.perform_request('GET', '_nodes/stats').body
+  node_stats = default_client.transport.perform_request('GET', '_nodes/stats').body
   $node_names ||= node_stats['nodes'].collect do |name, stats|
     stats['name']
   end
@@ -99,22 +100,6 @@ class NotFound < StandardError; end
 
 module HelperModule
   def self.included(context)
-    context.let(:client_double) do
-      Class.new { include OpenSearch::API }.new.tap do |client|
-        expect(client).to receive(:perform_request).with(*expected_args).and_return(response_double)
-      end
-    end
-
-    context.let(:client) do
-      Class.new { include OpenSearch::API }.new.tap do |client|
-        expect(client).to receive(:perform_request).with(*expected_args).and_return(response_double)
-      end
-    end
-
-    context.let(:response_double) do
-      double('response', status: 200, body: {}, headers: {})
-    end
-
     context.let(:hosts) { OPENSEARCH_HOSTS }
   end
 end

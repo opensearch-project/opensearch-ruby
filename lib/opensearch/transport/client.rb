@@ -180,7 +180,6 @@ module OpenSearch
       end
 
       # Performs a request through delegation to {#transport}.
-      #
       def perform_request(method, path, params = {}, body = nil, headers = nil)
         method = @send_get_body_as if method == 'GET' && body
         if (opaque_id = params.delete(:opaque_id))
@@ -189,6 +188,32 @@ module OpenSearch
           headers.merge!('X-Opaque-Id' => opaque_id)
         end
         transport.perform_request(method, path, params, body, headers)
+      end
+
+      def perform_ping_request(*args)
+        perform_request(*args).status == 200
+      rescue StandardError => e
+        return false if e.class.to_s =~ /NotFound|ConnectionFailed/
+        return false if e.message =~ /Not *Found|404|ConnectionFailed/i
+        raise e
+      end
+
+      def perform_head_request(*args)
+        perform_request(*args).status == 200
+      rescue StandardError => e
+        return false if e.class.to_s =~ /NotFound/
+        return false if e.message =~ /Not\s*Found/i
+        raise e
+      end
+
+      def perform_delete_request(*args, ignore404)
+        perform_request(*args).body
+      rescue StandardError => e
+        if ignore404
+          return false if e.class.to_s =~ /NotFound/
+          return false if e.message =~ /Not\s*Found/i
+        end
+        raise e
       end
 
       private

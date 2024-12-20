@@ -3,106 +3,62 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Returns information and statistics about terms in the fields of a particular document.
-      #
-      # @option arguments [String] :index The index in which the document resides. (*Required*)
-      # @option arguments [String] :id The id of the document, when not specified a doc param should be supplied.
-      # @option arguments [Boolean] :term_statistics Specifies if total term frequency and document frequency should be returned.
-      # @option arguments [Boolean] :field_statistics Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.
-      # @option arguments [List] :fields A comma-separated list of fields to return.
-      # @option arguments [Boolean] :offsets Specifies if term offsets should be returned.
-      # @option arguments [Boolean] :positions Specifies if term positions should be returned.
-      # @option arguments [Boolean] :payloads Specifies if term payloads should be returned.
-      # @option arguments [String] :preference Specify the node or shard the operation should be performed on (default: random).
-      # @option arguments [String] :routing Specific routing value.
-      # @option arguments [Boolean] :realtime Specifies if request is real-time as opposed to near-real-time (default: true).
-      # @option arguments [Number] :version Explicit version number for concurrency control
-      # @option arguments [String] :version_type Specific version type (options: internal, external, external_gte, force)
-      # @option arguments [Hash] :headers Custom HTTP headers
-      # @option arguments [Hash] :body Define parameters and or supply a document to get termvectors for. See documentation.
-      #
-      # *Deprecation notice*:
-      # Specifying types in urls has been deprecated
-      # Deprecated since version 7.0.0
-      #
-      #
-      #
-      def termvectors(arguments = {})
-        raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
+    module Root
+      module Actions
+        # Returns information and statistics about terms in the fields of a particular document.
+        #
+        # @option args [String] :index *Required* Name of the index that contains the document.
+        # @option args [Boolean] :field_statistics (default: true) If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
+        # @option args [Enumerable<String>, String] :fields Comma-separated list or wildcard expressions of fields to include in the statistics. Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.
+        # @option args [Boolean] :offsets (default: true) If `true`, the response includes term offsets.
+        # @option args [Boolean] :payloads (default: true) If `true`, the response includes term payloads.
+        # @option args [Boolean] :positions (default: true) If `true`, the response includes term positions.
+        # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
+        # @option args [Boolean] :realtime (default: true) If `true`, the request is real-time as opposed to near-real-time.
+        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Boolean] :term_statistics If `true`, the response includes term frequency and document frequency.
+        # @option args [Integer] :version If `true`, returns the document version as part of a hit.
+        # @option args [String] :version_type Specific version type.
+        # @option args [String] :id Unique identifier of the document.
+        # @option args [Hash] :body Define parameters and or supply a document to get termvectors for. See documentation.
+        def termvectors(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?
 
-        headers = arguments.delete(:headers) || {}
+          _index = args.delete('index')
+          _id = args.delete('id')
 
-        arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = body ? 'POST' : 'GET'
+          url     = Utils.build_url(_index, '_termvectors', _id)
 
-        _index = arguments.delete(:index)
+          Utils.validate_query_params! args, TERMVECTORS_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
+        end
 
-        _id = arguments.delete(:id)
-
-        method = if arguments[:body]
-                   OpenSearch::API::HTTP_POST
-                 else
-                   OpenSearch::API::HTTP_GET
-                 end
-
-        endpoint = arguments.delete(:endpoint) || '_termvectors'
-        path = if _index && _id
-                 "#{Utils.__listify(_index)}/#{endpoint}/#{Utils.__listify(_id)}"
-               else
-                 "#{Utils.__listify(_index)}/#{endpoint}"
-               end
-
-        params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-        body = arguments[:body]
-        perform_request(method, path, params, body, headers).body
+        TERMVECTORS_QUERY_PARAMS = Set.new(%w[
+          field_statistics
+          fields
+          offsets
+          payloads
+          positions
+          preference
+          realtime
+          routing
+          term_statistics
+          version
+          version_type
+        ]).freeze
       end
-
-      # Deprecated: Use the plural version, {#termvectors}
-      #
-      def termvector(arguments = {})
-        termvectors(arguments.merge(endpoint: '_termvector'))
-      end
-
-      # Register this action with its valid params when the module is loaded.
-      #
-      # @since 6.2.0
-      ParamsRegistry.register(:termvectors, %i[
-        term_statistics
-        field_statistics
-        fields
-        offsets
-        positions
-        payloads
-        preference
-        routing
-        realtime
-        version
-        version_type
-      ].freeze)
     end
   end
 end

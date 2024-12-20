@@ -3,87 +3,48 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Allows to execute several search template operations in one request.
-      #
-      # @option arguments [List] :index A comma-separated list of index names to use as default
-      # @option arguments [String] :search_type Search operation type (options: query_then_fetch, dfs_query_then_fetch)
-      # @option arguments [Boolean] :typed_keys Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-      # @option arguments [Number] :max_concurrent_searches Controls the maximum number of concurrent searches the multi search api will execute
-      # @option arguments [Boolean] :rest_total_hits_as_int Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-      # @option arguments [Boolean] :ccs_minimize_roundtrips Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
-      # @option arguments [Hash] :headers Custom HTTP headers
-      # @option arguments [Hash] :body The request definitions (metadata-search request definition pairs), separated by newlines (*Required*)
-      #
-      # *Deprecation notice*:
-      # Specifying types in urls has been deprecated
-      # Deprecated since version 7.0.0
-      #
-      #
-      #
-      def msearch_template(arguments = {})
-        raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
+    module Root
+      module Actions
+        # Allows to execute several search template operations in one request.
+        #
+        # @option args [Boolean] :ccs_minimize_roundtrips (default: true) If `true`, network round-trips are minimized for cross-cluster search requests.
+        # @option args [Integer] :max_concurrent_searches Maximum number of concurrent searches the API can run.
+        # @option args [Boolean] :rest_total_hits_as_int If `true`, the response returns `hits.total` as an integer. If `false`, it returns `hits.total` as an object.
+        # @option args [String] :search_type The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`.
+        # @option args [Boolean] :typed_keys If `true`, the response prefixes aggregation and suggester names with their respective types.
+        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*`.
+        # @option args [Enumerable<Hash>] :body *Required* The request definitions (metadata-search request definition pairs), separated by newlines
+        def msearch_template(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
 
-        headers = arguments.delete(:headers) || {}
+          _index = args.delete('index')
 
-        arguments = arguments.clone
+          headers = (args.delete('headers') || {}).merge('Content-Type' => 'application/x-ndjson')
+          body    = Utils.bulkify(args.delete('body'))
+          method  = body ? 'POST' : 'GET'
+          url     = Utils.build_url(_index, '_msearch/template')
 
-        _index = arguments.delete(:index)
-
-        method = OpenSearch::API::HTTP_POST
-        path   = if _index
-                   "#{Utils.__listify(_index)}/_msearch/template"
-                 else
-                   '_msearch/template'
-                 end
-        params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-        body = arguments[:body]
-        if body.is_a?(Array)
-          payload = body.map { |d| d.is_a?(String) ? d : OpenSearch::API.serializer.dump(d) }
-          payload << '' unless payload.empty?
-          payload = payload.join("\n")
-        else
-          payload = body
+          Utils.validate_query_params! args, MSEARCH_TEMPLATE_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        headers.merge!('Content-Type' => 'application/x-ndjson')
-        perform_request(method, path, params, payload, headers).body
+        MSEARCH_TEMPLATE_QUERY_PARAMS = Set.new(%w[
+          ccs_minimize_roundtrips
+          max_concurrent_searches
+          rest_total_hits_as_int
+          search_type
+          typed_keys
+        ]).freeze
       end
-
-      # Register this action with its valid params when the module is loaded.
-      #
-      # @since 6.2.0
-      ParamsRegistry.register(:msearch_template, %i[
-        search_type
-        typed_keys
-        max_concurrent_searches
-        rest_total_hits_as_int
-        ccs_minimize_roundtrips
-      ].freeze)
     end
   end
 end

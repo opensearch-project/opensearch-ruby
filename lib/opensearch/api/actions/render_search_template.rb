@@ -3,59 +3,32 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Allows to use the Mustache language to pre-render a search definition.
-      #
-      # @option arguments [String] :id The id of the stored search template
-      # @option arguments [Hash] :headers Custom HTTP headers
-      # @option arguments [Hash] :body The search definition template and its params
-      #
-      #
-      def render_search_template(arguments = {})
-        headers = arguments.delete(:headers) || {}
+    module Root
+      module Actions
+        # Allows to use the Mustache language to pre-render a search definition.
+        #
+        # @option args [String] :id ID of the search template to render. If no `source` is specified, this or the `id` request body parameter is required.
+        # @option args [Hash] :body The search definition template and its parameters.
+        def render_search_template(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          _id = args.delete('id')
 
-        arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = body ? 'POST' : 'GET'
+          url     = Utils.build_url('_render/template', _id)
 
-        _id = arguments.delete(:id)
-
-        method = if arguments[:body]
-                   OpenSearch::API::HTTP_POST
-                 else
-                   OpenSearch::API::HTTP_GET
-                 end
-
-        path = if _id
-                 "_render/template/#{Utils.__listify(_id)}"
-               else
-                 '_render/template'
-               end
-        params = {}
-
-        body = arguments[:body]
-        perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args
+          transport.perform_request(method, url, args, body, headers).body
+        end
       end
     end
   end

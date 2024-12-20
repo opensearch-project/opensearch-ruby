@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,48 +15,39 @@ module OpenSearch
       module Actions
         # Adds a block to an index.
         #
-        # @option arguments [List] :index A comma separated list of indices to add a block to
-        # @option arguments [String] :block The block to add (one of read, write, read_only or metadata)
-        # @option arguments [Time] :timeout Explicit operation timeout
-        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
-        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
-        # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
-        # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
-        # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def add_block(arguments = {})
-          raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
-          raise ArgumentError, "Required argument 'block' missing" unless arguments[:block]
+        # @option args [String] :block *Required* The block to add (one of `read`, `write`, `read_only` or `metadata`).
+        # @option args [Enumerable<String>, String] :index *Required* A comma separated list of indexes to add a block to.
+        # @option args [Boolean] :allow_no_indices Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
+        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+        # @option args [Boolean] :ignore_unavailable Whether specified concrete indexes should be ignored when unavailable (missing or closed).
+        # @option args [String] :master_timeout DEPRECATED Specify timeout for connection to cluster manager.
+        # @option args [String] :timeout Explicit operation timeout
+        def add_block(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'block' missing" if args['block'].nil?
+          raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?
 
-          headers = arguments.delete(:headers) || {}
+          _block = args.delete('block')
+          _index = args.delete('index')
 
-          arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'PUT'
+          url     = Utils.build_url(_index, '_block', _block)
 
-          _index = arguments.delete(:index)
-
-          _block = arguments.delete(:block)
-
-          method = OpenSearch::API::HTTP_PUT
-          path   = "#{Utils.__listify(_index)}/_block/#{Utils.__listify(_block)}"
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, ADD_BLOCK_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:add_block, %i[
-          timeout
-          master_timeout
-          cluster_manager_timeout
-          ignore_unavailable
+        ADD_BLOCK_QUERY_PARAMS = Set.new(%w[
           allow_no_indices
+          cluster_manager_timeout
           expand_wildcards
-        ].freeze)
+          ignore_unavailable
+          master_timeout
+          timeout
+        ]).freeze
       end
     end
   end

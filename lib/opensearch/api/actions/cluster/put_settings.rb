@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,38 +15,30 @@ module OpenSearch
       module Actions
         # Updates the cluster settings.
         #
-        # @option arguments [Boolean] :flat_settings Return settings in flat format (default: false)
-        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Explicit operation timeout for connection to master node
-        # @option arguments [Time] :cluster_manager_timeout Explicit operation timeout for connection to cluster_manager node
-        # @option arguments [Time] :timeout Explicit operation timeout
-        # @option arguments [Hash] :headers Custom HTTP headers
-        # @option arguments [Hash] :body The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart). (*Required*)
-        #
-        #
-        def put_settings(arguments = {})
-          raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
+        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [Boolean] :flat_settings Return settings in flat format.
+        # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
+        # @option args [String] :timeout Explicit operation timeout
+        # @option args [Hash] :body *Required* The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).
+        def put_settings(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
 
-          headers = arguments.delete(:headers) || {}
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'PUT'
+          url     = '_cluster/settings'
 
-          arguments = arguments.clone
-
-          method = OpenSearch::API::HTTP_PUT
-          path   = '_cluster/settings'
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = arguments[:body] || {}
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, PUT_SETTINGS_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:put_settings, %i[
+        PUT_SETTINGS_QUERY_PARAMS = Set.new(%w[
+          cluster_manager_timeout
           flat_settings
           master_timeout
-          cluster_manager_timeout
           timeout
-        ].freeze)
+        ]).freeze
       end
     end
   end

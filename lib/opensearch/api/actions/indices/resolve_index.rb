@@ -3,65 +3,38 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
     module Indices
       module Actions
-        # Returns information about any matching indices, aliases, and data streams
-        # This functionality is Experimental and may be changed or removed
-        # completely in a future release. OpenSearch will take a best effort approach
-        # to fix any issues, but experimental features are not subject to the
-        # support SLA of official GA features.
+        # Returns information about any matching indexes, aliases, and data streams.
         #
-        # @option arguments [List] :name A comma-separated list of names or wildcard expressions
-        # @option arguments [String] :expand_wildcards Whether wildcard expressions should get expanded to open or closed indices (default: open) (options: open, closed, hidden, none, all)
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def resolve_index(arguments = {})
-          raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
+        # @option args [Enumerable<String>, String] :name *Required* Comma-separated name(s) or index pattern(s) of the indexes, aliases, and data streams to resolve. Resources on remote clusters can be specified using the `<cluster>`:`<name>` syntax.
+        # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+        def resolve_index(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'name' missing" if args['name'].nil?
 
-          headers = arguments.delete(:headers) || {}
+          _name = args.delete('name')
 
-          arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'GET'
+          url     = Utils.build_url('_resolve/index', _name)
 
-          _name = arguments.delete(:name)
-
-          method = OpenSearch::API::HTTP_GET
-          path   = "_resolve/index/#{Utils.__listify(_name)}"
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, RESOLVE_INDEX_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:resolve_index, [
-          :expand_wildcards
-        ].freeze)
+        RESOLVE_INDEX_QUERY_PARAMS = Set.new(%w[
+          expand_wildcards
+        ]).freeze
       end
     end
   end

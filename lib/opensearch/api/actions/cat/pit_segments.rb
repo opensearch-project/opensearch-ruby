@@ -3,45 +3,44 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
     module Cat
       module Actions
-        # Retrieves info of certain PIT segments
+        # List segments for one or several PITs.
         #
-        # @option arguments [Hash] body: Must include `pit_id`, which is an array of PIT IDs. (required)
-        # @option arguments [String] :format a short version of the Accept header, e.g. json, yaml
-        # @option arguments [List] :h Comma-separated list of column names to display
-        # @option arguments [Boolean] :help Return help information
-        # @option arguments [List] :s Comma-separated list of column names or column aliases to sort by
-        # @option arguments [Boolean] :v Verbose mode. Display column headers
-        # @option arguments [Hash] :headers Custom HTTP headers
-        def pit_segments(arguments = {})
-          raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
+        # @option args [String] :bytes The unit in which to display byte values.
+        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
+        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
+        # @option args [Boolean] :help Return help information.
+        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
+        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [Hash] :body
+        def pit_segments(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'GET'
+          url     = '_cat/pit_segments'
 
-          arguments = arguments.clone
-          headers = arguments.delete(:headers) || {}
-
-          method = OpenSearch::API::HTTP_GET
-          path   = '_cat/pit_segments'
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-          params[:h] = Utils.__listify(params[:h]) if params[:h]
-
-          body = arguments[:body]
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, PIT_SEGMENTS_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        ParamsRegistry.register(:pit_segments, %i[
+        PIT_SEGMENTS_QUERY_PARAMS = Set.new(%w[
+          bytes
           format
           h
           help
           s
           v
-        ].freeze)
+        ]).freeze
       end
     end
   end

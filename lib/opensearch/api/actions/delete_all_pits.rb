@@ -3,24 +3,31 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Deletes all PITs.
-      def delete_all_pits(arguments = {})
-        method = OpenSearch::API::HTTP_DELETE
-        path = '_search/point_in_time/_all'
-        params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-        body = nil
+    module Root
+      module Actions
+        # Deletes all active point in time searches.
+        #
+        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
+        def delete_all_pits(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          ignore  = args.delete('ignore') || []
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'DELETE'
+          url     = '_search/point_in_time/_all'
 
-        perform_request(method, path, params, body).body
+          Utils.validate_query_params! args
+          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
+        end
       end
-
-      ParamsRegistry.register(:delete_all_pits, [].freeze)
     end
   end
 end

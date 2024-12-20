@@ -1,0 +1,23 @@
+{{{license_header}}}
+{{{generated_code_warning}}}
+
+require 'opensearch/transport'
+require 'opensearch/api'
+Dir[File.expand_path('opensearch/api/**/*.rb', __dir__)].each { |f| require f }
+
+module OpenSearch
+  class Client
+    include OpenSearch::API::Root::Actions
+    attr_accessor :transport
+
+    def initialize(arguments = {}, &block)
+      @transport = OpenSearch::Transport::Client.new(arguments, &block)
+    end
+    {{#namespaces}}
+
+    def {{name}}
+      @{{{name}}} ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::{{module}}::Actions)
+    end
+    {{/namespaces}}
+  end
+end

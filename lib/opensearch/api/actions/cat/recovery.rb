@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,54 +15,40 @@ module OpenSearch
       module Actions
         # Returns information about index shard recoveries, both on-going completed.
         #
-        # @option arguments [List] :index Comma-separated list or wildcard expression of index names to limit the returned information
-        # @option arguments [String] :format a short version of the Accept header, e.g. json, yaml
-        # @option arguments [Boolean] :active_only If `true`, the response only includes ongoing shard recoveries
-        # @option arguments [String] :bytes The unit in which to display byte values (options: b, k, kb, m, mb, g, gb, t, tb, p, pb)
-        # @option arguments [Boolean] :detailed If `true`, the response includes detailed information about shard recoveries
-        # @option arguments [List] :h Comma-separated list of column names to display
-        # @option arguments [Boolean] :help Return help information
-        # @option arguments [List] :s Comma-separated list of column names or column aliases to sort by
-        # @option arguments [String] :time The unit in which to display time values (options: d, h, m, s, ms, micros, nanos)
-        # @option arguments [Boolean] :v Verbose mode. Display column headers
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def recovery(arguments = {})
-          headers = arguments.delete(:headers) || {}
+        # @option args [Boolean] :active_only If `true`, the response only includes ongoing shard recoveries.
+        # @option args [String] :bytes The unit used to display byte values.
+        # @option args [Boolean] :detailed If `true`, the response includes detailed information about shard recoveries.
+        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
+        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
+        # @option args [Boolean] :help Return help information.
+        # @option args [Enumerable<String>] :index Comma-separated list or wildcard expression of index names to limit the returned information.
+        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
+        # @option args [String] :time The unit in which to display time values.
+        # @option args [Boolean] :v Verbose mode. Display column headers.
+        def recovery(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          _index = args.delete('index')
 
-          arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'GET'
+          url     = Utils.build_url('_cat/recovery', _index)
 
-          _index = arguments.delete(:index)
-
-          method = OpenSearch::API::HTTP_GET
-          path   = if _index
-                     "_cat/recovery/#{Utils.__listify(_index)}"
-                   else
-                     '_cat/recovery'
-                   end
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-          params[:h] = Utils.__listify(params[:h]) if params[:h]
-
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, RECOVERY_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:recovery, %i[
-          format
+        RECOVERY_QUERY_PARAMS = Set.new(%w[
           active_only
           bytes
           detailed
+          format
           h
           help
-          index
           s
           time
           v
-        ].freeze)
+        ]).freeze
       end
     end
   end

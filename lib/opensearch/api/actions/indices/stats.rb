@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,70 +15,42 @@ module OpenSearch
       module Actions
         # Provides statistics on operations happening in an index.
         #
-        # @option arguments [List] :metric Limit the information returned the specific metrics. (options: _all, completion, docs, fielddata, query_cache, flush, get, indexing, merge, request_cache, refresh, search, segments, store, warmer, suggest)
-        # @option arguments [List] :index A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
-        # @option arguments [List] :completion_fields A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)
-        # @option arguments [List] :fielddata_fields A comma-separated list of fields for `fielddata` index metric (supports wildcards)
-        # @option arguments [List] :fields A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)
-        # @option arguments [List] :groups A comma-separated list of search groups for `search` index metric
-        # @option arguments [String] :level Return stats aggregated at cluster, index or shard level (options: cluster, indices, shards)
-        # @option arguments [List] :types A comma-separated list of document types for the `indexing` index metric
-        # @option arguments [Boolean] :include_segment_file_sizes Whether to report the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested)
-        # @option arguments [Boolean] :include_unloaded_segments If set to true segment stats will include stats for segments that are not currently loaded into memory
-        # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
-        # @option arguments [Boolean] :forbid_closed_indices If set to false stats will also collected from closed indices if explicitly specified or if expand_wildcards expands to closed indices
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def stats(arguments = {})
-          headers = arguments.delete(:headers) || {}
+        # @option args [Enumerable<String>, String] :completion_fields Comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
+        # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
+        # @option args [Enumerable<String>, String] :fielddata_fields Comma-separated list or wildcard expressions of fields to include in field data statistics.
+        # @option args [Enumerable<String>, String] :fields Comma-separated list or wildcard expressions of fields to include in the statistics.
+        # @option args [Boolean] :forbid_closed_indices (default: true) If `true`, statistics are not collected from closed indexes.
+        # @option args [Enumerable<String>, String] :groups Comma-separated list of search groups to include in the search statistics.
+        # @option args [Boolean] :include_segment_file_sizes If `true`, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+        # @option args [Boolean] :include_unloaded_segments If `true`, the response includes information from segments that are not loaded into memory.
+        # @option args [String] :level Indicates whether statistics are aggregated at the cluster, index, or shard level.
+        # @option args [Enumerable<String>, String] :metric Limit the information returned the specific metrics.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
+        def stats(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          _metric = args.delete('metric')
+          _index = args.delete('index')
 
-          method = HTTP_GET
-          parts  = Utils.__extract_parts arguments, ParamsRegistry.get(:stats_parts)
-          path   = Utils.__pathify Utils.__listify(arguments[:index]), '_stats', Utils.__listify(parts)
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(:stats_params)
-          params[:fields] = Utils.__listify(params[:fields], escape: false) if params[:fields]
-          params[:groups] = Utils.__listify(params[:groups], escape: false) if params[:groups]
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'GET'
+          url     = Utils.build_url(_index, '_stats', _metric)
 
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, STATS_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:stats_params, %i[
+        STATS_QUERY_PARAMS = Set.new(%w[
           completion_fields
+          expand_wildcards
           fielddata_fields
           fields
+          forbid_closed_indices
           groups
-          level
-          types
           include_segment_file_sizes
           include_unloaded_segments
-          expand_wildcards
-          forbid_closed_indices
-        ].freeze)
-
-        ParamsRegistry.register(:stats_parts, %i[
-          _all
-          completion
-          docs
-          fielddata
-          query_cache
-          flush
-          get
-          indexing
-          merge
-          request_cache
-          refresh
-          search
-          segments
-          store
-          warmer
-          suggest
-          metric
-        ].freeze)
+          level
+        ]).freeze
       end
     end
   end

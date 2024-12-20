@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# The OpenSearch Contributors require contributions made to
+# this file be licensed under the Apache-2.0 license or a
+# compatible open source license.
+
+# frozen_string_literal: true
+
+require 'rake'
+require 'active_support/all'
+
+task :download_spec do
+  sh 'curl -L -X GET "https://github.com/opensearch-project/opensearch-api-specification/releases/download/main-latest/opensearch-openapi.yaml" -o opensearch-openapi.yaml'
+end
+
+
+task :generate_api do
+  require './lib/generator'
+  generator = Generator.new('./opensearch-openapi.yaml', '../')
+  generator.generate
+end

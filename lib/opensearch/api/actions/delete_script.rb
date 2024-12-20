@@ -3,64 +3,45 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Deletes a script.
-      #
-      # @option arguments [String] :id Script ID
-      # @option arguments [Time] :timeout Explicit operation timeout
-      # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
-      # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
-      # @option arguments [Hash] :headers Custom HTTP headers
-      #
-      #
-      def delete_script(arguments = {})
-        raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]
+    module Root
+      module Actions
+        # Deletes a script.
+        #
+        # @option args [String] :id *Required* Identifier for the stored script or search template.
+        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
+        def delete_script(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?
 
-        headers = arguments.delete(:headers) || {}
+          _id = args.delete('id')
 
-        arguments = arguments.clone
+          ignore  = args.delete('ignore') || []
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'DELETE'
+          url     = Utils.build_url('_scripts', _id)
 
-        _id = arguments.delete(:id)
+          Utils.validate_query_params! args, DELETE_SCRIPT_QUERY_PARAMS
+          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
+        end
 
-        method = OpenSearch::API::HTTP_DELETE
-        path   = "_scripts/#{Utils.__listify(_id)}"
-        params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-        body = nil
-        perform_request(method, path, params, body, headers).body
+        DELETE_SCRIPT_QUERY_PARAMS = Set.new(%w[
+          cluster_manager_timeout
+          master_timeout
+          timeout
+        ]).freeze
       end
-
-      # Register this action with its valid params when the module is loaded.
-      #
-      # @since 6.2.0
-      ParamsRegistry.register(:delete_script, %i[
-        timeout
-        master_timeout
-        cluster_manager_timeout
-      ].freeze)
     end
   end
 end

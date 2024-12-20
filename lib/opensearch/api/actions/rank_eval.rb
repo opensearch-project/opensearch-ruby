@@ -3,75 +3,46 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Allows to evaluate the quality of ranked search results over a set of typical search queries
-      # This functionality is Experimental and may be changed or removed
-      # completely in a future release. OpenSearch will take a best effort approach
-      # to fix any issues, but experimental features are not subject to the
-      # support SLA of official GA features.
-      #
-      # @option arguments [List] :index A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
-      # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
-      # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
-      # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
-      # @option arguments [String] :search_type Search operation type (options: query_then_fetch, dfs_query_then_fetch)
-      # @option arguments [Hash] :headers Custom HTTP headers
-      # @option arguments [Hash] :body The ranking evaluation search definition, including search requests, document ratings and ranking metric definition. (*Required*)
-      #
-      #
-      def rank_eval(arguments = {})
-        raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
+    module Root
+      module Actions
+        # Allows to evaluate the quality of ranked search results over a set of typical search queries.
+        #
+        # @option args [Boolean] :allow_no_indices If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
+        # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+        # @option args [Boolean] :ignore_unavailable If `true`, missing or closed indexes are not included in the response.
+        # @option args [String] :search_type Search operation type
+        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard (`*`) expressions are supported. To target all data streams and indexes in a cluster, omit this parameter or use `_all` or `*`.
+        # @option args [Hash] :body *Required* The ranking evaluation search definition, including search requests, document ratings and ranking metric definition.
+        def rank_eval(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
 
-        headers = arguments.delete(:headers) || {}
+          _index = args.delete('index')
 
-        arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = body ? 'POST' : 'GET'
+          url     = Utils.build_url(_index, '_rank_eval')
 
-        _index = arguments.delete(:index)
+          Utils.validate_query_params! args, RANK_EVAL_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
+        end
 
-        method = OpenSearch::API::HTTP_POST
-        path   = if _index
-                   "#{Utils.__listify(_index)}/_rank_eval"
-                 else
-                   '_rank_eval'
-                 end
-        params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-        body = arguments[:body]
-        perform_request(method, path, params, body, headers).body
+        RANK_EVAL_QUERY_PARAMS = Set.new(%w[
+          allow_no_indices
+          expand_wildcards
+          ignore_unavailable
+          search_type
+        ]).freeze
       end
-
-      # Register this action with its valid params when the module is loaded.
-      #
-      # @since 6.2.0
-      ParamsRegistry.register(:rank_eval, %i[
-        ignore_unavailable
-        allow_no_indices
-        expand_wildcards
-        search_type
-      ].freeze)
     end
   end
 end

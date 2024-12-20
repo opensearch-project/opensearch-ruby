@@ -3,26 +3,11 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
@@ -30,48 +15,38 @@ module OpenSearch
       module Actions
         # Deletes an index.
         #
-        # @option arguments [List] :index A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices
-        # @option arguments [Time] :timeout Explicit operation timeout
-        # @option arguments [Time] :master_timeout (DEPRECATED: use cluster_manager_timeout instead) Specify timeout for connection to master
-        # @option arguments [Time] :cluster_manager_timeout Specify timeout for connection to cluster_manager
-        # @option arguments [Boolean] :ignore_unavailable Ignore unavailable indexes (default: false)
-        # @option arguments [Boolean] :allow_no_indices Ignore if a wildcard expression resolves to no concrete indices (default: false)
-        # @option arguments [String] :expand_wildcards Whether wildcard expressions should get expanded to open or closed indices (default: open) (options: open, closed, hidden, none, all)
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def delete(arguments = {})
-          raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
+        # @option args [Enumerable<String>, String] :index *Required* Comma-separated list of indexes to delete. You cannot specify index aliases. By default, this parameter does not support wildcards (`*`) or `_all`. To use wildcards or `_all`, set the `action.destructive_requires_name` cluster setting to `false`.
+        # @option args [Boolean] :allow_no_indices If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+        # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
+        # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
+        def delete(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?
 
-          headers = arguments.delete(:headers) || {}
+          _index = args.delete('index')
 
-          arguments = arguments.clone
+          ignore  = args.delete('ignore') || []
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'DELETE'
+          url     = _index
 
-          _index = arguments.delete(:index)
-
-          method = OpenSearch::API::HTTP_DELETE
-          path   = Utils.__listify(_index).to_s
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = nil
-          if Array(arguments[:ignore]).include?(404)
-            Utils.__rescue_from_not_found { perform_request(method, path, params, body, headers).body }
-          else
-            perform_request(method, path, params, body, headers).body
-          end
+          Utils.validate_query_params! args, DELETE_QUERY_PARAMS
+          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:delete, %i[
-          timeout
-          master_timeout
-          cluster_manager_timeout
-          ignore_unavailable
+        DELETE_QUERY_PARAMS = Set.new(%w[
           allow_no_indices
+          cluster_manager_timeout
           expand_wildcards
-        ].freeze)
+          ignore_unavailable
+          master_timeout
+          timeout
+        ]).freeze
       end
     end
   end

@@ -3,71 +3,44 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
     module Indices
       module Actions
-        # Performs the flush operation on one or more indices.
+        # Performs the flush operation on one or more indexes.
         #
-        # @option arguments [List] :index A comma-separated list of index names; use `_all` or empty string for all indices
-        # @option arguments [Boolean] :force Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)
-        # @option arguments [Boolean] :wait_if_ongoing If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.
-        # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
-        # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
-        # @option arguments [String] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both. (options: open, closed, hidden, none, all)
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def flush(arguments = {})
-          headers = arguments.delete(:headers) || {}
+        # @option args [Boolean] :allow_no_indices If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+        # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+        # @option args [Boolean] :force If `true`, the request forces a flush even if there are no changes to commit to the index.
+        # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
+        # @option args [Boolean] :wait_if_ongoing (default: true) If `true`, the flush operation blocks until execution when another flush operation is running. If `false`, OpenSearch returns an error if you request a flush when another flush operation is running.
+        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards (`*`). To flush all data streams and indexes, omit this parameter or use `*` or `_all`.
+        def flush(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          _index = args.delete('index')
 
-          arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = body ? 'POST' : 'GET'
+          url     = Utils.build_url(_index, '_flush')
 
-          _index = arguments.delete(:index)
-
-          method = OpenSearch::API::HTTP_POST
-          path   = if _index
-                     "#{Utils.__listify(_index)}/_flush"
-                   else
-                     '_flush'
-                   end
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, FLUSH_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:flush, %i[
-          force
-          wait_if_ongoing
-          ignore_unavailable
+        FLUSH_QUERY_PARAMS = Set.new(%w[
           allow_no_indices
           expand_wildcards
-        ].freeze)
+          force
+          ignore_unavailable
+          wait_if_ongoing
+        ]).freeze
       end
     end
   end

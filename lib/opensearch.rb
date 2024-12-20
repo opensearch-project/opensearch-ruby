@@ -3,99 +3,137 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
 
-require 'opensearch/version'
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
 require 'opensearch/transport'
 require 'opensearch/api'
+Dir[File.expand_path('opensearch/api/**/*.rb', __dir__)].each { |f| require f }
 
 module OpenSearch
-  SECURITY_PRIVILEGES_VALIDATION_WARNING = 'The client is unable to verify distribution due to security privileges on the server side. Some functionality may not be compatible if the server is running an unsupported product.'.freeze
-  NOT_SUPPORTED_WARNING = 'The client is not supported for the provided version and distribution combination.'.freeze
-
   class Client
-    include OpenSearch::API
+    include OpenSearch::API::Root::Actions
     attr_accessor :transport
 
-    # See OpenSearch::Transport::Client for initializer parameters
     def initialize(arguments = {}, &block)
-      @verified = false
       @transport = OpenSearch::Transport::Client.new(arguments, &block)
     end
 
-    def method_missing(name, *args, &block)
-      return super unless name == :perform_request
-      verify_open_search unless @verified
-      @transport.perform_request(*args, &block)
+    def asynchronous_search
+      @asynchronous_search ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::AsynchronousSearch::Actions)
     end
 
-    def respond_to_missing?(method_name, include_private = false)
-      method_name == :perform_request || super
+    def cat
+      @cat ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Cat::Actions)
     end
 
-    private
-
-    def verify_open_search
-      begin
-        response = open_search_validation_request
-      rescue OpenSearch::Transport::Transport::Errors::Unauthorized,
-             OpenSearch::Transport::Transport::Errors::Forbidden
-        @verified = true
-        warn(SECURITY_PRIVILEGES_VALIDATION_WARNING)
-        return
-      end
-
-      body = if response.headers['content-type'] == 'application/yaml'
-               require 'yaml'
-               YAML.safe_load(response.body)
-             else
-               response.body
-             end
-      version = body.dig('version', 'number')
-      distribution = body.dig('version', 'distribution')
-      verify_version_and_distribution(version, distribution)
+    def cluster
+      @cluster ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Cluster::Actions)
     end
 
-    def verify_version_and_distribution(version, distribution)
-      raise OpenSearch::UnsupportedProductError if version.nil?
-
-      # The client supports all the versions of OpenSearch
-      if distribution != 'opensearch' &&
-         (Gem::Version.new(version) < Gem::Version.new('6.0.0') ||
-           Gem::Version.new(version) >= Gem::Version.new('8.0.0'))
-        raise OpenSearch::UnsupportedProductError
-      end
-
-      @verified = true
+    def dangling_indices
+      @dangling_indices ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::DanglingIndices::Actions)
     end
 
-    def open_search_validation_request
-      @transport.perform_request('GET', '/')
+    def flow_framework
+      @flow_framework ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::FlowFramework::Actions)
     end
-  end
 
-  class UnsupportedProductError < StandardError
-    def initialize(message = NOT_SUPPORTED_WARNING)
-      super(message)
+    def indices
+      @indices ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Indices::Actions)
+    end
+
+    def ingest
+      @ingest ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Ingest::Actions)
+    end
+
+    def insights
+      @insights ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Insights::Actions)
+    end
+
+    def ism
+      @ism ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Ism::Actions)
+    end
+
+    def knn
+      @knn ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Knn::Actions)
+    end
+
+    def list
+      @list ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::List::Actions)
+    end
+
+    def ml
+      @ml ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Ml::Actions)
+    end
+
+    def nodes
+      @nodes ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Nodes::Actions)
+    end
+
+    def notifications
+      @notifications ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Notifications::Actions)
+    end
+
+    def observability
+      @observability ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Observability::Actions)
+    end
+
+    def ppl
+      @ppl ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Ppl::Actions)
+    end
+
+    def query
+      @query ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Query::Actions)
+    end
+
+    def remote_store
+      @remote_store ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::RemoteStore::Actions)
+    end
+
+    def replication
+      @replication ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Replication::Actions)
+    end
+
+    def rollups
+      @rollups ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Rollups::Actions)
+    end
+
+    def search_pipeline
+      @search_pipeline ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::SearchPipeline::Actions)
+    end
+
+    def security
+      @security ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Security::Actions)
+    end
+
+    def sm
+      @sm ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Sm::Actions)
+    end
+
+    def snapshot
+      @snapshot ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Snapshot::Actions)
+    end
+
+    def sql
+      @sql ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Sql::Actions)
+    end
+
+    def tasks
+      @tasks ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Tasks::Actions)
+    end
+
+    def transforms
+      @transforms ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Transforms::Actions)
+    end
+
+    def wlm
+      @wlm ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Wlm::Actions)
+    end
+
+    def http
+      @http ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Http::Actions)
     end
   end
 end

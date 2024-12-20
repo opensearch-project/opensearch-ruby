@@ -3,73 +3,42 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
     module Tasks
       module Actions
         # Cancels a task, if it can be cancelled through an API.
-        # This functionality is Experimental and may be changed or removed
-        # completely in a future release. OpenSearch will take a best effort approach
-        # to fix any issues, but experimental features are not subject to the
-        # support SLA of official GA features.
         #
-        # @option arguments [String] :task_id Cancel the task with specified task id (node_id:task_number)
-        # @option arguments [List] :nodes A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
-        # @option arguments [List] :actions A comma-separated list of actions that should be cancelled. Leave empty to cancel all.
-        # @option arguments [String] :parent_task_id Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.
-        # @option arguments [Boolean] :wait_for_completion Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
-        # @option arguments [Hash] :headers Custom HTTP headers
-        #
-        #
-        def cancel(arguments = {})
-          headers = arguments.delete(:headers) || {}
+        # @option args [Enumerable<String>, String] :actions Comma-separated list or wildcard expression of actions used to limit the request.
+        # @option args [Enumerable<String>] :nodes Comma-separated list of node IDs or names used to limit the request.
+        # @option args [String] :parent_task_id Parent task ID used to limit the tasks.
+        # @option args [Boolean] :wait_for_completion Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
+        # @option args [Float, String] :task_id ID of the task.
+        def cancel(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          _task_id = args.delete('task_id')
 
-          arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'POST'
+          url     = Utils.build_url('_tasks', _task_id, '_cancel')
 
-          _task_id = arguments.delete(:task_id)
-
-          method = OpenSearch::API::HTTP_POST
-          path   = if _task_id
-                     "_tasks/#{Utils.__listify(_task_id)}/_cancel"
-                   else
-                     '_tasks/_cancel'
-                   end
-          params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-          body = nil
-          perform_request(method, path, params, body, headers).body
+          Utils.validate_query_params! args, CANCEL_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
         end
 
-        # Register this action with its valid params when the module is loaded.
-        #
-        # @since 6.2.0
-        ParamsRegistry.register(:cancel, %i[
-          nodes
+        CANCEL_QUERY_PARAMS = Set.new(%w[
           actions
+          nodes
           parent_task_id
           wait_for_completion
-        ].freeze)
+        ]).freeze
       end
     end
   end

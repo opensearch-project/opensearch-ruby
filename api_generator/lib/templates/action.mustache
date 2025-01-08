@@ -1,0 +1,64 @@
+{{{license_header}}}
+{{{generated_code_warning}}}
+
+# frozen_string_literal: true
+
+module OpenSearch
+  module API
+    module {{module_name}}
+      module Actions
+        # {{{method_description}}}
+        #
+        {{#argument_descriptions}}
+        # @option args [{{{data_type}}}] :{{{name}}}{{#required}} *Required*{{/required}}{{#deprecated}} DEPRECATED{{/deprecated}}{{#default}} (default: {{{default}}}){{/default}}{{#description}} {{{description}}}{{/description}}
+        {{/argument_descriptions}}
+        {{#support_ignore}}
+        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
+        {{/support_ignore}}
+        {{#api_reference}}
+        #
+        # {API Reference}[{{{api_reference}}}]
+        {{/api_reference}}
+        def {{method_name}}(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          {{#required_args}}
+          raise ArgumentError, "Required argument '{{arg}}' missing" if args['{{arg}}'].nil?
+          {{#_blank_line}}
+
+          {{/_blank_line}}
+          {{/required_args}}
+          {{#path_params}}
+          _{{{name}}} = args.delete('{{name}}')
+          {{#_blank_line}}
+
+          {{/_blank_line}}
+          {{/path_params}}
+          {{#support_ignore}}
+          ignore  = args.delete('ignore') || []
+          {{/support_ignore}}
+          {{#bulk_body}}
+          headers = (args.delete('headers') || {}).merge('Content-Type' => 'application/x-ndjson')
+          body    = Utils.bulkify(args.delete('body'))
+          {{/bulk_body}}
+          {{^bulk_body}}
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          {{/bulk_body}}
+          method  = {{{http_verb}}}
+          url     = {{{url}}}
+
+          Utils.validate_query_params! args{{#has_query}}, {{valid_params_constant_name}}{{/has_query}}
+          {{{perform_request}}}
+        end
+        {{#has_query}}
+
+        {{{valid_params_constant_name}}} = Set.new(%w[
+        {{#query_params}}
+          {{{name}}}
+        {{/query_params}}
+        ]).freeze
+        {{/has_query}}
+      end
+    end
+  end
+end

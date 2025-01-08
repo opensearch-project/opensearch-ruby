@@ -3,43 +3,47 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Creates a point in time.
-      #
-      # @option arguments [String] :index The name(s) of the target index(es) for the PIT. May contain a comma-separated list or a wildcard index pattern. (required)
-      # @option arguments [String] :keep_alive The amount of time to keep the PIT. (required)
-      # @option arguments [String] :preference The node or the shard used to perform the search. (default: random)
-      # @option arguments [String] :routing Specifies to route search requests to a specific shard.
-      # @option arguments [String] :expand_wildcards The type of index that can match the wildcard pattern. Supports comma-separated values. (default: open)
-      # @option arguments [String] :allow_partial_pit_creation Specifies whether to create a PIT with partial failures. (default: false)
-      def create_pit(arguments = {})
-        raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
-        raise ArgumentError, "Required argument 'keep_alive' missing" unless arguments[:keep_alive]
+    module Root
+      module Actions
+        # Creates point in time context.
+        #
+        # @option args [Enumerable<String>] :index *Required* Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+        # @option args [Boolean] :allow_partial_pit_creation Allow if point in time can be created with partial failures.
+        # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+        # @option args [String] :keep_alive Specify the keep alive for point in time.
+        # @option args [String] :preference (default: random) Specify the node or shard the operation should be performed on.
+        # @option args [Enumerable<String>, String] :routing Comma-separated list of specific routing values.
+        def create_pit(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?
 
-        arguments = arguments.clone
-        _index = arguments.delete(:index)
+          _index = args.delete('index')
 
-        method = OpenSearch::API::HTTP_POST
-        path = "#{Utils.__listify(_index)}/_search/point_in_time"
-        params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-        body = nil
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'POST'
+          url     = Utils.build_url(_index, '_search/point_in_time')
 
-        perform_request(method, path, params, body).body
+          Utils.validate_query_params! args, CREATE_PIT_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
+        end
+
+        CREATE_PIT_QUERY_PARAMS = Set.new(%w[
+          allow_partial_pit_creation
+          expand_wildcards
+          keep_alive
+          preference
+          routing
+        ]).freeze
       end
-
-      ParamsRegistry.register(:create_pit, %i[
-        keep_alive
-        preference
-        routing
-        expand_wildcards
-        allow_partial_pit_creation
-      ].freeze)
     end
   end
 end

@@ -3,84 +3,54 @@
 # The OpenSearch Contributors require contributions made to
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
-#
-# Modifications Copyright OpenSearch Contributors. See
-# GitHub history for details.
-#
-# Licensed to Elasticsearch B.V. under one or more contributor
-# license agreements. See the NOTICE file distributed with
-# this work for additional information regarding copyright
-# ownership. Elasticsearch B.V. licenses this file to you under
-# the Apache License, Version 2.0 (the "License"); you may
-# not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
+
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
+
+# frozen_string_literal: true
 
 module OpenSearch
   module API
-    module Actions
-      # Allows to get multiple documents in one request.
-      #
-      # @option arguments [String] :index The name of the index
-      # @option arguments [List] :stored_fields A comma-separated list of stored fields to return in the response
-      # @option arguments [String] :preference Specify the node or shard the operation should be performed on (default: random)
-      # @option arguments [Boolean] :realtime Specify whether to perform the operation in realtime or search mode
-      # @option arguments [Boolean] :refresh Refresh the shard containing the document before performing the operation
-      # @option arguments [String] :routing Specific routing value
-      # @option arguments [List] :_source True or false to return the _source field or not, or a list of fields to return
-      # @option arguments [List] :_source_excludes A list of fields to exclude from the returned _source field
-      # @option arguments [List] :_source_includes A list of fields to extract and return from the _source field
-      # @option arguments [Hash] :headers Custom HTTP headers
-      # @option arguments [Hash] :body Document identifiers; can be either `docs` (containing full document information) or `ids` (when index is provided in the URL. (*Required*)
-      #
-      # *Deprecation notice*:
-      # Specifying types in urls has been deprecated
-      # Deprecated since version 7.0.0
-      #
-      #
-      #
-      def mget(arguments = {})
-        raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
+    module Root
+      module Actions
+        # Allows to get multiple documents in one request.
+        #
+        # @option args [Boolean, Enumerable<String>, String] :_source Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
+        # @option args [Enumerable<String>, String] :_source_excludes A comma-separated list of source fields to exclude from the response. You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.
+        # @option args [Enumerable<String>, String] :_source_includes A comma-separated list of source fields to include in the response. If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the `_source_excludes` query parameter. If the `_source` parameter is `false`, this parameter is ignored.
+        # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
+        # @option args [Boolean] :realtime If `true`, the request is real-time as opposed to near-real-time.
+        # @option args [Boolean, String] :refresh If `true`, the request refreshes relevant shards before retrieving documents.
+        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :stored_fields If `true`, retrieves the document fields stored in the index rather than the document `_source`.
+        # @option args [String] :index Name of the index to retrieve documents from when `ids` are specified, or when a document in the `docs` array does not specify an index.
+        # @option args [Hash] :body *Required* Document identifiers; can be either `docs` (containing full document information) or `ids` (when index is provided in the URL.
+        def mget(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
 
-        headers = arguments.delete(:headers) || {}
+          _index = args.delete('index')
 
-        arguments = arguments.clone
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = body ? 'POST' : 'GET'
+          url     = Utils.build_url(_index, '_mget')
 
-        _index = arguments.delete(:index)
+          Utils.validate_query_params! args, MGET_QUERY_PARAMS
+          transport.perform_request(method, url, args, body, headers).body
+        end
 
-        method = OpenSearch::API::HTTP_POST
-        path   = if _index
-                   "#{Utils.__listify(_index)}/_mget"
-                 else
-                   '_mget'
-                 end
-        params = Utils.__validate_and_extract_params arguments, ParamsRegistry.get(__method__)
-
-        body = arguments[:body]
-        perform_request(method, path, params, body, headers).body
+        MGET_QUERY_PARAMS = Set.new(%w[
+          _source
+          _source_excludes
+          _source_includes
+          preference
+          realtime
+          refresh
+          routing
+          stored_fields
+        ]).freeze
       end
-
-      # Register this action with its valid params when the module is loaded.
-      #
-      # @since 6.2.0
-      ParamsRegistry.register(:mget, %i[
-        stored_fields
-        preference
-        realtime
-        refresh
-        routing
-        _source
-        _source_excludes
-        _source_includes
-      ].freeze)
     end
   end
 end

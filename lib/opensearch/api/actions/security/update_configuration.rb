@@ -4,8 +4,8 @@
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
 
-# This code was generated from OpenSearch API Spec.
-# Update the code generation logic instead of modifying this file directly.
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
 
 # frozen_string_literal: true
 
@@ -13,25 +13,20 @@ module OpenSearch
   module API
     module Security
       module Actions
-        UPDATE_CONFIGURATION_QUERY_PARAMS = Set.new(%i[
-        ]).freeze
-
-        # Adds or updates the existing configuration using the REST API.
+        # Adds or updates the existing configuration using the REST API. Only accessible by admins and users with REST API access and only when put or patch is enabled.
         #
-        # @option arguments [Hash] :body *Required*
-        #
-        # {API Reference}[https://opensearch.org/docs/2.7/security/access-control/api/#update-configuration]
-        def update_configuration(arguments = {})
-          raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
+        # @option args [Hash] :body *Required*
+        def update_configuration(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
 
-          arguments = arguments.clone
-          headers = arguments.delete(:headers) || {}
-          body    = arguments.delete(:body)
-          url     = Utils.__pathify '_plugins', '_security', 'api', 'securityconfig', 'config'
-          method  = OpenSearch::API::HTTP_PUT
-          params  = Utils.__validate_and_extract_params arguments, UPDATE_CONFIGURATION_QUERY_PARAMS
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'PUT'
+          url     = '_plugins/_security/api/securityconfig/config'
 
-          perform_request(method, url, params, body, headers).body
+          Utils.validate_query_params! args
+          transport.perform_request(method, url, args, body, headers).body
         end
       end
     end

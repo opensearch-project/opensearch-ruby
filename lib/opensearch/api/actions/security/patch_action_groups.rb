@@ -4,8 +4,8 @@
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
 
-# This code was generated from OpenSearch API Spec.
-# Update the code generation logic instead of modifying this file directly.
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
 
 # frozen_string_literal: true
 
@@ -13,23 +13,20 @@ module OpenSearch
   module API
     module Security
       module Actions
-        PATCH_ACTION_GROUPS_QUERY_PARAMS = Set.new(%i[
-        ]).freeze
-
         # Creates, updates, or deletes multiple action groups in a single call.
         #
-        # @option arguments [Hash] :body
-        #
-        # {API Reference}[https://opensearch.org/docs/latest/security/access-control/api/#patch-action-groups]
-        def patch_action_groups(arguments = {})
-          arguments = arguments.clone
-          headers = arguments.delete(:headers) || {}
-          body    = arguments.delete(:body)
-          url     = Utils.__pathify '_plugins', '_security', 'api', 'actiongroups'
-          method  = OpenSearch::API::HTTP_PATCH
-          params  = Utils.__validate_and_extract_params arguments, PATCH_ACTION_GROUPS_QUERY_PARAMS
+        # @option args [Enumerable<Hash>] :body *Required*
+        def patch_action_groups(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
 
-          perform_request(method, url, params, body, headers).body
+          headers = (args.delete('headers') || {}).merge('Content-Type' => 'application/x-ndjson')
+          body    = Utils.bulkify(args.delete('body'))
+          method  = 'PATCH'
+          url     = '_plugins/_security/api/actiongroups'
+
+          Utils.validate_query_params! args
+          transport.perform_request(method, url, args, body, headers).body
         end
       end
     end

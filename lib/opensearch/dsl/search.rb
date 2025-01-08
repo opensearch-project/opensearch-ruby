@@ -51,8 +51,8 @@ module OpenSearch
       #     # => {:query=>{:match=>{:title=>"test"}}}
       #
       #
-      def search(*args, &block)
-        Search.new(*args, &block)
+      def search(...)
+        Search.new(...)
       end
 
       extend self

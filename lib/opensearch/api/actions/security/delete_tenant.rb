@@ -4,8 +4,8 @@
 # this file be licensed under the Apache-2.0 license or a
 # compatible open source license.
 
-# This code was generated from OpenSearch API Spec.
-# Update the code generation logic instead of modifying this file directly.
+# This file is generated from the OpenSearch REST API spec.
+# Do not modify it by hand. Instead, modify the generator or the spec.
 
 # frozen_string_literal: true
 
@@ -13,27 +13,24 @@ module OpenSearch
   module API
     module Security
       module Actions
-        DELETE_TENANT_QUERY_PARAMS = Set.new(%i[
-        ]).freeze
-
         # Delete the specified tenant.
         #
-        # @option arguments [String] :tenant *Required*
-        #
-        # {API Reference}[https://opensearch.org/docs/latest/security/access-control/api/#delete-action-group]
-        def delete_tenant(arguments = {})
-          raise ArgumentError, "Required argument 'tenant' missing" unless arguments[:tenant]
+        # @option args [String] :tenant *Required* The name of the tenant to delete.
+        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
+        def delete_tenant(args = {})
+          args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'tenant' missing" if args['tenant'].nil?
 
-          arguments = arguments.clone
-          _tenant = arguments.delete(:tenant)
+          _tenant = args.delete('tenant')
 
-          headers = arguments.delete(:headers) || {}
-          body    = arguments.delete(:body)
-          url     = Utils.__pathify '_plugins', '_security', 'api', 'tenants', _tenant
-          method  = OpenSearch::API::HTTP_DELETE
-          params  = Utils.__validate_and_extract_params arguments, DELETE_TENANT_QUERY_PARAMS
+          ignore  = args.delete('ignore') || []
+          headers = args.delete('headers') || {}
+          body    = args.delete('body')
+          method  = 'DELETE'
+          url     = Utils.build_url('_plugins/_security/api/tenants', _tenant)
 
-          perform_request(method, url, params, body, headers).body
+          Utils.validate_query_params! args
+          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
         end
       end
     end

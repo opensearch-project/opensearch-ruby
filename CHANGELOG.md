@@ -13,6 +13,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 - Added an API Generator ([#233](https://github.com/opensearch-project/opensearch-ruby/issues/233))
 - Added a workflow to generate API methods from OpenSearch API Spec
+- Added support for Ruby 3.4 ([#265](https://github.com/opensearch-project/opensearch-ruby/pull/265))
 ### Changed
 - Restructured the API methods and modules to be more efficient and intuitive
 ### Deprecated

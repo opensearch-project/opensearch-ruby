@@ -24,7 +24,7 @@ jobs:
         entry:
           - { ruby_version: '3.3', opensearch_ref: '1.x', jdk_version: '11' }
           - { ruby_version: '3.3', opensearch_ref: '2.x', jdk_version: '17' }
-          - { ruby_version: '3.3', opensearch_ref: 'main', jdk_version: '17' }
+          - { ruby_version: '3.3', opensearch_ref: 'main', jdk_version: '23' }
 
     steps:
       - uses: ruby/setup-ruby@v1

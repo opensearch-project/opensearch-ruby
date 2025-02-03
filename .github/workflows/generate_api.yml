@@ -29,6 +29,7 @@ jobs:
       - name: Update bundler
         run: |
           sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev
           bundle install
 
       - name: Generate API

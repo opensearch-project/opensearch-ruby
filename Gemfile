@@ -28,19 +28,16 @@ source 'https://rubygems.org'
 
 gem 'opensearch-ruby', path: __dir__, require: false
 
+# TODO: remove unnecessary dependencies
 gem 'ansi'
 gem 'bundler'
 gem 'cane'
-gem 'faraday-httpclient'
-gem 'faraday-net_http_persistent'
 gem 'hashie'
-gem 'httpclient'
 gem 'jbuilder'
 gem 'jsonify'
 gem 'minitest', '~> 5'
 gem 'minitest-reporters', '~> 1'
 gem 'mocha', '~> 2'
-gem 'net-http-persistent'
 gem 'pry'
 gem 'rake', '~> 13'
 gem 'rspec', '~> 3'
@@ -50,19 +47,27 @@ gem 'rubocop-rspec'
 gem 'shoulda-context'
 gem 'simplecov', '~> 0.17', '< 0.18'
 gem 'test-unit', '~> 2'
-gem 'typhoeus', '~> 1.4'
 gem 'webmock', '~> 2.0'
 gem 'yard'
 
-gem 'curb' unless defined? JRUBY_VERSION
-gem 'faraday-patron' unless defined? JRUBY_VERSION
-gem 'patron' unless defined? JRUBY_VERSION
+if defined? JRUBY_VERSION
+  gem 'manticore'
+  gem 'pry-nav'
+else
+  gem 'curb'
+  gem 'require-prof'
+  gem 'ruby-prof'
+end
 
-gem 'require-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
-gem 'ruby-prof' unless defined?(JRUBY_VERSION) || defined?(Rubinius)
-
-gem 'manticore' if defined? JRUBY_VERSION
-gem 'pry-nav' if defined? JRUBY_VERSION
-
-gem 'faraday', ENV.fetch('FARADAY_VERSION', nil), require: false if ENV.key?('FARADAY_VERSION')
-gem 'faraday-typhoeus' if !ENV.key?('FARADAY_VERSION') && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.6')
+if ENV.key?('FARADAY_VERSION')
+  gem 'faraday', ENV.fetch('FARADAY_VERSION'), require: false
+  gem 'httpclient'
+  gem 'net-http-persistent'
+  gem 'patron' unless defined? JRUBY_VERSION
+  gem 'typhoeus'
+else
+  gem 'faraday-httpclient'
+  gem 'faraday-net_http_persistent'
+  gem 'faraday-patron' unless defined? JRUBY_VERSION
+  gem 'faraday-typhoeus'
+end

@@ -1762,7 +1762,6 @@ describe OpenSearch::Transport::Client do
         end
       end
 
-
       context 'when typhoeus is used as an adapter', unless: jruby? do
         before do
           require 'typhoeus'

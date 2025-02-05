@@ -1809,7 +1809,9 @@ describe OpenSearch::Transport::Client do
         it 'keeps connections open' do
           response = client.perform_request('GET', '_nodes/stats/http')
           connections_before = response.body['nodes'].values.find { |n| n['name'] == node_names.first }['http']['total_opened']
+          puts 'RELOADING CONNECTIONS'
           client.transport.reload_connections!
+          puts 'CONNECTIONS RELOADED'
           response = client.perform_request('GET', '_nodes/stats/http')
           connections_after = response.body['nodes'].values.find { |n| n['name'] == node_names.first }['http']['total_opened']
           expect(connections_after).to be >= (connections_before)

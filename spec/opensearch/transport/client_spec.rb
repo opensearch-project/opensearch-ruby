@@ -1780,6 +1780,8 @@ describe OpenSearch::Transport::Client do
         end
 
         it 'keeps connections open' do
+          puts 'Testing with _cat/health'
+          puts client.cat.health
           puts 'Performing GET _nodes/stats/http'
           response = client.perform_request('GET', '_nodes/stats/http')
           connections_before = response.body['nodes'].values.find { |n| n['name'] == node_names.first }['http']['total_opened']

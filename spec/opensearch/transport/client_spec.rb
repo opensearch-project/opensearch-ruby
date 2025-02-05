@@ -1762,32 +1762,6 @@ describe OpenSearch::Transport::Client do
         end
       end
 
-      context 'when patron is used as an adapter', unless: jruby? do
-        before do
-          require 'patron'
-        end
-
-        let(:options) do
-          { adapter: :patron }
-        end
-
-        let(:adapter) do
-          client.transport.connections.first.connection.builder.adapter
-        end
-
-        it 'uses the patron connection handler' do
-          expect(adapter).to eq('Faraday::Adapter::Patron')
-        end
-
-        it 'keeps connections open' do
-          response = client.perform_request('GET', '_nodes/stats/http')
-          connections_before = response.body['nodes'].values.find { |n| n['name'] == node_names.first }['http']['total_opened']
-          client.transport.reload_connections!
-          response = client.perform_request('GET', '_nodes/stats/http')
-          connections_after = response.body['nodes'].values.find { |n| n['name'] == node_names.first }['http']['total_opened']
-          expect(connections_after).to be >= (connections_before)
-        end
-      end
 
       context 'when typhoeus is used as an adapter', unless: jruby? do
         before do
@@ -1813,6 +1787,33 @@ describe OpenSearch::Transport::Client do
           puts 'Start reloading connections'
           client.transport.reload_connections!
           puts 'Connections reloaded'
+          response = client.perform_request('GET', '_nodes/stats/http')
+          connections_after = response.body['nodes'].values.find { |n| n['name'] == node_names.first }['http']['total_opened']
+          expect(connections_after).to be >= (connections_before)
+        end
+      end
+
+      context 'when patron is used as an adapter', unless: jruby? do
+        before do
+          require 'patron'
+        end
+
+        let(:options) do
+          { adapter: :patron }
+        end
+
+        let(:adapter) do
+          client.transport.connections.first.connection.builder.adapter
+        end
+
+        it 'uses the patron connection handler' do
+          expect(adapter).to eq('Faraday::Adapter::Patron')
+        end
+
+        it 'keeps connections open' do
+          response = client.perform_request('GET', '_nodes/stats/http')
+          connections_before = response.body['nodes'].values.find { |n| n['name'] == node_names.first }['http']['total_opened']
+          client.transport.reload_connections!
           response = client.perform_request('GET', '_nodes/stats/http')
           connections_after = response.body['nodes'].values.find { |n| n['name'] == node_names.first }['http']['total_opened']
           expect(connections_after).to be >= (connections_before)

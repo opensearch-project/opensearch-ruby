@@ -64,7 +64,7 @@ if ENV.key?('FARADAY_VERSION')
   gem 'httpclient'
   gem 'net-http-persistent'
   gem 'patron' unless defined? JRUBY_VERSION
-  gem 'typhoeus'
+  gem 'typhoeus', '~> 1.4'
 else
   gem 'faraday-httpclient'
   gem 'faraday-net_http_persistent'

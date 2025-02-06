@@ -33,14 +33,25 @@ class SpecHash
 
   # @param [Hash] hash
   def initialize(hash = {}, parsed: true)
+    raise ArgumentError, "#{self.class} must be initialized with a Hash" unless hash.is_a?(Hash)
     @hash = parsed ? hash : parse(hash)
+    @parsed_keys = Set.new
+  end
+
+  def to_s
+    "<SpecHash: #{@hash.to_s}>"
+  end
+
+  def is_a?(klass)
+    klass == SpecHash || super
   end
 
   def [](key)
-    parse(@hash[key])
+    return @hash[key] if @parsed_keys.include?(key)
+    @hash[key] = parse(@hash[key])
   end
 
-  def respond_to_missing?(name)
+  def respond_to_missing?(name, ...)
     @hash.key?(name.to_s) || {}.respond_to?(name) || super
   end
 
@@ -49,7 +60,7 @@ class SpecHash
       warn "Accessing Hash attribute `#{name}` which is also a key of the SpecHash instance." if @hash.key?(name.to_s)
       return @hash.send(name, ...)
     end
-    parse(@hash[name.to_s])
+    self[name.to_s]
   end
 
   private
@@ -59,8 +70,8 @@ class SpecHash
     return value unless value.is_a?(Hash)
     ref = value.delete('$ref')
     value.transform_values! { |v| parse(v) }
-    return SpecHash.new(value) unless ref
-    SpecHash.new(parse(resolve(ref)).merge(value))
+    value.merge!(resolve(ref)) if ref
+    SpecHash.new(value)
   end
 
   def resolve(ref)

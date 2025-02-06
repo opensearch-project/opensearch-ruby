@@ -25,7 +25,7 @@
 # under the License.
 
 LICENSE = File.read('./.github/license-header.txt')
-files = `git ls-files | grep -E '\.rb|Rakefile|\.rake|\.erb|Gemfile|gemspec'`.split("\n")
+files = `git ls-files | grep -E '\.rb|^Rakefile$|\.rake|\.erb|^Gemfile$|^gemspec$'`.split("\n")
 errors = []
 
 files.each do |file|

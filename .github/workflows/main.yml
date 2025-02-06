@@ -48,7 +48,7 @@ jobs:
     env:
       TEST_OPENSEARCH_SERVER: http://localhost:9250
       PORT: 9250
-      FARADAY_VERSION: '~> 1.0'
+      FARADAY_VERSION: '~> 1'
     strategy:
       fail-fast: false
       matrix:
@@ -106,7 +106,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install libcurl4-openssl-dev
-          sudo apt-get install ca-certificates
           ruby -v
           bundle install
       - name: Test Client Security

@@ -1802,7 +1802,7 @@ describe OpenSearch::Transport::Client do
           client.transport.connections.first.connection.builder.adapter
         end
 
-        it 'uses the patron connection handler' do
+        it 'uses the typhoeus connection handler' do
           expect(adapter).to eq('Faraday::Adapter::Typhoeus')
         end
 

@@ -3,12 +3,12 @@ name: Integration with Unreleased OpenSearch
 on:
   push:
     branches:
-      - "main"
+      - 'main'
     paths-ignore:
       - '*.md'
   pull_request:
     branches:
-      - "main"
+      - 'main'
     paths-ignore:
       - '*.md'
 
@@ -24,7 +24,7 @@ jobs:
         entry:
           - { ruby_version: '3.3', opensearch_ref: '1.x', jdk_version: '11' }
           - { ruby_version: '3.3', opensearch_ref: '2.x', jdk_version: '17' }
-          - { ruby_version: '3.3', opensearch_ref: 'main', jdk_version: '23' }
+          - { ruby_version: '3.3', opensearch_ref: 'main', jdk_version: '21' }
 
     steps:
       - uses: ruby/setup-ruby@v1
@@ -40,7 +40,7 @@ jobs:
       - name: Get OpenSearch branch top
         id: get-key
         working-directory: opensearch
-        run: echo key=`git log -1 --format='%H'` >> $GITHUB_OUTPUT
+        run: echo key=`git log -1 --format='%H'`-${{ matrix.entry.jdk_version }} >> $GITHUB_OUTPUT
 
       - name: Restore cached build
         id: cache-restore
@@ -60,7 +60,6 @@ jobs:
         if: steps.cache-restore.outputs.cache-hit != 'true'
         working-directory: opensearch
         run: ./gradlew :distribution:archives:linux-tar:assemble --stacktrace
-        
 
       - name: Save cached build
         if: steps.cache-restore.outputs.cache-hit != 'true'

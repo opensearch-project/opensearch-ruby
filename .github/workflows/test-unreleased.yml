@@ -15,6 +15,7 @@ on:
 jobs:
   test:
     env:
+      FARADAY_VERSION: '~> 1'
       TEST_OPENSEARCH_SERVER: http://localhost:9200
       PORT: 9200
     runs-on: ubuntu-latest

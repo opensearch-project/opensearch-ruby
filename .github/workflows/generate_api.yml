@@ -1,5 +1,9 @@
 name: Generate API from Spec
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/generate_api.yml'
+      - 'api_generator/**'
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * 0" # Every Sunday at midnight GMT
@@ -37,18 +41,30 @@ jobs:
           bundle exec rake download_spec
           bundle exec rake generate_api
 
+      # This should only trigger on pull requests that modifies the api_generator directory
+      # and NOT on the scheduled workflow since the scheduled workflow will trigger the lint workflow instead.
+      - name: Lint generated files
+        if: ${{ github.event_name == 'pull_request' }}
+        working-directory: ./
+        run: |-
+          bundle install
+          bundle exec rubocop
+
       - name: Get current date
         id: date
+        if: ${{ github.event_name != 'pull_request' }}
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
       - name: GitHub App token
         id: github_app_token
+        if: ${{ github.event_name != 'pull_request' }}
         uses: tibdex/github-app-token@v2.1.0
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Create pull request
+        if: ${{ github.event_name != 'pull_request' }}
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.github_app_token.outputs.token }}

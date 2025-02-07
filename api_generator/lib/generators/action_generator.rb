@@ -27,7 +27,7 @@ class ActionRenderer < BaseGenerator
     @module_name = namespace.root ? 'Root' : namespace.name.camelize
     @method_name = action.name.underscore
     @valid_params_constant_name = "#{action.name.upcase}_QUERY_PARAMS"
-    @method_description = action.description.squeeze("\n").gsub("\n", "\n        # ")
+    @method_description = action.description.split("\n").filter(&:present?).map(&:strip).join("\n        # ")
   end
 
   def argument_descriptions

@@ -6,11 +6,15 @@ on:
       - 'main'
     paths-ignore:
       - '*.md'
+      - '.github/workflows/generate_api.yml'
+      - 'api_generator/**'
   pull_request:
     branches:
       - 'main'
     paths-ignore:
       - '*.md'
+      - '.github/workflows/generate_api.yml'
+      - 'api_generator/**'
 
 jobs:
   test:

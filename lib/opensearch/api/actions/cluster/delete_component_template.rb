@@ -15,10 +15,10 @@ module OpenSearch
       module Actions
         # Deletes a component template.
         #
-        # @option args [String] :name *Required* Name of the component template to delete. Wildcard (*) expressions are supported.
+        # @option args [String] :name *Required* The name of the component template to delete. Supports wildcard (*) expressions.
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [String] :timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete_component_template(args = {})
           args = Utils.clone_and_normalize_arguments(args)

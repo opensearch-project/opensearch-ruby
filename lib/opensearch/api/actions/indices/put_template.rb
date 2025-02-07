@@ -19,7 +19,7 @@ module OpenSearch
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [Boolean] :create If `true`, this request cannot replace or update existing index templates.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Float] :order Order in which OpenSearch applies this template if index matches multiple templates.  Templates with lower 'order' values are merged first. Templates with higher 'order' values are merged later, overriding templates with lower values.
+        # @option args [Integer] :order Order in which OpenSearch applies this template if index matches multiple templates.  Templates with lower 'order' values are merged first. Templates with higher 'order' values are merged later, overriding templates with lower values.
         # @option args [Hash] :body *Required* The template definition
         def put_template(args = {})
           args = Utils.clone_and_normalize_arguments(args)

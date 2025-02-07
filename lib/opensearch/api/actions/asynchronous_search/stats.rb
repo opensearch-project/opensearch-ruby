@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module AsynchronousSearch
       module Actions
-        # Monitoring of asynchronous searches that are running, completed, and/or persisted.
+        # Monitors any asynchronous searches that are `running`, `completed`, or `persisted`.
         #
         def stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)

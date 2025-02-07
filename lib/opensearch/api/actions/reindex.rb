@@ -20,8 +20,9 @@ module OpenSearch
         # @option args [Integer] :max_docs Maximum number of documents to process. By default, all documents.
         # @option args [Boolean, String] :refresh If `true`, the request refreshes affected shards to make this operation visible to search.
         # @option args [Float] :requests_per_second (default: 0) The throttle for this request in sub-requests per second. Defaults to no throttle.
+        # @option args [Boolean] :require_alias
         # @option args [String] :scroll Specifies how long a consistent view of the index should be maintained for scrolled search.
-        # @option args [Float, String] :slices The number of slices this task should be divided into. Defaults to 1 slice, meaning the task isn't sliced into subtasks.
+        # @option args [Integer, String] :slices The number of slices this task should be divided into. Defaults to 1 slice, meaning the task isn't sliced into subtasks.
         # @option args [String] :timeout Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
         # @option args [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [Boolean] :wait_for_completion (default: true) If `true`, the request blocks until the operation is complete.
@@ -43,6 +44,7 @@ module OpenSearch
           max_docs
           refresh
           requests_per_second
+          require_alias
           scroll
           slices
           timeout

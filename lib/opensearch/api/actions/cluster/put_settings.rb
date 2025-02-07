@@ -15,11 +15,11 @@ module OpenSearch
       module Actions
         # Updates the cluster settings.
         #
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [Boolean] :flat_settings Return settings in flat format.
-        # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
-        # @option args [String] :timeout Explicit operation timeout
-        # @option args [Hash] :body *Required* The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).
+        # @option args [String] :cluster_manager_timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [Boolean] :flat_settings Returns settings in a flat format.
+        # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [String] :timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [Hash] :body *Required* The cluster settings to update.
         def put_settings(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?

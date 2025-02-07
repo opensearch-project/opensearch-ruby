@@ -15,13 +15,13 @@ module OpenSearch
       module Actions
         # Allows to manually change the allocation of individual shards in the cluster.
         #
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [Boolean] :dry_run If `true`, then the request simulates the operation only and returns the resulting state.
-        # @option args [Boolean] :explain If `true`, then the response contains an explanation of why the commands can or cannot be executed.
-        # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [String] :cluster_manager_timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [Boolean] :dry_run When `true`, the request simulates the operation and returns the resulting state.
+        # @option args [Boolean] :explain When `true`, the response contains an explanation of why certain commands can or cannot be executed.
+        # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
         # @option args [Enumerable<String>, String] :metric Limits the information returned to the specified metrics.
-        # @option args [Boolean] :retry_failed If `true`, then retries allocation of shards that are blocked due to too many subsequent allocation failures.
-        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [Boolean] :retry_failed When `true`, retries shard allocation if it was blocked because of too many subsequent failures.
+        # @option args [String] :timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
         # @option args [Hash] :body The definition of `commands` to perform (`move`, `cancel`, `allocate`)
         def reroute(args = {})
           args = Utils.clone_and_normalize_arguments(args)

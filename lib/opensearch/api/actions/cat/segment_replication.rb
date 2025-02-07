@@ -13,25 +13,26 @@ module OpenSearch
   module API
     module Cat
       module Actions
-        # Returns information about both on-going and latest completed Segment Replication events.
+        # Returns information about active and last-completed segment replication events on each replica shard, including related shard-level metrics.
+        # These metrics provide information about how far behind the primary shard the replicas are lagging.
         #
-        # @option args [Boolean] :active_only If `true`, the response only includes ongoing segment replication events.
-        # @option args [Boolean] :allow_no_indices Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
-        # @option args [String] :bytes The unit in which to display byte values.
-        # @option args [Boolean] :completed_only If `true`, the response only includes latest completed segment replication events.
-        # @option args [Boolean] :detailed If `true`, the response includes detailed information about segment replications.
-        # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Boolean] :ignore_throttled Whether specified concrete, expanded or aliased indexes should be ignored when throttled.
-        # @option args [Boolean] :ignore_unavailable Whether specified concrete indexes should be ignored when unavailable (missing or closed).
-        # @option args [Enumerable<String>] :index Comma-separated list or wildcard expression of index names to limit the returned information.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
-        # @option args [Enumerable<String>] :shards Comma-separated list of shards to display.
-        # @option args [String] :time The unit in which to display time values.
-        # @option args [String] :timeout Operation timeout.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [Boolean] :active_only When `true`, the response only includes ongoing segment replication events.
+        # @option args [Boolean] :allow_no_indices Whether to ignore the index if a wildcard index expression resolves to no concrete indexes. This includes the `_all` string or when no indexes have been specified.
+        # @option args [String] :bytes The units used to display byte values.
+        # @option args [Boolean] :completed_only When `true`, the response only includes the last-completed segment replication events.
+        # @option args [Boolean] :detailed When `true`, the response includes additional metrics for each stage of a segment replication event.
+        # @option args [Enumerable<String>, String] :expand_wildcards Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Boolean] :ignore_throttled Whether specified concrete, expanded, or aliased indexes should be ignored when throttled.
+        # @option args [Boolean] :ignore_unavailable Whether the specified concrete indexes should be ignored when missing or closed.
+        # @option args [Enumerable<String>] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
+        # @option args [Enumerable<String>] :shards A comma-separated list of shards to display.
+        # @option args [String] :time Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://opensearch.org/docs/latest/api-reference/units/).
+        # @option args [String] :timeout The operation timeout.
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         def segment_replication(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

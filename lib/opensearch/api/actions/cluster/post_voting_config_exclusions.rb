@@ -13,11 +13,11 @@ module OpenSearch
   module API
     module Cluster
       module Actions
-        # Updates the cluster voting config exclusions by node ids or node names.
+        # Updates the cluster voting configuration by excluding certain node IDs or names.
         #
-        # @option args [Enumerable<String>, String] :node_ids A comma-separated list of the persistent ids of the nodes to exclude from the voting configuration. If specified, you may not also specify `node_names`.
-        # @option args [Enumerable<String>, String] :node_names A comma-separated list of the names of the nodes to exclude from the voting configuration. If specified, you may not also specify `node_ids`.
-        # @option args [String] :timeout When adding a voting configuration exclusion, the API waits for the specified nodes to be excluded from the voting configuration before returning. If the timeout expires before the appropriate condition is satisfied, the request fails and returns an error.
+        # @option args [Enumerable<String>, String] :node_ids A comma-separated list of node IDs to exclude from the voting configuration. When using this setting, you cannot also specify `node_names`.
+        # @option args [Enumerable<String>, String] :node_names A comma-separated list of node names to exclude from the voting configuration. When using this setting, you cannot also specify `node_ids`.
+        # @option args [String] :timeout When adding a voting configuration exclusion, the API waits for the specified nodes to be excluded from the voting configuration before returning a response. If the timeout expires before the appropriate condition is satisfied, the request fails and returns an error.
         def post_voting_config_exclusions(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

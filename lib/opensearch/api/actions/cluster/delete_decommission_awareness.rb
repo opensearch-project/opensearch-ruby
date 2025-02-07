@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Cluster
       module Actions
-        # Delete any existing decommission.
+        # Recommissions a decommissioned zone.
         #
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete_decommission_awareness(args = {})

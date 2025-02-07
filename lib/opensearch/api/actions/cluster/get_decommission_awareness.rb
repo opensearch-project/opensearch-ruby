@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Cluster
       module Actions
-        # Get details and status of decommissioned attribute.
+        # Retrieves the decommission status for all zones.
         #
-        # @option args [String] :awareness_attribute_name *Required* Awareness attribute name.
+        # @option args [String] :awareness_attribute_name *Required* The name of the awareness attribute.
         def get_decommission_awareness(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'awareness_attribute_name' missing" if args['awareness_attribute_name'].nil?

@@ -16,15 +16,15 @@ module OpenSearch
         # Updates a distinguished cluster name for a specific cluster. Only accessible to super-admins and with rest-api permissions when enabled.
         #
         # @option args [String] :cluster_name *Required* The cluster name to update `nodesDn` value.
-        # @option args [Hash] :body
+        # @option args [Enumerable<Hash>] :body
         def patch_distinguished_name(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'cluster_name' missing" if args['cluster_name'].nil?
 
           _cluster_name = args.delete('cluster_name')
 
-          headers = args.delete('headers') || {}
-          body    = args.delete('body')
+          headers = (args.delete('headers') || {}).merge('Content-Type' => 'application/x-ndjson')
+          body    = Utils.bulkify(args.delete('body'))
           method  = 'PATCH'
           url     = Utils.build_url('_plugins/_security/api/nodesdn', _cluster_name)
 

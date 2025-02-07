@@ -13,18 +13,18 @@ module OpenSearch
   module API
     module Cat
       module Actions
-        # Returns information about index shard recoveries, both on-going completed.
+        # Returns all completed and ongoing index and shard recoveries.
         #
         # @option args [Boolean] :active_only If `true`, the response only includes ongoing shard recoveries.
-        # @option args [String] :bytes The unit used to display byte values.
-        # @option args [Boolean] :detailed If `true`, the response includes detailed information about shard recoveries.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Enumerable<String>] :index Comma-separated list or wildcard expression of index names to limit the returned information.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
-        # @option args [String] :time The unit in which to display time values.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [String] :bytes The units used to display byte values.
+        # @option args [Boolean] :detailed When `true`, includes detailed information about shard recoveries.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Enumerable<String>] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
+        # @option args [String] :time Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://opensearch.org/docs/latest/api-reference/units/).
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         def recovery(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

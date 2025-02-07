@@ -18,7 +18,7 @@ module OpenSearch
         # @option args [Boolean] :rest_total_hits_as_int If `true`, the API response's `hit.total` property is returned as an integer. If `false`, the API response's `hit.total` property is returned as an object.
         # @option args [String] :scroll Period to retain the search context for scrolling.
         # @option args [String] :scroll_id DEPRECATED The scroll ID for scrolled search
-        # @option args [Hash] :body The scroll ID if not passed by URL or query parameter.
+        # @option args [Hash] :body
         def scroll(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _scroll_id = args.delete('scroll_id')

@@ -17,7 +17,7 @@ module OpenSearch
         # for example to pick up a mapping change.
         #
         # @option args [Enumerable<String>, String] :index *Required* Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`.
-        # @option args [Enumerable<String>] :_source Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
+        # @option args [Boolean, Enumerable<String>, String] :_source Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
         # @option args [Enumerable<String>] :_source_excludes List of fields to exclude from the returned `_source` field.
         # @option args [Enumerable<String>] :_source_includes List of fields to extract and return from the `_source` field.
         # @option args [Boolean] :allow_no_indices If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
@@ -43,7 +43,7 @@ module OpenSearch
         # @option args [String] :search_timeout Explicit timeout for each search request.
         # @option args [String] :search_type The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`.
         # @option args [Integer] :size Deprecated, use `max_docs` instead.
-        # @option args [Float, String] :slices The number of slices this task should be divided into.
+        # @option args [Integer, String] :slices The number of slices this task should be divided into.
         # @option args [Enumerable<String>] :sort A comma-separated list of <field>:<direction> pairs.
         # @option args [Enumerable<String>] :stats Specific `tag` of the request for logging and statistical purposes.
         # @option args [Integer] :terminate_after Maximum number of documents to collect for each shard. If a query reaches this limit, OpenSearch terminates the query early. OpenSearch collects documents before sorting. Use with caution. OpenSearch applies this parameter to each shard handling the request. When possible, let OpenSearch perform early termination automatically. Avoid specifying this parameter for requests that target data streams with backing indexes across multiple data tiers.

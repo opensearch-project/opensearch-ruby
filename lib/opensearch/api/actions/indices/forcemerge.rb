@@ -19,7 +19,7 @@ module OpenSearch
         # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
         # @option args [Boolean] :flush (default: true) Specify whether the index should be flushed after performing the operation.
         # @option args [Boolean] :ignore_unavailable Whether specified concrete indexes should be ignored when unavailable (missing or closed)
-        # @option args [Float] :max_num_segments The number of larger segments into which smaller segments are merged. Set this parameter to 1 to merge all segments into one segment. The default behavior is to perform the merge as necessary.
+        # @option args [Integer] :max_num_segments The number of larger segments into which smaller segments are merged. Set this parameter to 1 to merge all segments into one segment. The default behavior is to perform the merge as necessary.
         # @option args [Boolean] :only_expunge_deletes Specify whether the operation should only expunge deleted documents
         # @option args [Boolean] :primary_only Specify whether the operation should only perform on primary shards. Defaults to false.
         # @option args [Boolean] :wait_for_completion (default: true) Should the request wait until the force merge is completed.

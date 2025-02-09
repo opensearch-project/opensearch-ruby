@@ -13,12 +13,12 @@ module OpenSearch
   module API
     module Cluster
       module Actions
-        # Returns a list of any cluster-level changes (e.g. create index, update mapping,
-        # allocate or fail shard) which have not yet been executed.
+        # Returns a list of pending cluster-level tasks, such as index creation, mapping updates,
+        # or new allocations.
         #
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [Boolean] :local If `true`, the request retrieves information from the local node only. If `false`, information is retrieved from the cluster-manager node.
-        # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [String] :cluster_manager_timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [Boolean] :local When `true`, the request retrieves information from the local node only. When `false`, information is retrieved from the cluster manager node.
+        # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
         def pending_tasks(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

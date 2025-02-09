@@ -20,7 +20,7 @@ module OpenSearch
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
+          method  = body ? 'POST' : 'GET'
           url     = '_plugins/_ml/models/_search'
 
           Utils.validate_query_params! args

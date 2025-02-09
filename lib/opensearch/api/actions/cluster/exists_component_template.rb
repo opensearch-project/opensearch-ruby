@@ -15,10 +15,10 @@ module OpenSearch
       module Actions
         # Returns information about whether a particular component template exist.
         #
-        # @option args [String] :name *Required* Name of the component template to check existence of. Wildcard (*) expressions are supported.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [Boolean] :local If `true`, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the cluster-manager node.
-        # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [String] :name *Required* The name of the component template. Wildcard (*) expressions are supported.
+        # @option args [String] :cluster_manager_timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [Boolean] :local When `true`, the request retrieves information from the local node only. When `false, information is retrieved from the cluster manager node.
+        # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
         def exists_component_template(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'name' missing" if args['name'].nil?

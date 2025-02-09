@@ -13,15 +13,15 @@ module OpenSearch
   module API
     module Cat
       module Actions
-        # Shows information about currently configured aliases to indexes including filter and routing info.
+        # Shows information about aliases currently configured to indexes, including filter and routing information.
         #
-        # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [Enumerable<String>, String] :expand_wildcards Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Boolean] :local Whether to return information from the local node only instead of from the cluster manager node.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         # @option args [Enumerable<String>, String] :name A comma-separated list of aliases to retrieve. Supports wildcards (`*`).  To retrieve all aliases, omit this parameter or use `*` or `_all`.
         def aliases(args = {})
           args = Utils.clone_and_normalize_arguments(args)

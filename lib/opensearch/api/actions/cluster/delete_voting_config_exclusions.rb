@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Cluster
       module Actions
-        # Clears cluster voting config exclusions.
+        # Clears any cluster voting configuration exclusions.
         #
-        # @option args [Boolean] :wait_for_removal (default: true) Specifies whether to wait for all excluded nodes to be removed from the cluster before clearing the voting configuration exclusions list. Defaults to true, meaning that all excluded nodes must be removed from the cluster before this API takes any action. If set to `false` then the voting configuration exclusions list is cleared even if some excluded nodes are still in the cluster.
+        # @option args [Boolean] :wait_for_removal (default: true) Specifies whether to wait for all excluded nodes to be removed from the cluster before clearing the voting configuration exclusions list. When `true`, all excluded nodes are removed from the cluster before this API takes any action. When `false`, the voting configuration exclusions list is cleared even if some excluded nodes are still in the cluster.
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete_voting_config_exclusions(args = {})
           args = Utils.clone_and_normalize_arguments(args)

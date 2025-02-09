@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module AsynchronousSearch
       module Actions
-        # Delete asynchronous search.
+        # Deletes any responses from an asynchronous search.
         #
         # @option args [String] :id *Required*
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request

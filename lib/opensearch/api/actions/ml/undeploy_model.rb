@@ -15,11 +15,10 @@ module OpenSearch
       module Actions
         # Undeploys a model.
         #
-        # @option args [String] :model_id *Required*
+        # @option args [String] :model_id
+        # @option args [Hash] :body
         def undeploy_model(args = {})
           args = Utils.clone_and_normalize_arguments(args)
-          raise ArgumentError, "Required argument 'model_id' missing" if args['model_id'].nil?
-
           _model_id = args.delete('model_id')
 
           headers = args.delete('headers') || {}

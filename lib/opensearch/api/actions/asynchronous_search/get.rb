@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module AsynchronousSearch
       module Actions
-        # Get partial responses from asynchronous search.
+        # Gets partial responses from an asynchronous search.
         #
         # @option args [String] :id *Required*
         def get(args = {})

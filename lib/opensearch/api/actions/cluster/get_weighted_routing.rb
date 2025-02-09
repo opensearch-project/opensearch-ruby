@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Fetches weighted shard routing weights.
         #
-        # @option args [String] :attribute *Required* Awareness attribute name.
+        # @option args [String] :attribute *Required* The name of the awareness attribute.
         def get_weighted_routing(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'attribute' missing" if args['attribute'].nil?

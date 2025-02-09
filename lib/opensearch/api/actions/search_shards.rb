@@ -22,7 +22,6 @@ module OpenSearch
         # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
         # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
         # @option args [Enumerable<String>, String] :index Returns the indexes and shards that a search request would be executed against.
-        # @option args [Hash] :body Defines the parameters that can be used in the `search_shards` endpoint request. See documentation for supported query syntax.
         def search_shards(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

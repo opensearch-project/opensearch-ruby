@@ -15,16 +15,16 @@ module OpenSearch
       module Actions
         # Provides a snapshot of how many shards are allocated to each data node and how much disk space they are using.
         #
-        # @option args [String] :bytes The unit used to display byte values.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.
-        # @option args [String] :master_timeout DEPRECATED Operation timeout for connection to cluster-manager node.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
-        # @option args [Enumerable<String>, String] :node_id Comma-separated list of node identifiers or names used to limit the returned information.
+        # @option args [String] :bytes The units used to display byte values.
+        # @option args [String] :cluster_manager_timeout A timeout for connection to the cluster manager node.
+        # @option args [String] :format A short version of the HTTP `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Boolean] :local Returns local information but does not retrieve the state from cluster-manager node.
+        # @option args [String] :master_timeout DEPRECATED A timeout for connection to the cluster manager node.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
+        # @option args [Enumerable<String>, String] :node_id A comma-separated list of node IDs or names used to limit the returned information.
         def allocation(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _node_id = args.delete('node_id')

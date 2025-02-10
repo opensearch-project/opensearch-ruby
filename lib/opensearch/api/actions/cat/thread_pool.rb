@@ -14,17 +14,17 @@ module OpenSearch
     module Cat
       module Actions
         # Returns cluster-wide thread pool statistics per node.
-        # By default the active, queue and rejected statistics are returned for all thread pools.
+        # By default the active, queued, and rejected statistics are returned for all thread pools.
         #
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.
-        # @option args [String] :master_timeout DEPRECATED Operation timeout for connection to cluster-manager node.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
+        # @option args [String] :cluster_manager_timeout A timeout for connection to the cluster manager node.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Boolean] :local Returns local information but does not retrieve the state from the cluster manager node.
+        # @option args [String] :master_timeout DEPRECATED The amount of time allowed to establish a connection to the cluster manager node.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
         # @option args [Integer] :size The multiplier in which to display values.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         # @option args [Enumerable<String>, String] :thread_pool_patterns A comma-separated list of thread pool names used to limit the request. Accepts wildcard expressions.
         def thread_pool(args = {})
           args = Utils.clone_and_normalize_arguments(args)

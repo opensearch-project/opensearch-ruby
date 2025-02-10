@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Root
       module Actions
-        # Changes the number of requests per second for a particular Reindex operation.
+        # Changes the number of requests per second for a particular reindex operation.
         #
         # @option args [String] :task_id *Required* Identifier for the task.
         # @option args [Float] :requests_per_second The throttle for this request in sub-requests per second.

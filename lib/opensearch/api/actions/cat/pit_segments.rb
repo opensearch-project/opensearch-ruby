@@ -13,14 +13,14 @@ module OpenSearch
   module API
     module Cat
       module Actions
-        # List segments for one or several PITs.
+        # Lists one or several CAT point-in-time segments.
         #
-        # @option args [String] :bytes The unit in which to display byte values.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [String] :bytes The units used to display byte values.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         # @option args [Hash] :body
         def pit_segments(args = {})
           args = Utils.clone_and_normalize_arguments(args)

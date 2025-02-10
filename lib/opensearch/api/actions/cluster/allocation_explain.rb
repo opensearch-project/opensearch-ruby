@@ -13,11 +13,11 @@ module OpenSearch
   module API
     module Cluster
       module Actions
-        # Provides explanations for shard allocations in the cluster.
+        # Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to a node.
         #
-        # @option args [Boolean] :include_disk_info If `true`, returns information about disk usage and shard sizes.
-        # @option args [Boolean] :include_yes_decisions If `true`, returns YES decisions in explanation.
-        # @option args [Hash] :body The index, shard, and primary flag to explain. Empty means 'explain the first unassigned shard'
+        # @option args [Boolean] :include_disk_info When `true`, returns information about disk usage and shard sizes.
+        # @option args [Boolean] :include_yes_decisions When `true`, returns any `YES` decisions in the allocation explanation.
+        # @option args [Hash] :body The index, shard, and primary flag for which to generate an explanation. Leave this empty to generate an explanation for the first unassigned shard.
         def allocation_explain(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

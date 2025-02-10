@@ -15,13 +15,13 @@ module OpenSearch
       module Actions
         # Shows how much heap memory is currently being used by field data on every data node in the cluster.
         #
-        # @option args [String] :bytes The unit used to display byte values.
-        # @option args [Enumerable<String>, String] :fields Comma-separated list of fields used to limit returned information.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [String] :bytes The units used to display byte values.
+        # @option args [Enumerable<String>, String] :fields A comma-separated list of fields used to limit the amount of returned information.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         def fielddata(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _fields = args.delete('fields')

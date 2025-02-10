@@ -13,18 +13,18 @@ module OpenSearch
   module API
     module Cat
       module Actions
-        # Provides a detailed view of shard allocation on nodes.
+        # Lists the states of all primary and replica shards and how they are distributed.
         #
-        # @option args [String] :bytes The unit used to display byte values.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.
-        # @option args [String] :master_timeout DEPRECATED Operation timeout for connection to cluster-manager node.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
-        # @option args [String] :time The unit in which to display time values.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [String] :bytes The units used to display byte values.
+        # @option args [String] :cluster_manager_timeout The amount of time allowed to establish a connection to the cluster manager node.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Boolean] :local Returns local information but does not retrieve the state from the cluster manager node.
+        # @option args [String] :master_timeout DEPRECATED The amount of time allowed to establish a connection to the cluster manager node.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
+        # @option args [String] :time Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://opensearch.org/docs/latest/api-reference/units/).
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
         def shards(args = {})
           args = Utils.clone_and_normalize_arguments(args)

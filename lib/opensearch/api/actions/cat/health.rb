@@ -15,13 +15,13 @@ module OpenSearch
       module Actions
         # Returns a concise representation of the cluster health.
         #
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
         # @option args [String] :time The unit used to display time values.
-        # @option args [Boolean] :ts (default: true) If `true`, returns `HH:MM:SS` and Unix epoch timestamps.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [Boolean] :ts (default: true) When `true`, returns `HH:MM:SS` and Unix epoch timestamps.
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         def health(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

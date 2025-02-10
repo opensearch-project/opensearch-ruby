@@ -13,19 +13,19 @@ module OpenSearch
   module API
     module Cluster
       module Actions
-        # Returns a comprehensive information about the state of the cluster.
+        # Returns comprehensive information about the state of the cluster.
         #
-        # @option args [Boolean] :allow_no_indices Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified)
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-        # @option args [Boolean] :flat_settings Return settings in flat format.
-        # @option args [Boolean] :ignore_unavailable Whether specified concrete indexes should be ignored when unavailable (missing or closed)
-        # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.
-        # @option args [String] :master_timeout DEPRECATED Specify timeout for connection to cluster manager.
+        # @option args [Boolean] :allow_no_indices Whether to ignore a wildcard index expression that resolves into no concrete indexes. This includes the `_all` string or when no indexes have been specified.
+        # @option args [String] :cluster_manager_timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [Enumerable<String>, String] :expand_wildcards Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
+        # @option args [Boolean] :flat_settings Returns settings in a flat format.
+        # @option args [Boolean] :ignore_unavailable Whether the specified concrete indexes should be ignored when unavailable (missing or closed).
+        # @option args [Boolean] :local Whether to return information from the local node only instead of from the cluster manager node.
+        # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
         # @option args [Integer] :wait_for_metadata_version Wait for the metadata version to be equal or greater than the specified metadata version.
         # @option args [String] :wait_for_timeout The maximum time to wait for `wait_for_metadata_version` before timing out.
-        # @option args [Enumerable<String>] :metric Limit the information returned to the specified metrics
-        # @option args [Enumerable<String>, String] :index A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
+        # @option args [Enumerable<String>] :metric Limits the information returned to only the specified metrics.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
         def state(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _metric = args.delete('metric')

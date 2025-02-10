@@ -13,18 +13,18 @@ module OpenSearch
   module API
     module Cat
       module Actions
-        # Returns all snapshots in a specific repository.
+        # Lists all of the snapshots stored in a specific repository.
         #
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
-        # @option args [Boolean] :help Return help information.
-        # @option args [Boolean] :ignore_unavailable If `true`, the response does not include information from unavailable snapshots.
-        # @option args [String] :master_timeout DEPRECATED Operation timeout for connection to cluster-manager node.
+        # @option args [String] :cluster_manager_timeout The amount of time allowed to establish a connection to the cluster manager node.
+        # @option args [String] :format A short version of the `Accept` header, such as `json` or `yaml`.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
+        # @option args [Boolean] :help Returns help information.
+        # @option args [Boolean] :ignore_unavailable When `true`, the response does not include information from unavailable snapshots.
+        # @option args [String] :master_timeout DEPRECATED The amount of time allowed to establish a connection to the cluster manager node.
         # @option args [Enumerable<String>, String] :repository *Required* A comma-separated list of snapshot repositories used to limit the request. Accepts wildcard expressions. `_all` returns all repositories. If any repository fails during the request, OpenSearch returns an error.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
-        # @option args [String] :time The unit in which to display time values.
-        # @option args [Boolean] :v Verbose mode. Display column headers.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
+        # @option args [String] :time Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://opensearch.org/docs/latest/api-reference/units/).
+        # @option args [Boolean] :v Enables verbose mode, which displays column headers.
         def snapshots(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?

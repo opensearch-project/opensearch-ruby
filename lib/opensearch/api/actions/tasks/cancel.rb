@@ -19,7 +19,7 @@ module OpenSearch
         # @option args [Enumerable<String>] :nodes Comma-separated list of node IDs or names used to limit the request.
         # @option args [String] :parent_task_id Parent task ID used to limit the tasks.
         # @option args [Boolean] :wait_for_completion Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false
-        # @option args [Float, String] :task_id ID of the task.
+        # @option args [String] :task_id ID of the task.
         def cancel(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _task_id = args.delete('task_id')

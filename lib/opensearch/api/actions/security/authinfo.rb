@@ -13,10 +13,10 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Returns the authentication information.
+        # Returns or updates authentication information for the currently authenticated user.
         #
-        # @option args [String] :auth_type The type of current authentication request.
-        # @option args [Boolean] :verbose Indicates whether a verbose response should be returned.
+        # @option args [String] :auth_type The type of the current authentication request.
+        # @option args [Boolean] :verbose Whether to return a verbose response.
         def authinfo(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

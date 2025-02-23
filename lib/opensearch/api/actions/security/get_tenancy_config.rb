@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
+        # Retrieves the multi-tenancy configuration. Requires super admin or REST API permissions.
         #
         def get_tenancy_config(args = {})
           args = Utils.clone_and_normalize_arguments(args)

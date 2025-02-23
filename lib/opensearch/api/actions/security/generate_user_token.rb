@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Generates authorization token for the given user.
+        # Generates an authorization token for the specified user.
         #
-        # @option args [String] :username *Required* The name of the user for whom an auth token is to be vended.
+        # @option args [String] :username *Required* The name of the user for whom to issue an authorization token.
         def generate_user_token(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'username' missing" if args['username'].nil?

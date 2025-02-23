@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Changes the number of requests per second for a particular Delete By Query operation.
         #
-        # @option args [Float, String] :task_id *Required* The ID for the task.
+        # @option args [String] :task_id *Required* The ID for the task.
         # @option args [Float] :requests_per_second The throttle for this request in sub-requests per second.
         def delete_by_query_rethrottle(args = {})
           args = Utils.clone_and_normalize_arguments(args)

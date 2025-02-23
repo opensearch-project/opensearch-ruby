@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Generates authorization token for the given user. Legacy API. Not Implemented.
         #
-        # @option args [String] :username *Required* The name of the user for whom an auth token is to be vended.
+        # @option args [String] :username *Required* The name of the user for whom to issue an authorization token.
         def generate_user_token_legacy(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'username' missing" if args['username'].nil?

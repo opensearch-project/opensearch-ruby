@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Checks to see if the Security plugin is up and running.
+        # Checks to see if the Security plugin is running.
         #
-        # @option args [String] :mode A flag to indicate whether service should consider security-plugin's status before returning health response. `strict` mode indicates service should check Security plugin status.
+        # @option args [String] :mode A flag that determines whether to consider the security status before returning a response for a health query response. For example, `strict` mode indicates service should check the Security plugin status.
         def health(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Creates, updates, or deletes multiple action groups in a single call.
+        # Creates, updates, or deletes multiple action groups in a single request.
         #
         # @option args [Enumerable<Hash>] :body *Required*
         def patch_action_groups(args = {})

@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Returns account details for the current user.
+        # Returns account information for the current user.
         #
         def get_account_details(args = {})
           args = Utils.clone_and_normalize_arguments(args)

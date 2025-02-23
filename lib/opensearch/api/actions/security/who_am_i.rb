@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Gets the user identity related information for currently logged in user.
+        # Gets the identity information for the user currently logged in.
         #
         def who_am_i(args = {})
           args = Utils.clone_and_normalize_arguments(args)

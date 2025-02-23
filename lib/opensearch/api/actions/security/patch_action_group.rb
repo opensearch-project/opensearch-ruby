@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Updates individual attributes of an action group.
+        # Updates the individual attributes of an action group.
         #
         # @option args [String] :action_group *Required* The name of the action group to update.
         # @option args [Enumerable<Hash>] :body *Required*

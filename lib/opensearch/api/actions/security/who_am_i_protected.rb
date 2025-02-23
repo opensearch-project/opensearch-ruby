@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Gets the user identity related information for currently logged in user. User needs to have access to this endpoint when authorization at REST layer is enabled.
+        # Gets the identity information for the user currently logged in. To use this operation, you must have access to this endpoint when authorization at REST layer is enabled.
         #
         def who_am_i_protected(args = {})
           args = Utils.clone_and_normalize_arguments(args)

@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Generates On-Behalf-Of token for the current user.
+        # Generates a `On-Behalf-Of` token for the current user.
         #
         # @option args [Hash] :body *Required*
         def generate_obo_token(args = {})

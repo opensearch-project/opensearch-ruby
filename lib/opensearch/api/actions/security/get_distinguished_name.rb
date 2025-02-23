@@ -13,10 +13,10 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
+        # Retrieves all node distinguished names. Requires super admin or REST API permissions.
         #
-        # @option args [String] :cluster_name *Required* The cluster-name to retrieve nodes DN setting for.
-        # @option args [Boolean] :show_all A Boolean flag to include/exclude static nodes DN from final result.
+        # @option args [String] :cluster_name *Required* The name of the cluster to retrieve that cluster's nodes DN settings.
+        # @option args [Boolean] :show_all Whether to include or exclude any static node's DN settings from the final result.
         def get_distinguished_name(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'cluster_name' missing" if args['cluster_name'].nil?

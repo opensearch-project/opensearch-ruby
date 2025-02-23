@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves the SSL configuration information.
+        # Retrieves information about the SSL configuration.
         #
-        # @option args [Hash] :show_dn A Boolean flag to indicate whether all domain names should be returned.
+        # @option args [Hash] :show_dn Whether to include all domain names in the response.
         def get_sslinfo(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

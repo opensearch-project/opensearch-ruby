@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Migrates security configuration from v6 to v7.
+        # Migrates the security configuration from v6 to v7.
         #
         def migrate(args = {})
           args = Utils.clone_and_normalize_arguments(args)

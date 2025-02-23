@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Flushes the Security plugin user, authentication, and authorization cache.
+        # Flushes the Security plugin's user, authentication, and authorization cache.
         #
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def flush_cache(args = {})

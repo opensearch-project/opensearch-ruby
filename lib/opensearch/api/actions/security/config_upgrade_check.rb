@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Check whether or not an upgrade can be performed and what resources can be updated.
+        # Checks whether or not an upgrade can be performed and which security resources can be updated.
         #
         def config_upgrade_check(args = {})
           args = Utils.clone_and_normalize_arguments(args)

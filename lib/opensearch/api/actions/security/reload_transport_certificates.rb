@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Reload Transport layer communication certificates.
+        # Reloads the transport communication certificates.
         #
         def reload_transport_certificates(args = {})
           args = Utils.clone_and_normalize_arguments(args)

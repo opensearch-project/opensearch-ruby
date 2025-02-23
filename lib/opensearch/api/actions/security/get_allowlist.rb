@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves the current list of allowed API accessible to normal user.
+        # Retrieves the current list of allowed APIs accessible to a normal user.
         #
         def get_allowlist(args = {})
           args = Utils.clone_and_normalize_arguments(args)

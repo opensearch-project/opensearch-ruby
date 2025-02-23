@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Creates or replaces the specified tenant.
         #
-        # @option args [String] :tenant *Required* The name of the tenant to be created.
+        # @option args [String] :tenant *Required* The name of the tenant to create.
         # @option args [Hash] :body *Required*
         def create_tenant(args = {})
           args = Utils.clone_and_normalize_arguments(args)

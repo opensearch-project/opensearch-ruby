@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Adds or updates the existing configuration using the REST API. Only accessible by admins and users with REST API access and only when put or patch is enabled.
+        # Updates the settings for an existing security configuration. Requires super admin or REST API permissions.
         #
         # @option args [Hash] :body *Required*
         def update_configuration(args = {})

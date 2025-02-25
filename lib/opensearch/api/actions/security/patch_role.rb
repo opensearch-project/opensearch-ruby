@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Updates individual attributes of a role.
+        # Updates the individual attributes of a role.
         #
         # @option args [String] :role *Required* The name of the role to update.
         # @option args [Enumerable<Hash>] :body *Required*

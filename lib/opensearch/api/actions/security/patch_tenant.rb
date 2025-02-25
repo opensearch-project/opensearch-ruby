@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Add, delete, or modify a single tenant.
+        # Adds, deletes, or modifies a single tenant.
         #
         # @option args [String] :tenant *Required* The name of the tenant to update.
         # @option args [Enumerable<Hash>] :body *Required*

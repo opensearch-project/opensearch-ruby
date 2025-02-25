@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Updates the current list of allowed API accessible to normal user.
+        # Updates the current list of APIs accessible for users on the allow list.
         #
         # @option args [Enumerable<Hash>] :body *Required*
         def patch_allowlist(args = {})

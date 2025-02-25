@@ -15,8 +15,8 @@ module OpenSearch
       module Actions
         # Retrieves the cluster security certificates.
         #
-        # @option args [String] :cert_type The type of certificates (HTTP, TRANSPORT, ALL) to retrieve from all nodes.
-        # @option args [String] :timeout The maximum duration, in seconds, to be spent to retrieve certificates from all nodes.
+        # @option args [String] :cert_type The type of certificates (`HTTP`, `TRANSPORT`, or `ALL`) to retrieve from all nodes.
+        # @option args [String] :timeout The maximum duration, in seconds, to spend retrieving certificates from all nodes before a timeout.
         def get_all_certificates(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

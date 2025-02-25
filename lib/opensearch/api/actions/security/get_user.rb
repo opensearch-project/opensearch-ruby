@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieve one internal user.
+        # Retrieve information about the specified internal user.
         #
         # @option args [String] :username *Required* The name of the user to retrieve.
         def get_user(args = {})

@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Retrieves one role.
         #
-        # @option args [String] :role *Required*
+        # @option args [String] :role *Required* The name of the role to retrieve.
         def get_role(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'role' missing" if args['role'].nil?

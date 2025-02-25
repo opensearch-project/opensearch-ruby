@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Checks whether the v6 security configuration is valid and ready to be migrated to v7.
         #
-        # @option args [Boolean] :accept_invalid A Boolean flag to indicate whether invalid v6 configuration should be allowed.
+        # @option args [Boolean] :accept_invalid Whether an invalid v6 configuration should be allowed.
         def validate(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

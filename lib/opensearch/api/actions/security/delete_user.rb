@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Delete the specified user.
+        # Deletes the specified internal user.
         #
         # @option args [String] :username *Required* The name of the user to delete.
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request

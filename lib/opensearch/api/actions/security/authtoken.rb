@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Returns the authorization token.
+        # Returns the authorization token for the current user.
         #
         def authtoken(args = {})
           args = Utils.clone_and_normalize_arguments(args)

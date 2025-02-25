@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Creates or updates multiple role mappings in a single call.
+        # Creates or updates multiple role mappings in a single request.
         #
         # @option args [Enumerable<Hash>] :body *Required*
         def patch_role_mappings(args = {})

@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Creates or replaces the specified user.
         #
-        # @option args [String] :username *Required* The name of the user to be created.
+        # @option args [String] :username *Required* The name of the user to create.
         # @option args [Hash] :body *Required*
         def create_user(args = {})
           args = Utils.clone_and_normalize_arguments(args)

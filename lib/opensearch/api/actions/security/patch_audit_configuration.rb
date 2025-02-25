@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # A PATCH call is used to update specified fields in the audit configuration.
+        # Updates the specified fields in the audit configuration.
         #
         # @option args [Enumerable<Hash>] :body *Required*
         def patch_audit_configuration(args = {})

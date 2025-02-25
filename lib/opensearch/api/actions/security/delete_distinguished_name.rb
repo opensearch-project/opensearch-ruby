@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Deletes all distinguished names in the specified cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
+        # Deletes all distinguished names in the specified cluster or node allowlist. Requires super admin or REST API permissions.
         #
-        # @option args [String] :cluster_name *Required* The cluster-name to delete from list of distinguished names.
+        # @option args [String] :cluster_name *Required* The cluster name to delete from list of distinguished names.
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete_distinguished_name(args = {})
           args = Utils.clone_and_normalize_arguments(args)

@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Creates or replaces the specified role mapping.
         #
-        # @option args [String] :role *Required* The name of the role to create a role mapping for.
+        # @option args [String] :role *Required* The name of the role for which to create a role mapping.
         # @option args [Hash] :body *Required*
         def create_role_mapping(args = {})
           args = Utils.clone_and_normalize_arguments(args)

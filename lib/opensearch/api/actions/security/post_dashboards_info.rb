@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Updates the current security-dashboards plugin configuration.
+        # Retrieves the current values for dynamic security settings for OpenSearch Dashboards.
         #
         def post_dashboards_info(args = {})
           args = Utils.clone_and_normalize_arguments(args)

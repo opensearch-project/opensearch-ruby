@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Bulk update of distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
+        # Bulk updates specified node distinguished names. Requires super admin or REST API permissions.
         #
         # @option args [Enumerable<Hash>] :body *Required*
         def patch_distinguished_names(args = {})

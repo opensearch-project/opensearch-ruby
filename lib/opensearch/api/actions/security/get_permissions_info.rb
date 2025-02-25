@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Gets the evaluated REST API permissions for the currently logged in user.
+        # Retrieves the evaluated REST API permissions for the currently logged in user.
         #
         def get_permissions_info(args = {})
           args = Utils.clone_and_normalize_arguments(args)

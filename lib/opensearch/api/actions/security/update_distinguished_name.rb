@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Adds or updates the specified distinguished names in the cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
+        # Adds or updates the specified distinguished names in the cluster or node allowlist. Requires super admin or REST API permissions.
         #
-        # @option args [String] :cluster_name *Required* The cluster-name to create/update `nodesDn` value for.
+        # @option args [String] :cluster_name *Required* The name of the cluster containing the `nodesDn` value to create or update.
         # @option args [Hash] :body
         def update_distinguished_name(args = {})
           args = Utils.clone_and_normalize_arguments(args)

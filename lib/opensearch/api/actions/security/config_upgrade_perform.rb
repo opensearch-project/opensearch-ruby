@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Helps cluster operator upgrade missing defaults and stale default definitions.
+        # Assists the cluster operator with upgrading missing default values and stale default definitions.
         #
         # @option args [Hash] :body
         def config_upgrade_perform(args = {})

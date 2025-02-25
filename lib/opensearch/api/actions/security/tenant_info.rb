@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves the tenant names if any exist. Only accessible to super admins or kibanaserver user.
+        # Retrieves the names of current tenants. Requires super admin or `kibanaserver` permissions.
         #
         def tenant_info(args = {})
           args = Utils.clone_and_normalize_arguments(args)

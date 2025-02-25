@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Creates or replaces the specified role.
         #
-        # @option args [String] :role *Required* The name of the role to be created.
+        # @option args [String] :role *Required* The name of the role to create.
         # @option args [Hash] :body *Required*
         def create_role(args = {})
           args = Utils.clone_and_normalize_arguments(args)

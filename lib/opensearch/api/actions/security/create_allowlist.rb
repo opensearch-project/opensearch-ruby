@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Creates or replaces the permitted APIs. Accessible using Super Admin certificate or REST API permission.
+        # Creates or replaces APIs permitted for users on the allow list. Requires a super admin certificate or REST API permissions.
         #
         # @option args [Hash] :body *Required*
         def create_allowlist(args = {})

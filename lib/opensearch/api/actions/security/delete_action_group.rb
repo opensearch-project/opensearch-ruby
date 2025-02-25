@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Delete a specified action group.
+        # Deletes the specified action group.
         #
         # @option args [String] :action_group *Required* The name of the action group to delete.
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request

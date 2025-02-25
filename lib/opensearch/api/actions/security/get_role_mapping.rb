@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves one role mapping.
+        # Retrieves the specified role mapping.
         #
-        # @option args [String] :role *Required*
+        # @option args [String] :role *Required* The name of the role mapping to retrieve.
         def get_role_mapping(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'role' missing" if args['role'].nil?

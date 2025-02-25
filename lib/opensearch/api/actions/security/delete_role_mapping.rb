@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Deletes the specified role mapping.
         #
-        # @option args [String] :role *Required* The name of the role whose mapping needs to delete.
+        # @option args [String] :role *Required* The name of the role for which to delete the role's mappings.
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete_role_mapping(args = {})
           args = Utils.clone_and_normalize_arguments(args)

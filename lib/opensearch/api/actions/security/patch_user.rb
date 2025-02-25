@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Updates individual attributes of an internal user.
+        # Updates individual attributes for an internal user.
         #
         # @option args [String] :username *Required* The name of the user to update.
         # @option args [Enumerable<Hash>] :body *Required*

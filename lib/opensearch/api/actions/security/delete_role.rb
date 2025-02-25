@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Delete the specified role.
+        # Deletes the specified role.
         #
         # @option args [String] :role *Required* The name of the role to delete.
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request

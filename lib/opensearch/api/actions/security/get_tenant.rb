@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves one tenant.
+        # Retrieves the specified tenant.
         #
         # @option args [String] :tenant *Required* The name of the tenant to retrieve.
         def get_tenant(args = {})

@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
+        # Retrieves all node distinguished names. Requires super admin or REST API permissions.
         #
-        # @option args [Boolean] :show_all A Boolean flag to include/exclude static nodes DN from final result.
+        # @option args [Boolean] :show_all Whether to include or exclude any static node's DN settings from the final result.
         def get_distinguished_names(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

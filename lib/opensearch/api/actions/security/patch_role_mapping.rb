@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Updates individual attributes of a role mapping.
+        # Updates the individual attributes of a role mapping.
         #
-        # @option args [String] :role *Required* The name of the role to update role-mapping for.
+        # @option args [String] :role *Required* The name of the role to update a role mapping for
         # @option args [Enumerable<Hash>] :body *Required*
         def patch_role_mapping(args = {})
           args = Utils.clone_and_normalize_arguments(args)

@@ -13,11 +13,11 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Retrieves the given node's security certificates.
+        # Retrieves the specified node's security certificates.
         #
-        # @option args [String] :node_id *Required* The full-id of the node to retrieve certificates.
-        # @option args [String] :cert_type The type of certificates (HTTP, TRANSPORT, ALL) to retrieve for a node.
-        # @option args [String] :timeout The maximum duration, in seconds, to be spent to retrieve a node's certificates.
+        # @option args [String] :node_id *Required* The node ID to retrieve certificates for.
+        # @option args [String] :cert_type The type of certificates (`HTTP`, `TRANSPORT`, or `ALL`) to retrieve from a node.
+        # @option args [String] :timeout The maximum duration, in seconds, to spend retrieving certificates from all nodes before a timeout.
         def get_node_certificates(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'node_id' missing" if args['node_id'].nil?

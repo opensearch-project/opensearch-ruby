@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Updates a distinguished cluster name for a specific cluster. Only accessible to super-admins and with rest-api permissions when enabled.
+        # Updates the distinguished cluster name for the specified cluster. Requires super admin or REST API permissions.
         #
-        # @option args [String] :cluster_name *Required* The cluster name to update `nodesDn` value.
+        # @option args [String] :cluster_name *Required* The cluster name to update the `nodesDn` value.
         # @option args [Enumerable<Hash>] :body
         def patch_distinguished_name(args = {})
           args = Utils.clone_and_normalize_arguments(args)

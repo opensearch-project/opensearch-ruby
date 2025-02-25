@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Add, delete, or modify multiple tenants in a single call.
+        # Adds, deletes, or modifies multiple tenants in a single request.
         #
         # @option args [Enumerable<Hash>] :body *Required*
         def patch_tenants(args = {})

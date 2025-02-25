@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Delete the specified tenant.
+        # Deletes the specified tenant.
         #
         # @option args [String] :tenant *Required* The name of the tenant to delete.
         # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request

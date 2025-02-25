@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Creates or replaces the multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
+        # Creates or replaces the multi-tenancy configuration. Requires super admin or REST API permissions.
         #
         # @option args [Hash] :body *Required*
         def create_update_tenancy_config(args = {})

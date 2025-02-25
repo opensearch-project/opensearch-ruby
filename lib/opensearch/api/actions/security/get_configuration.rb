@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Returns the current Security plugin configuration in JSON format.
+        # Returns the current Security plugin configuration in a JSON format.
         #
         def get_configuration(args = {})
           args = Utils.clone_and_normalize_arguments(args)

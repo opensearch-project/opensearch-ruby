@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Security
       module Actions
-        # Reload HTTP layer communication certificates.
+        # Reloads the HTTP communication certificates.
         #
         def reload_http_certificates(args = {})
           args = Utils.clone_and_normalize_arguments(args)

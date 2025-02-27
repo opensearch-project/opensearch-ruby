@@ -113,10 +113,7 @@ To delete a document, use the `delete` API action. The following code deletes th
 ```ruby 
 client.delete(index: index, id: 1)
 ```
-By default, the `delete` action is not idempotent. If you try to delete a document that does not exist, or delete the same document twice, you will run into Not Found (404) error. You can make the `delete` action idempotent by setting the `ignore` parameter to `404`:
-```ruby
-client.delete(index: index, id: 1, ignore: 404)
-```
+By default, the `delete` action is not idempotent. If you try to delete a document that does not exist, or delete the same document twice, you will run into 404/NotFound error. You can make the `delete` action idempotent across the client instance. Check the [Idempotent Delete](idempotent_delete.md) guide for more information.
 
 ### Delete multiple documents by query
 To delete documents that match a query, use the `delete_by_query` API action. The following code deletes all documents with `year` greater than 2023:

@@ -282,8 +282,6 @@ module OpenSearch
 
           params = params.clone
 
-          ignore = Array(params.delete(:ignore)).compact.map(&:to_i)
-
           begin
             tries     += 1
             connection = get_connection or raise(Error, 'Cannot get new connection from pool.')
@@ -343,10 +341,9 @@ module OpenSearch
                       duration
             end
 
-            # Log the failure only when `ignore` doesn't match the response status
-            log_fatal "[#{response.status}] #{response.body}" unless ignore.include?(response.status.to_i)
+            log_fatal "[#{response.status}] #{response.body}"
 
-            __raise_transport_error response unless ignore.include?(response.status.to_i)
+            __raise_transport_error response
           end
 
           if response.body && !response.body.empty? && response.headers && response.headers['content-type'] =~ /json/
@@ -358,9 +355,7 @@ module OpenSearch
             'n/a'
           end
 
-          unless ignore.include?(response.status.to_i)
-            __log_response method, path, params, body, url, response, json, took, duration
-          end
+          __log_response method, path, params, body, url, response, json, took, duration
 
           if tracer
             __trace method, path, params, connection.connection.headers, body, url, response, nil, 'N/A',

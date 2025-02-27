@@ -25,7 +25,6 @@ module OpenSearch
         # @option args [Integer] :version Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
         # @option args [String] :version_type Specific version type: `external`, `external_gte`.
         # @option args [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
-        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?
@@ -34,14 +33,13 @@ module OpenSearch
           _id = args.delete('id')
           _index = args.delete('index')
 
-          ignore  = args.delete('ignore') || []
           headers = args.delete('headers') || {}
           body    = args.delete('body')
           method  = 'DELETE'
           url     = Utils.build_url(_index, '_doc', _id)
 
           Utils.validate_query_params! args, DELETE_QUERY_PARAMS
-          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
+          transport.perform_delete_request method, url, args, body, headers
         end
 
         DELETE_QUERY_PARAMS = Set.new(%w[

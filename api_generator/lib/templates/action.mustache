@@ -12,9 +12,6 @@ module OpenSearch
         {{#argument_descriptions}}
         # @option args [{{{data_type}}}] :{{{name}}}{{#required}} *Required*{{/required}}{{#deprecated}} DEPRECATED{{/deprecated}}{{#default}} (default: {{{default}}}){{/default}}{{#description}} {{{description}}}{{/description}}
         {{/argument_descriptions}}
-        {{#support_ignore}}
-        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
-        {{/support_ignore}}
         {{#api_reference}}
         #
         # {API Reference}[{{{api_reference}}}]
@@ -33,9 +30,6 @@ module OpenSearch
 
           {{/_blank_line}}
           {{/path_params}}
-          {{#support_ignore}}
-          ignore  = args.delete('ignore') || []
-          {{/support_ignore}}
           {{#bulk_body}}
           headers = (args.delete('headers') || {}).merge('Content-Type' => 'application/x-ndjson')
           body    = Utils.bulkify(args.delete('body'))

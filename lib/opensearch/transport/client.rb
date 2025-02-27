@@ -101,6 +101,8 @@ module OpenSearch
       #
       # @option arguments [Boolean] :reload_on_failure Reload connections after failure (false by default)
       #
+      # @option arguments [Boolean] :ignore_404_on_delete Whether to ignore 404/NotFound error on http DELETE (false by default)
+      #
       # @option arguments [Integer] :request_timeout The request timeout to be passed to transport in options
       #
       # @option arguments [Symbol] :adapter A specific adapter for Faraday (e.g. `:patron`)
@@ -134,7 +136,7 @@ module OpenSearch
       #
       def initialize(arguments = {}, &block)
         @options = arguments.transform_keys(&:to_sym)
-        @arguments = @options
+        @arguments = @options.clone
         @arguments[:logger] ||= @arguments[:log]   ? DEFAULT_LOGGER.call : nil
         @arguments[:tracer] ||= @arguments[:trace] ? DEFAULT_TRACER.call : nil
         @arguments[:reload_connections] ||= false
@@ -144,6 +146,7 @@ module OpenSearch
         @arguments[:transport_options]  ||= {}
         @arguments[:http]               ||= {}
         @options[:http]                 ||= {}
+        @options[:ignore_404_on_delete] ||= false
 
         set_api_key if (@api_key = @arguments[:api_key])
         set_compatibility_header if ENV['ELASTIC_CLIENT_APIVERSIONING']
@@ -206,10 +209,10 @@ module OpenSearch
         raise e
       end
 
-      def perform_delete_request(*args, ignore404)
+      def perform_delete_request(*args)
         perform_request(*args).body
       rescue StandardError => e
-        if ignore404
+        if @options[:ignore_404_on_delete]
           return false if e.class.to_s =~ /NotFound/
           return false if e.message =~ /Not\s*Found/i
         end

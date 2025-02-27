@@ -72,10 +72,6 @@ class ActionRenderer < BaseGenerator
     @action.arguments.find { |arg| arg.name == 'body' }&.schema&.type == 'array'
   end
 
-  def support_ignore
-    @action.http_verbs == %w[DELETE]
-  end
-
   def path_params
     @action.path_params.map { |arg| { name: arg.name } }
            .tap { |args| args.last&.[]=('_blank_line', true) }
@@ -89,7 +85,7 @@ class ActionRenderer < BaseGenerator
     args = 'method, url, args, body, headers'
     return "transport.perform_ping_request #{args}" if @action.full_name == 'ping'
     return "transport.perform_head_request #{args}" if @action.http_verbs == %w[HEAD]
-    return "transport.perform_delete_request #{args}, ignore.include?(404)" if @action.http_verbs == %w[DELETE]
+    return "transport.perform_delete_request #{args}" if @action.http_verbs == %w[DELETE]
     "transport.perform_request(#{args}).body"
   end
 end

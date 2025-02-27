@@ -14,7 +14,7 @@ require 'cgi'
 module OpenSearch
   module API
     module Utils
-      NON_URL_ARGS = Set.new(%w[body headers ignore]).freeze
+      NON_URL_ARGS = Set.new(%w[body headers]).freeze
       BULK_OPERATIONS = Set.new(%w[index create delete update]).freeze
 
       # @return a new hash with all keys converted to strings and url param values escaped

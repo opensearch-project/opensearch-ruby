@@ -120,7 +120,7 @@ The response body contains the index's settings and mappings:
       } 
     }
   } 
-}
+}  
 ```
 ### Delete an Index
 Let's delete the `movies` index by using the `indices.delete` API action:
@@ -131,9 +131,9 @@ client.indices.delete(index: :movies)
 We can also delete multiple indices at once:
 
 ```ruby
-client.indices.delete(index: [:movies, :paintings, :burner], ignore: 404)
+client.indices.delete(index: [:movies, :paintings, :burner])
 ```
-Notice that we are passing `ignore: 404` to the request. This tells the client to ignore the `404` error if the index doesn't exist for deletion. Without it, the above `delete` request will throw an error because the `movies` index has already been deleted in the previous example.
+By default, the `indices.delete` action is not idempotent. If you try to delete an index that does not exist, or delete the same indices twice, you will run into 404/NotFound error. You can make the `indices.delete` action idempotent across the client instance. Check the [Idempotent Delete](idempotent_delete.md) guide for more information.
 
 ## Cleanup
 

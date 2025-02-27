@@ -19,21 +19,19 @@ module OpenSearch
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
         # @option args [String] :timeout Explicit operation timeout
-        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete_repository(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?
 
           _repository = args.delete('repository')
 
-          ignore  = args.delete('ignore') || []
           headers = args.delete('headers') || {}
           body    = args.delete('body')
           method  = 'DELETE'
           url     = Utils.build_url('_snapshot', _repository)
 
           Utils.validate_query_params! args, DELETE_REPOSITORY_QUERY_PARAMS
-          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
+          transport.perform_delete_request method, url, args, body, headers
         end
 
         DELETE_REPOSITORY_QUERY_PARAMS = Set.new(%w[

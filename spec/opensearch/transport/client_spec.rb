@@ -1707,21 +1707,6 @@ describe OpenSearch::Transport::Client do
         end
       end
 
-      context 'when the \'ignore\' parameter is specified' do
-        let(:response) do
-          client.perform_request('PUT', '_foobar', ignore: 400)
-        end
-
-        it 'exposes the status in the response' do
-          expect(response.status).to eq(400)
-        end
-
-        it 'exposes the body of the response' do
-          expect(response.body).to be_a(Hash)
-          expect(response.body.inspect).to match(/invalid_index_name_exception/)
-        end
-      end
-
       context 'when request headers are specified' do
 
         let(:response) do

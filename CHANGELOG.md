@@ -12,12 +12,14 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [4.0.0]
 ### Added
 - Added an API Generator ([#233](https://github.com/opensearch-project/opensearch-ruby/issues/233))
-- Added a workflow to generate API methods from OpenSearch API Spec
+- Added a workflow to generate API methods from OpenSearch API Spec ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Added support for Ruby 3.4 ([#265](https://github.com/opensearch-project/opensearch-ruby/pull/265))
 ### Changed
-- Restructured the API methods and modules to be more efficient and intuitive
+- Restructured the API methods and modules to be more efficient and intuitive ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
+- Moved ignore-404-on-deletion feature into the client options ([#277](https://github.com/opensearch-project/opensearch-ruby/pull/277))
 ### Deprecated
-- Removed support for Ruby 2.x
+- Removed support for Ruby 2.x ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
+- Removed the ability to ignore any error code by passing the `ignore: Array<error_code>` to each API method invocation ([#277](https://github.com/opensearch-project/opensearch-ruby/pull/277))
 
 ## [3.4.0]
 ### Added

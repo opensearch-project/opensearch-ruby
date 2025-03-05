@@ -22,6 +22,15 @@ context 'OpenSearch client with security plugin enabled' do
     )
   end
 
+  let(:ignore_404_client) do
+    OpenSearch::Client.new(
+      host: OPENSEARCH_URL,
+      logger: logger,
+      transport_options: { ssl: { verify: false } },
+      ignore_404_on_delete: true
+    )
+  end
+
   context 'Integrates with opensearch API' do
     it 'performs the API methods' do
       # Ping the cluster
@@ -90,7 +99,7 @@ context 'OpenSearch client with security plugin enabled' do
       expect { client.indices.delete(index: 'movies') }.to raise_error(OpenSearch::Transport::Transport::Errors::NotFound)
 
       # Delete a non-existent index ignoring 404
-      expect(client.indices.delete(index: 'movies', ignore: [404])).to be_falsey
+      expect(ignore_404_client.indices.delete(index: 'movies')).to be_falsey
 
       # Using unsupported query parameter
       expect { client.ping(invalid: 'invalid') }.to raise_error 'URL parameter \'invalid\' is not supported'

@@ -281,21 +281,6 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
       end
     end
 
-    should "not raise an error when the :ignore argument has been passed" do
-      @transport.stubs(:get_connection).returns(stub_everything :failures => 1)
-
-      assert_raise OpenSearch::Transport::Transport::Errors::BadRequest do
-        @transport.perform_request 'GET', '/' do
-          OpenSearch::Transport::Transport::Response.new 400, 'CLIENT ERROR'
-        end
-      end
-
-      # No `BadRequest` error
-      @transport.perform_request 'GET', '/', :ignore => 400 do
-        OpenSearch::Transport::Transport::Response.new 400, 'CLIENT ERROR'
-      end
-    end
-
     should "mark the connection as dead on failure" do
       c = stub_everything :failures => 1
       @transport.expects(:get_connection).returns(c)
@@ -465,17 +450,6 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
       assert_raise OpenSearch::Transport::Transport::Errors::InternalServerError do
         @transport.perform_request('POST', '_search', &@block)
       end
-    end
-
-    should "not log a failed OpenSearch request as fatal" do
-      @block = Proc.new { |c, u| puts "ERROR" }
-      @block.expects(:call).returns(OpenSearch::Transport::Transport::Response.new 500, 'ERROR')
-
-      @transport.expects(:__log_response).once
-      @transport.logger.expects(:fatal).never
-
-      # No `BadRequest` error
-      @transport.perform_request('POST', '_search', :ignore => 500, &@block)
     end
 
     should "log and re-raise a Ruby exception" do

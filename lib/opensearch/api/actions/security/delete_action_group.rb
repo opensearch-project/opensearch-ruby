@@ -16,21 +16,19 @@ module OpenSearch
         # Deletes the specified action group.
         #
         # @option args [String] :action_group *Required* The name of the action group to delete.
-        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete_action_group(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'action_group' missing" if args['action_group'].nil?
 
           _action_group = args.delete('action_group')
 
-          ignore  = args.delete('ignore') || []
           headers = args.delete('headers') || {}
           body    = args.delete('body')
           method  = 'DELETE'
           url     = Utils.build_url('_plugins/_security/api/actiongroups', _action_group)
 
           Utils.validate_query_params! args
-          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
+          transport.perform_delete_request method, url, args, body, headers
         end
       end
     end

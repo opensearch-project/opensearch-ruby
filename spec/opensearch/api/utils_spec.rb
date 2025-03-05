@@ -39,7 +39,7 @@ describe OpenSearch::API::Utils do
         bool: true,
         'nil' => nil,
         'array' => [1, 2, 3],
-        ignore: [404] }
+        headers: [100] }
     end
 
     it 'returns a new hash with keys as strings and values normalized except those of NON_URL_ARGS' do
@@ -51,7 +51,7 @@ describe OpenSearch::API::Utils do
                           'string' => 'amazing+spider-man,+big+%26+small',
                           'nil' => '',
                           'array' => '1,2,3',
-                          'ignore' => [404]
+                          'headers' => [100]
                         })
     end
   end

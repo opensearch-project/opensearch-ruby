@@ -22,21 +22,19 @@ module OpenSearch
         # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?
 
           _index = args.delete('index')
 
-          ignore  = args.delete('ignore') || []
           headers = args.delete('headers') || {}
           body    = args.delete('body')
           method  = 'DELETE'
           url     = _index
 
           Utils.validate_query_params! args, DELETE_QUERY_PARAMS
-          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
+          transport.perform_delete_request method, url, args, body, headers
         end
 
         DELETE_QUERY_PARAMS = Set.new(%w[

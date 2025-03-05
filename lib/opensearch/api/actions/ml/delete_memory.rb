@@ -16,21 +16,19 @@ module OpenSearch
         # Delete a memory.
         #
         # @option args [String] :memory_id *Required*
-        # @option args [List] :ignore set to [404] to ignore server's NOT FOUND error for this request
         def delete_memory(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'memory_id' missing" if args['memory_id'].nil?
 
           _memory_id = args.delete('memory_id')
 
-          ignore  = args.delete('ignore') || []
           headers = args.delete('headers') || {}
           body    = args.delete('body')
           method  = 'DELETE'
           url     = Utils.build_url('_plugins/_ml/memory', _memory_id)
 
           Utils.validate_query_params! args
-          transport.perform_delete_request method, url, args, body, headers, ignore.include?(404)
+          transport.perform_delete_request method, url, args, body, headers
         end
       end
     end

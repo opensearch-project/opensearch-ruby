@@ -16,13 +16,13 @@ module OpenSearch
         # Returns basic information about the health of the cluster.
         #
         # @option args [String] :awareness_attribute The name of the awareness attribute for which to return the cluster health status (for example, `zone`). Applicable only if `level` is set to `awareness_attributes`.
-        # @option args [String] :cluster_manager_timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
-        # @option args [Enumerable<String>, String] :expand_wildcards Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+        # @option args [Enumerable<String>, String] :expand_wildcards (default: open) Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
         # @option args [String] :level (default: cluster) Controls the amount of detail included in the cluster health response.
         # @option args [Boolean] :local Whether to return information from the local node only instead of from the cluster manager node.
         # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
-        # @option args [String] :timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
-        # @option args [Integer, String] :wait_for_active_shards Waits until the specified number of shards is active before returning a response. Use `all` for all shards.
+        # @option args [String] :timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+        # @option args [Integer, String] :wait_for_active_shards (default: 0) Waits until the specified number of shards is active before returning a response. Use `all` for all shards.
         # @option args [String] :wait_for_events Waits until all currently queued events with the given priority are processed.
         # @option args [Boolean] :wait_for_no_initializing_shards Whether to wait until there are no initializing shards in the cluster.
         # @option args [Boolean] :wait_for_no_relocating_shards Whether to wait until there are no relocating shards in the cluster.

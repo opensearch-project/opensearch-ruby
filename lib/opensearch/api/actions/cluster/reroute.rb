@@ -15,9 +15,9 @@ module OpenSearch
       module Actions
         # Allows to manually change the allocation of individual shards in the cluster.
         #
-        # @option args [String] :cluster_manager_timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [Boolean] :dry_run When `true`, the request simulates the operation and returns the resulting state.
-        # @option args [Boolean] :explain When `true`, the response contains an explanation of why certain commands can or cannot be executed.
+        # @option args [Boolean] :explain When `true`, the response contains an explanation of why reroute certain commands can or cannot be executed.
         # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
         # @option args [Enumerable<String>, String] :metric Limits the information returned to the specified metrics.
         # @option args [Boolean] :retry_failed When `true`, retries shard allocation if it was blocked because of too many subsequent failures.

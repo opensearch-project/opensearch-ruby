@@ -16,7 +16,7 @@ module OpenSearch
         # Decommissions a cluster zone based on awareness. This can greatly benefit multi-zone deployments, where awareness attributes can aid in applying new upgrades to a cluster in a controlled fashion.
         #
         # @option args [String] :awareness_attribute_name *Required* The name of the awareness attribute.
-        # @option args [String] :awareness_attribute_value *Required* The value of the awareness attribute.
+        # @option args [String] :awareness_attribute_value *Required* The value of the awareness attribute. For example, if you have shards allocated in two different zones, you can give each zone a value of `zone-a` or `zoneb`. The cluster decommission operation decommissions the zone listed in the method.
         def put_decommission_awareness(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'awareness_attribute_name' missing" if args['awareness_attribute_name'].nil?

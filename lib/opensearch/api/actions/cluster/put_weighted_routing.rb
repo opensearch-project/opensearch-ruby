@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Updates weighted shard routing weights.
         #
-        # @option args [String] :attribute *Required* The name of the awareness attribute.
+        # @option args [String] :attribute *Required* The name of awareness attribute, usually `zone`.
         # @option args [Hash] :body
         def put_weighted_routing(args = {})
           args = Utils.clone_and_normalize_arguments(args)

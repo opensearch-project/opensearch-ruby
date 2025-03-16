@@ -16,7 +16,7 @@ module OpenSearch
         # Returns comprehensive information about the state of the cluster.
         #
         # @option args [Boolean] :allow_no_indices Whether to ignore a wildcard index expression that resolves into no concrete indexes. This includes the `_all` string or when no indexes have been specified.
-        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters]({https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [Enumerable<String>, String] :expand_wildcards Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
         # @option args [Boolean] :flat_settings Returns settings in a flat format.
         # @option args [Boolean] :ignore_unavailable Whether the specified concrete indexes should be ignored when unavailable (missing or closed).

@@ -15,9 +15,9 @@ module OpenSearch
       module Actions
         # Returns information about a task.
         #
-        # @option args [String] :task_id *Required* ID of the task.
-        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Boolean] :wait_for_completion If `true`, the request blocks until the task has completed.
+        # @option args [String] :task_id *Required* The ID of the task.
+        # @option args [String] :timeout (default: 30s) The amount of time to wait for a response.
+        # @option args [Boolean] :wait_for_completion Waits for the matching task to complete. When `true`, the request is blocked until the task has completed.
         def get(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'task_id' missing" if args['task_id'].nil?

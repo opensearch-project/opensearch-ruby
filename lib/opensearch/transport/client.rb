@@ -105,6 +105,8 @@ module OpenSearch
       #
       # @option arguments [Integer] :request_timeout The request timeout to be passed to transport in options
       #
+      # @option arguments [Object] :request_signer An object that responds to `#sign_request` and returns a hash of headers
+      #
       # @option arguments [Symbol] :adapter A specific adapter for Faraday (e.g. `:patron`)
       #
       # @option arguments [Hash] :transport_options Options to be passed to the `Faraday::Connection` constructor
@@ -147,6 +149,7 @@ module OpenSearch
         @arguments[:http]               ||= {}
         @options[:http]                 ||= {}
         @options[:ignore_404_on_delete] ||= false
+        @options[:request_signer]       ||= nil
 
         set_api_key if (@api_key = @arguments[:api_key])
         set_compatibility_header if ENV['ELASTIC_CLIENT_APIVERSIONING']
@@ -183,12 +186,21 @@ module OpenSearch
       end
 
       # Performs a request through delegation to {#transport}.
-      def perform_request(method, path, params = {}, body = nil, headers = nil)
+      def perform_request(method, path, params = {}, body = nil, headers = {})
         method = @send_get_body_as if method == 'GET' && body
         if (opaque_id = params.delete(:opaque_id))
-          headers = {} if headers.nil?
           opaque_id = @opaque_id_prefix ? "#{@opaque_id_prefix}#{opaque_id}" : opaque_id
           headers.merge!('X-Opaque-Id' => opaque_id)
+        end
+        if @options[:request_signer]
+          connection = transport.get_connection
+          headers = @options[:request_signer].sign_request(
+            method: method, path: path, params: params, body: body, headers: headers,
+            host: connection.host[:host],
+            port: connection.host[:port],
+            url: connection.full_url(path, params),
+            logger: @arguments[:logger]
+          )
         end
         transport.perform_request(method, path, params, body, headers)
       end

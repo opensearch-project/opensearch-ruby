@@ -15,13 +15,13 @@ module OpenSearch
       module Actions
         # Returns a list of tasks.
         #
-        # @option args [Enumerable<String>, String] :actions Comma-separated list or wildcard expression of actions used to limit the request.
-        # @option args [Boolean] :detailed If `true`, the response includes detailed information about shard recoveries.
-        # @option args [String] :group_by Key used to group tasks in the response.
-        # @option args [Enumerable<String>] :nodes Comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
-        # @option args [String] :parent_task_id Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of `-1`.
-        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Boolean] :wait_for_completion If `true`, the request blocks until the operation is complete.
+        # @option args [Enumerable<String>, String] :actions A comma-separated list of actions that should be returned. Keep empty to return all.
+        # @option args [Boolean] :detailed When `true`, the response includes detailed information about shard recoveries.
+        # @option args [String] :group_by (default: nodes) Groups tasks by parent/child relationships or nodes.
+        # @option args [Enumerable<String>] :nodes A comma-separated list of node IDs or names to limit the returned information. Use `_local` to return information from the node you're connecting to, specify the node name to get information from specific nodes, or keep the parameter empty to get information from all nodes.
+        # @option args [String] :parent_task_id Returns tasks with a specified parent task ID (node_id:task_number). Keep empty or set to -1 to return all.
+        # @option args [String] :timeout The amount of time to wait for a response.
+        # @option args [Boolean] :wait_for_completion Waits for the matching task to complete. When `true`, the request is blocked until the task has completed.
         def list(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

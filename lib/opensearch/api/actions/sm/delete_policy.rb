@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Deletes a snapshot management policy.
         #
-        # @option args [String] :policy_name *Required* The name of the snapshot management policy.
+        # @option args [String] :policy_name *Required* The snapshot management policy name.
         def delete_policy(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'policy_name' missing" if args['policy_name'].nil?

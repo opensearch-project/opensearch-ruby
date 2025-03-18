@@ -15,11 +15,11 @@ module OpenSearch
       module Actions
         # Retrieves all snapshot management policies with optional pagination and filtering.
         #
-        # @option args [Integer] :from The starting index (default: 0)
-        # @option args [String] :queryString A query string to filter policies.
-        # @option args [Integer] :size The number of policies to return.
-        # @option args [String] :sortField The field to sort on.
-        # @option args [String] :sortOrder (default: asc) The order of sorting.
+        # @option args [Integer] :from (default: 0) The index to retrieve snapshot management policies from.
+        # @option args [String] :queryString Filters the returned snapshot management policies based on query string.
+        # @option args [Integer] :size The number of snapshot management policies to return.
+        # @option args [String] :sortField The name of the query field to sort on.
+        # @option args [String] :sortOrder (default: asc) The order to sort the snapshot management policy result.
         def get_policies(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

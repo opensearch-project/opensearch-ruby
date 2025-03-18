@@ -64,6 +64,10 @@ module OpenSearch
       @list ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::List::Actions)
     end
 
+    def ltr
+      @ltr ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Ltr::Actions)
+    end
+
     def ml
       @ml ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Ml::Actions)
     end

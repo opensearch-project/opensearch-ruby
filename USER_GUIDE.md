@@ -153,7 +153,7 @@ require 'opensearch-ruby'
 client = OpenSearch::Client.new(
   host: 'https://localhost:9200',
   request_signer: Struct.new(:signer) do
-    def self.sign_request(args)
+    def self.sign_request(**args)
       args[:headers].merge({ 'X-signature' => Time.now.utc })
     end
   end

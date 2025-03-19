@@ -116,7 +116,7 @@ class MyRequestSigner
   end
 
   def sign_request(method:, host:, path:, port:, url:, params:, headers:, body:, logger:)
-    logger?.info("Signing request: #{method} #{url}")
+    logger&.info("Signing request: #{method} #{url}")
     signed_headers = headers.merge({
       'X-Date' => Time.now.utc.strftime('%Y%m%dT%H%M%SZ'),
       'X-public_key' => @public_key,

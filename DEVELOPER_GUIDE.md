@@ -122,7 +122,7 @@ class MyRequestSigner
       'X-public_key' => @public_key,
       'X-Hash' => OpenSSL::HMAC.hexdigest('sha256', @private_key, body.to_s)
     })
-    logger?.debug("Signed headers: #{signed_headers}")
+    logger&.debug("Signed headers: #{signed_headers}")
     signed_headers
   end
 end

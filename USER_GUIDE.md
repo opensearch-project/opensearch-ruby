@@ -3,6 +3,7 @@
   - [Basic Usage](#basic-usage)
   - [OpenSearch DSL](#opensearch-dsl)
   - [Guides by Topics](#guides-by-topics)
+  - [Using a Request Signer](#using-a-request-signer)
   - [Amazon OpenSearch Service](#amazon-opensearch-service)
 
 # User Guide
@@ -24,12 +25,12 @@ bundle install
 Import the client:
 
 ```ruby
-require 'opensearch'
+require 'opensearch-ruby'
 ```
 
 ## Basic Usage
 ```ruby
-require 'opensearch'
+require 'opensearch-ruby'
 
 client = OpenSearch::Client.new(
   host: 'https://localhost:9200',
@@ -114,8 +115,8 @@ puts response
 The `opensearch-dsl` library is designed as a group of standalone Ruby modules, classes and DSL methods, which provide an idiomatic way to build complex search definitions
 
 ```ruby
-require 'opensearch'
-require 'opensearch/dsl'
+require 'opensearch-ruby'
+require 'opensearch-dsl'
 include OpenSearch::DSL
 
 response = client.search index: index_name, body: search {
@@ -142,8 +143,25 @@ response = client.search index: index_name, body: search {
 - [Transport Options](guides/transport_options.md)
 - [Custom HTTP Requests](guides/json.md)
 
+
+## Using a Request Signer
+The OpenSearch ruby client supports request signing as an authentication mechanism. When instantiating a client, you can pass a request signer object to sign requests. This object is often created via a 3rd party library such as `opensearch-aws-sigv4`, but you can also create your own (Check the [DEVELOPER_GUIDE](./DEVELOPER_GUIDE.md) for more details). Below is a very simple example of a request signer object that simply signs the request with a timestamp:
+
+```ruby
+require 'opensearch-ruby'
+
+client = OpenSearch::Client.new(
+  host: 'https://localhost:9200',
+  request_signer: Struct.new(:signer) do
+    def self.sign_request(**args)
+      args[:headers].merge({ 'X-signature' => Time.now.utc })
+    end
+  end
+)
+```
+
 ## Amazon OpenSearch Service
 
-Requests to [OpenSearch Service and OpenSearch Serverless](https://docs.aws.amazon.com/opensearch-service/index.html) must be signed using the AWS signing protocol. Use `opensearch-aws-sigv4` gem in place of `opensearch-ruby` gem.
+Requests to [OpenSearch Service and OpenSearch Serverless](https://docs.aws.amazon.com/opensearch-service/index.html) must be signed using the AWS signing protocol. The `opensearch-aws-sigv4` gem provides a request signer object that can be passed to the `OpenSearch::Client` during instantiation to sign requests.
 
 For more information, checkout the [USER_GUIDE](https://github.com/opensearch-project/opensearch-ruby-aws-sigv4/blob/main/USER_GUIDE.md) of [opensearch-aws-sigv4 gem](https://github.com/opensearch-project/opensearch-ruby-aws-sigv4).

@@ -18,7 +18,12 @@ context 'OpenSearch client with security plugin enabled' do
     OpenSearch::Client.new(
       host: OPENSEARCH_URL,
       logger: logger,
-      transport_options: { ssl: { verify: false } }
+      transport_options: { ssl: { verify: false } },
+      request_signer: Struct.new(:signer) do
+        def self.sign_request(args)
+          args[:headers].merge({ 'Content-Type' => 'application/json' })
+        end
+      end
     )
   end
 
@@ -41,6 +46,7 @@ context 'OpenSearch client with security plugin enabled' do
 
       # Create index movies with settings and mappings
       client.indices.create(
+        headers: { 'Content-Type' => 'This would have failed without the request_signer' },
         index: 'movies',
         body: {
           settings: {

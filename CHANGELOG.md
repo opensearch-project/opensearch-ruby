@@ -14,6 +14,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added an API Generator ([#233](https://github.com/opensearch-project/opensearch-ruby/issues/233))
 - Added a workflow to generate API methods from OpenSearch API Spec ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Added support for Ruby 3.4 ([#265](https://github.com/opensearch-project/opensearch-ruby/pull/265))
+- Added ability to sign requests ([#281](https://github.com/opensearch-project/opensearch-ruby/pull/281))
 ### Changed
 - Restructured the API methods and modules to be more efficient and intuitive ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Moved ignore-404-on-deletion feature into the client options ([#277](https://github.com/opensearch-project/opensearch-ruby/pull/277))

@@ -15,12 +15,12 @@ module OpenSearch
       module Actions
         # Restores a snapshot.
         #
-        # @option args [String] :repository *Required* A repository name
-        # @option args [String] :snapshot *Required* A snapshot name
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :repository *Required* The name of the repository containing the snapshot
+        # @option args [String] :snapshot *Required* The name of the snapshot to restore.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
-        # @option args [Boolean] :wait_for_completion Should this request wait until the operation has completed before returning
-        # @option args [Hash] :body Details of what to restore
+        # @option args [Boolean] :wait_for_completion -| Whether to return a response after the restore operation has completed. When `false`, the request returns a response when the restore operation initializes. When `true`, the request returns a response when the restore operation completes.
+        # @option args [Hash] :body Determines which settings and indexes to restore when restoring a snapshot
         def restore(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?

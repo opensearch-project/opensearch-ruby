@@ -15,12 +15,12 @@ module OpenSearch
       module Actions
         # Returns information about a snapshot.
         #
-        # @option args [String] :repository *Required* Comma-separated list of snapshot repository names used to limit the request. Wildcard (*) expressions are supported.
-        # @option args [Enumerable<String>, String] :snapshot *Required* Comma-separated list of snapshot names to retrieve. Also accepts wildcards (`*`). - To get information about all snapshots in a registered repository, use a wildcard (`*`) or `_all`. - To get information about any snapshots that are currently running, use `_current`.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error for any snapshots that are unavailable.
+        # @option args [String] :repository *Required* A comma-separated list of snapshot repository names used to limit the request. Wildcard (*) expressions are supported.
+        # @option args [Enumerable<String>, String] :snapshot *Required* A comma-separated list of snapshot names to retrieve. Also accepts wildcard expressions. (`*`). - To get information about all snapshots in a registered repository, use a wildcard (`*`) or `_all`. - To get information about any snapshots that are currently running, use `_current`.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+        # @option args [Boolean] :ignore_unavailable When `false`, the request returns an error for any snapshots that are unavailable.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Boolean] :verbose If `true`, returns additional information about each snapshot such as the version of OpenSearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.
+        # @option args [Boolean] :verbose When `true`, returns additional information about each snapshot such as the version of OpenSearch which took the snapshot, the start and end times of the snapshot, and the number of shards contained in the snapshot.
         def get(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?

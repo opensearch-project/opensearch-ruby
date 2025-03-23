@@ -13,14 +13,14 @@ module OpenSearch
   module API
     module Snapshot
       module Actions
-        # Clones indexes from one snapshot into another snapshot in the same repository.
+        # Creates a clone of all or part of a snapshot in the same repository as the original snapshot.
         #
-        # @option args [String] :repository *Required* A repository name
-        # @option args [String] :snapshot *Required* The name of the snapshot to clone from
-        # @option args [String] :target_snapshot *Required* The name of the cloned snapshot to create
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :repository *Required* The name of repository which will contain the snapshots clone.
+        # @option args [String] :snapshot *Required* The name of the original snapshot.
+        # @option args [String] :target_snapshot *Required* The name of the cloned snapshot.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
-        # @option args [Hash] :body *Required* The snapshot clone definition
+        # @option args [Hash] :body *Required* The snapshot clone definition.
         def clone(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?

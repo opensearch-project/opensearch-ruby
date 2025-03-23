@@ -13,12 +13,12 @@ module OpenSearch
   module API
     module Ingest
       module Actions
-        # Deletes a pipeline.
+        # Deletes an ingest pipeline.
         #
-        # @option args [String] :id *Required* Pipeline ID or wildcard expression of pipeline IDs used to limit the request. To delete all ingest pipelines in a cluster, use a value of `*`.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :id *Required* The pipeline ID or wildcard expression of pipeline IDs used to limit the request. To delete all ingest pipelines in a cluster, use a value of `*`.
+        # @option args [String] :cluster_manager_timeout The amount of time allowed to establish a connection to the cluster manager node.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [String] :timeout The amount of time to wait for a response.
         def delete_pipeline(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?

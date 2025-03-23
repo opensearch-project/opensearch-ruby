@@ -13,11 +13,11 @@ module OpenSearch
   module API
     module Ingest
       module Actions
-        # Returns a pipeline.
+        # Returns an ingest pipeline.
         #
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :cluster_manager_timeout The amount of time allowed to establish a connection to the cluster manager node.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [String] :id Comma-separated list of pipeline IDs to retrieve. Wildcard (`*`) expressions are supported. To get all ingest pipelines, omit this parameter or use `*`.
+        # @option args [String] :id A comma-separated list of pipeline IDs to retrieve. Wildcard (`*`) expressions are supported. To get all ingest pipelines, omit this parameter or use `*`.
         def get_pipeline(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _id = args.delete('id')

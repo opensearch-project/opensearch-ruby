@@ -13,14 +13,14 @@ module OpenSearch
   module API
     module Snapshot
       module Actions
-        # Creates a repository.
+        # Creates a snapshot repository.
         #
-        # @option args [String] :repository *Required* A repository name
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :repository *Required* The name for the newly registered repository.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
-        # @option args [String] :timeout Explicit operation timeout
-        # @option args [Boolean] :verify Whether to verify the repository after creation
-        # @option args [Hash] :body *Required* The repository definition
+        # @option args [String] :timeout The amount of time to wait for a response.
+        # @option args [Boolean] :verify When `true`, verifies the creation of the snapshot repository.
+        # @option args [Hash] :body *Required* The repository definition.
         def create_repository(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?

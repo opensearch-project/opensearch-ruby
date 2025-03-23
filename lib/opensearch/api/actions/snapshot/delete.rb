@@ -15,9 +15,9 @@ module OpenSearch
       module Actions
         # Deletes a snapshot.
         #
-        # @option args [String] :repository *Required* A repository name
-        # @option args [String] :snapshot *Required* A comma-separated list of snapshot names
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :repository *Required* The name of the snapshot repository to delete.
+        # @option args [String] :snapshot *Required* A comma-separated list of snapshot names to delete from the repository.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
         def delete(args = {})
           args = Utils.clone_and_normalize_arguments(args)

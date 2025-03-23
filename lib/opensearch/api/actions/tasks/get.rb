@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Returns information about a task.
         #
-        # @option args [String] :task_id *Required* The ID of the task.
+        # @option args [String] :task_id *Required* The task ID.
         # @option args [String] :timeout (default: 30s) The amount of time to wait for a response.
         # @option args [Boolean] :wait_for_completion Waits for the matching task to complete. When `true`, the request is blocked until the task has completed.
         def get(args = {})

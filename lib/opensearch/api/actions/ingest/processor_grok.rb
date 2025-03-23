@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Ingest
       module Actions
-        # Returns a list of the built-in patterns.
+        # Returns a list of built-in grok patterns.
         #
-        # @option args [Boolean] :s Sort returned patterns by key name.
+        # @option args [Boolean] :s Determines how to sort returned grok patterns by key name.
         def processor_grok(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

@@ -13,12 +13,12 @@ module OpenSearch
   module API
     module Snapshot
       module Actions
-        # Removes stale data from repository.
+        # Removes any stale data from a snapshot repository.
         #
         # @option args [String] :repository *Required* Snapshot repository to clean up.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node.
-        # @option args [String] :timeout Period to wait for a response.
+        # @option args [String] :timeout The amount of time to wait for a response.
         def cleanup_repository(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?

@@ -13,12 +13,12 @@ module OpenSearch
   module API
     module Snapshot
       module Actions
-        # Deletes a repository.
+        # Deletes a snapshot repository.
         #
-        # @option args [Enumerable<String>, String] :repository *Required* Name of the snapshot repository to unregister. Wildcard (`*`) patterns are supported.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [Enumerable<String>, String] :repository *Required* The name of the snapshot repository to unregister. Wildcard (`*`) patterns are supported.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
-        # @option args [String] :timeout Explicit operation timeout
+        # @option args [String] :timeout The amount of time to wait for a response.
         def delete_repository(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?

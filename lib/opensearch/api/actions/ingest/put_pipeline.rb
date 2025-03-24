@@ -13,13 +13,13 @@ module OpenSearch
   module API
     module Ingest
       module Actions
-        # Creates or updates a pipeline.
+        # Creates or updates an ingest pipeline.
         #
-        # @option args [String] :id *Required* ID of the ingest pipeline to create or update.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :id *Required* The ID of the ingest pipeline.
+        # @option args [String] :cluster_manager_timeout The amount of time allowed to establish a connection to the cluster manager node.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Hash] :body *Required* The ingest definition
+        # @option args [String] :timeout The amount of time to wait for a response.
+        # @option args [Hash] :body *Required* The ingest definition.
         def put_pipeline(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?

@@ -13,10 +13,10 @@ module OpenSearch
   module API
     module Ingest
       module Actions
-        # Allows to simulate a pipeline with example documents.
+        # Simulates an ingest pipeline with example documents.
         #
-        # @option args [Boolean] :verbose If `true`, the response includes output data for each processor in the executed pipeline.
-        # @option args [String] :id Pipeline to test. If you don't specify a `pipeline` in the request body, this parameter is required.
+        # @option args [Boolean] :verbose When `true`, the response includes output data for each processor in the pipeline
+        # @option args [String] :id The pipeline to test. If you don't specify a `pipeline` in the request body, this parameter is required.
         # @option args [Hash] :body *Required* The simulate definition
         def simulate(args = {})
           args = Utils.clone_and_normalize_arguments(args)

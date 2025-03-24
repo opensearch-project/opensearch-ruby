@@ -15,9 +15,9 @@ module OpenSearch
       module Actions
         # Returns a high-level overview of cluster statistics.
         #
-        # @option args [Boolean] :flat_settings When `true`, returns settings in a flat format.
+        # @option args [Boolean] :flat_settings Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`.
         # @option args [String] :timeout The amount of time to wait for each node to respond. If a node does not respond before its timeout expires, the response does not include its stats. However, timed out nodes are included in the response's `_nodes.failed` property. Defaults to no timeout.
-        # @option args [Enumerable<String>] :index_metric A comma-separated list of index metric groups, for example, `docs,store`.
+        # @option args [Enumerable<String>] :index_metric A comma-separated list of [index metric groups](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-stats/#index-metric-groups), for example, `docs,store`.
         # @option args [Enumerable<String>] :metric Limit the information returned to the specified metrics.
         # @option args [Enumerable<String>, String] :node_id A comma-separated list of node IDs used to filter results. Supports [node filters](https://opensearch.org/docs/latest/api-reference/nodes-apis/index/#node-filters).
         def stats(args = {})

@@ -13,12 +13,12 @@ module OpenSearch
   module API
     module Snapshot
       module Actions
-        # Returns information about a repository.
+        # Returns information about a snapshot repository.
         #
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+        # @option args [Boolean] :local Whether to get information from the local node.
         # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
-        # @option args [Enumerable<String>, String] :repository A comma-separated list of repository names
+        # @option args [Enumerable<String>, String] :repository A comma-separated list of repository names.
         def get_repository(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _repository = args.delete('repository')

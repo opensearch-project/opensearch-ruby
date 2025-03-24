@@ -18,13 +18,13 @@ module OpenSearch
         # @option args [Boolean] :allow_no_indices Whether to ignore a wildcard index expression that resolves into no concrete indexes. This includes the `_all` string or when no indexes have been specified.
         # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [Enumerable<String>, String] :expand_wildcards Specifies the type of index that wildcard expressions can match. Supports comma-separated values.
-        # @option args [Boolean] :flat_settings Returns settings in a flat format.
+        # @option args [Boolean] :flat_settings Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`.
         # @option args [Boolean] :ignore_unavailable Whether the specified concrete indexes should be ignored when unavailable (missing or closed).
         # @option args [Boolean] :local Whether to return information from the local node only instead of from the cluster manager node.
         # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
         # @option args [Integer] :wait_for_metadata_version Wait for the metadata version to be equal or greater than the specified metadata version.
         # @option args [String] :wait_for_timeout The maximum time to wait for `wait_for_metadata_version` before timing out.
-        # @option args [Enumerable<String>] :metric Limits the information returned to only the specified metrics.
+        # @option args [Enumerable<String>] :metric Limits the information returned to only the [specified metric groups](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-stats/#metric-groups).
         # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
         def state(args = {})
           args = Utils.clone_and_normalize_arguments(args)

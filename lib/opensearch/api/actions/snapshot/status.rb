@@ -15,11 +15,11 @@ module OpenSearch
       module Actions
         # Returns information about the status of a snapshot.
         #
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
-        # @option args [Boolean] :ignore_unavailable Whether to ignore unavailable snapshots, defaults to `false` which means a SnapshotMissingException is thrown
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+        # @option args [Boolean] :ignore_unavailable Whether to ignore any unavailable snapshots, When `false`, a `SnapshotMissingException` is thrown.
         # @option args [String] :master_timeout DEPRECATED Explicit operation timeout for connection to cluster-manager node
-        # @option args [String] :repository A repository name
-        # @option args [Enumerable<String>, String] :snapshot A comma-separated list of snapshot names
+        # @option args [String] :repository The name of the repository containing the snapshot.
+        # @option args [Enumerable<String>, String] :snapshot A comma-separated list of snapshot names.
         def status(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _repository = args.delete('repository')

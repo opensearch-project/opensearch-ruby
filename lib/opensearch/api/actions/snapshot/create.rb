@@ -13,14 +13,14 @@ module OpenSearch
   module API
     module Snapshot
       module Actions
-        # Creates a snapshot in a repository.
+        # Creates a snapshot within an existing repository.
         #
-        # @option args [String] :repository *Required* Repository for the snapshot.
-        # @option args [String] :snapshot *Required* Name of the snapshot. Must be unique in the repository.
-        # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
+        # @option args [String] :repository *Required* The name of the repository where the snapshot will be stored.
+        # @option args [String] :snapshot *Required* The name of the snapshot. Must be unique in the repository.
+        # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Boolean] :wait_for_completion If `true`, the request returns a response when the snapshot is complete. If `false`, the request returns a response when the snapshot initializes.
-        # @option args [Hash] :body The snapshot definition
+        # @option args [Boolean] :wait_for_completion When `true`, the request returns a response when the snapshot is complete. When `false`, the request returns a response when the snapshot initializes.
+        # @option args [Hash] :body The snapshot definition.
         def create(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'repository' missing" if args['repository'].nil?

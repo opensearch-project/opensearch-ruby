@@ -18,10 +18,10 @@ module OpenSearch
         # @option args [String] :cluster_manager_timeout The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
         # @option args [Boolean] :dry_run When `true`, the request simulates the operation and returns the resulting state.
         # @option args [Boolean] :explain When `true`, the response contains an explanation of why reroute certain commands can or cannot be executed.
-        # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [String] :master_timeout DEPRECATED A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts `0` without a unit and `-1` to indicate an unspecified value.
         # @option args [Enumerable<String>, String] :metric Limits the information returned to the specified metrics.
         # @option args [Boolean] :retry_failed When `true`, retries shard allocation if it was blocked because of too many subsequent failures.
-        # @option args [String] :timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts "0" without a unit and "-1" to indicate an unspecified value.
+        # @option args [String] :timeout A duration. Units can be `nanos`, `micros`, `ms` (milliseconds), `s` (seconds), `m` (minutes), `h` (hours) and `d` (days). Also accepts `0` without a unit and `-1` to indicate an unspecified value.
         # @option args [Hash] :body The definition of `commands` to perform (`move`, `cancel`, `allocate`)
         def reroute(args = {})
           args = Utils.clone_and_normalize_arguments(args)

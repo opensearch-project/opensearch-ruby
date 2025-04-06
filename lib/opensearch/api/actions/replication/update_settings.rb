@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Replication
       module Actions
-        # Updates settings on the follower index.
+        # Updates any settings on the follower index.
         #
-        # @option args [String] :index *Required* Name of the data stream, index, or index alias to perform bulk actions on.
+        # @option args [String] :index *Required* The name of the data stream, index, or index alias to perform bulk actions on.
         # @option args [Hash] :body *Required*
         def update_settings(args = {})
           args = Utils.clone_and_normalize_arguments(args)

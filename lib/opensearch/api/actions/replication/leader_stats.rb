@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Replication
       module Actions
-        # Gets information about replicated leader indexes on a specified cluster.
+        # Retrieves information about any replicated leader indexes on a specified cluster.
         #
         def leader_stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)

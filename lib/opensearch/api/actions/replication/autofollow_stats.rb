@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Replication
       module Actions
-        # Gets information about auto-follow activity and any replication rules configured on the specified cluster.
+        # Retrieves information about any auto-follow activity and any replication rules configured on the specified cluster.
         #
         def autofollow_stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)

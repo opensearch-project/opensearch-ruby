@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Creates a snapshot management policy.
         #
-        # @option args [String] :policy_name *Required* The snapshot management policy name.
+        # @option args [String] :policy_name *Required* The name of the snapshot management policy to create.
         # @option args [Hash] :body
         def create_policy(args = {})
           args = Utils.clone_and_normalize_arguments(args)

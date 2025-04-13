@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Replication
       module Actions
-        # Terminates replication and converts the follower index to a standard index.
+        # Terminates the replication and converts the follower index to a standard index.
         #
-        # @option args [String] :index *Required* Name of the data stream, index, or index alias to perform bulk actions on.
+        # @option args [String] :index *Required* The name of the data stream, index, or index alias to perform bulk actions on.
         # @option args [Hash] :body *Required*
         def stop(args = {})
           args = Utils.clone_and_normalize_arguments(args)

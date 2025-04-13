@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Replication
       module Actions
-        # Gets the status of index replication.
+        # Retrieves the the status of an index replication.
         #
-        # @option args [String] :index *Required* Name of the data stream, index, or index alias to perform bulk actions on.
+        # @option args [String] :index *Required* The name of the data stream, index, or index alias to perform bulk actions on.
         def status(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?

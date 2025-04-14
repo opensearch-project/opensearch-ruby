@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Updates an existing snapshot management policy. Requires `if_seq_no` and `if_primary_term`.
         #
-        # @option args [String] :policy_name *Required* The snapshot management policy name.
+        # @option args [String] :policy_name *Required* The name of the snapshot management policy to update.
         # @option args [Integer] :if_primary_term *Required* The primary term of the policy to update.
         # @option args [Integer] :if_seq_no *Required* The sequence number of the policy to update.
         # @option args [Hash] :body

@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Resumes replication of the leader index.
         #
-        # @option args [String] :index *Required* Name of the data stream, index, or index alias to perform bulk actions on.
+        # @option args [String] :index *Required* The name of the data stream, index, or index alias to perform bulk actions on.
         # @option args [Hash] :body *Required*
         def resume(args = {})
           args = Utils.clone_and_normalize_arguments(args)

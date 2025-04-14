@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Replication
       module Actions
-        # Automatically starts replication on indexes matching a specified pattern.
+        # Automatically starts the replication on indexes matching a specified pattern.
         #
         # @option args [Hash] :body *Required*
         def create_replication_rule(args = {})

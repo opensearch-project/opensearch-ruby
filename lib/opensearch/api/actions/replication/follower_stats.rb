@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Replication
       module Actions
-        # Gets information about follower (syncing) indexes on a specified cluster.
+        # Retrieves information about any follower (syncing) indexes on a specified cluster.
         #
         def follower_stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)

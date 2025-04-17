@@ -188,10 +188,6 @@ module OpenSearch
       # Performs a request through delegation to {#transport}.
       def perform_request(method, path, params = {}, body = nil, headers = {})
         method = @send_get_body_as if method == 'GET' && body
-        if (opaque_id = params.delete('opaque_id'))
-          opaque_id = @opaque_id_prefix ? "#{@opaque_id_prefix}#{opaque_id}" : opaque_id
-          headers.merge!('X-Opaque-Id' => opaque_id)
-        end
         if @options[:request_signer]
           connection = transport.get_connection
           headers = @options[:request_signer].sign_request(

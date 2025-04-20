@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Ism
       module Actions
-        # Gets a policy.
+        # Retrieves a specific policy.
         #
         # @option args [String] :policy_id *Required*
         def get_policy(args = {})

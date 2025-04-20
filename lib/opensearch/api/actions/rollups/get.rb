@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Rollups
       module Actions
-        # Get an index rollup.
+        # Retrieves an index rollup job configuration by ID.
         #
-        # @option args [String] :id *Required* Rollup to access
+        # @option args [String] :id *Required* The ID of the rollup job.
         def get(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?

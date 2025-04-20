@@ -13,10 +13,10 @@ module OpenSearch
   module API
     module Sql
       module Actions
-        # Collect metrics for the plugin within the interval.
+        # Retrieves performance metrics for the SQL plugin.
         #
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Boolean] :sanitize (default: true) Specifies whether to escape special characters in the results
+        # @option args [String] :format Specifies the response format (JSON or YAML).
+        # @option args [Boolean] :sanitize (default: true) Whether to escape special characters in the results.
         def get_stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

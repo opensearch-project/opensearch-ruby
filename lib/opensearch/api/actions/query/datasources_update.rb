@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Query
       module Actions
-        # Updates an existing query datasource.
+        # Updates an existing query data source.
         #
-        # @option args [Hash] :body
+        # @option args [Hash] :body The updated data source configuration.
         def datasources_update(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

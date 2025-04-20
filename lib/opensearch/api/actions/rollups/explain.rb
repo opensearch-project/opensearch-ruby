@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Rollups
       module Actions
-        # Get a rollup's current status.
+        # Retrieves the execution status information for an index rollup job.
         #
-        # @option args [String] :id *Required* Rollup to access
+        # @option args [String] :id *Required* The ID of the rollup job.
         def explain(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?

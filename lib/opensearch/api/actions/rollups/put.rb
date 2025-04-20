@@ -13,12 +13,12 @@ module OpenSearch
   module API
     module Rollups
       module Actions
-        # Create or update index rollup.
+        # Creates or updates an index rollup job configuration.
         #
-        # @option args [String] :id *Required* Rollup to access
-        # @option args [Float] :if_primary_term Only perform the operation if the document has this primary term.
-        # @option args [Integer] :if_seq_no Only perform the operation if the document has this sequence number.
-        # @option args [Hash] :body
+        # @option args [String] :id *Required* The ID of the rollup job.
+        # @option args [Float] :if_primary_term Only performs the operation if the document has the specified primary term.
+        # @option args [Integer] :if_seq_no Only performs the operation if the document has the specified sequence number.
+        # @option args [Hash] :body Updates the rollup job configuration.
         def put(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?

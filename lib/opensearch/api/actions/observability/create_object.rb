@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Creates a new observability object.
         #
-        # @option args [Hash] :body
+        # @option args [Hash] :body The core observability object containing visualization and query data.
         def create_object(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

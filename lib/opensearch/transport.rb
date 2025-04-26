@@ -27,11 +27,11 @@
 require 'uri'
 require 'time'
 require 'timeout'
-require 'multi_json'
+require 'json'
 require 'faraday'
 
 require 'opensearch/transport/transport/loggable'
-require 'opensearch/transport/transport/serializer/multi_json'
+require 'opensearch/transport/transport/serializer/json'
 require 'opensearch/transport/transport/sniffer'
 require 'opensearch/transport/transport/response'
 require 'opensearch/transport/transport/errors'

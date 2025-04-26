@@ -33,7 +33,7 @@ describe OpenSearch::API do
     end
 
     it 'has a default serializer' do
-      expect(OpenSearch::API.serializer).to eq(MultiJson)
+      expect(OpenSearch::API.serializer).to be_a(OpenSearch::Transport::Transport::Serializer::JSON)
     end
 
     context 'when settings are changed' do

@@ -191,11 +191,11 @@ describe OpenSearch::API::Utils do
       end
 
       let(:header) do
-        MultiJson.load(lines.first)
+        JSON.parse(lines.first)
       end
 
       let(:data_string) do
-        MultiJson.load(lines.last)
+        JSON.parse(lines.last)
       end
 
       it 'does not mutate the input' do

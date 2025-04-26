@@ -37,7 +37,7 @@ module OpenSearch
         DEFAULT_RELOAD_AFTER     = 10_000 # Requests
         DEFAULT_RESURRECT_AFTER  = 60     # Seconds
         DEFAULT_MAX_RETRIES      = 3      # Requests
-        DEFAULT_SERIALIZER_CLASS = Serializer::MultiJson
+        DEFAULT_SERIALIZER_CLASS = Serializer::JSON
         SANITIZED_PASSWORD       = '*' * rand(1..14)
 
         attr_reader   :hosts, :options, :connections, :counter, :last_request_at, :protocol

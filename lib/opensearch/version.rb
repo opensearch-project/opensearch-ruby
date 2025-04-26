@@ -25,5 +25,5 @@
 # under the License.
 
 module OpenSearch
-  VERSION = '4.0.0-beta.4'.freeze
+  VERSION = '4.0.0-beta.5'.freeze
 end

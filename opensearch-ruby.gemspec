@@ -66,5 +66,4 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'faraday', '>= 1.0', '< 3'
   s.add_dependency "logger"
-  s.add_dependency 'multi_json', '>= 1.0'
 end

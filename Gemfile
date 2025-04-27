@@ -50,6 +50,9 @@ gem 'test-unit', '~> 2'
 gem 'webmock', '~> 2.0'
 gem 'yard'
 
+# TODO: Remove after https://github.com/mperham/connection_pool/issues/201 is fixed/released
+gem 'connection_pool', '!= 2.5.2'
+
 if defined? JRUBY_VERSION
   gem 'manticore'
   gem 'pry-nav'

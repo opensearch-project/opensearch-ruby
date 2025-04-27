@@ -48,40 +48,6 @@ jobs:
       - name: Run All Tests
         run: rake test:all
 
-  test-opensearch-faraday-1:
-    env:
-      TEST_OPENSEARCH_SERVER: http://localhost:9250
-      PORT: 9250
-      FARADAY_VERSION: '~> 1'
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby: [ '3.0', 3.4, jruby-10.0 ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Increase system limits
-        run: |
-          sudo swapoff -a
-          sudo sysctl -w vm.swappiness=1
-          sudo sysctl -w fs.file-max=262144
-          sudo sysctl -w vm.max_map_count=262144
-      - uses: ./.github/actions/opensearch
-        with:
-          cluster-version: latest
-          disable-security: true
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - name: Build and test with Rake
-        run: |
-          sudo apt-get update
-          sudo apt-get install libcurl4-openssl-dev
-          ruby -v
-          bundle install
-      - name: Test Faraday on Transport Layer
-        run: rake test:transport:all
-
   test-opensearch-security:
     env:
       TEST_OPENSEARCH_SERVER: https://admin:myStrongPassword123!@localhost:9200

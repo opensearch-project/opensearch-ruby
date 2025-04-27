@@ -37,7 +37,7 @@ class OpenSearch::Transport::ClientIntegrationTest < Minitest::Test
       # Require the library so autodetection finds it.
       require 'typhoeus'
       # Require the adapter so autodetection finds it.
-      require 'faraday/typhoeus' if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2')
+      require 'faraday/typhoeus'
 
       transport = OpenSearch::Transport::Transport::HTTP::Faraday.new \
         :hosts => [ { host: @host, port: @port } ] do |f|

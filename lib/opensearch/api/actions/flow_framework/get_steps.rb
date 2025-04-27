@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module FlowFramework
       module Actions
-        # Get a list of workflow steps.
+        # Retrieves available workflow steps.
         #
-        # @option args [String] :workflow_step The name of the step to retrieve.
+        # @option args [String] :workflow_step The name of the workflow step.
         def get_steps(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

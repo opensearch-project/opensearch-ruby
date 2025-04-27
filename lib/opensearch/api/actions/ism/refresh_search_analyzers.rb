@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Ism
       module Actions
-        # Refresh search analyzers in real time.
+        # Refreshes search analyzers in real time.
         #
-        # @option args [String] :index *Required* Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
+        # @option args [String] :index *Required*
         def refresh_search_analyzers(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?

@@ -13,10 +13,10 @@ module OpenSearch
   module API
     module FlowFramework
       module Actions
-        # Get the provisioning deployment status until it is complete.
+        # Retrieves the current workflow provisioning status.
         #
-        # @option args [String] :workflow_id *Required*
-        # @option args [Boolean] :all The all parameter specifies whether the response should return all fields.
+        # @option args [String] :workflow_id *Required* The ID of the workflow.
+        # @option args [Boolean] :all Whether to return all fields in the response.
         def get_status(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'workflow_id' missing" if args['workflow_id'].nil?

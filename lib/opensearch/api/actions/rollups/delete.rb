@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Rollups
       module Actions
-        # Delete index rollup.
+        # Deletes an index rollup job configuration.
         #
-        # @option args [String] :id *Required* Rollup to access
+        # @option args [String] :id *Required* The ID of the rollup job.
         def delete(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?

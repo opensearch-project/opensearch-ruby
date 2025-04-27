@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Removes a policy from an index.
         #
-        # @option args [String] :index *Required* Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
+        # @option args [String] :index *Required*
         def remove_policy(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?

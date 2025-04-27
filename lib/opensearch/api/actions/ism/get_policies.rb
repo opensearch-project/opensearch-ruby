@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Ism
       module Actions
-        # Gets the policies.
+        # Retrieves the policies.
         #
         def get_policies(args = {})
           args = Utils.clone_and_normalize_arguments(args)

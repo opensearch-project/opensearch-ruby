@@ -30,11 +30,11 @@ class OpenSearch::Transport::Transport::SerializerTest < Minitest::Test
 
   context "Serializer" do
 
-    should "use MultiJson by default" do
-      ::MultiJson.expects(:load)
-      ::MultiJson.expects(:dump)
-      OpenSearch::Transport::Transport::Serializer::MultiJson.new.load('{}')
-      OpenSearch::Transport::Transport::Serializer::MultiJson.new.dump({})
+    should "use JSON by default" do
+      ::JSON.expects(:parse)
+      ::JSON.expects(:generate)
+      OpenSearch::Transport::Transport::Serializer::JSON.new.load('{}')
+      OpenSearch::Transport::Transport::Serializer::JSON.new.dump({})
     end
 
   end

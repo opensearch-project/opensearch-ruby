@@ -7,6 +7,7 @@ Major versions of OpenSearch introduce breaking changes that require careful upg
 - The lesser-known ability to ignore any error code by passing the `ignore: Array<error_code>` to each API method invocation is deemed unnecessary and dangerous. This feature has been removed in OpenSearch Ruby 4.
 - The ability to pass an `opaque_id` parameter into an API method invocation to set the value of the `X-Opaque-Id` header has been removed. The user should now set the `X-Opaque-Id` header as part of the `headers` parameter in the API method invocation directly.
 - OpenSearch Ruby 4 received a major refactor to remove middle-man `perform_request` methods. While this does not affect the vast majority of use cases, applications or wrappers that rely on these methods should be updated. For more information, check the `How the perform_request method is invoked` section of this [PR](https://github.com/opensearch-project/opensearch-ruby/pull/261).
+- The default serializer was switched from `multi_json` to the `json` gem. If you want to still use `multi_json`, you can easily achieve it by implementing a [custom serializer](guides/transport_options.md#serializer-implementations).
 ## Upgrade to OpenSearch Ruby 3
 In Version 3 of the OpenSearch Ruby client, we have added the `api` and `transport` modules as the core components of the gem, instead of treating them as separate gems that are required by the `opensearch-ruby` gem. This removes the confusions around compatibility between the ruby client, its legacy dependencies, and the OpenSearch cluster.
 

@@ -383,7 +383,7 @@ You can write your own transport implementation easily, by including the {OpenSe
 
 ### Serializer Implementations
 
-By default, the [MultiJSON](http://rubygems.org/gems/multi_json) library is used as the serializer implementation, and it will pick up the "right" adapter based on gems available.
+By default, the [json](https://rubygems.org/gems/json) library is used as the serializer implementation.
 
 The serialization component is pluggable, though, so you can write your own by including the {OpenSearch::Transport::Transport::Serializer::Base} module, implementing the required contract, and passing it to the client as the `serializer_class` or `serializer` parameter.
 

@@ -38,21 +38,25 @@ module OpenSearch
           end
         end
 
-        # A default JSON serializer (using [MultiJSON](http://rubygems.org/gems/multi_json))
+        # A default JSON serializer (using [json](http://rubygems.org/gems/json))
         #
-        class MultiJson
+        class JSON
           include Base
 
           # De-serialize a Hash from JSON string
           #
           def load(string, options = {})
-            ::MultiJson.load(string, options)
+            ::JSON.parse(string, options)
           end
 
           # Serialize a Hash to JSON string
           #
           def dump(object, options = {})
-            ::MultiJson.dump(object, options)
+            if options.delete(:pretty)
+              ::JSON.pretty_generate(object, options)
+            else
+              ::JSON.generate(object, options)
+            end
           end
         end
       end

@@ -18,6 +18,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Changed
 - Restructured the API methods and modules to be more efficient and intuitive ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Moved ignore-404-on-deletion feature into the client options ([#277](https://github.com/opensearch-project/opensearch-ruby/pull/277))
+- Changed the default json serializer from `multi_json` to the `json` gem ([#290](https://github.com/opensearch-project/opensearch-ruby/pull/290))
 ### Removed
 - Removed support for Ruby 2.x ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Removed the ability to ignore any error code by passing the `ignore: Array<error_code>` to each API method invocation ([#277](https://github.com/opensearch-project/opensearch-ruby/pull/277))

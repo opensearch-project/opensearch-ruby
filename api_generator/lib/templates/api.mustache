@@ -11,7 +11,7 @@ module OpenSearch
     {{/global_query_params}}
     ]).freeze
 
-    DEFAULT_SERIALIZER = MultiJson
+    DEFAULT_SERIALIZER = Transport::Transport::Serializer::JSON.new
 
     def self.serializer
       settings[:serializer] || DEFAULT_SERIALIZER

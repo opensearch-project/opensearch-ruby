@@ -366,10 +366,8 @@ module OpenSearch
       #
       def __auto_detect_adapter
         # Get the Faraday adapter list without initializing it.
-        adapter = if Faraday::Adapter.respond_to?(:registered_middleware) # Faraday 2.x
+        adapter = if Faraday::Adapter.respond_to?(:registered_middleware)
                     ->(name) { Faraday::Adapter.registered_middleware[name] }
-                  elsif Faraday::Adapter.respond_to?(:fetch_middleware) # Faraday 1.x
-                    ->(name) { Faraday::Adapter.fetch_middleware(name) }
                   else
                     {} # fallback behavior that should never happen
                   end

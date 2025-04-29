@@ -23,6 +23,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Removed support for Ruby 2.x ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Removed the ability to ignore any error code by passing the `ignore: Array<error_code>` to each API method invocation ([#277](https://github.com/opensearch-project/opensearch-ruby/pull/277))
 - Removed ability to set `X-Opaque-Id` header value via the `opaque_id` parameter. ([#287](https://github.com/opensearch-project/opensearch-ruby/pull/287))
+- Removed support for Faraday 1.x. ([#293](https://github.com/opensearch-project/opensearch-ruby/pull/293))
 
 ## [3.4.0]
 ### Added

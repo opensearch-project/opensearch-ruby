@@ -3,6 +3,7 @@ Major versions of OpenSearch introduce breaking changes that require careful upg
 
 ## Upgrade to OpenSearch Ruby 4
 - OpenSearch Ruby 4 drops support for Ruby 2.x. If you are using Ruby 2.x, you should upgrade to Ruby 3.x before upgrading to OpenSearch Ruby 4.
+- Support for Faraday 1.x was removed. Faraday 2 doesn't depend on the adapter gems anymore, so if you are using Faraday 1.x with a different library gem than the default you will need to include the adapter gem into your own Gemfile.
 - OpenSearch Ruby 4 has a different implementation of the `ignore 404 error` feature on all delete actions. Instead of passing `ingore: 404` as if it is a query parameter for each API action, this feature can now be toggled on and off (off by default) during the client instance instantiation. If you are using this feature, you should review the [Idempotent Delete](./guides/idempotent_delete.md) guide for the changes.
 - The lesser-known ability to ignore any error code by passing the `ignore: Array<error_code>` to each API method invocation is deemed unnecessary and dangerous. This feature has been removed in OpenSearch Ruby 4.
 - The ability to pass an `opaque_id` parameter into an API method invocation to set the value of the `X-Opaque-Id` header has been removed. The user should now set the `X-Opaque-Id` header as part of the `headers` parameter in the API method invocation directly.

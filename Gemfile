@@ -62,15 +62,7 @@ else
   gem 'ruby-prof'
 end
 
-if ENV.key?('FARADAY_VERSION')
-  gem 'faraday', ENV.fetch('FARADAY_VERSION'), require: false
-  gem 'httpclient'
-  gem 'net-http-persistent'
-  gem 'patron' unless defined? JRUBY_VERSION
-  gem 'typhoeus', '~> 1.4'
-else
-  gem 'faraday-httpclient'
-  gem 'faraday-net_http_persistent'
-  gem 'faraday-patron' unless defined? JRUBY_VERSION
-  gem 'faraday-typhoeus'
-end
+gem 'faraday-httpclient'
+gem 'faraday-net_http_persistent'
+gem 'faraday-patron' unless defined? JRUBY_VERSION
+gem 'faraday-typhoeus'

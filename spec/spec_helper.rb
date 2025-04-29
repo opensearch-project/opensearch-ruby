@@ -48,7 +48,7 @@ if defined?(JRUBY_VERSION)
   require 'pry-nav'
 else
   require 'faraday/patron'
-  require 'faraday/typhoeus' if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2')
+  require 'faraday/typhoeus'
   require 'opensearch/transport/transport/http/curb'
   require 'curb'
 end

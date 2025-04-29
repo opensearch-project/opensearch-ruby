@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Ism
       module Actions
-        # Checks whether the policy exists.
+        # Checks for the existence of a policy.
         #
         # @option args [String] :policy_id *Required*
         def exists_policy(args = {})

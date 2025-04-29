@@ -13,11 +13,11 @@ module OpenSearch
   module API
     module Sql
       module Actions
-        # Send a SQL/PPL query to the SQL plugin.
+        # Executes SQL or PPL queries against OpenSearch indices.
         #
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Boolean] :sanitize (default: true) Specifies whether to escape special characters in the results
-        # @option args [Hash] :body
+        # @option args [String] :format Specifies the response format (JSON or YAML).
+        # @option args [Boolean] :sanitize (default: true) Whether to escape special characters in the results.
+        # @option args [Hash] :body Contains the SQL or PPL query to execute.
         def query(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

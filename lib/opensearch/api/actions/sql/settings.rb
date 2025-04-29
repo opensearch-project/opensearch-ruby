@@ -13,10 +13,10 @@ module OpenSearch
   module API
     module Sql
       module Actions
-        # Adds SQL settings to the standard OpenSearch cluster settings.
+        # Updates SQL plugin settings in the OpenSearch cluster configuration.
         #
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Hash] :body
+        # @option args [String] :format Specifies the response format (JSON or YAML).
+        # @option args [Hash] :body Contains SQL plugin configuration settings.
         def settings(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

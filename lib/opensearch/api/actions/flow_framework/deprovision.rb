@@ -13,10 +13,10 @@ module OpenSearch
   module API
     module FlowFramework
       module Actions
-        # Deprovision workflow's resources when you no longer need it.
+        # Deprovision workflow's resources when you no longer need them.
         #
-        # @option args [String] :workflow_id *Required*
-        # @option args [String] :allow_delete Required when deleting resources involves a high potential for data loss.
+        # @option args [String] :workflow_id *Required* The ID of the workflow.
+        # @option args [String] :allow_delete Specifies whether to allow deletion of resources with potential data loss.
         def deprovision(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'workflow_id' missing" if args['workflow_id'].nil?

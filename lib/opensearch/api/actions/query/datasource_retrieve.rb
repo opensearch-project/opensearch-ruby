@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Query
       module Actions
-        # Retrieves specific datasource specified by name.
+        # Retrieves a specific data source by name.
         #
-        # @option args [String] :datasource_name *Required* The Name of the DataSource to retrieve.
+        # @option args [String] :datasource_name *Required* The name of the data source to retrieve.
         def datasource_retrieve(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'datasource_name' missing" if args['datasource_name'].nil?

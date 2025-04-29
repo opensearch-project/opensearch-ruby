@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Provisioning a workflow. This API is also executed when the Create or Update Workflow API is called with the provision parameter set to true.
         #
-        # @option args [String] :workflow_id *Required*
+        # @option args [String] :workflow_id *Required* The ID of the workflow.
         # @option args [Hash] :body Pass dynamic substitution expressions as key-value pairs, either as query parameters or in the request body. For example, if you specified a credential field in the template as `openai_key: '$'`, you can pass `openai_key` as a query parameter or in the request body.
         def provision(args = {})
           args = Utils.clone_and_normalize_arguments(args)

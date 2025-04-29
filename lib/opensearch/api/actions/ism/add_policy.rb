@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Adds a policy to an index.
         #
-        # @option args [String] :index *Required* Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
+        # @option args [String] :index *Required*
         # @option args [Hash] :body
         def add_policy(args = {})
           args = Utils.clone_and_normalize_arguments(args)

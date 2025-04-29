@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Ism
       module Actions
-        # Gets the currently applied policy on indexes.
+        # Retrieves the currently applied policy on the specified indexes.
         #
-        # @option args [String] :index Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
+        # @option args [String] :index
         # @option args [Hash] :body
         def explain_policy(args = {})
           args = Utils.clone_and_normalize_arguments(args)

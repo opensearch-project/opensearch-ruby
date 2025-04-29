@@ -13,13 +13,13 @@ module OpenSearch
   module API
     module FlowFramework
       module Actions
-        # Create a workflow.
+        # Creates a new workflow template.
         #
-        # @option args [Boolean] :provision Provision the workflow as part of the request.
-        # @option args [Boolean] :reprovision
-        # @option args [Boolean] :update_fields Update only the fields included in the request body.
-        # @option args [String] :use_case To use a workflow template, specify it in the `use_case` query parameter when creating a workflow.
-        # @option args [String] :validation (default: all) Validate the workflow. Valid values are all (validate the template) and none (do not validate the template). Default is all.
+        # @option args [Boolean] :provision Whether to provision the workflow as part of the request.
+        # @option args [Boolean] :reprovision Whether to reprovision an existing workflow.
+        # @option args [Boolean] :update_fields Whether to update only the fields included in the request body..
+        # @option args [String] :use_case Specifies the workflow template to use.
+        # @option args [String] :validation (default: all) Specifies the validation type. Valid values are `all` (validate the template) and `none` (do not validate the template).
         # @option args [Hash] :body
         def create(args = {})
           args = Utils.clone_and_normalize_arguments(args)

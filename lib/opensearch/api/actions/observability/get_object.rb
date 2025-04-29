@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Retrieves specific observability object specified by ID.
         #
-        # @option args [String] :object_id *Required* The ID of the Observability Object.
+        # @option args [String] :object_id *Required* The ID of the observability object to retrieve.
         def get_object(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'object_id' missing" if args['object_id'].nil?

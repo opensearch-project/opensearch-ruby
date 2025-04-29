@@ -13,10 +13,10 @@ module OpenSearch
   module API
     module FlowFramework
       module Actions
-        # Delete a workflow.
+        # Deletes a workflow template.
         #
-        # @option args [String] :workflow_id *Required*
-        # @option args [Boolean] :clear_status Delete the workflow state (without deprovisioning resources) after deleting the template. OpenSearch deletes the workflow state only if the provisioning status is not IN_PROGRESS. Default is false.
+        # @option args [String] :workflow_id *Required* The ID of the workflow.
+        # @option args [Boolean] :clear_status Whether to delete the workflow state without deprovisioning resources. OpenSearch deletes the workflow state only if the provisioning status is not `IN_PROGRESS`. .
         def delete(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'workflow_id' missing" if args['workflow_id'].nil?

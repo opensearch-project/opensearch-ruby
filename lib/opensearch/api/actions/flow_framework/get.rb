@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module FlowFramework
       module Actions
-        # Get a workflow.
+        # Retrieves a workflow template.
         #
-        # @option args [String] :workflow_id *Required*
+        # @option args [String] :workflow_id *Required* The ID of the workflow.
         def get(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'workflow_id' missing" if args['workflow_id'].nil?

@@ -15,8 +15,8 @@ module OpenSearch
       module Actions
         # Updates an existing observability object.
         #
-        # @option args [String] :object_id *Required* The ID of the Observability Object.
-        # @option args [Hash] :body
+        # @option args [String] :object_id *Required* The ID of the observability object to update.
+        # @option args [Hash] :body The core observability object containing visualization and query data.
         def update_object(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'object_id' missing" if args['object_id'].nil?

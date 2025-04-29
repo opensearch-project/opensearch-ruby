@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Ism
       module Actions
-        # Gets the policies.
+        # Creates or updates policies.
         #
         # @option args [Float] :if_primary_term Only perform the operation if the document has this primary term.
         # @option args [Integer] :if_seq_no Only perform the operation if the document has this sequence number.

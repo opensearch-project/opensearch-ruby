@@ -15,8 +15,8 @@ module OpenSearch
       module Actions
         # Deletes specific observability objects specified by ID or a list of IDs.
         #
-        # @option args [String] :objectId The ID of a single Observability Object to delete.
-        # @option args [String] :objectIdList A comma-separated list of Observability Object IDs to delete.
+        # @option args [String] :objectId The ID of a single observability object to delete.
+        # @option args [String] :objectIdList A comma-separated list of observability object IDs to delete.
         def delete_objects(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Ism
       module Actions
-        # Retry the failed action for an index.
+        # Retries the failed action for an index.
         #
-        # @option args [String] :index *Required* Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
+        # @option args [String] :index *Required*
         # @option args [Hash] :body
         def retry_index(args = {})
           args = Utils.clone_and_normalize_arguments(args)

@@ -20,7 +20,7 @@ module OpenSearch
         # @option args [Boolean] :create If `true`, the template passed in the body is only used if no existing templates match the same index patterns. If `false`, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :name Name of the index template to simulate. To test a template configuration before you add it to the cluster, omit this parameter and specify the template configuration in the request body.
-        # @option args [Hash] :body New index template definition to be simulated, if no index template name is specified.
+        # @option args [Hash] :body The configuration for an index template.
         def simulate_template(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _name = args.delete('name')

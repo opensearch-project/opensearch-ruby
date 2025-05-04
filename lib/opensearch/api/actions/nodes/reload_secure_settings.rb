@@ -16,7 +16,7 @@ module OpenSearch
         # Reloads secure settings.
         #
         # @option args [Enumerable<String>, String] :node_id The names of particular nodes in the cluster to target.
-        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [String] :timeout The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [Hash] :body An object containing the password for the OpenSearch keystore.
         def reload_secure_settings(args = {})
           args = Utils.clone_and_normalize_arguments(args)

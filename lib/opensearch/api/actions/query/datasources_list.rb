@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Query
       module Actions
-        # Retrieves list of all datasources.
+        # Retrieves a list of all available data sources.
         #
         def datasources_list(args = {})
           args = Utils.clone_and_normalize_arguments(args)

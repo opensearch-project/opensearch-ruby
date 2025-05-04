@@ -26,7 +26,7 @@ module OpenSearch
         # @option args [String] :wait_for_events Waits until all currently queued events with the given priority are processed.
         # @option args [Boolean] :wait_for_no_initializing_shards Whether to wait until there are no initializing shards in the cluster.
         # @option args [Boolean] :wait_for_no_relocating_shards Whether to wait until there are no relocating shards in the cluster.
-        # @option args [Float, String] :wait_for_nodes Waits until the specified number of nodes (`N`) is available. Accepts `>=N`, `<=N`, `>N`, and `<N`. You can also use `ge(N)`, `le(N)`, `gt(N)`, and `lt(N)` notation.
+        # @option args [Integer, String] :wait_for_nodes Waits until the specified number of nodes (`N`) is available. Accepts `>=N`, `<=N`, `>N`, and `<N`. You can also use `ge(N)`, `le(N)`, `gt(N)`, and `lt(N)` notation.
         # @option args [String] :wait_for_status Waits until the cluster health reaches the specified status or better.
         # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
         def health(args = {})

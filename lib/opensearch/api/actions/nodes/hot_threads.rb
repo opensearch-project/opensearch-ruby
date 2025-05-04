@@ -15,12 +15,12 @@ module OpenSearch
       module Actions
         # Returns information about hot threads on each node in the cluster.
         #
-        # @option args [Enumerable<String>] :node_id Comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
-        # @option args [Boolean] :ignore_idle_threads (default: true) Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue.
-        # @option args [String] :interval The interval for the second sampling of threads.
-        # @option args [Integer] :snapshots (default: 10) Number of samples of thread stack trace.
-        # @option args [Integer] :threads (default: 3) Specify the number of threads to provide information for.
-        # @option args [String] :timeout Operation timeout.
+        # @option args [Enumerable<String>] :node_id A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
+        # @option args [Boolean] :ignore_idle_threads (default: true) Whether to show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue.
+        # @option args [String] :interval The time interval between thread stack trace samples.
+        # @option args [Integer] :snapshots (default: 10) The number of thread stack trace samples to collect.
+        # @option args [Integer] :threads (default: 3) The number of threads to provide information for.
+        # @option args [String] :timeout The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :type The type to sample.
         def hot_threads(args = {})
           args = Utils.clone_and_normalize_arguments(args)

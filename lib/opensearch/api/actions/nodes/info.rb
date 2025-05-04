@@ -15,11 +15,11 @@ module OpenSearch
       module Actions
         # Returns information about nodes in the cluster.
         #
-        # @option args [Boolean] :flat_settings If `true`, returns settings in flat format.
-        # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+        # @option args [Boolean] :flat_settings When `true`, returns settings in flat format.
+        # @option args [String] :timeout The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [Enumerable<String>, Enumerable<String>, String] :node_id_or_metric Limits the information returned to a list of node IDs or specific metrics. Supports a comma-separated list, such as `node1,node2` or `http,ingest`.
         # @option args [Enumerable<String>] :metric Limits the information returned to the specific metrics. Supports a comma-separated list, such as `http,ingest`.
-        # @option args [Enumerable<String>, String] :node_id Comma-separated list of node IDs or names used to limit returned information.
+        # @option args [Enumerable<String>, String] :node_id A comma-separated list of node IDs or names used to limit returned information.
         def info(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _node_id_or_metric = args.delete('node_id_or_metric')

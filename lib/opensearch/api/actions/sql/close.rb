@@ -13,11 +13,11 @@ module OpenSearch
   module API
     module Sql
       module Actions
-        # Clear the cursor context.
+        # Closes an open cursor to free server-side resources.
         #
-        # @option args [String] :format A short version of the Accept header (for example, `json`, `yaml`).
-        # @option args [Boolean] :sanitize (default: true) Specifies whether to escape special characters in the results
-        # @option args [Hash] :body
+        # @option args [String] :format Specifies the response format (JSON or YAML).
+        # @option args [Boolean] :sanitize (default: true) Whether to escape special characters in the results.
+        # @option args [Hash] :body Contains the cursor identifier to close.
         def close(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

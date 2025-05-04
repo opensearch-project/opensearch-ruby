@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Query
       module Actions
-        # Creates a new query datasource.
+        # Creates a new query data source.
         #
-        # @option args [Hash] :body
+        # @option args [Hash] :body The data source configuration to create.
         def datasources_create(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

@@ -13,9 +13,9 @@ module OpenSearch
   module API
     module Query
       module Actions
-        # Deletes specific datasource specified by name.
+        # Deletes a specific data source by name.
         #
-        # @option args [String] :datasource_name *Required* The Name of the DataSource to delete.
+        # @option args [String] :datasource_name *Required* The name of the data source to delete.
         def datasource_delete(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'datasource_name' missing" if args['datasource_name'].nil?

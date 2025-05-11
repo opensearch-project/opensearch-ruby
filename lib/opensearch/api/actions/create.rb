@@ -24,7 +24,7 @@ module OpenSearch
         # @option args [String] :timeout Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
         # @option args [Integer] :version Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
         # @option args [String] :version_type Specific version type: `external`, `external_gte`.
-        # @option args [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [Hash] :body *Required* The document
         def create(args = {})
           args = Utils.clone_and_normalize_arguments(args)

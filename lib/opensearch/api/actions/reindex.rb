@@ -24,7 +24,7 @@ module OpenSearch
         # @option args [String] :scroll Specifies how long a consistent view of the index should be maintained for scrolled search.
         # @option args [Integer, String] :slices The number of slices this task should be divided into. Defaults to 1 slice, meaning the task isn't sliced into subtasks.
         # @option args [String] :timeout Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
-        # @option args [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [Boolean] :wait_for_completion (default: true) If `true`, the request blocks until the operation is complete.
         # @option args [Hash] :body *Required* The search definition using the Query DSL and the prototype for the index request.
         def reindex(args = {})

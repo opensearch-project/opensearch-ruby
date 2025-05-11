@@ -72,6 +72,10 @@ module OpenSearch
       @ml ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Ml::Actions)
     end
 
+    def neural
+      @neural ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Neural::Actions)
+    end
+
     def nodes
       @nodes ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Nodes::Actions)
     end

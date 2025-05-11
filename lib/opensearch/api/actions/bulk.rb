@@ -21,10 +21,10 @@ module OpenSearch
         # @option args [String] :pipeline ID of the pipeline to use to preprocess incoming documents. If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request. If a final pipeline is configured it will always run, regardless of the value of this parameter.
         # @option args [Boolean, String] :refresh If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes. Valid values: `true`, `false`, `wait_for`.
         # @option args [Boolean] :require_alias If `true`, the request's actions must target an index alias.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [String] :routing Custom value used to route operations to a specific shard.
         # @option args [String] :timeout Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
         # @option args [String] :type Default document type for items which don't provide one.
-        # @option args [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [String] :index Name of the data stream, index, or index alias to perform bulk actions on.
         # @option args [Enumerable<Hash>] :body *Required* The operation definition and data (action-data pairs), separated by newlines
         def bulk(args = {})

@@ -26,7 +26,7 @@ module OpenSearch
         # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
         # @option args [String] :timeout Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
         # @option args [String] :type Default document type for items which don't provide one.
-        # @option args [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [String] :index Name of the data stream, index, or index alias to perform bulk actions on.
         # @option args [Enumerable<Hash>] :body *Required* The operation definition and data (action-data pairs), separated by newlines
         def bulk_stream(args = {})

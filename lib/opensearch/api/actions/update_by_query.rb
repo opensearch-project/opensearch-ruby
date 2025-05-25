@@ -49,7 +49,7 @@ module OpenSearch
         # @option args [Integer] :terminate_after Maximum number of documents to collect for each shard. If a query reaches this limit, OpenSearch terminates the query early. OpenSearch collects documents before sorting. Use with caution. OpenSearch applies this parameter to each shard handling the request. When possible, let OpenSearch perform early termination automatically. Avoid specifying this parameter for requests that target data streams with backing indexes across multiple data tiers.
         # @option args [String] :timeout Period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
         # @option args [Boolean] :version If `true`, returns the document version as part of a hit.
-        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, String, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [Boolean] :wait_for_completion (default: true) If `true`, the request blocks until the operation is complete.
         # @option args [Hash] :body The search definition using the Query DSL
         def update_by_query(args = {})

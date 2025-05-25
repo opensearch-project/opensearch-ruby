@@ -21,7 +21,7 @@ module OpenSearch
         # @option args [Boolean] :dry_run If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, String, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [String] :new_index Name of the index to create. Supports date math. Data streams do not support this parameter.
         # @option args [Hash] :body The conditions that needs to be met for executing rollover
         def rollover(args = {})

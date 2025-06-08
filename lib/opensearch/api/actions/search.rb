@@ -42,7 +42,7 @@ module OpenSearch
         # @option args [String] :q Query in the Lucene query string syntax using query parameter search. Query parameter searches do not support the full OpenSearch Query DSL but are handy for testing.
         # @option args [Boolean] :request_cache If `true`, the caching of search results is enabled for requests where `size` is `0`. Defaults to index level settings.
         # @option args [Boolean] :rest_total_hits_as_int Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [String] :scroll Period to retain the search context for scrolling. See Scroll search results. By default, this value cannot exceed `1d` (24 hours). You can change this limit using the `search.max_keep_alive` cluster-level setting.
         # @option args [String] :search_pipeline Customizable sequence of processing stages applied to search queries.
         # @option args [String] :search_type How distributed term frequencies are calculated for relevance scoring.

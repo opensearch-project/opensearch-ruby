@@ -22,7 +22,7 @@ module OpenSearch
         # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, String, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         def close(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?

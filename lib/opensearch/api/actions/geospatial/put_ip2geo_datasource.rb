@@ -11,25 +11,29 @@
 
 module OpenSearch
   module API
-    module Security
+    module Geospatial
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Create a specific IP2Geo data source.
+        # Default values:
+        # - `endpoint`: `"https://geoip.maps.opensearch.org/v1/geolite2-city/manifest.json"`
+        # - `update_interval_in_days`: 3.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [String] :name *Required*
+        # @option args [Hash] :body
+        def put_ip2geo_datasource(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'name' missing" if args['name'].nil?
+
+          _name = args.delete('name')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          method  = 'PUT'
+          url     = Utils.build_url('_plugins/geospatial/ip2geo/datasource', _name)
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
+          Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

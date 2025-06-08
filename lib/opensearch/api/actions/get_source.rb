@@ -15,8 +15,8 @@ module OpenSearch
       module Actions
         # Returns the source of a document.
         #
-        # @option args [String] :id *Required* Unique identifier of the document.
-        # @option args [String] :index *Required* Name of the index that contains the document.
+        # @option args [String] :id *Required* The unique identifier of the document.
+        # @option args [String] :index *Required* The name of the index that contains the document.
         # @option args [Boolean, Enumerable<String>, String] :_source Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
         # @option args [Enumerable<String>, String] :_source_excludes A comma-separated list of source fields to exclude in the response.
         # @option args [Enumerable<String>, String] :_source_includes A comma-separated list of source fields to include in the response.

@@ -11,25 +11,25 @@
 
 module OpenSearch
   module API
-    module Security
+    module Geospatial
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Delete a specific IP2Geo data source.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [String] :name *Required*
+        def delete_ip2geo_datasource(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'name' missing" if args['name'].nil?
+
+          _name = args.delete('name')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          method  = 'DELETE'
+          url     = Utils.build_url('_plugins/geospatial/ip2geo/datasource', _name)
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
-          transport.perform_request(method, url, args, body, headers).body
+          Utils.validate_query_params! args
+          transport.perform_delete_request method, url, args, body, headers
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

@@ -11,25 +11,23 @@
 
 module OpenSearch
   module API
-    module Security
+    module Ltr
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Clears the store caches.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [String] :store The name of the feature store for which to clear the cache.
+        def clear_cache(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          _store = args.delete('store')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          method  = 'POST'
+          url     = Utils.build_url('_ltr', _store, '_clearcache')
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
+          Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

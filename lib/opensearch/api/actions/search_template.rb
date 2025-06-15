@@ -24,7 +24,7 @@ module OpenSearch
         # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
         # @option args [Boolean] :profile If `true`, the query execution is profiled.
         # @option args [Boolean] :rest_total_hits_as_int If `true`, `hits.total` are rendered as an integer in the response.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [String] :scroll Specifies how long a consistent view of the index should be maintained for scrolled search.
         # @option args [String] :search_type The type of the search operation.
         # @option args [Boolean] :typed_keys If `true`, the response prefixes aggregation and suggester names with their respective types.

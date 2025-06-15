@@ -11,25 +11,23 @@
 
 module OpenSearch
   module API
-    module Security
+    module SearchRelevance
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Gets the search configurations.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [String] :search_configuration_id The search configuration id
+        def get_search_configurations(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          _search_configuration_id = args.delete('search_configuration_id')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
           method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          url     = Utils.build_url('_plugins/search_relevance/search_configurations', _search_configuration_id)
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
+          Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

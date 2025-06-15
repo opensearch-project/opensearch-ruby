@@ -35,7 +35,7 @@ module OpenSearch
         # @option args [Boolean, String] :refresh If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
         # @option args [Boolean] :request_cache If `true`, the request cache is used for this request. Defaults to the index-level setting.
         # @option args [Float] :requests_per_second (default: 0) The throttle for this request in sub-requests per second.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [String] :scroll Period to retain the search context for scrolling.
         # @option args [Integer] :scroll_size (default: 100) Size of the scroll request that powers the operation.
         # @option args [String] :search_timeout Explicit timeout for each search request. Defaults to no timeout.
@@ -47,7 +47,7 @@ module OpenSearch
         # @option args [Integer] :terminate_after Maximum number of documents to collect for each shard. If a query reaches this limit, OpenSearch terminates the query early. OpenSearch collects documents before sorting. Use with caution. OpenSearch applies this parameter to each shard handling the request. When possible, let OpenSearch perform early termination automatically. Avoid specifying this parameter for requests that target data streams with backing indexes across multiple data tiers.
         # @option args [String] :timeout Period each deletion request waits for active shards.
         # @option args [Boolean] :version If `true`, returns the document version as part of a hit.
-        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, String, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [Boolean] :wait_for_completion (default: true) If `true`, the request blocks until the operation is complete.
         # @option args [Hash] :body *Required* The search definition using the Query DSL
         def delete_by_query(args = {})

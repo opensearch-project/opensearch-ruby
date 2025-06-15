@@ -11,25 +11,21 @@
 
 module OpenSearch
   module API
-    module Security
+    module SearchRelevance
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Creates a judgment.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [Hash] :body The request body of the judgment to be created.
+        def put_judgments(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          method  = 'PUT'
+          url     = '_plugins/search_relevance/judgments'
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
+          Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

@@ -11,25 +11,23 @@
 
 module OpenSearch
   module API
-    module Security
+    module Geospatial
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Get one or more IP2Geo data sources, defaulting to returning all if no names specified.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [Enumerable<String>, String] :name
+        def get_ip2geo_datasource(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          _name = args.delete('name')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
           method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          url     = Utils.build_url('_plugins/geospatial/ip2geo/datasource', _name)
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
+          Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

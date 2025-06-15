@@ -21,7 +21,7 @@ module OpenSearch
         # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
         # @option args [Boolean] :realtime If `true`, the request is real-time as opposed to near-real-time.
         # @option args [Boolean, String] :refresh If `true`, the request refreshes relevant shards before retrieving documents.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [Enumerable<String>, String] :stored_fields If `true`, retrieves the document fields stored in the index rather than the document `_source`.
         # @option args [String] :index Name of the index to retrieve documents from when `ids` are specified, or when a document in the `docs` array does not specify an index.
         # @option args [Hash] :body *Required* Document identifiers; can be either `docs` (containing full document information) or `ids` (when index is provided in the URL.

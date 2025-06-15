@@ -11,25 +11,20 @@
 
 module OpenSearch
   module API
-    module Security
+    module Ltr
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Lists all available feature stores.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        def list_stores(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}
           body    = args.delete('body')
           method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          url     = '_ltr'
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
+          Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

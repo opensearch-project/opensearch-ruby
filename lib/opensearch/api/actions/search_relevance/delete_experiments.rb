@@ -11,25 +11,25 @@
 
 module OpenSearch
   module API
-    module Security
+    module SearchRelevance
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Deletes a specified experiment.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [String] :experiment_id *Required* The experiment id
+        def delete_experiments(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'experiment_id' missing" if args['experiment_id'].nil?
+
+          _experiment_id = args.delete('experiment_id')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          method  = 'DELETE'
+          url     = Utils.build_url('_plugins/search_relevance/experiments', _experiment_id)
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
-          transport.perform_request(method, url, args, body, headers).body
+          Utils.validate_query_params! args
+          transport.perform_delete_request method, url, args, body, headers
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

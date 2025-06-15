@@ -11,25 +11,25 @@
 
 module OpenSearch
   module API
-    module Security
+    module Geospatial
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Use an OpenSearch query to upload `GeoJSON` regardless if index exists.
+        # - When type is `geo_point`, only Point geometry is allowed
+        # - When type is `geo_shape`, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, GeometryCollection, Envelope).
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [Hash] :body *Required*
+        def geojson_upload_put(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'body' missing" if args['body'].nil?
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          method  = 'PUT'
+          url     = '_plugins/geospatial/geojson/_upload'
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
+          Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

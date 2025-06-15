@@ -11,25 +11,21 @@
 
 module OpenSearch
   module API
-    module Security
+    module SearchRelevance
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Creates a new query set by sampling queries from the user behavior data.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [Hash] :body
+        def post_query_sets(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          method  = 'POST'
+          url     = '_plugins/search_relevance/query_sets'
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
+          Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

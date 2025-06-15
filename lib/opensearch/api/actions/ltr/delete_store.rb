@@ -11,25 +11,25 @@
 
 module OpenSearch
   module API
-    module Security
+    module Ltr
       module Actions
-        # Retrieves information about the SSL configuration.
+        # Deletes a feature store with the specified name.
         #
-        # @option args [Boolean, String] :show_dn Whether to include all domain names in the response.
-        def get_sslinfo(args = {})
+        # @option args [String] :store *Required* The name of the feature store.
+        def delete_store(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'store' missing" if args['store'].nil?
+
+          _store = args.delete('store')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'GET'
-          url     = '_opendistro/_security/sslinfo'
+          method  = 'DELETE'
+          url     = Utils.build_url('_ltr', _store)
 
-          Utils.validate_query_params! args, GET_SSLINFO_QUERY_PARAMS
-          transport.perform_request(method, url, args, body, headers).body
+          Utils.validate_query_params! args
+          transport.perform_delete_request method, url, args, body, headers
         end
-
-        GET_SSLINFO_QUERY_PARAMS = Set.new(%w[
-          show_dn
-        ]).freeze
       end
     end
   end

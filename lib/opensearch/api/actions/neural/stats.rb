@@ -15,10 +15,13 @@ module OpenSearch
       module Actions
         # Provides information about the current status of the neural-search plugin.
         #
-        # @option args [String] :node_id Comma-separated list of node IDs or names to limit the returned information; leave empty to get information from all nodes.
+        # @option args [String] :node_id A comma-separated list of node IDs or names to limit the returned information; leave empty to get information from all nodes.
         # @option args [Boolean] :flat_stat_paths Whether to return stats in the flat form, which can improve readability, especially for heavily nested stats. For example, the flat form of `"processors": { "ingest": { "text_embedding_executions": 20181212 } }` is  `"processors.ingest.text_embedding_executions": "20181212"`.
+        # @option args [Boolean] :include_all_nodes (default: true) When `true` includes aggregated statistics across all nodes in the `all_nodes` category. When `false`, excludes the `all_nodes` category from the response.
+        # @option args [Boolean] :include_individual_nodes (default: true) When `true` includes statistics for individual nodes in the `nodes` category. When `false`, excludes the `nodes` category from the response.
+        # @option args [Boolean] :include_info (default: true) When `true` includes cluster-wide information in the `info` category. When `false`, excludes the `info` category from the response.
         # @option args [Boolean] :include_metadata Whether to return stat metadata instead of the raw stat value, includes additional information about the stat. These can include things like type hints, time since last stats being recorded, or recent rolling interval values
-        # @option args [String] :stat Comma-separated list of stats to retrieve; use empty string to retrieve all stats.
+        # @option args [String] :stat A comma-separated list of stats to retrieve; use empty string to retrieve all stats.
         def stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _node_id = args.delete('node_id')
@@ -35,6 +38,9 @@ module OpenSearch
 
         STATS_QUERY_PARAMS = Set.new(%w[
           flat_stat_paths
+          include_all_nodes
+          include_individual_nodes
+          include_info
           include_metadata
         ]).freeze
       end

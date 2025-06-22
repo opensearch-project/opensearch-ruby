@@ -18,7 +18,7 @@ module OpenSearch
         # @option args [Boolean] :allow_no_indices Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
         # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
         # @option args [Boolean] :ignore_unavailable Whether specified concrete indexes should be ignored when unavailable (missing or closed).
-        # @option args [Enumerable<String>] :index Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+        # @option args [Enumerable<String>] :index A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
         def get_upgrade(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

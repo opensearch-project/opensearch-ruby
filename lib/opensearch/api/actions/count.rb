@@ -27,9 +27,9 @@ module OpenSearch
         # @option args [Float] :min_score Sets the minimum `_score` value that documents must have to be included in the result.
         # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
         # @option args [String] :q Query in the Lucene query string syntax.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [Integer] :terminate_after Maximum number of documents to collect for each shard. If a query reaches this limit, OpenSearch terminates the query early. OpenSearch collects documents before sorting.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
         # @option args [Hash] :body Query to restrict the results specified with the Query DSL (optional)
         def count(args = {})
           args = Utils.clone_and_normalize_arguments(args)

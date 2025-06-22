@@ -15,8 +15,8 @@ module OpenSearch
       module Actions
         # Returns a document.
         #
-        # @option args [String] :id *Required* Unique identifier of the document.
-        # @option args [String] :index *Required* Name of the index that contains the document.
+        # @option args [String] :id *Required* The unique identifier of the document.
+        # @option args [String] :index *Required* The name of the index that contains the document.
         # @option args [Boolean, Enumerable<String>, String] :_source Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
         # @option args [Enumerable<String>, String] :_source_excludes A comma-separated list of source fields to exclude in the response.
         # @option args [Enumerable<String>, String] :_source_includes A comma-separated list of source fields to include in the response.
@@ -26,7 +26,7 @@ module OpenSearch
         # @option args [Enumerable<String>, String] :routing Target the specified primary shard.
         # @option args [Enumerable<String>, String] :stored_fields List of stored fields to return as part of a hit. If no fields are specified, no stored fields are included in the response. If this field is specified, the `_source` parameter defaults to false.
         # @option args [Integer] :version Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-        # @option args [String] :version_type Specific version type: `internal`, `external`, `external_gte`.
+        # @option args [String] :version_type The specific version type: `internal`, `external`, `external_gte`.
         def get(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?

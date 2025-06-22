@@ -15,8 +15,8 @@ module OpenSearch
       module Actions
         # Deletes an alias.
         #
-        # @option args [Enumerable<String>, String] :index *Required* Comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`).
-        # @option args [Enumerable<String>, String] :name *Required* Comma-separated list of aliases to remove. Supports wildcards (`*`). To remove all aliases, use `*` or `_all`.
+        # @option args [Enumerable<String>, String] :index *Required* A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`).
+        # @option args [Enumerable<String>, String] :name *Required* A comma-separated list of aliases to remove. Supports wildcards (`*`). To remove all aliases, use `*` or `_all`.
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.

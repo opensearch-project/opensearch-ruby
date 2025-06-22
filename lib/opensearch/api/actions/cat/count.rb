@@ -20,7 +20,7 @@ module OpenSearch
         # @option args [Boolean] :help Returns help information.
         # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
         # @option args [Boolean] :v Enables verbose mode, which displays column headers.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
         def count(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

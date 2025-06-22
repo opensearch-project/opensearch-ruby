@@ -19,7 +19,7 @@ module OpenSearch
         # @option args [Boolean] :flat_settings If `true`, returns settings in flat format.
         # @option args [Boolean] :local If `true`, the request retrieves information from the local node only.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Enumerable<String>, String] :name Comma-separated list of index template names used to limit the request. Wildcard (`*`) expressions are supported. To return all index templates, omit this parameter or use a value of `_all` or `*`.
+        # @option args [Enumerable<String>, String] :name A comma-separated list of index template names used to limit the request. Wildcard (`*`) expressions are supported. To return all index templates, omit this parameter or use a value of `_all` or `*`.
         def get_template(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _name = args.delete('name')

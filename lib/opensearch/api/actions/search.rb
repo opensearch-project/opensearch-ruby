@@ -42,7 +42,7 @@ module OpenSearch
         # @option args [String] :q Query in the Lucene query string syntax using query parameter search. Query parameter searches do not support the full OpenSearch Query DSL but are handy for testing.
         # @option args [Boolean] :request_cache If `true`, the caching of search results is enabled for requests where `size` is `0`. Defaults to index level settings.
         # @option args [Boolean] :rest_total_hits_as_int Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [String] :scroll Period to retain the search context for scrolling. See Scroll search results. By default, this value cannot exceed `1d` (24 hours). You can change this limit using the `search.max_keep_alive` cluster-level setting.
         # @option args [String] :search_pipeline Customizable sequence of processing stages applied to search queries.
         # @option args [String] :search_type How distributed term frequencies are calculated for relevance scoring.
@@ -62,7 +62,7 @@ module OpenSearch
         # @option args [Boolean] :typed_keys If `true`, aggregation and suggester names are be prefixed by their respective types in the response.
         # @option args [Boolean] :verbose_pipeline Enables or disables verbose mode for the search pipeline. When verbose mode is enabled, detailed information about each processor in the search pipeline is included in the search response. This includes the processor name, execution status, input, output, and time taken for processing. This parameter is primarily intended for debugging purposes, allowing users to track how data flows and transforms through the search pipeline.
         # @option args [Boolean] :version If `true`, returns document version as part of a hit.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
         # @option args [Hash] :body The search definition using the Query DSL
         def search(args = {})
           args = Utils.clone_and_normalize_arguments(args)

@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Opens an index.
         #
-        # @option args [Enumerable<String>, String] :index *Required* Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). By default, you must explicitly name the indexes you using to limit the request. To limit a request using `_all`, `*`, or other wildcard expressions, change the `action.destructive_requires_name` setting to false. You can update this setting in the `opensearch.yml` file or using the cluster update settings API.
+        # @option args [Enumerable<String>, String] :index *Required* A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). By default, you must explicitly name the indexes you using to limit the request. To limit a request using `_all`, `*`, or other wildcard expressions, change the `action.destructive_requires_name` setting to false. You can update this setting in the `opensearch.yml` file or using the cluster update settings API.
         # @option args [Boolean] :allow_no_indices If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -23,7 +23,7 @@ module OpenSearch
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :task_execution_timeout Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
         # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+        # @option args [Integer, String, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
         # @option args [Boolean] :wait_for_completion (default: true) Should this request wait until the operation has completed before returning.
         def open(args = {})
           args = Utils.clone_and_normalize_arguments(args)

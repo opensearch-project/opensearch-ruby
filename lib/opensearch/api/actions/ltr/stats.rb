@@ -15,9 +15,9 @@ module OpenSearch
       module Actions
         # Provides information about the current status of the LTR plugin.
         #
-        # @option args [Enumerable<String>] :node_id Comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
+        # @option args [Enumerable<String>] :node_id A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
         # @option args [String] :timeout The time in milliseconds to wait for a response.
-        # @option args [Enumerable<String>] :stat Comma-separated list of stats to retrieve; use `_all` or empty string to retrieve all stats.
+        # @option args [Enumerable<String>] :stat A comma-separated list of stats to retrieve; use `_all` or empty string to retrieve all stats.
         def stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _node_id = args.delete('node_id')

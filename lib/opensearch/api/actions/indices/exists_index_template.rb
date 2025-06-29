@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Returns information about whether a particular index template exists.
         #
-        # @option args [String] :name *Required* Name of the index template to check existence of. Wildcard (*) expressions are supported.
+        # @option args [String] :name *Required* The name of the index template to check existence of. Wildcard (*) expressions are supported.
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [Boolean] :flat_settings Return settings in flat format.
         # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.

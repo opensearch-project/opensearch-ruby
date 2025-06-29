@@ -21,14 +21,16 @@ module OpenSearch
         # @option args [Boolean] :explain If `true`, the response includes additional details about score computation as part of a hit.
         # @option args [Boolean] :ignore_throttled If `true`, specified concrete, expanded, or aliased indexes are not included in the response when throttled.
         # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
+        # @option args [Boolean] :phase_took Indicates whether to return phase-level `took` time values in the response.
         # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
         # @option args [Boolean] :profile If `true`, the query execution is profiled.
         # @option args [Boolean] :rest_total_hits_as_int If `true`, `hits.total` are rendered as an integer in the response.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [String] :scroll Specifies how long a consistent view of the index should be maintained for scrolled search.
+        # @option args [String] :search_pipeline Customizable sequence of processing stages applied to search queries.
         # @option args [String] :search_type The type of the search operation.
         # @option args [Boolean] :typed_keys If `true`, the response prefixes aggregation and suggester names with their respective types.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (*).
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (*).
         # @option args [Hash] :body *Required* The search definition template and its parameters.
         def search_template(args = {})
           args = Utils.clone_and_normalize_arguments(args)
@@ -52,11 +54,13 @@ module OpenSearch
           explain
           ignore_throttled
           ignore_unavailable
+          phase_took
           preference
           profile
           rest_total_hits_as_int
           routing
           scroll
+          search_pipeline
           search_type
           typed_keys
         ]).freeze

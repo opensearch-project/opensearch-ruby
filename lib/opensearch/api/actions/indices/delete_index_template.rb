@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Deletes an index template.
         #
-        # @option args [String] :name *Required* Name of the index template to delete. Wildcard (*) expressions are supported.
+        # @option args [String] :name *Required* The name of the index template to delete. Wildcard (*) expressions are supported.
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.

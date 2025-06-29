@@ -19,7 +19,7 @@ module OpenSearch
         # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
         # @option args [Boolean] :ignore_unavailable If `true`, missing or closed indexes are not included in the response.
         # @option args [String] :search_type Search operation type
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard (`*`) expressions are supported. To target all data streams and indexes in a cluster, omit this parameter or use `_all` or `*`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard (`*`) expressions are supported. To target all data streams and indexes in a cluster, omit this parameter or use `_all` or `*`.
         # @option args [Hash] :body *Required* The ranking evaluation search definition, including search requests, document ratings and ranking metric definition.
         def rank_eval(args = {})
           args = Utils.clone_and_normalize_arguments(args)

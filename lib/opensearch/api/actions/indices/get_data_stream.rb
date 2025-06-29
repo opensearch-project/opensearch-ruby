@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Returns data streams.
         #
-        # @option args [Enumerable<String>, String] :name Comma-separated list of data stream names used to limit the request. Wildcard (`*`) expressions are supported. If omitted, all data streams are returned.
+        # @option args [Enumerable<String>, String] :name A comma-separated list of data stream names used to limit the request. Wildcard (`*`) expressions are supported. If omitted, all data streams are returned.
         def get_data_stream(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _name = args.delete('name')

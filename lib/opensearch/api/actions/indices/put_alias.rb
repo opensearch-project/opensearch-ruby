@@ -19,7 +19,7 @@ module OpenSearch
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [String] :name Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams or indexes to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indexes return an error.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams or indexes to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indexes return an error.
         # @option args [Hash] :body The settings for the alias, such as `routing` or `filter`
         def put_alias(args = {})
           args = Utils.clone_and_normalize_arguments(args)

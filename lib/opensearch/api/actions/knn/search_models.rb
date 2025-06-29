@@ -26,7 +26,7 @@ module OpenSearch
         # @option args [Boolean] :ccs_minimize_roundtrips (default: true) Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
         # @option args [String] :default_operator The default operator for query string query (AND or OR).
         # @option args [String] :df The field to use as default where no field prefix is given in the query string.
-        # @option args [Enumerable<String>] :docvalue_fields Comma-separated list of fields to return as the docvalue representation of a field for each hit.
+        # @option args [Enumerable<String>] :docvalue_fields A comma-separated list of fields to return as the docvalue representation of a field for each hit.
         # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
         # @option args [Boolean] :explain Specify whether to return detailed information about score computation as part of a hit.
         # @option args [Integer] :from (default: 0) Starting offset.
@@ -39,14 +39,14 @@ module OpenSearch
         # @option args [String] :q Query in the Lucene query string syntax.
         # @option args [Boolean] :request_cache Specify if request cache should be used for this request or not, defaults to index level setting.
         # @option args [Boolean] :rest_total_hits_as_int Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response.
-        # @option args [Enumerable<String>, String] :routing Comma-separated list of specific routing values.
+        # @option args [Enumerable<String>, String] :routing A comma-separated list of specific routing values.
         # @option args [String] :scroll Specify how long a consistent view of the index should be maintained for scrolled search.
         # @option args [String] :search_type Search operation type.
         # @option args [Boolean] :seq_no_primary_term Specify whether to return sequence number and primary term of the last modification of each hit.
         # @option args [Integer] :size (default: 10) Number of hits to return.
-        # @option args [Enumerable<String>] :sort Comma-separated list of <field>:<direction> pairs.
+        # @option args [Enumerable<String>] :sort A comma-separated list of <field>:<direction> pairs.
         # @option args [Enumerable<String>] :stats Specific 'tag' of the request for logging and statistical purposes.
-        # @option args [Enumerable<String>] :stored_fields Comma-separated list of stored fields to return.
+        # @option args [Enumerable<String>] :stored_fields A comma-separated list of stored fields to return.
         # @option args [String] :suggest_field Specify which field to use for suggestions.
         # @option args [String] :suggest_mode Specify suggest mode.
         # @option args [Integer] :suggest_size How many suggestions to return in response.

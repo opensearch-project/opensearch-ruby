@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Preloads native library files into memory, reducing initial search latency for specified indexes.
         #
-        # @option args [Enumerable<String>] :index *Required* Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+        # @option args [Enumerable<String>] :index *Required* A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
         def warmup(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?

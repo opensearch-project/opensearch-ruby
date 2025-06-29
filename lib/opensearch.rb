@@ -40,6 +40,10 @@ module OpenSearch
       @flow_framework ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::FlowFramework::Actions)
     end
 
+    def geospatial
+      @geospatial ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Geospatial::Actions)
+    end
+
     def indices
       @indices ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Indices::Actions)
     end
@@ -112,8 +116,16 @@ module OpenSearch
       @search_pipeline ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::SearchPipeline::Actions)
     end
 
+    def search_relevance
+      @search_relevance ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::SearchRelevance::Actions)
+    end
+
     def security
       @security ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Security::Actions)
+    end
+
+    def security_analytics
+      @security_analytics ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::SecurityAnalytics::Actions)
     end
 
     def sm

@@ -13,7 +13,7 @@ module OpenSearch
   module API
     module Root
       module Actions
-        # Returns information about why a specific matches (or doesn't match) a query.
+        # Returns information about why a specific document matches (or doesn't match) a query.
         #
         # @option args [String] :id *Required* Defines the document ID.
         # @option args [String] :index *Required* Index names used to limit the request. Only a single index name can be provided to this parameter.
@@ -27,7 +27,7 @@ module OpenSearch
         # @option args [Boolean] :lenient If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
         # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
         # @option args [String] :q Query in the Lucene query string syntax.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [Enumerable<String>, String] :stored_fields A comma-separated list of stored fields to return in the response.
         # @option args [Hash] :body The query definition using the Query DSL
         def explain(args = {})

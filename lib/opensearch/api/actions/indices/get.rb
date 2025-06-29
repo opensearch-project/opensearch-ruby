@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Returns information about one or more indexes.
         #
-        # @option args [Enumerable<String>, String] :index *Required* Comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard expressions (*) are supported.
+        # @option args [Enumerable<String>, String] :index *Required* A comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard expressions (*) are supported.
         # @option args [Boolean] :allow_no_indices If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.

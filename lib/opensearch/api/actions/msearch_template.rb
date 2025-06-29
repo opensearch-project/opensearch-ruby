@@ -20,7 +20,7 @@ module OpenSearch
         # @option args [Boolean] :rest_total_hits_as_int If `true`, the response returns `hits.total` as an integer. If `false`, it returns `hits.total` as an object.
         # @option args [String] :search_type The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`.
         # @option args [Boolean] :typed_keys If `true`, the response prefixes aggregation and suggester names with their respective types.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*`.
         # @option args [Enumerable<Hash>] :body *Required* The request definitions (metadata-search request definition pairs), separated by newlines
         def msearch_template(args = {})
           args = Utils.clone_and_normalize_arguments(args)

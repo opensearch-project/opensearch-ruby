@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Deletes a data stream.
         #
-        # @option args [Enumerable<String>, String] :name *Required* Comma-separated list of data streams to delete. Wildcard (`*`) expressions are supported.
+        # @option args [Enumerable<String>, String] :name *Required* A comma-separated list of data streams to delete. Wildcard (`*`) expressions are supported.
         def delete_data_stream(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'name' missing" if args['name'].nil?

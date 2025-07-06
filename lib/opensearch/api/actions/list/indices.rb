@@ -19,7 +19,7 @@ module OpenSearch
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [Enumerable<String>, String] :expand_wildcards The type of index that wildcard patterns can match.
         # @option args [String] :format A short version of the Accept header, such as `JSON`, `YAML`.
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
         # @option args [String] :health The health status used to limit returned indexes. By default, the response includes indexes of any health status.
         # @option args [Boolean] :help Return help information.
         # @option args [Boolean] :include_unloaded_segments If `true`, the response includes information from segments that are not loaded into memory.
@@ -27,12 +27,12 @@ module OpenSearch
         # @option args [String] :master_timeout DEPRECATED Operation timeout for connection to cluster-manager node.
         # @option args [Hash] :next_token Token to retrieve next page of indexes.
         # @option args [Boolean] :pri If `true`, the response only includes information from primary shards.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
         # @option args [Integer] :size Maximum number of indexes to be displayed in a page.
         # @option args [String] :sort Defines order in which indexes will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created indexes would be displayed first.
         # @option args [String] :time The unit used to display time values.
         # @option args [Boolean] :v Verbose mode. Display column headers.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
         def indices(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

@@ -16,7 +16,7 @@ module OpenSearch
         # Get stats.
         #
         # @option args [String] :node_id
-        # @option args [String] :stat
+        # @option args [Enumerable<String>, String] :stat
         def get_stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _node_id = args.delete('node_id')

@@ -27,7 +27,7 @@ module OpenSearch
         # @option args [Boolean] :lenient If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
         # @option args [String] :q Query in the Lucene query string syntax.
         # @option args [Boolean] :rewrite If `true`, returns a more detailed explanation showing the actual Lucene query that will be executed.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`.
         # @option args [Hash] :body The query definition specified with the Query DSL
         def validate_query(args = {})
           args = Utils.clone_and_normalize_arguments(args)

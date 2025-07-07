@@ -4,6 +4,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 ### Added
 ### Changed
+- Update rubygems public key setting expiry to 20260707 ([#308](https://github.com/opensearch-project/opensearch-ruby/pull/308))
 ### Deprecated
 ### Removed
 ### Fixed

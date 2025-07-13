@@ -22,7 +22,7 @@ module OpenSearch
         # @option args [Boolean] :rest_total_hits_as_int If `true`, `hits.total` are returned as an integer in the response. Defaults to false, which returns an object.
         # @option args [String] :search_type Indicates whether global term and document frequencies should be used when scoring returned documents.
         # @option args [Boolean] :typed_keys Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and index aliases to search.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and index aliases to search.
         # @option args [Enumerable<Hash>] :body *Required* The request definitions (metadata-search request definition pairs), separated by newlines
         def msearch(args = {})
           args = Utils.clone_and_normalize_arguments(args)

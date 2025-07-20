@@ -15,8 +15,8 @@ module OpenSearch
       module Actions
         # Explicitly clears the search context for a scroll.
         #
-        # @option args [Enumerable<String>, String] :scroll_id DEPRECATED Comma-separated list of scroll IDs to clear. To clear all scroll IDs, use `_all`.
-        # @option args [Hash] :body Comma-separated list of scroll IDs to clear if none was specified using the `scroll_id` parameter
+        # @option args [Enumerable<String>, String] :scroll_id DEPRECATED A comma-separated list of scroll IDs to clear. To clear all scroll IDs, use `_all`.
+        # @option args [Hash] :body A comma-separated list of scroll IDs to clear if none was specified using the `scroll_id` parameter
         def clear_scroll(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _scroll_id = args.delete('scroll_id')

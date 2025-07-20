@@ -15,12 +15,12 @@ module OpenSearch
       module Actions
         # Provides statistics on operations happening in an index.
         #
-        # @option args [Enumerable<String>, String] :completion_fields Comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
+        # @option args [Enumerable<String>, String] :completion_fields A comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
         # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
-        # @option args [Enumerable<String>, String] :fielddata_fields Comma-separated list or wildcard expressions of fields to include in field data statistics.
-        # @option args [Enumerable<String>, String] :fields Comma-separated list or wildcard expressions of fields to include in the statistics.
+        # @option args [Enumerable<String>, String] :fielddata_fields A comma-separated list or wildcard expressions of fields to include in field data statistics.
+        # @option args [Enumerable<String>, String] :fields A comma-separated list or wildcard expressions of fields to include in the statistics.
         # @option args [Boolean] :forbid_closed_indices (default: true) If `true`, statistics are not collected from closed indexes.
-        # @option args [Enumerable<String>, String] :groups Comma-separated list of search groups to include in the search statistics.
+        # @option args [Enumerable<String>, String] :groups A comma-separated list of search groups to include in the search statistics.
         # @option args [Boolean] :include_segment_file_sizes If `true`, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
         # @option args [Boolean] :include_unloaded_segments If `true`, the response includes information from segments that are not loaded into memory.
         # @option args [String] :level Indicates whether statistics are aggregated at the cluster, index, or shard level.

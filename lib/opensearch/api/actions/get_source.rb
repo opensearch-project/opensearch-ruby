@@ -15,17 +15,17 @@ module OpenSearch
       module Actions
         # Returns the source of a document.
         #
-        # @option args [String] :id *Required* Unique identifier of the document.
-        # @option args [String] :index *Required* Name of the index that contains the document.
+        # @option args [String] :id *Required* The unique identifier of the document.
+        # @option args [String] :index *Required* The name of the index containing the document.
         # @option args [Boolean, Enumerable<String>, String] :_source Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
         # @option args [Enumerable<String>, String] :_source_excludes A comma-separated list of source fields to exclude in the response.
         # @option args [Enumerable<String>, String] :_source_includes A comma-separated list of source fields to include in the response.
         # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
-        # @option args [Boolean] :realtime Boolean) If `true`, the request is real-time as opposed to near-real-time.
+        # @option args [Boolean] :realtime Boolean) If `true`, the request is real time as opposed to near real time.
         # @option args [Boolean, String] :refresh If `true`, OpenSearch refreshes the affected shards to make this operation visible to search. If `false`, do nothing with refreshes.
         # @option args [Enumerable<String>, String] :routing Target the specified primary shard.
         # @option args [Integer] :version Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-        # @option args [String] :version_type Specific version type. One of `internal`, `external`, `external_gte`.
+        # @option args [String] :version_type The specific version type. One of `internal`, `external`, `external_gte`.
         def get_source(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'id' missing" if args['id'].nil?

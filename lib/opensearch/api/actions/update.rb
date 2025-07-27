@@ -26,9 +26,9 @@ module OpenSearch
         # @option args [Boolean, String] :refresh If 'true', OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.
         # @option args [Boolean] :require_alias If `true`, the destination must be an index alias.
         # @option args [Integer] :retry_on_conflict (default: 0) Specify how many times should the operation be retried when a conflict occurs.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [String] :timeout Period to wait for dynamic mapping updates and active shards. This guarantees OpenSearch waits for at least the timeout before failing. The actual wait time could be longer, particularly when multiple waits occur.
-        # @option args [Integer, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operations. Set to 'all' or any positive integer up to the total number of shards in the index (number_of_replicas+1). Defaults to 1 meaning the primary shard.
+        # @option args [Integer, String, NilClass, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operations. Set to 'all' or any positive integer up to the total number of shards in the index (number_of_replicas+1). Defaults to 1 meaning the primary shard.
         # @option args [Hash] :body *Required* The request definition requires either `script` or partial `doc`
         def update(args = {})
           args = Utils.clone_and_normalize_arguments(args)

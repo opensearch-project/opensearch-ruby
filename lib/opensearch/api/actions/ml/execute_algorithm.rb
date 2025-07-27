@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Execute an algorithm.
         #
-        # @option args [String] :algorithm_name *Required*
+        # @option args [String] :algorithm_name *Required* The function name.
         # @option args [Hash] :body
         def execute_algorithm(args = {})
           args = Utils.clone_and_normalize_arguments(args)

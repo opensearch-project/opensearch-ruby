@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Provides statistics on operations happening in a data stream.
         #
-        # @option args [Enumerable<String>, String] :name Comma-separated list of data streams used to limit the request. Wildcard expressions (`*`) are supported. To target all data streams in a cluster, omit this parameter or use `*`.
+        # @option args [Enumerable<String>, String] :name A comma-separated list of data streams used to limit the request. Wildcard expressions (`*`) are supported. To target all data streams in a cluster, omit this parameter or use `*`.
         def data_streams_stats(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _name = args.delete('name')

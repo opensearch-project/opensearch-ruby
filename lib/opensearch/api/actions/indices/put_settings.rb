@@ -23,7 +23,7 @@ module OpenSearch
         # @option args [String] :master_timeout DEPRECATED Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
         # @option args [Boolean] :preserve_existing If `true`, existing index settings remain unchanged.
         # @option args [String] :timeout Period to wait for a response. If no response is received before the  timeout expires, the request fails and returns an error.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
         # @option args [Hash] :body *Required* The configuration settings for an index.
         def put_settings(args = {})
           args = Utils.clone_and_normalize_arguments(args)

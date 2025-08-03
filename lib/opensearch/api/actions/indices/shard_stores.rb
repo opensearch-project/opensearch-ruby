@@ -16,10 +16,10 @@ module OpenSearch
         # Provides store information for shard copies of indexes.
         #
         # @option args [Boolean] :allow_no_indices If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-        # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+        # @option args [Enumerable<String>, String] :expand_wildcards (default: open) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
         # @option args [Boolean] :ignore_unavailable If `true`, missing or closed indexes are not included in the response.
-        # @option args [Enumerable<String>, String] :status List of shard health statuses used to limit the request.
-        # @option args [Enumerable<String>, String] :index List of data streams, indexes, and aliases used to limit the request.
+        # @option args [Enumerable<String>, String] :status (default: ["yellow", "red"]) (default: ["yellow", "red"]) A list of shard health statuses used to limit the request.
+        # @option args [Enumerable<String>, String] :index Limits health reporting to a specific source. Can be a single source or a comma-separated list of sources (comprised of data streams, indexes, and aliases).
         def shard_stores(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

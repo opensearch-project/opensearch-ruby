@@ -20,7 +20,7 @@ module OpenSearch
         # @option args [Boolean] :ignore_unavailable Whether specified concrete indexes should be ignored when unavailable (missing or closed).
         # @option args [Boolean] :only_ancient_segments If `true`, only ancient (an older Lucene major release) segments will be upgraded.
         # @option args [Boolean] :wait_for_completion Should this request wait until the operation has completed before returning.
-        # @option args [Enumerable<String>] :index Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+        # @option args [Enumerable<String>] :index A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
         def upgrade(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

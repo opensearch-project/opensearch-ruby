@@ -15,12 +15,12 @@ module OpenSearch
       module Actions
         # Creates point in time context.
         #
-        # @option args [Enumerable<String>] :index *Required* Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+        # @option args [Enumerable<String>] :index *Required* A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
         # @option args [Boolean] :allow_partial_pit_creation Allow if point in time can be created with partial failures.
         # @option args [Enumerable<String>, String] :expand_wildcards Whether to expand wildcard expression to concrete indexes that are open, closed or both.
         # @option args [String] :keep_alive Specify the keep alive for point in time.
         # @option args [String] :preference (default: random) Specify the node or shard the operation should be performed on.
-        # @option args [Enumerable<String>, String] :routing Comma-separated list of specific routing values.
+        # @option args [Enumerable<String>, String] :routing A comma-separated list of specific routing values.
         def create_pit(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           raise ArgumentError, "Required argument 'index' missing" if args['index'].nil?

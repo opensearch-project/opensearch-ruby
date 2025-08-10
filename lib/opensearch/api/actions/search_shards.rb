@@ -20,8 +20,9 @@ module OpenSearch
         # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
         # @option args [Boolean] :local If `true`, the request retrieves information from the local node only.
         # @option args [String] :preference (default: random) Specifies the node or shard the operation should be performed on. Random by default.
-        # @option args [Enumerable<String>, String] :routing Custom value used to route operations to a specific shard.
+        # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [Enumerable<String>, String] :index Returns the indexes and shards that a search request would be executed against.
+        # @option args [Hash] :body
         def search_shards(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

@@ -18,10 +18,10 @@ module OpenSearch
         # @option args [Boolean] :allow_no_indices If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
         # @option args [Enumerable<String>, String] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
         # @option args [Boolean] :fielddata If `true`, clears the fields cache. Use the `fields` parameter to clear the cache of specific fields only.
-        # @option args [Enumerable<String>, String] :fields Comma-separated list of field names used to limit the `fielddata` parameter.
+        # @option args [Enumerable<String>, String] :fields A comma-separated list of field names used to limit the `fielddata` parameter.
         # @option args [Boolean] :file If `true`, clears the unused entries from the file cache on nodes with the Search role.
         # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
-        # @option args [Enumerable<String>] :index Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+        # @option args [Enumerable<String>] :index A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
         # @option args [Boolean] :query If `true`, clears the query cache.
         # @option args [Boolean] :request If `true`, clears the request cache.
         def clear_cache(args = {})

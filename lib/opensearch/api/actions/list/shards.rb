@@ -18,12 +18,12 @@ module OpenSearch
         # @option args [String] :bytes The unit used to display byte values.
         # @option args [String] :cluster_manager_timeout Operation timeout for connection to cluster-manager node.
         # @option args [String] :format A short version of the Accept header, such as `JSON`, `YAML`.
-        # @option args [Enumerable<String>] :h Comma-separated list of column names to display.
+        # @option args [Enumerable<String>] :h A comma-separated list of column names to display.
         # @option args [Boolean] :help Return help information.
         # @option args [Boolean] :local Return local information, do not retrieve the state from cluster-manager node.
         # @option args [String] :master_timeout DEPRECATED Operation timeout for connection to cluster-manager node.
         # @option args [Hash] :next_token Token to retrieve next page of shards.
-        # @option args [Enumerable<String>] :s Comma-separated list of column names or column aliases to sort by.
+        # @option args [Enumerable<String>] :s A comma-separated list of column names or column aliases to sort by.
         # @option args [Integer] :size Maximum number of shards to be displayed in a page.
         # @option args [String] :sort Defines order in which shards will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created shards would be displayed first.
         # @option args [String] :time The unit in which to display time values.

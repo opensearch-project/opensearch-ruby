@@ -20,7 +20,7 @@ module OpenSearch
         # @option args [Boolean] :force If `true`, the request forces a flush even if there are no changes to commit to the index.
         # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
         # @option args [Boolean] :wait_if_ongoing (default: true) If `true`, the flush operation blocks until execution when another flush operation is running. If `false`, OpenSearch returns an error if you request a flush when another flush operation is running.
-        # @option args [Enumerable<String>, String] :index Comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards (`*`). To flush all data streams and indexes, omit this parameter or use `*` or `_all`.
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards (`*`). To flush all data streams and indexes, omit this parameter or use `*` or `_all`.
         def flush(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           _index = args.delete('index')

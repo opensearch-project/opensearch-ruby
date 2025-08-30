@@ -34,7 +34,7 @@ Repositories create consistent release labels, such as `v1.0.0`, `v1.1.0` and `v
 The release process is standard across repositories in this org and is run by a release manager volunteering from amongst [MAINTAINERS](MAINTAINERS.md). For this client, there are 5 gems that can be released: `opensearch-api`, `opensearch-ruby`, `opensearch-transport`, `opensearch-dsl` and `opensearch-aws-sigv4`.
 
 1. Create a tag for the releasing ruby gem, e.g. `opensearch-ruby/2.2.0`, and push it to the GitHub repo.
-1. The [release-drafter.yml](.github/workflows/release-drafter.yml) will be automatically kicked off and is responsible for drafting a new release on GitHub containing release artifacts.
+1. The [release_drafter.yml](.github/workflows/release_drafter.yml) will be automatically kicked off and is responsible for drafting a new release on GitHub containing release artifacts.
 1. Before creating a draft release, this workflow creates a GitHub issue asking for approval from the [maintainers](MAINTAINERS.md). See sample [issue](https://github.com/gaiksaya/opensearch-ruby/issues/1). The maintainers need to approve in order to continue the workflow run.
 1. This draft release triggers the [jenkins release workflow](https://build.ci.opensearch.org/job/opensearch-ruby-gems-release/) as a result of which opensearch-ruby client gem is released on rubygems.
 1. Once the above release workflow is successful, the drafted release on GitHub is published automatically.

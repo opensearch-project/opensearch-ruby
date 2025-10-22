@@ -319,13 +319,15 @@ module OpenSearch
               reload_connections! and retry
             end
 
-            raise e unless max_retries
+            exception = OpenSearch::Transport::Transport::Error.new(e.message)
+
+            raise exception unless max_retries
             log_warn "[#{e.class}] Attempt #{tries} connecting to #{connection.host.inspect}"
             if tries <= max_retries
               retry
             else
               log_fatal "[#{e.class}] Cannot connect to #{connection.host.inspect} after #{tries} tries"
-              raise e
+              raise exception
             end
           rescue StandardError => e
             log_fatal "[#{e.class}] #{e.message} (#{connection.host.inspect if connection})"

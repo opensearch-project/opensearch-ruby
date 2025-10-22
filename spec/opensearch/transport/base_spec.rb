@@ -42,14 +42,14 @@ describe OpenSearch::Transport::Transport::Base do
 
         expect {
           client.perform_request('GET', '_cluster/stats')
-        }.to raise_exception(Faraday::ConnectionFailed)
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
 
       it 'replaces the password with the string \'REDACTED\'' do
         expect(logger).to receive(:error).with(/REDACTED/)
         expect {
           client.perform_request('GET', '_cluster/stats')
-        }.to raise_exception(Faraday::ConnectionFailed)
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
 
@@ -142,7 +142,7 @@ describe OpenSearch::Transport::Transport::Base do
     end
 
     it 'raises an exception' do
-      expect { client.perform_request('GET', '/') }.to raise_exception(Faraday::ConnectionFailed)
+      expect { client.perform_request('GET', '/') }.to raise_exception(OpenSearch::Transport::Transport::Error)
     end
   end
 
@@ -166,7 +166,7 @@ describe OpenSearch::Transport::Transport::Base do
       it 'uses the client `retry_on_failure` value' do
         expect {
           client.transport.perform_request('GET', '/info')
-        }.to raise_exception(Faraday::ConnectionFailed)
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
 
@@ -197,7 +197,7 @@ describe OpenSearch::Transport::Transport::Base do
       it 'uses the option `retry_on_failure` value' do
         expect do
           client.transport.perform_request('GET', '/info', {}, nil, nil, retry_on_failure: 5)
-        end.to raise_exception(Faraday::ConnectionFailed)
+        end.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
   end
@@ -222,7 +222,7 @@ describe OpenSearch::Transport::Transport::Base do
       it 'uses the default `MAX_RETRIES` value' do
         expect {
           client.transport.perform_request('GET', '/info')
-        }.to raise_exception(Faraday::ConnectionFailed)
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
 
@@ -234,7 +234,7 @@ describe OpenSearch::Transport::Transport::Base do
       it 'uses the option `retry_on_failure` value' do
         expect {
           client.transport.perform_request('GET', '/info', {}, nil, nil, retry_on_failure: 5)
-        }.to raise_exception(Faraday::ConnectionFailed)
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
   end
@@ -259,7 +259,7 @@ describe OpenSearch::Transport::Transport::Base do
       it 'does not retry' do
         expect {
           client.transport.perform_request('GET', '/info')
-        }.to raise_exception(Faraday::ConnectionFailed)
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
 
@@ -272,7 +272,7 @@ describe OpenSearch::Transport::Transport::Base do
       it 'uses the option `retry_on_failure` value' do
         expect {
           client.transport.perform_request('GET', '/info', {}, nil, nil, retry_on_failure: 5)
-        }.to raise_exception(Faraday::ConnectionFailed)
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
   end
@@ -294,7 +294,7 @@ describe OpenSearch::Transport::Transport::Base do
       it 'does not retry' do
         expect do
           client.transport.perform_request('GET', '/info')
-        end.to raise_exception(Faraday::ConnectionFailed)
+        end.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
 
@@ -306,7 +306,7 @@ describe OpenSearch::Transport::Transport::Base do
       it 'uses the option `retry_on_failure` value' do
         expect do
           client.transport.perform_request('GET', '/info', {}, nil, nil, retry_on_failure: 5)
-        end.to raise_exception(Faraday::ConnectionFailed)
+        end.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
     end
   end

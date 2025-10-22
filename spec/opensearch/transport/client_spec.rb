@@ -1492,7 +1492,7 @@ describe OpenSearch::Transport::Client do
           expect(client.perform_request('GET', '_nodes/_local'))
           expect {
             client.perform_request('GET', '_nodes/_local')
-          }.to raise_exception(Faraday::ConnectionFailed)
+          }.to raise_exception(OpenSearch::Transport::Transport::Error)
         end
       end
 

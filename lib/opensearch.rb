@@ -152,6 +152,10 @@ module OpenSearch
       @transforms ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Transforms::Actions)
     end
 
+    def ubi
+      @ubi ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Ubi::Actions)
+    end
+
     def wlm
       @wlm ||= OpenSearch::API::Namespace.new(transport, OpenSearch::API::Wlm::Actions)
     end

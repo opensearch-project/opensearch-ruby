@@ -73,7 +73,7 @@ jobs:
           body: |
             Update `opensearch-ruby` to reflect the latest [OpenSearch API spec](https://github.com/opensearch-project/opensearch-api-specification/releases/download/main-latest/opensearch-openapi.yaml).
             Date: ${{ env.date }}
-          branch: update-api-from-spec-${{ env.date }}
+          branch: update-api-from-spec
           base: main
           signoff: true
           labels: |

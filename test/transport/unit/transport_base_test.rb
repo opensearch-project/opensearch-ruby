@@ -267,7 +267,7 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
       # `block.expects(:call).raises(::Errno::ECONNREFUSED)` fails on Ruby 1.8
       block = lambda { |a,b| raise ::Errno::ECONNREFUSED }
 
-      assert_raise ::Errno::ECONNREFUSED do
+      assert_raise OpenSearch::Transport::Transport::Error do
         @transport.perform_request 'GET', '/', &block
       end
     end
@@ -289,7 +289,7 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
 
       c.expects(:dead!)
 
-      assert_raise( ::Errno::ECONNREFUSED ) { @transport.perform_request 'GET', '/', &block }
+      assert_raise(OpenSearch::Transport::Transport::Error) { @transport.perform_request 'GET', '/', &block }
     end
   end
 
@@ -343,7 +343,7 @@ class OpenSearch::Transport::Transport::BaseTest < Minitest::Test
             then.raises(Errno::ECONNREFUSED).
             then.returns(stub_everything :failures => 1)
 
-      assert_raise Errno::ECONNREFUSED do
+      assert_raise OpenSearch::Transport::Transport::Error do
         @transport.perform_request('GET', '/', &@block)
       end
     end

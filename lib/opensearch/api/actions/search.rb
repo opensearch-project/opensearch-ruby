@@ -34,6 +34,7 @@ module OpenSearch
         # @option args [Boolean] :ignore_throttled If `true`, concrete, expanded or aliased indexes will be ignored when frozen.
         # @option args [Boolean] :ignore_unavailable If `false`, the request returns an error if it targets a missing or closed index.
         # @option args [Boolean] :include_named_queries_score Indicates whether `hit.matched_queries` should be rendered as a map that includes the name of the matched query associated with its score (true) or as an array containing the name of the matched queries (false)
+        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
         # @option args [Boolean] :lenient If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored. This parameter can only be used when the `q` query string parameter is specified.
         # @option args [Integer] :max_concurrent_shard_requests (default: 5) Defines the number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
         # @option args [Boolean] :phase_took Indicates whether to return phase-level `took` time values in the response.
@@ -62,7 +63,6 @@ module OpenSearch
         # @option args [Boolean] :typed_keys If `true`, aggregation and suggester names are be prefixed by their respective types in the response.
         # @option args [Boolean] :verbose_pipeline Enables or disables verbose mode for the search pipeline. When verbose mode is enabled, detailed information about each processor in the search pipeline is included in the search response. This includes the processor name, execution status, input, output, and time taken for processing. This parameter is primarily intended for debugging purposes, allowing users to track how data flows and transforms through the search pipeline.
         # @option args [Boolean] :version If `true`, returns document version as part of a hit.
-        # @option args [Enumerable<String>, String] :index A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
         # @option args [Hash] :body The search definition using the Query DSL
         def search(args = {})
           args = Utils.clone_and_normalize_arguments(args)

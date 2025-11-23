@@ -21,7 +21,7 @@ module OpenSearch
         # @option args [Boolean] :offsets (default: true) If `true`, the response includes term offsets.
         # @option args [Boolean] :payloads (default: true) If `true`, the response includes term payloads.
         # @option args [Boolean] :positions (default: true) If `true`, the response includes term positions.
-        # @option args [String] :preference Specifies the node or shard on which the operation should be performed.  See [preference query parameter]({{site.url}}{{site.baseurl}}/api-reference/search-apis/search/#the-preference-query-parameter) for a list of available options.  By default the requests are routed randomly to available shard copies (primary or replica), with no guarantee of consistency across repeated queries.
+        # @option args [String] :preference Specifies the node or shard on which the operation should be performed. See [preference query parameter]({{site.url}}{{site.baseurl}}/api-reference/search-apis/search/#the-preference-query-parameter) for a list of available options. By default the requests are routed randomly to available shard copies (primary or replica), with no guarantee of consistency across repeated queries.
         # @option args [Boolean] :realtime (default: true) If `true`, the request is real time as opposed to near real time.
         # @option args [Enumerable<String>, String] :routing A custom value used to route operations to a specific shard.
         # @option args [Boolean] :term_statistics If `true`, the response includes term frequency and document frequency.

@@ -14,7 +14,6 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Vacha Shah              | [VachaShah](https://github.com/VachaShah)     | Amazon      |
 | Theo Truong             | [nhtruong](https://github.com/nhtruong)       | Amazon      |
 | Harsha Vamsi Kalluri    | [harshavamsi](https://github.com/harshavamsi) | Amazon      |
-| Earlopain               | [Earlopain](https://github.com/Earlopain)     |             |
 
 
 ## Emeritus
@@ -24,3 +23,4 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Daniel Doubrovkine | [dblock](https://github.com/dblock)             | Independent |
 | Yuvraj Jaiswal     | [yuvi17](https://github.com/yuvi17)             | Amazon      |
 | Jayesh Hathila     | [jayeshathila](https://github.com/jayeshathila) | Amazon      |
+| Earlopain          | [Earlopain](https://github.com/Earlopain)       |             |

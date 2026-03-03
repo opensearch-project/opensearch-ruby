@@ -81,6 +81,9 @@ module OpenSearch
           @reload_after    = options[:reload_connections].is_a?(Integer) ? options[:reload_connections] : DEFAULT_RELOAD_AFTER
           @resurrect_after = options[:resurrect_after] || DEFAULT_RESURRECT_AFTER
           @retry_on_status = Array(options[:retry_on_status]).map(&:to_i)
+
+          @retry_backoff        = options[:retry_backoff]
+          @retry_backoff_factor = options[:retry_backoff_factor] || 2
         end
 
         # Returns a connection from the connection pool by delegating to {Connections::Collection#get_connection}.
@@ -304,6 +307,7 @@ module OpenSearch
             raise e unless response && @retry_on_status.include?(response.status)
             log_warn "[#{e.class}] Attempt #{tries} to get response from #{url}"
             if tries <= (max_retries || DEFAULT_MAX_RETRIES)
+              __retry_backoff_sleep(tries)
               retry
             else
               log_fatal "[#{e.class}] Cannot get response from #{url} after #{tries} tries"
@@ -316,6 +320,7 @@ module OpenSearch
 
             if reload_on_failure && (tries < connections.all.size)
               log_warn "[#{e.class}] Reloading connections (attempt #{tries} of #{connections.all.size})"
+              __retry_backoff_sleep(tries)
               reload_connections! and retry
             end
 
@@ -324,6 +329,7 @@ module OpenSearch
             raise exception unless max_retries
             log_warn "[#{e.class}] Attempt #{tries} connecting to #{connection.host.inspect}"
             if tries <= max_retries
+              __retry_backoff_sleep(tries)
               retry
             else
               log_fatal "[#{e.class}] Cannot connect to #{connection.host.inspect} after #{tries} tries"
@@ -381,6 +387,25 @@ module OpenSearch
         end
 
         private
+
+        # Sleeps with exponential backoff before a retry attempt, if `retry_backoff` is configured.
+        #
+        # The delay is calculated as: retry_backoff * (retry_backoff_factor ** (tries - 1))
+        # with up to 25% random jitter to avoid thundering herd effects.
+        #
+        # @param tries [Integer] The current attempt number (1-based)
+        #
+        # @api private
+        #
+        def __retry_backoff_sleep(tries)
+          return unless @retry_backoff
+
+          delay = @retry_backoff * (@retry_backoff_factor**(tries - 1))
+          jitter = delay * rand * 0.25
+          sleep_duration = delay + jitter
+          log_warn "[Retry] Backing off for #{format('%.2f', sleep_duration)}s before retry ##{tries}"
+          sleep(sleep_duration)
+        end
 
         USER_AGENT_STR = 'User-Agent'.freeze
         USER_AGENT_REGEX = /user-?_?agent/

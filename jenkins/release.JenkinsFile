@@ -1,4 +1,4 @@
-lib = library(identifier: 'jenkins@6.4.5', retriever: modernSCM([
+lib = library(identifier: 'jenkins@13.0.1', retriever: modernSCM([
     $class: 'GitSCMSource',
     remote: 'https://github.com/opensearch-project/opensearch-build-libraries.git',
 ]))
@@ -6,8 +6,7 @@ lib = library(identifier: 'jenkins@6.4.5', retriever: modernSCM([
 standardReleasePipelineWithGenericTrigger(
     tokenIdCredential: 'jenkins-opensearch-ruby-generic-webhook-token',
     causeString: 'A tag was cut on opensearch-project/opensearch-ruby repository causing this workflow to run',
-    downloadReleaseAsset: true,
-    publishRelease: true) {
+    downloadReleaseAsset: true) {
         publishToRubyGems(
             publicCertPath: ".github/opensearch-rubygems.pem",
             apiKeyCredentialId: 'jenkins-opensearch-ruby-api-key',

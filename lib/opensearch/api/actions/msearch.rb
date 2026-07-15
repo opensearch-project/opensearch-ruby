@@ -15,6 +15,7 @@ module OpenSearch
       module Actions
         # Allows to execute several search operations in one request.
         #
+        # @option args [Boolean] :allow_partial_results (default: true) Specifies whether to return partial results if there are shard request timeouts or shard failures
         # @option args [Boolean] :ccs_minimize_roundtrips (default: true) If `true`, network round-trips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
         # @option args [Integer] :max_concurrent_searches Maximum number of concurrent searches the multi search API can execute.
         # @option args [Integer] :max_concurrent_shard_requests (default: 5) Maximum number of concurrent shard requests that each sub-search request executes per node.
@@ -40,6 +41,7 @@ module OpenSearch
         end
 
         MSEARCH_QUERY_PARAMS = Set.new(%w[
+          allow_partial_results
           ccs_minimize_roundtrips
           max_concurrent_searches
           max_concurrent_shard_requests

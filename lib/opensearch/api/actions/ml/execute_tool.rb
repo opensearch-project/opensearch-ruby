@@ -11,17 +11,22 @@
 
 module OpenSearch
   module API
-    module SearchRelevance
+    module Ml
       module Actions
-        # Creates a new query set by uploading manually.
+        # Execute a tool.
         #
-        # @option args [Hash] :body The schema for updating a query set.
-        def put_query_sets(args = {})
+        # @option args [String] :tool_name *Required*
+        # @option args [Hash] :body
+        def execute_tool(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'tool_name' missing" if args['tool_name'].nil?
+
+          _tool_name = args.delete('tool_name')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'PUT'
-          url     = '_plugins/_search_relevance/query_sets'
+          method  = 'POST'
+          url     = Utils.build_url('_plugins/_ml/tools/_execute', _tool_name)
 
           Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body

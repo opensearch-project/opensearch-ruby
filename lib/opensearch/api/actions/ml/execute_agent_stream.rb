@@ -11,17 +11,22 @@
 
 module OpenSearch
   module API
-    module SearchRelevance
+    module Ml
       module Actions
-        # Creates a new query set by uploading manually.
+        # Execute an agent in streaming mode.
         #
-        # @option args [Hash] :body The schema for updating a query set.
-        def put_query_sets(args = {})
+        # @option args [String] :agent_id *Required*
+        # @option args [Hash] :body
+        def execute_agent_stream(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'agent_id' missing" if args['agent_id'].nil?
+
+          _agent_id = args.delete('agent_id')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'PUT'
-          url     = '_plugins/_search_relevance/query_sets'
+          method  = 'POST'
+          url     = Utils.build_url('_plugins/_ml/agents', _agent_id, '_execute/stream')
 
           Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body

@@ -13,18 +13,22 @@ module OpenSearch
   module API
     module SearchRelevance
       module Actions
-        # Creates a new query set by uploading manually.
+        # Deletes a specified scheduled experiment.
         #
-        # @option args [Hash] :body The schema for updating a query set.
-        def put_query_sets(args = {})
+        # @option args [String] :experiment_id *Required* The experiment id
+        def delete_scheduled_experiments(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'experiment_id' missing" if args['experiment_id'].nil?
+
+          _experiment_id = args.delete('experiment_id')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'PUT'
-          url     = '_plugins/_search_relevance/query_sets'
+          method  = 'DELETE'
+          url     = Utils.build_url('_plugins/_search_relevance/experiments/schedule', _experiment_id)
 
           Utils.validate_query_params! args
-          transport.perform_request(method, url, args, body, headers).body
+          transport.perform_delete_request method, url, args, body, headers
         end
       end
     end

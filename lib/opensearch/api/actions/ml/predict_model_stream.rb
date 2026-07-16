@@ -11,17 +11,22 @@
 
 module OpenSearch
   module API
-    module SearchRelevance
+    module Ml
       module Actions
-        # Creates a new query set by uploading manually.
+        # Predicts a model in streaming mode.
         #
-        # @option args [Hash] :body The schema for updating a query set.
-        def put_query_sets(args = {})
+        # @option args [String] :model_id *Required*
+        # @option args [Hash] :body
+        def predict_model_stream(args = {})
           args = Utils.clone_and_normalize_arguments(args)
+          raise ArgumentError, "Required argument 'model_id' missing" if args['model_id'].nil?
+
+          _model_id = args.delete('model_id')
+
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'PUT'
-          url     = '_plugins/_search_relevance/query_sets'
+          method  = 'POST'
+          url     = Utils.build_url('_plugins/_ml/models', _model_id, '_predict/stream')
 
           Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body

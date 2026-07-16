@@ -13,15 +13,15 @@ module OpenSearch
   module API
     module SearchRelevance
       module Actions
-        # Creates a new query set by uploading manually.
+        # Creates a scheduled experiment.
         #
-        # @option args [Hash] :body The schema for updating a query set.
-        def put_query_sets(args = {})
+        # @option args [Hash] :body The schema for scheduling experiments.
+        def post_scheduled_experiments(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'PUT'
-          url     = '_plugins/_search_relevance/query_sets'
+          method  = 'POST'
+          url     = '_plugins/_search_relevance/experiments/schedule'
 
           Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body

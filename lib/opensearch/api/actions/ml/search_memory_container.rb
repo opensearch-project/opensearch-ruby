@@ -11,17 +11,17 @@
 
 module OpenSearch
   module API
-    module SearchRelevance
+    module Ml
       module Actions
-        # Creates a new query set by uploading manually.
+        # Search memory containers.
         #
-        # @option args [Hash] :body The schema for updating a query set.
-        def put_query_sets(args = {})
+        # @option args [Hash] :body
+        def search_memory_container(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}
           body    = args.delete('body')
-          method  = 'PUT'
-          url     = '_plugins/_search_relevance/query_sets'
+          method  = body ? 'POST' : 'GET'
+          url     = '_plugins/_ml/memory_containers/_search'
 
           Utils.validate_query_params! args
           transport.perform_request(method, url, args, body, headers).body

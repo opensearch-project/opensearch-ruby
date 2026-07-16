@@ -26,7 +26,7 @@ jobs:
         cluster-version: [ "1.3.3", "2.0.1", "2", "3.0.0", "3"  ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Increase system limits
         run: |
           sudo swapoff -a
@@ -37,7 +37,7 @@ jobs:
         with:
           cluster-version: ${{ matrix.cluster-version }}
           disable-security: true
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f # v1
         with:
           ruby-version: 3.3
       - name: Build and test with Rake
@@ -59,7 +59,7 @@ jobs:
         cluster-version: [ "1.3.3", "2.0.1" ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Increase system limits
         run: |
           sudo swapoff -a
@@ -70,7 +70,7 @@ jobs:
         with:
           cluster-version: ${{ matrix.cluster-version }}
           disable-security: false
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f # v1
         with:
           ruby-version: 3.3
       - name: Build and test with Rake

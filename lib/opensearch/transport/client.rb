@@ -190,8 +190,13 @@ module OpenSearch
         method = @send_get_body_as if method == 'GET' && body
         if @options[:request_signer]
           connection = transport.get_connection
+          # Serialize body to the same string that will be sent on the wire so
+          # the signer computes a signature over the exact bytes transmitted.
+          # The transport uses __convert_to_json (which returns a String as-is
+          # and serializes everything else), so we mirror that here.
+          serialized_body = body.is_a?(String) ? body : (body && transport.serializer.dump(body))
           headers = @options[:request_signer].sign_request(
-            method: method, path: path, params: params, body: body, headers: headers,
+            method: method, path: path, params: params, body: serialized_body, headers: headers,
             host: connection.host[:host],
             port: connection.host[:port],
             url: connection.full_url(path, params),

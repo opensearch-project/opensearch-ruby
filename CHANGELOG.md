@@ -8,6 +8,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Fixed `request_signer` receiving the raw body object instead of the serialized string, causing signature mismatches ([#311](https://github.com/opensearch-project/opensearch-ruby/issues/311))
+- Fixed double-encoding of wildcard and special characters in index/path parameters (e.g. `index: "test-*"` was being sent as `test-%252A`) ([#319](https://github.com/opensearch-project/opensearch-ruby/issues/319))
 ### Security
 
 ## [4.0.0]

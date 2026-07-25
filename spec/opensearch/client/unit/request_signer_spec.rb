@@ -40,9 +40,48 @@ describe OpenSearch::Client do
       { query: 'string' },
       { request: :body },
       { header1: 'value1',
-        dummy_header1: { request: :body },
+        dummy_header1: '{"request":"body"}',
         dummy_header2: { query: 'string' },
         dummy_header3: 'localhost' }
     )
+  end
+
+  context 'when a body is provided' do
+    let(:captured_bodies) { [] }
+    let(:capturing_signer) do
+      bodies = captured_bodies
+      Class.new do
+        define_singleton_method(:sign_request) do |args|
+          bodies << args[:body]
+          args[:headers]
+        end
+      end
+    end
+    let(:capturing_client) do
+      described_class.new(
+        host: 'http://localhost:9200',
+        request_signer: capturing_signer
+      ).tap do |cli|
+        allow(cli.transport.transport).to receive(:perform_request).and_return({ body: 'ok' })
+      end
+    end
+
+    it 'passes a serialized String to sign_request, not the raw Hash' do
+      body_hash = { query: { match_all: {} } }
+      capturing_client.transport.perform_request('POST', '_search', {}, body_hash, {})
+      expect(captured_bodies.last).to be_a(String)
+      expect(captured_bodies.last).to eq(OpenSearch::API.serializer.dump(body_hash))
+    end
+
+    it 'passes nil to sign_request when body is nil' do
+      capturing_client.transport.perform_request('GET', '_cat/health', {}, nil, {})
+      expect(captured_bodies.last).to be_nil
+    end
+
+    it 'passes a pre-serialized String body through unchanged' do
+      raw = '{"already":"serialized"}'
+      capturing_client.transport.perform_request('POST', '_search', {}, raw, {})
+      expect(captured_bodies.last).to eq(raw)
+    end
   end
 end

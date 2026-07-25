@@ -9,7 +9,7 @@
 
 # frozen_string_literal: true
 
-require 'cgi/escape'
+require 'uri'
 
 module OpenSearch
   module API
@@ -38,11 +38,14 @@ module OpenSearch
       end
 
       # @return the value escaped for URL unless it is a Hash
+      # Uses URI encoding rather than CGI.escape so that characters meaningful in
+      # OpenSearch index patterns (e.g. '*') are preserved and not percent-encoded,
+      # which would cause double-encoding when the HTTP layer encodes the URL.
       def self.normalize_value(value)
         return value.clone if value.is_a? Hash
         value = value.to_s.strip unless value.is_a? Enumerable
         value = value.split(',') if value.is_a? String
-        value.map { |v| CGI.escape(v.to_s) }.join(',')
+        value.map { |v| URI::DEFAULT_PARSER.escape(v.to_s, /[^A-Za-z0-9\-._~*]/) }.join(',')
       end
 
       def self.build_url(*parts)

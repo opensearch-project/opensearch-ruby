@@ -44,15 +44,41 @@ describe OpenSearch::API::Utils do
 
     it 'returns a new hash with keys as strings and values normalized except those of NON_URL_ARGS' do
       is_expected.to eq({
-                          'hello' => 'world+2',
+                          'hello' => 'world%202',
                           'hash' => { bar: 'baz' },
                           'number' => '42',
                           'bool' => 'true',
-                          'string' => 'amazing+spider-man,+big+%26+small',
+                          'string' => 'amazing%20spider-man,%20big%20%26%20small',
                           'nil' => '',
                           'array' => '1,2,3',
                           'headers' => [100]
                         })
+    end
+  end
+
+  describe '#normalize_value' do
+    it 'preserves wildcard * so index patterns are not double-encoded by the HTTP layer' do
+      expect(described_class.normalize_value('test-*')).to eq('test-*')
+    end
+
+    it 'preserves * in comma-separated multi-index patterns' do
+      expect(described_class.normalize_value('logs-*,metrics-*')).to eq('logs-*,metrics-*')
+    end
+
+    it 'percent-encodes spaces as %20 (not + which would be double-encoded)' do
+      expect(described_class.normalize_value('my index')).to eq('my%20index')
+    end
+
+    it 'percent-encodes & and other special chars' do
+      expect(described_class.normalize_value('a&b')).to eq('a%26b')
+    end
+
+    it 'returns plain strings unchanged' do
+      expect(described_class.normalize_value('my-index_name')).to eq('my-index_name')
+    end
+
+    it 'converts an array of values joining with comma' do
+      expect(described_class.normalize_value(['idx-one', 'idx-*'])).to eq('idx-one,idx-*')
     end
   end
 

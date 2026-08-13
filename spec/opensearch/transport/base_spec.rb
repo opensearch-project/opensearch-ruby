@@ -25,7 +25,6 @@
 # under the License.
 
 require_relative '../../spec_helper'
-require 'ostruct'
 
 describe OpenSearch::Transport::Transport::Base do
   context 'when a host is printed in a logged message' do

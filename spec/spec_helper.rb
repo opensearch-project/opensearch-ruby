@@ -37,6 +37,7 @@ require 'jbuilder'
 require 'jsonify'
 require 'yaml'
 require 'hashie/mash'
+require 'ostruct'
 
 require 'faraday/httpclient'
 require 'faraday/net_http_persistent'

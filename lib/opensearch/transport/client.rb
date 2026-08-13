@@ -145,6 +145,7 @@ module OpenSearch
         @arguments[:retry_on_failure]   ||= false
         @arguments[:reload_on_failure]  ||= false
         @arguments[:randomize_hosts]    ||= false
+        @arguments[:compression]        ||= false
         @arguments[:transport_options]  ||= {}
         @arguments[:http]               ||= {}
         @options[:http]                 ||= {}

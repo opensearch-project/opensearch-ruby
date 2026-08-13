@@ -64,7 +64,7 @@ module OpenSearch
           @options[:retry_on_status] ||= []
 
           @block       = block
-          @compression = !@options[:compression].nil?
+          @compression = !!@options[:compression]
           @connections = __build_connections
 
           @serializer  = options[:serializer] || (options[:serializer_class] ? options[:serializer_class].new(self) : DEFAULT_SERIALIZER_CLASS.new(self))

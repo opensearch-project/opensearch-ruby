@@ -91,7 +91,7 @@ module OpenSearch
           #
           def perform_request(method, path, params = {}, body = nil, headers = nil, opts = {})
             super do |connection, url|
-              params[:body] = __convert_to_json(body) if body
+              params[:body] = request_body(body) if body
               params[:headers] = headers if headers
               params = params.merge @request_options
               case method
@@ -167,7 +167,8 @@ module OpenSearch
             headers = (options && options[:headers]) || {}
             headers[CONTENT_TYPE_STR] = find_value(headers, CONTENT_TYPE_REGEX) || DEFAULT_CONTENT_TYPE
             headers[USER_AGENT_STR] = find_value(headers, USER_AGENT_REGEX) || user_agent_header
-            headers[ACCEPT_ENCODING] = GZIP if use_compression?
+            headers[ACCEPT_ENCODING] = GZIP
+            headers[CONTENT_ENCODING] = GZIP if use_compression?
             request_options.merge!(headers: headers)
           end
 

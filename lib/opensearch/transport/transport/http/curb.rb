@@ -49,7 +49,7 @@ module OpenSearch
                 connection.connection.set :nobody, true
               when 'GET', 'POST', 'PUT', 'DELETE'
                 connection.connection.set :nobody, false
-                connection.connection.put_data = __convert_to_json(body) if body
+                connection.connection.put_data = request_body(body) if body
                 if headers
                   if connection.connection.headers
                     connection.connection.headers.merge!(headers)

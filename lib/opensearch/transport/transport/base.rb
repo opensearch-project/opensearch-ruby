@@ -389,12 +389,13 @@ module OpenSearch
         DEFAULT_CONTENT_TYPE = 'application/json'.freeze
         GZIP = 'gzip'.freeze
         ACCEPT_ENCODING = 'Accept-Encoding'.freeze
+        CONTENT_ENCODING = 'Content-Encoding'.freeze
         GZIP_FIRST_TWO_BYTES = '1f8b'.freeze
         HEX_STRING_DIRECTIVE = 'H*'.freeze
         RUBY_ENCODING = '1.9'.respond_to?(:force_encoding)
 
         def decompress_response(body)
-          return body unless use_compression?
+          return nil unless body
           return body unless gzipped?(body)
 
           io = StringIO.new(body)
@@ -418,8 +419,28 @@ module OpenSearch
           headers = options[:headers] || {}
           headers[CONTENT_TYPE_STR] = find_value(headers, CONTENT_TYPE_REGEX) || DEFAULT_CONTENT_TYPE
           headers[USER_AGENT_STR] = find_value(headers, USER_AGENT_REGEX) || user_agent_header(client)
-          client.headers[ACCEPT_ENCODING] = GZIP if use_compression?
+          client.headers[ACCEPT_ENCODING] = GZIP
+          client.headers[CONTENT_ENCODING] = GZIP if use_compression?
           client.headers.merge!(headers)
+        end
+
+        def compress_request(body)
+          io = StringIO.new
+          gzip_writer = if RUBY_ENCODING
+                          Zlib::GzipWriter.new(io, encoding: 'ASCII-8BIT')
+                        else
+                          Zlib::GzipWriter.new(io)
+                        end
+          gzip_writer.write(body)
+          gzip_writer.close
+          io.string
+        end
+
+        def request_body(body)
+          return nil unless body
+
+          json_body = __convert_to_json(body)
+          use_compression? ? compress_request(json_body) : json_body
         end
 
         def find_value(hash, regex)

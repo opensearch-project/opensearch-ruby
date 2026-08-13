@@ -25,6 +25,7 @@
 # under the License.
 
 require_relative '../../spec_helper'
+require 'ostruct'
 
 describe OpenSearch::Transport::Transport::Base do
   context 'when a host is printed in a logged message' do
@@ -308,6 +309,71 @@ describe OpenSearch::Transport::Transport::Base do
           client.transport.perform_request('GET', '/info', {}, nil, nil, retry_on_failure: 5)
         end.to raise_exception(OpenSearch::Transport::Transport::Error)
       end
+    end
+  end
+
+  context 'when compression is enabled' do
+    let(:client) do
+      OpenSearch::Transport::Client.new(hosts: ['localhost'], compression: true)
+    end
+
+    let(:transport) { client.transport }
+    let(:connection) { transport.connections[0].connection }
+    let(:request_body) { { 'query' => { 'match_all' => {} } } }
+
+    before do
+      allow(connection).to receive(:run_request).and_return(
+        OpenStruct.new(status: 200, body: '{}', headers: { 'content-type' => 'application/json' })
+      )
+    end
+
+    it 'sets the Accept-Encoding and Content-Encoding headers' do
+      expect(connection.headers['Accept-Encoding']).to eq('gzip')
+      expect(connection.headers['Content-Encoding']).to eq('gzip')
+    end
+
+    it 'compresses the request body' do
+      expect(transport).to receive(:compress_request).and_call_original
+
+      transport.perform_request('POST', '_search', {}, request_body)
+    end
+
+    it 'decompresses the response body' do
+      expect(transport).to receive(:decompress_response).and_call_original
+
+      transport.perform_request('POST', '_search', {}, request_body)
+    end
+  end
+
+  context 'when compression is not enabled' do
+    let(:client) do
+      OpenSearch::Transport::Client.new(hosts: ['localhost'], compression: false)
+    end
+
+    let(:transport) { client.transport }
+    let(:connection) { transport.connections[0].connection }
+
+    before do
+      allow(connection).to receive(:run_request).and_return(
+        OpenStruct.new(status: 200, body: '{}', headers: { 'content-type' => 'application/json' })
+      )
+    end
+
+    it 'sets Accept-Encoding but not Content-Encoding' do
+      expect(connection.headers['Accept-Encoding']).to eq('gzip')
+      expect(connection.headers['Content-Encoding']).to be_nil
+    end
+
+    it 'does not compress the request body' do
+      expect(transport).not_to receive(:compress_request)
+
+      transport.perform_request('POST', '_search', {}, { 'query' => { 'match_all' => {} } })
+    end
+
+    it 'still decompresses the response body' do
+      expect(transport).to receive(:decompress_response).and_call_original
+
+      transport.perform_request('POST', '_search', {}, { 'query' => { 'match_all' => {} } })
     end
   end
 end

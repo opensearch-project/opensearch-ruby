@@ -232,6 +232,56 @@ class OpenSearch::Transport::Transport::HTTP::FaradayTest < Minitest::Test
 
       assert_equal 'https://U:P@foobar:1234/', transport.connections.first.full_url('')
     end
+
+    context "when compression is enabled" do
+      setup do
+        @transport = Faraday.new :hosts => [ { :host => 'foobar', :port => 1234 } ],
+                                 :options => { :compression => true }
+      end
+
+      should "set Accept-Encoding and Content-Encoding headers" do
+        headers = @transport.connections.first.connection.headers
+        assert_equal 'gzip', headers['Accept-Encoding']
+        assert_equal 'gzip', headers['Content-Encoding']
+      end
+
+      should "compress the request body" do
+        @transport.expects(:compress_request).returns('compressed')
+        @transport.connections.first.connection.expects(:run_request).returns(stub_everything)
+        @transport.perform_request 'POST', '/', {}, { :foo => 'bar' }
+      end
+
+      should "decompress the response body" do
+        @transport.expects(:decompress_response).returns('{}')
+        @transport.connections.first.connection.expects(:run_request).returns(stub_everything)
+        @transport.perform_request 'POST', '/', {}, { :foo => 'bar' }
+      end
+    end
+
+    context "when compression is not enabled" do
+      setup do
+        @transport = Faraday.new :hosts => [ { :host => 'foobar', :port => 1234 } ],
+                                 :options => { :compression => false }
+      end
+
+      should "set Accept-Encoding but not Content-Encoding" do
+        headers = @transport.connections.first.connection.headers
+        assert_equal 'gzip', headers['Accept-Encoding']
+        assert_nil headers['Content-Encoding']
+      end
+
+      should "not compress the request body" do
+        @transport.expects(:compress_request).never
+        @transport.connections.first.connection.expects(:run_request).returns(stub_everything)
+        @transport.perform_request 'POST', '/', {}, { :foo => 'bar' }
+      end
+
+      should "still decompress the response body" do
+        @transport.expects(:decompress_response).returns('{}')
+        @transport.connections.first.connection.expects(:run_request).returns(stub_everything)
+        @transport.perform_request 'POST', '/', {}, { :foo => 'bar' }
+      end
+    end
   end
 
 end

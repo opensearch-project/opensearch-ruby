@@ -1674,6 +1674,22 @@ describe OpenSearch::Transport::Client do
           expect(client.perform_request('GET', '/').body).to be_a(Hash)
         end
       end
+
+      context 'when performing a search with a request body' do
+        it 'succeeds with compression enabled' do
+          client = described_class.new(hosts: OPENSEARCH_HOSTS, compression: true)
+
+          expect(client.transport.connections[0].connection.headers['Content-Encoding']).to eq('gzip')
+          expect(client.perform_request('POST', '_search', {}, { query: { match_all: {} } }).body).to be_a(Hash)
+        end
+
+        it 'succeeds with compression disabled' do
+          client = described_class.new(hosts: OPENSEARCH_HOSTS, compression: false)
+
+          expect(client.transport.connections[0].connection.headers['Content-Encoding']).to be_nil
+          expect(client.perform_request('POST', '_search', {}, { query: { match_all: {} } }).body).to be_a(Hash)
+        end
+      end
     end
 
     describe '#perform_request' do

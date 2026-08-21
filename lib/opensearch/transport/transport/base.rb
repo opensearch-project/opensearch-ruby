@@ -392,19 +392,12 @@ module OpenSearch
         CONTENT_ENCODING = 'Content-Encoding'.freeze
         GZIP_FIRST_TWO_BYTES = '1f8b'.freeze
         HEX_STRING_DIRECTIVE = 'H*'.freeze
-        RUBY_ENCODING = '1.9'.respond_to?(:force_encoding)
 
         def decompress_response(body)
           return nil unless body
           return body unless gzipped?(body)
 
-          io = StringIO.new(body)
-          gzip_reader = if RUBY_ENCODING
-                          Zlib::GzipReader.new(io, encoding: 'ASCII-8BIT')
-                        else
-                          Zlib::GzipReader.new(io)
-                        end
-          gzip_reader.read
+          Zlib::GzipReader.new(StringIO.new(body.b)).read
         end
 
         def gzipped?(body)
@@ -425,12 +418,8 @@ module OpenSearch
         end
 
         def compress_request(body)
-          io = StringIO.new
-          gzip_writer = if RUBY_ENCODING
-                          Zlib::GzipWriter.new(io, encoding: 'ASCII-8BIT')
-                        else
-                          Zlib::GzipWriter.new(io)
-                        end
+          io = StringIO.new(''.b)
+          gzip_writer = Zlib::GzipWriter.new(io)
           gzip_writer.write(body)
           gzip_writer.close
           io.string

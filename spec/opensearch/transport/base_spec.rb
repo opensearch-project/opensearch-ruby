@@ -322,7 +322,7 @@ describe OpenSearch::Transport::Transport::Base do
 
     before do
       allow(connection).to receive(:run_request).and_return(
-        OpenStruct.new(status: 200, body: '{}', headers: { 'content-type' => 'application/json' })
+        double('response', status: 200, body: '{}', headers: { 'content-type' => 'application/json' })
       )
     end
 
@@ -354,7 +354,7 @@ describe OpenSearch::Transport::Transport::Base do
 
     before do
       allow(connection).to receive(:run_request).and_return(
-        OpenStruct.new(status: 200, body: '{}', headers: { 'content-type' => 'application/json' })
+        double('response', status: 200, body: '{}', headers: { 'content-type' => 'application/json' })
       )
     end
 

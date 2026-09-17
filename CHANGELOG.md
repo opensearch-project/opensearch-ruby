@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Fixed client compression behavior, specifically applying compression on requests, always inflating gzipped responses, and properly handling `compression: false` ([#338](https://github.com/opensearch-project/opensearch-ruby/pull/338))
 ### Security
 
 ## [4.0.0]

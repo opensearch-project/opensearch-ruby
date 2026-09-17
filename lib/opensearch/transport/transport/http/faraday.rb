@@ -58,7 +58,7 @@ module OpenSearch
               response = connection.connection.run_request(
                 method.downcase.to_sym,
                 url,
-                (body ? __convert_to_json(body) : nil),
+                request_body(body),
                 headers
               )
 

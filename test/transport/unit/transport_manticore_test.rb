@@ -67,7 +67,8 @@ else
         @transport.connections.first.connection.expects(:get).
           with('http://127.0.0.1:8080/', {:body => '{"foo":"bar"}',
                                            :headers => {"Content-Type" => "application/json",
-                                                        "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                        "User-Agent" => @transport.send(:user_agent_header),
+                                                        "Accept-Encoding" => "gzip"}}).returns(stub_everything)
         @transport.perform_request 'GET', '/', {}, '{"foo":"bar"}'
       end
 
@@ -75,7 +76,8 @@ else
         @transport.connections.first.connection.expects(:put).
           with('http://127.0.0.1:8080/', {:body => '{"foo":"bar"}',
                                            :headers => {"Content-Type" => "application/json",
-                                                        "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                        "User-Agent" => @transport.send(:user_agent_header),
+                                                        "Accept-Encoding" => "gzip"}}).returns(stub_everything)
         @transport.perform_request 'PUT', '/', {}, {:foo => 'bar'}
       end
 
@@ -83,7 +85,8 @@ else
         @transport.connections.first.connection.expects(:post).
           with('http://127.0.0.1:8080/', {:body => '{"foo":"bar"}',
                                            :headers => {"Content-Type" => "application/json",
-                                                        "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                        "User-Agent" => @transport.send(:user_agent_header),
+                                                        "Accept-Encoding" => "gzip"}}).returns(stub_everything)
         @transport.perform_request 'POST', '/', {}, {'foo' => 'bar'}
       end
 
@@ -91,7 +94,8 @@ else
         @transport.connections.first.connection.expects(:put).
           with('http://127.0.0.1:8080/', {:body => '{"foo":"bar"}',
                                            :headers => {"Content-Type" => "application/json",
-                                                        "User-Agent" => @transport.send(:user_agent_header)}})
+                                                        "User-Agent" => @transport.send(:user_agent_header),
+                                                        "Accept-Encoding" => "gzip"}})
           .returns(stub_everything)
         @transport.perform_request 'PUT', '/', {}, '{"foo":"bar"}', {"Content-Type" => "application/x-ndjson"}
       end
@@ -100,7 +104,8 @@ else
         @transport.connections.first.connection.expects(:post).
           with('http://127.0.0.1:8080/', {:body => '{"foo":"bar"}',
                                            :headers => {"Content-Type" => "application/json",
-                                                        "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                        "User-Agent" => @transport.send(:user_agent_header),
+                                                        "Accept-Encoding" => "gzip"}}).returns(stub_everything)
         @transport.serializer.expects(:dump).never
         @transport.perform_request 'POST', '/', {}, '{"foo":"bar"}'
       end
@@ -134,15 +139,20 @@ else
 
       should "handle HTTP methods" do
         @transport.connections.first.connection.expects(:delete).with('http://127.0.0.1:8080/', { headers: {"Content-Type" => "application/json",
-                                                                                                             "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                                                                             "User-Agent" => @transport.send(:user_agent_header),
+                                                                                                             "Accept-Encoding" => "gzip"}}).returns(stub_everything)
         @transport.connections.first.connection.expects(:head).with('http://127.0.0.1:8080/', { headers: {"Content-Type" => "application/json",
-                                                                                                           "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                                                                           "User-Agent" => @transport.send(:user_agent_header),
+                                                                                                           "Accept-Encoding" => "gzip"}}).returns(stub_everything)
         @transport.connections.first.connection.expects(:get).with('http://127.0.0.1:8080/', { headers: {"Content-Type" => "application/json",
-                                                                                                          "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                                                                          "User-Agent" => @transport.send(:user_agent_header),
+                                                                                                          "Accept-Encoding" => "gzip"}}).returns(stub_everything)
         @transport.connections.first.connection.expects(:put).with('http://127.0.0.1:8080/', { headers: {"Content-Type" => "application/json",
-                                                                                                          "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                                                                          "User-Agent" => @transport.send(:user_agent_header),
+                                                                                                          "Accept-Encoding" => "gzip"}}).returns(stub_everything)
         @transport.connections.first.connection.expects(:post).with('http://127.0.0.1:8080/', { headers: {"Content-Type" => "application/json",
-                                                                                                           "User-Agent" => @transport.send(:user_agent_header)}}).returns(stub_everything)
+                                                                                                           "User-Agent" => @transport.send(:user_agent_header),
+                                                                                                           "Accept-Encoding" => "gzip"}}).returns(stub_everything)
 
         %w| HEAD GET PUT POST DELETE |.each { |method| @transport.perform_request method, '/' }
 
@@ -183,6 +193,53 @@ else
 
         ::Manticore::Client.expects(:new).with(:potatoes => 1, :ssl => {})
         transport = Manticore.new :hosts => [ { :host => 'foobar', :port => 1234 } ], :options => options
+      end
+
+      context "when compression is enabled" do
+        setup do
+          @transport = Manticore.new :hosts => [ { :host => '127.0.0.1', :port => 8080 } ],
+                                     :options => { :compression => true }
+        end
+
+        should "set Accept-Encoding and Content-Encoding headers" do
+          headers = @transport.instance_variable_get(:@request_options)[:headers]
+          assert_equal 'gzip', headers['Accept-Encoding']
+          assert_equal 'gzip', headers['Content-Encoding']
+        end
+
+        should "compress the request body" do
+          @transport.expects(:compress_request).returns('compressed')
+          @transport.connections.first.connection.expects(:post).
+            with('http://127.0.0.1:8080/', {:body => 'compressed',
+                                             :headers => {"Content-Type" => "application/json",
+                                                          "User-Agent" => @transport.send(:user_agent_header),
+                                                          "Accept-Encoding" => "gzip",
+                                                          "Content-Encoding" => "gzip"}}).returns(stub_everything)
+          @transport.perform_request 'POST', '/', {}, { :foo => 'bar' }
+        end
+      end
+
+      context "when compression is not enabled" do
+        setup do
+          @transport = Manticore.new :hosts => [ { :host => '127.0.0.1', :port => 8080 } ],
+                                     :options => { :compression => false }
+        end
+
+        should "set Accept-Encoding but not Content-Encoding" do
+          headers = @transport.instance_variable_get(:@request_options)[:headers]
+          assert_equal 'gzip', headers['Accept-Encoding']
+          assert_nil headers['Content-Encoding']
+        end
+
+        should "not compress the request body" do
+          @transport.expects(:compress_request).never
+          @transport.connections.first.connection.expects(:post).
+            with('http://127.0.0.1:8080/', {:body => '{"foo":"bar"}',
+                                             :headers => {"Content-Type" => "application/json",
+                                                          "User-Agent" => @transport.send(:user_agent_header),
+                                                          "Accept-Encoding" => "gzip"}}).returns(stub_everything)
+          @transport.perform_request 'POST', '/', {}, { :foo => 'bar' }
+        end
       end
     end
 

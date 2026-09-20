@@ -360,6 +360,18 @@ describe OpenSearch::Transport::Client do
           end
         end
 
+        context 'when credentials contain URL-encoded characters \'http://user:pass%7D%7Dword@myhost:8080\'' do
+
+          let(:host) do
+            'http://user:pass%7D%7Dword@myhost:8080'
+          end
+
+          it 'decodes the credentials' do
+            expect(hosts[0][:user]).to eq('user')
+            expect(hosts[0][:password]).to eq('pass}}word')
+          end
+        end
+
         context 'when there is a trailing slash \'http://myhost/\'' do
 
           let(:host) do
@@ -885,6 +897,18 @@ describe OpenSearch::Transport::Client do
         expect(hosts[0][:port]).to be(4430)
         expect(hosts[0][:user]).to eq('USERNAME')
         expect(hosts[0][:password]).to eq('PASSWORD')
+      end
+    end
+
+    context 'when the hosts is an instance of URI with URL-encoded credentials' do
+
+      let(:host) do
+        URI.parse('https://user:pass%7D%7Dword@myhost:4430')
+      end
+
+      it 'decodes the credentials' do
+        expect(hosts[0][:user]).to eq('user')
+        expect(hosts[0][:password]).to eq('pass}}word')
       end
     end
 

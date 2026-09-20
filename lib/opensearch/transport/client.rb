@@ -318,8 +318,8 @@ module OpenSearch
                          default_port = uri.scheme == 'https' ? 443 : DEFAULT_PORT
                          {
                            scheme: uri.scheme,
-                           user: uri.user,
-                           password: uri.password,
+                           user: uri.user && CGI.unescape(uri.user),
+                           password: uri.password && CGI.unescape(uri.password),
                            host: uri.host,
                            path: uri.path,
                            port: uri.port || default_port
@@ -331,8 +331,8 @@ module OpenSearch
                      when URI
                        {
                          scheme: host.scheme,
-                         user: host.user,
-                         password: host.password,
+                         user: host.user && CGI.unescape(host.user),
+                         password: host.password && CGI.unescape(host.password),
                          host: host.host,
                          path: host.path,
                          port: host.port

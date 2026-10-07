@@ -46,7 +46,7 @@ module OpenSearch
           # De-serialize a Hash from JSON string
           #
           def load(string, options = {})
-            ::JSON.parse(string, options)
+            ::JSON.parse(string, **options)
           end
 
           # Serialize a Hash to JSON string

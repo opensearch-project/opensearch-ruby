@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Add support for json 3.0.x ([#123](https://github.com/opensearch-project/opensearch-ruby/pull/123))
 ### Security
 
 ## [4.0.0]

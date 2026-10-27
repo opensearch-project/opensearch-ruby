@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Creates a new query set by uploading manually.
         #
-        # @option args [Hash] :body
+        # @option args [Hash] :body The schema for updating a query set.
         def put_query_sets(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

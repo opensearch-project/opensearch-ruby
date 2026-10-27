@@ -4,7 +4,6 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 ### Added
 ### Changed
-- Update rubygems public key setting expiry to 20260707 ([#308](https://github.com/opensearch-project/opensearch-ruby/pull/308))
 ### Deprecated
 ### Removed
 ### Fixed
@@ -16,16 +15,22 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added a workflow to generate API methods from OpenSearch API Spec ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Added support for Ruby 3.4 ([#265](https://github.com/opensearch-project/opensearch-ruby/pull/265))
 - Added ability to sign requests ([#281](https://github.com/opensearch-project/opensearch-ruby/pull/281))
+- Added `ml` memory container, agentic memory, and streaming actions (`create_memory_container`, `add_agentic_memory`, `search_agentic_memory`, `execute_agent_stream`, `predict_model_stream`, `execute_tool`, and related) from the latest OpenSearch API spec
+- Added `search_relevance` scheduled experiment actions (`get_scheduled_experiments`, `post_scheduled_experiments`, `delete_scheduled_experiments`) from the latest OpenSearch API spec
 ### Changed
 - Restructured the API methods and modules to be more efficient and intuitive ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Moved ignore-404-on-deletion feature into the client options ([#277](https://github.com/opensearch-project/opensearch-ruby/pull/277))
 - Changed the default json serializer from `multi_json` to the `json` gem ([#290](https://github.com/opensearch-project/opensearch-ruby/pull/290))
+- Updated the API to reflect the latest OpenSearch API spec ([#271](https://github.com/opensearch-project/opensearch-ruby/pull/271), [#276](https://github.com/opensearch-project/opensearch-ruby/pull/276), [#279](https://github.com/opensearch-project/opensearch-ruby/pull/279), [#280](https://github.com/opensearch-project/opensearch-ruby/pull/280), [#282](https://github.com/opensearch-project/opensearch-ruby/pull/282), [#284](https://github.com/opensearch-project/opensearch-ruby/pull/284), [#286](https://github.com/opensearch-project/opensearch-ruby/pull/286), [#296](https://github.com/opensearch-project/opensearch-ruby/pull/296), [#299](https://github.com/opensearch-project/opensearch-ruby/pull/299), [#314](https://github.com/opensearch-project/opensearch-ruby/pull/314), [#318](https://github.com/opensearch-project/opensearch-ruby/pull/318), [#320](https://github.com/opensearch-project/opensearch-ruby/pull/320)) and regenerated against the latest spec for the 4.0.0 release, adding a `msearch` `allow_partial_results` parameter
+- Wrapped unreachable host exceptions in `OpenSearch::Transport::Transport::Error` ([#317](https://github.com/opensearch-project/opensearch-ruby/pull/317))
+- Only require what is necessary from `cgi` for Ruby 3.5 ([#298](https://github.com/opensearch-project/opensearch-ruby/pull/298))
+- Update rubygems public key setting expiry to 20260707 ([#308](https://github.com/opensearch-project/opensearch-ruby/pull/308))
+- Update RubyGems signing certificate ([#330](https://github.com/opensearch-project/opensearch-ruby/pull/330))
 ### Removed
 - Removed support for Ruby 2.x ([261](https://github.com/opensearch-project/opensearch-ruby/pull/261))
 - Removed the ability to ignore any error code by passing the `ignore: Array<error_code>` to each API method invocation ([#277](https://github.com/opensearch-project/opensearch-ruby/pull/277))
 - Removed ability to set `X-Opaque-Id` header value via the `opaque_id` parameter. ([#287](https://github.com/opensearch-project/opensearch-ruby/pull/287))
 - Removed support for Faraday 1.x. ([#293](https://github.com/opensearch-project/opensearch-ruby/pull/293))
-- Wrapped unreachable host exceptions in `OpenSearch::Transport::Transport::Error`. ([#317](https://github.com/opensearch-project/opensearch-ruby/pull/317))
 
 ## [3.4.0]
 ### Added

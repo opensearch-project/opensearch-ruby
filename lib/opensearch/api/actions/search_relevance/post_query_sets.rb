@@ -15,7 +15,7 @@ module OpenSearch
       module Actions
         # Creates a new query set by sampling queries from the user behavior data.
         #
-        # @option args [Hash] :body
+        # @option args [Hash] :body The schema for creating a query set.
         def post_query_sets(args = {})
           args = Utils.clone_and_normalize_arguments(args)
           headers = args.delete('headers') || {}

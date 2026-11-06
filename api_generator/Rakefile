@@ -10,7 +10,7 @@ require 'rake'
 require 'active_support/all'
 
 task :download_spec do
-  sh 'curl -L -X GET "https://github.com/opensearch-project/opensearch-api-specification/releases/download/main-latest/opensearch-openapi.yaml" -o opensearch-openapi.yaml'
+  sh 'curl -L -X GET "https://api-spec.opensearch.org/opensearch-openapi.yaml" -o opensearch-openapi.yaml'
 end
 
 

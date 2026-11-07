@@ -99,6 +99,12 @@ module OpenSearch
       #                                                        exception (false by default)
       # @option arguments Array<Number> :retry_on_status Retry when specific status codes are returned
       #
+      # @option arguments [Number] :retry_backoff         Base delay in seconds before retrying (nil by default,
+      #                                                   meaning no delay between retries). When set, retries will
+      #                                                   sleep with exponential backoff: retry_backoff * (retry_backoff_factor ** (attempt - 1))
+      #                                                   with up to 25% random jitter.
+      # @option arguments [Number] :retry_backoff_factor  Multiplier for exponential backoff (2 by default)
+      #
       # @option arguments [Boolean] :reload_on_failure Reload connections after failure (false by default)
       #
       # @option arguments [Boolean] :ignore_404_on_delete Whether to ignore 404/NotFound error on http DELETE (false by default)

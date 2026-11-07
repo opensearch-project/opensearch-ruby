@@ -310,4 +310,80 @@ describe OpenSearch::Transport::Transport::Base do
       end
     end
   end
+
+  context 'when the client has `retry_backoff` configured' do
+    let(:client) do
+      OpenSearch::Transport::Client.new(arguments)
+    end
+
+    let(:arguments) do
+      {
+        hosts: ['http://unavailable:9200', 'http://unavailable:9201'],
+        retry_on_failure: 2,
+        retry_backoff: 1,
+        retry_backoff_factor: 2
+      }
+    end
+
+    context 'when a request fails and is retried' do
+      before do
+        allow(client.transport).to receive(:sleep)
+      end
+
+      it 'sleeps with exponential backoff before each retry' do
+        expect {
+          client.transport.perform_request('GET', '/info')
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
+
+        expect(client.transport).to have_received(:sleep).with(a_value_between(1.0, 1.25)).ordered
+        expect(client.transport).to have_received(:sleep).with(a_value_between(2.0, 2.5)).ordered
+      end
+    end
+
+    context 'when retry_backoff is not set' do
+      let(:arguments) do
+        {
+          hosts: ['http://unavailable:9200'],
+          retry_on_failure: 1
+        }
+      end
+
+      before do
+        allow(client.transport).to receive(:sleep)
+      end
+
+      it 'does not sleep between retries' do
+        expect {
+          client.transport.perform_request('GET', '/info')
+        }.to raise_exception(OpenSearch::Transport::Transport::Error)
+
+        expect(client.transport).not_to have_received(:sleep)
+      end
+    end
+
+    context 'when retrying on status codes' do
+      let(:arguments) do
+        {
+          hosts: OPENSEARCH_HOSTS,
+          retry_on_failure: 2,
+          retry_on_status: [404],
+          retry_backoff: 0.5,
+          retry_backoff_factor: 2
+        }
+      end
+
+      before do
+        allow(client.transport).to receive(:sleep)
+      end
+
+      it 'sleeps with exponential backoff on retry_on_status retries' do
+        expect {
+          client.transport.perform_request('GET', 'myindex/_doc/1?routing=FOOBARBAZ')
+        }.to raise_exception(OpenSearch::Transport::Transport::Errors::NotFound)
+
+        expect(client.transport).to have_received(:sleep).with(a_value_between(0.5, 0.625)).ordered
+        expect(client.transport).to have_received(:sleep).with(a_value_between(1.0, 1.25)).ordered
+      end
+    end
+  end
 end

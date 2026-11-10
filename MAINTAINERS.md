@@ -8,7 +8,6 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 
 | Maintainer              | GitHub ID                                     | Affiliation |
 | ----------------------- | --------------------------------------------- | ----------- |
-| Vijayan Balasubramanian | [VijayanB](https://github.com/VijayanB)       | Amazon      |
 | Rob Sears               | [robsears](https://github.com/robsears)       | Bonsai      |
 | Vacha Shah              | [VachaShah](https://github.com/VachaShah)     | Amazon      |
 | Theo Truong             | [nhtruong](https://github.com/nhtruong)       | Amazon      |
@@ -24,3 +23,4 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Jayesh Hathila     | [jayeshathila](https://github.com/jayeshathila) | Amazon      |
 | Earlopain          | [Earlopain](https://github.com/Earlopain)       |             |
 | Vamshi Vijay Nakkirtha | [vamshin](https://github.com/vamshin) | Amazon |
+| Vijayan Balasubramanian | [VijayanB](https://github.com/VijayanB) | Amazon |
